@@ -33,8 +33,7 @@ title = "제목3",
 
 SELECT * FROM article;
 
-
-
+SELECT LAST_INSERT_ID();
 
 
 
