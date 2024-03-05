@@ -1,4 +1,4 @@
-package com.swc.exam.vo;
+package com.swc.exam.demo.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

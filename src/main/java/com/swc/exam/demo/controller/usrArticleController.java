@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.swc.exam.demo.service.ArticleService;
-import com.swc.exam.vo.Article;
+import com.swc.exam.demo.vo.Article;
 
 @Controller
 public class UsrArticleController {

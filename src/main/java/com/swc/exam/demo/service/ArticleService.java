@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.swc.exam.demo.repository.ArticleRepository;
-import com.swc.exam.vo.Article;
+import com.swc.exam.demo.vo.Article;
 
 @Service
 public class ArticleService {
