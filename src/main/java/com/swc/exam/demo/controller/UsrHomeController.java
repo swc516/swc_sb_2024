@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.swc.exam.vo.Article;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -17,43 +19,43 @@ import lombok.NoArgsConstructor;
 @Controller
 public class UsrHomeController {
 
-	@RequestMapping("usr/home/getString")
+	@RequestMapping("/usr/home/getString")
 	@ResponseBody
 	public String getString() {
 		return "HI";
 	}
 	
-	@RequestMapping("usr/home/getInt")
+	@RequestMapping("/usr/home/getInt")
 	@ResponseBody
 	public int getInt() {
 		return 10;
 	}
 	
-	@RequestMapping("usr/home/getFloat")
+	@RequestMapping("/usr/home/getFloat")
 	@ResponseBody
 	public float getFloat() {
 		return 10.5f;
 	}
 	
-	@RequestMapping("usr/home/getDouble")
+	@RequestMapping("/usr/home/getDouble")
 	@ResponseBody
 	public double getDouble() {
 		return 10.5;
 	}
 	
-	@RequestMapping("usr/home/getBoolean")
+	@RequestMapping("/usr/home/getBoolean")
 	@ResponseBody
 	public boolean getBoolean() {
 		return true;
 	}
 	
-	@RequestMapping("usr/home/getCharacter")
+	@RequestMapping("/usr/home/getCharacter")
 	@ResponseBody
 	public char getCharacter() {
 		return 'a';
 	}
 	
-	@RequestMapping("usr/home/getMap")
+	@RequestMapping("/usr/home/getMap")
 	@ResponseBody
 	public Map<String, Object> getMap() {
 		Map<String, Object> map = new HashMap<>();
@@ -63,7 +65,7 @@ public class UsrHomeController {
 	}
 	
 	
-	@RequestMapping("usr/home/getList")
+	@RequestMapping("/usr/home/getList")
 	@ResponseBody
 	public List<String> getList() {
 		List<String> list = new ArrayList<>();
@@ -73,19 +75,19 @@ public class UsrHomeController {
 	}
 	
 	
-	@RequestMapping("usr/home/getArticle")
+	@RequestMapping("/usr/home/getArticle")
 	@ResponseBody
 	public Article getArticle() {
-		Article article = new Article(1, "제목1");
+		Article article = new Article(1, "제목1", "내용1");
 		return article;
 	}
 	
 	
-	@RequestMapping("usr/home/getArticles")
+	@RequestMapping("/usr/home/getArticles")
 	@ResponseBody
 	public List<Article> getArticles() {
-		Article article1 = new Article(1, "제목1");
-		Article article2 = new Article(2, "제목2");
+		Article article1 = new Article(1, "제목1", "내용1");
+		Article article2 = new Article(2, "제목2", "내용2");
 		
 		List<Article> list = new ArrayList<>();
 		list.add(article1);
@@ -96,11 +98,3 @@ public class UsrHomeController {
 	
 }
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-class Article{
-	private int id;
-	private String title;
-	
-}
