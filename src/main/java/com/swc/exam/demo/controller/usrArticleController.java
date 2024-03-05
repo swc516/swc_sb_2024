@@ -3,27 +3,30 @@ package com.swc.exam.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.swc.exam.demo.service.ArticleService;
 import com.swc.exam.vo.Article;
 
 @Controller
-public class usrArticleController {
+public class UsrArticleController {
 	// 인스턴스 변수 시작
+	@Autowired
+	private ArticleService articleService; 
 	private int articlesLastId;
 	private List<Article> articles;
 	// 인스턴스 변수 끝
 	
 	// 생성자
-	public usrArticleController() {
+	public UsrArticleController() {
 		articlesLastId = 0;
 		articles = new ArrayList<>();
 
 		makeTestData();
 	}
-
 	// 서비스 메서드 시작
 	private void makeTestData() {
 		for (int i = 1; i <= 10; i++) {
