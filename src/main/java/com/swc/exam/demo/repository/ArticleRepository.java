@@ -3,63 +3,23 @@ package com.swc.exam.demo.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import com.swc.exam.vo.Article;
 
-@Component
-public class ArticleRepository {
-	private int articlesLastId;
-	private List<Article> articles;
+@Mapper
+public interface ArticleRepository {
+	public Article writeArticle(String title, String body);
 	
-	public ArticleRepository() {
-		articlesLastId = 0;
-		articles = new ArrayList<>();
+	@Select("SELECT * FROM article WHERE id = #{id}")
+	public Article getArticle(@Param("id") int id);
 
-	}
-	
-	public void makeTestData() {
-		for (int i = 1; i <= 10; i++) {
-			String title = "제목"+ i;
-			String body = "내용"+ i;
-			
-			writeArticle(title, body);
-		}
-	}
-	
-	public Article writeArticle(String title, String body) {
-		int id = articlesLastId + 1;
-		Article article = new Article(id, title, body);
+	public void deleteArticle(int id);
 
-		articles.add(article);
-		articlesLastId = id;
-		return article;
-	}
+	public void modifyArticle(int id, String title, String body);
 	
-	public Article getArticle(int id) {
-		for(Article article : articles) {
-			if(article.getId() == id) {				
-				return article;
-			}
-		}
-		return null;
-	}
-	
-
-	public void deleteArticle(int id) {
-		Article article = getArticle(id);
-		
-		articles.remove(article);
-	}
-
-	public void modifyArticle(int id, String title, String body) {
-		Article article = getArticle(id);
-		
-		article.setTitle(title);;
-		article.setBody(body);
-	}
-	
-	public List<Article> getArticles() {
-		return articles;
-	}
+	public List<Article> getArticles();
 }
