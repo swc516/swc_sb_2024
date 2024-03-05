@@ -12,4 +12,15 @@ public class UsrHomeController {
 		return "안녕하세요";
 	}
 
+	@RequestMapping("usr/home/main2")
+	@ResponseBody
+	public String showMain2() {
+		return "반갑습니다";
+	}
+	
+	@RequestMapping("usr/home/main3")
+	@ResponseBody
+	public String showMain3() {
+		return "또 봐요";
+	}
 }
