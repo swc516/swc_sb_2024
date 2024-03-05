@@ -1,70 +1,35 @@
 package com.swc.exam.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.swc.exam.demo.repository.ArticleRepository;
 import com.swc.exam.vo.Article;
 
 @Service
 public class ArticleService {
-	// 인스턴스 변수 시작
-	private int articlesLastId;
-	private List<Article> articles;
-	// 인스턴스 변수 끝
-	
-	// 생성자
-	public ArticleService() {
-		articlesLastId = 0;
-		articles = new ArrayList<>();
+	private ArticleRepository articleRepository;
 
-		makeTestData();
+	public ArticleService(ArticleRepository articleRepository) {
+		this.articleRepository = articleRepository;
+		articleRepository.makeTestData();
 	}
-	
-	
-	public void makeTestData() {
-		for (int i = 1; i <= 10; i++) {
-			int id = articlesLastId + 1;
-			String title = "제목"+ i;
-			String body = "내용"+ i;
-			writeArticle(title, body);
-		}
-	}
-	
+
 	public Article writeArticle(String title, String body) {
-		int id = articlesLastId + 1;
-		Article article = new Article(id, title, body);
-
-		articles.add(article);
-		articlesLastId = id;
-		return article;
+		return articleRepository.writeArticle(title, body);
 	}
-	
-	public Article getArticle(int id) {
-		for(Article article : articles) {
-			if(article.getId() == id) {				
-				return article;
-			}
-		}
-		return null;
-	}
-	
-
-	public void deleteArticle(int id) {
-		Article article = getArticle(id);
-		
-		articles.remove(article);
-	}
-
-	public void modifyArticle(int id, String title, String body) {
-		Article article = getArticle(id);
-		
-		article.setTitle(title);;
-		article.setBody(body);
-	}
-	
 	public List<Article> getArticles() {
-		return articles;
+		return articleRepository.getArticles();
+	}
+	public Article getArticle(int id) {
+		return articleRepository.getArticle(id);
+	}
+	public void modifyArticle(int id, String title, String body) {
+			articleRepository.modifyArticle(id, title, body);
+	}
+	public void deleteArticle(int id) {
+		articleRepository.deleteArticle(id);
 	}
 }
