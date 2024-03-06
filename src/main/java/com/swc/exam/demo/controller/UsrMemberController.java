@@ -62,7 +62,7 @@ public class UsrMemberController {
 		
 		Member member = memberService.getMemberById(joinRd.getData1());
 
-		return ResultData.newData(joinRd, member);
+		return ResultData.newData(joinRd, "member",  member);
 	}
 
 	
