@@ -36,4 +36,9 @@ public class ResultData {
 	public boolean isFail() {
 		return isSuccess() == false;
 	}
+
+	public static ResultData newData(ResultData joinRd, Object newData) {
+		return from(joinRd.getResultCode(), joinRd.getMsg(), newData);
+		
+	}
 }
