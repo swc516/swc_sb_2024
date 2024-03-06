@@ -10,3 +10,9 @@
 html> body{
     font-family: 'GangwonEdu_OTFBoldA';
 }
+
+.table-box-type-1 > table th,
+.table-box-type-1 > table td {
+	border: 1px solid black;
+	padding: 10px;
+}
