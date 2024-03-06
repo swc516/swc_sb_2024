@@ -6,8 +6,8 @@
 	<insert id="writeArticle">
 		INSERT INTO article
 		SET regDate = NOW(),
-		updateDate =
-		NOW(),
+		updateDate = NOW(),
+		memberId = #{memberId},
 		title = #{title},
 		`body` = #{body}
 	</insert>
@@ -40,10 +40,10 @@
 		UPDATE article 
 		SET <!-- <set> 하고싶었는데 안돼서 일단 이렇게. -->
 			<if test="title != null and title != ''">
-				title = #{title}
+				title = #{title},
 			</if>
 			<if test="body != null and body != ''">
-				`body` = #{body}
+				`body` = #{body},
 			</if>
 		updateDate = NOW()
 		WHERE id = #{id}

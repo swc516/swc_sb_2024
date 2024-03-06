@@ -97,7 +97,7 @@ public class UsrMemberController {
 			return ResultData.from("F-4", "비밀번호가 일치하지 않습니다.");
 		}
 
-		httpSession.setAttribute("loginedMemberId", member.getLoginId());
+		httpSession.setAttribute("loginedMemberId", member.getId());
 		
 		return ResultData.from("S-1", Ut.f("%s님 환영합니다", member.getNickname()));
 	}
