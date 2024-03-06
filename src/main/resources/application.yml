@@ -13,3 +13,7 @@ spring:
     password: root  
 mybatis:
   type-aliases-package: com.swc.exam.demo.vo
+custom:
+  logging:
+    dir: log
+    level: debug
