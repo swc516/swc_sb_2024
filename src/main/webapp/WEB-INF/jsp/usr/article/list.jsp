@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/resource/common.css" />
+<script src="/resource/common.js" defer="defer"></script>
 <title>메인</title>
 </head>
 <body>
@@ -34,8 +36,8 @@
       <c:forEach var="article" items="${articles}">
         <tr>
           <td>${article.id}</td>
-          <td>${article.regDate}</td>
-          <td>${article.updateDate}</td>
+          <td>${article.regDate.substring(2,16)}</td>
+          <td>${article.updateDate.substring(2,16)}</td>
           <td>${article.memberId}</td>
           <td>
             <a href="../article/detail?id=${article.id}">${article.title}</a>
