@@ -1,24 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/resource/common.css" />
-<script src="/resource/common.js" defer="defer"></script>
-<title>메인</title>
-</head>
-<body>
-  <h1>메인 페이지</h1>
-  <header>
-    <a href="/">로고</a>
-    
-    <ul>
-    	<li><a href="/">홈</a></li>
-    	<li><a href="/usr/article/list">List</a></li>
-    </ul>
-  </header>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="pageTitle" value="메인"/>
+<%@include file="../common/head.jspf" %>
 
-  <div>1234</div>
-    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo beatae veniam placeat odio voluptatibus est error consequatur enim optio consectetur sunt accusantium molestiae cupiditate quis repellendus facere atque ducimus velit.</div>
-</body>
-</html>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo beatae veniam placeat odio voluptatibus est error
+consequatur enim optio consectetur sunt accusantium molestiae cupiditate quis repellendus facere atque ducimus velit.
+
+<%@include file="../common/foot.jspf" %>
