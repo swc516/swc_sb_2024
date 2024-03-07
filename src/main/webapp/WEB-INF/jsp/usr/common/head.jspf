@@ -20,24 +20,30 @@
 <body>
   <header>
     <div class="flex h-20 container mx-auto">
-      <a href="/" class="flex h-20 items-center px-3">
+      <a href="/" class="flex items-center px-3 hover:underline">
         <span>로고</span>
       </a>
       <div class="flex-grow"></div>
       <ul class="flex">
         <li>
-          <a href="/" class="h-full flex items-center px-3"><span>홈</span></a>
+          <a href="/" class="h-full flex items-center px-3 hover:underline">
+            <span>홈</span>
+          </a>
         </li>
         <li>
-          <a href="/usr/article/list" class="h-full flex items-center px-3"><span>리스트</span></a>
+          <a href="/usr/article/list" class="h-full flex items-center px-3 hover:underline">
+            <span>리스트</span>
+          </a>
         </li>
         <li>
-          <a href="/usr/member/login" class="h-full flex items-center px-3"><span>로그인</span></a>
+          <a href="/usr/member/login" class="h-full flex items-center px-3 hover:underline">
+            <span>로그인</span>
+          </a>
         </li>
       </ul>
     </div>
   </header>
-  
+
   <section class="mt-5">
     <div class="container mx-auto px-3">
       <h1>${pageTitle}페이지</h1>
