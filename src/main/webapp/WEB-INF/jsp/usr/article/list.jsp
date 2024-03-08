@@ -9,6 +9,12 @@
     <div class="table-box-type-1">
       <table border="1">
         <thead>
+          <colgroup>
+            <col width="50" />
+            <col width="150" />
+            <col width="150" />
+            <col width="150" />
+          </colgroup>
           <tr>
             <th>번호</th>
             <th>작성날짜</th>
@@ -23,7 +29,7 @@
               <td>${article.id}</td>
               <td>${article.regDate.substring(2,16)}</td>
               <td>${article.updateDate.substring(2,16)}</td>
-              <td>${article.memberId}</td>
+              <td>${article.extra__writerName}</td>
               <td>
                 <a href="../article/detail?id=${article.id}">${article.title}</a>
               </td>
