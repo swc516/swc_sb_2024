@@ -27,6 +27,7 @@ public class Rq {
 	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
 		this.req = req;
 		this.resp = resp;
+		
 		this.session = req.getSession();
 		
 		boolean isLogined = false;
