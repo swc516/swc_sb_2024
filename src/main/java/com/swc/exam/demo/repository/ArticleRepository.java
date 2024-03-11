@@ -13,7 +13,7 @@ public interface ArticleRepository {
 	
 	public void writeArticle(@Param("memberId") int memberId, @Param("title") String title, @Param("body") String body);
 
-	@Select("""
+/*	@Select("""
 			SELECT A.*,
 			M.nickname AS extra__writerName
 			FROM article AS A
@@ -21,6 +21,21 @@ public interface ArticleRepository {
 			ON A.memberId = M.id
 			WHERE 1
 			AND A.id = #{id}
+			ORDER BY id DESC
+			""")*/
+	@Select("""
+			<script>
+			SELECT A.*,
+			M.nickname AS extra__writerName
+			FROM article AS A
+			LEFT JOIN member AS M
+			ON A.memberId = M.id
+			WHERE 1
+			<if test="boardId !=0">
+				AND A.boardId = #{boardId}
+			</if>
+			ORDER BY id DESC
+			</script>
 			""")
 	public Article getForPrintArticle(@Param("id") int id);
 
@@ -34,9 +49,10 @@ public interface ArticleRepository {
 			FROM article AS A
 			LEFT JOIN MEMBER AS M
 			ON A.memberId = M.id
+			WHERE A.boardId = #{boardId}
 			ORDER BY id DESC
 			""")
-	public List<Article> getForPrintArticles();
+	public List<Article> getForPrintArticles(@Param("boardId")int boardId);
 
 	public int getLastInsertId();
 }

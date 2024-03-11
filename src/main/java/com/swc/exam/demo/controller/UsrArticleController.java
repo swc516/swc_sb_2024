@@ -43,7 +43,7 @@ public class UsrArticleController {
 		
 		
 		
-		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId());
+		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId);
 		
 		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);
@@ -56,7 +56,7 @@ public class UsrArticleController {
 	public String showDetail(HttpServletRequest req, Model model, int id) {
 		Rq rq = (Rq)req.getAttribute("rq");
 		
-		Article article = articleService.getForPrintArticles(rq.getLoginedMemberId(), id);
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
 		model.addAttribute("article", article);
 		
@@ -69,7 +69,7 @@ public class UsrArticleController {
 	public ResultData<Article> getArticle(HttpServletRequest req, int id) {
 		Rq rq = (Rq)req.getAttribute("rq");
 		
-		Article article = articleService.getForPrintArticles(rq.getLoginedMemberId(), id);
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
 		if(article == null) {
 			return ResultData.from("F-1", Ut.f("%d번 게시물이 존재하지 않습니다.", id));
@@ -86,7 +86,7 @@ public class UsrArticleController {
 		Rq rq = (Rq)req.getAttribute("rq");
 		
 
-		Article article = articleService.getForPrintArticles(rq.getLoginedMemberId(), id);
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
 		if (article == null) {
 			ResultData.from("F-1", Ut.f("%d번 게시물이 존재하지 않습니다.", id));
@@ -105,7 +105,7 @@ public class UsrArticleController {
 	public String showModify(HttpServletRequest req, Model model, int id) {
 		Rq rq = (Rq)req.getAttribute("rq");
 		
-		Article article = articleService.getForPrintArticles(rq.getLoginedMemberId(), id);
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
 		if (article == null) {
 			return rq.historyBackJsOnview(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
@@ -130,7 +130,7 @@ public class UsrArticleController {
 		Rq rq = (Rq)req.getAttribute("rq");
 
 		
-		Article article = articleService.getForPrintArticles(rq.getLoginedMemberId(), id);
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		
 		if (article == null) {

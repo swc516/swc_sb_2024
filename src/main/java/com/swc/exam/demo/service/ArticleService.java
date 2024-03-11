@@ -24,8 +24,8 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);
 	}
 
-	public List<Article> getForPrintArticles(int actorId) {
-		List<Article> articles = articleRepository.getForPrintArticles();
+	public List<Article> getForPrintArticles(int actorId, int boardId) {
+		List<Article> articles = articleRepository.getForPrintArticles(boardId);
 
 		for (Article article : articles) {
 			updateForPrintData(actorId, article);
@@ -33,7 +33,7 @@ public class ArticleService {
 		return articles;
 	}
 
-	public Article getForPrintArticles(int actorId, int id) {
+	public Article getForPrintArticle(int actorId, int id) {
 		Article article = articleRepository.getForPrintArticle(id);
 
 		updateForPrintData(actorId, article);
@@ -58,7 +58,7 @@ public class ArticleService {
 	public ResultData<Article> modifyArticle(int id, String title, String body) {
 		articleRepository.modifyArticle(id, title, body);
 
-		Article article = getForPrintArticles(0, id);
+		Article article = getForPrintArticle(0, id);
 
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 수정되었습니다.", id), "article", article);
 	}
