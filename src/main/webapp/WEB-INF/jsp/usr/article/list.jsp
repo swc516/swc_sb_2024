@@ -6,25 +6,23 @@
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <div>
-      게시물 개수 : ${articlesCount}개
-    </div>
+    <div>게시물 개수 : ${articlesCount}개</div>
     <div class="table-box-type-1">
       <table border="1">
         <thead>
-          <colgroup>
-            <col width="50" />
-            <col width="150" />
-            <col width="150" />
-            <col width="150" />
-          </colgroup>
-          <tr>
-            <th>번호</th>
-            <th>작성날짜</th>
-            <th>수정날짜</th>
-            <th>작성자</th>
-            <th>제목</th>
-          </tr>
+        <colgroup>
+          <col width="50" />
+          <col width="150" />
+          <col width="150" />
+          <col width="150" />
+        </colgroup>
+        <tr>
+          <th>번호</th>
+          <th>작성날짜</th>
+          <th>수정날짜</th>
+          <th>작성자</th>
+          <th>제목</th>
+        </tr>
         </thead>
         <tbody>
           <c:forEach var="article" items="${articles}">
@@ -40,6 +38,11 @@
           </c:forEach>
         </tbody>
       </table>
+      <div class="page-menu mt-4" align="center">
+        <c:forEach begin="1" end="10" var="i">
+          <a class="btn btn-sm ${param.page == i ? 'btn-active' : '' }" href="?page=${i}">${i}</a>
+        </c:forEach>
+      </div>
     </div>
   </div>
 </section>
