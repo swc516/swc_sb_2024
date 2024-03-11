@@ -16,14 +16,8 @@
           <col width="150" />
           <col width="150" />
         </colgroup>
-        <tr>
-          <th>번호</th>
-          <th>작성날짜</th>
-          <th>수정날짜</th>
-          <th>작성자</th>
-          <th>제목</th>
-        </tr>
-        </thead>
+
+
         <tbody>
           <c:forEach var="article" items="${articles}">
             <tr>
@@ -39,9 +33,21 @@
         </tbody>
       </table>
       <div class="page-menu mt-4" align="center">
-        <c:forEach begin="1" end="${pagesCount}" var="i">
+        <c:set var="pageMenuArmLen" value="4" />
+        <c:set var="startPage" value="${page - pageMenuArmLen >= 1 ? page - pageMenuArmLen : 1}" />
+        <c:set var="endPage" value="${page + pageMenuArmLen <= pagesCount ? page + pageMenuArmLen : pagesCount}" />
+
+        <c:if test="${startPage > 1}">
+          <a class="btn btn-sm" href="?page=1">1</a>
+          <a class="btn btn-sm btn-disabled">...</a>
+        </c:if>
+        <c:forEach begin="${startPage}" end="${endPage}" var="i">
           <a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i}">${i}</a>
         </c:forEach>
+        <c:if test="${endPage < pagesCount}">
+          <a class="btn btn-sm btn-disabled">...</a>
+          <a class="btn btn-sm" href="?page=${pagesCount}">${pagesCount}</a>
+        </c:if>
       </div>
     </div>
   </div>
