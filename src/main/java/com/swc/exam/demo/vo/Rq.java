@@ -2,6 +2,10 @@ package com.swc.exam.demo.vo;
 
 import java.io.IOException;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+
 import com.swc.exam.demo.service.MemberService;
 import com.swc.exam.demo.util.Ut;
 
@@ -10,6 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 
+@Component
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
 	@Getter
 	private boolean isLogined;
@@ -42,6 +48,8 @@ public class Rq {
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
+		
+		this.req.setAttribute("rq", this);
 		
 	}
 

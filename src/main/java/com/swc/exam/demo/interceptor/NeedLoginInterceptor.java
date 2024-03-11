@@ -10,11 +10,17 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class NeedLoginInterceptor implements HandlerInterceptor {
+
+	private Rq rq;
+
+	public NeedLoginInterceptor(Rq rq){
+		this.rq = rq;
+}
+
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
-		Rq rq = (Rq) req.getAttribute("rq"); // MyWebMvcConfigurer 순서 상 밑에 있기 때문에 가능
-		
-		if ( !rq.isLogined()) {
+
+		if (!rq.isLogined()) {
 			rq.printHistoryBackJs("로그인 후 이용해주세요.");
 			return false;
 		}
