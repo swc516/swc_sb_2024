@@ -38,17 +38,14 @@ public interface ArticleRepository {
 			<if test="boardId != 0">
 				AND A.boardId = #{boardId}
 			</if>
-						<if test="boardId != 0">
-				AND A.boardId = #{boardId}
-			</if>
 			<if test="searchKeyword != ''">
 				<choose>
-					<when test="searchKeywordTypeCode != 'title'">
-						AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
-					</when>
-					<when test="searchKeywordTypeCode != 'body'">
-						AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
-					</when>
+					<when test="searchKeywordTypeCode == 'title'">
+			    		AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'body'">
+			    		AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
 					<otherwise>
 						AND(
 							A.title LIKE CONCAT('%', #{searchKeyword}, '%')
@@ -78,12 +75,12 @@ public interface ArticleRepository {
 			</if>
 			<if test="searchKeyword != ''">
 				<choose>
-					<when test="searchKeywordTypeCode != 'title'">
-						AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
-					</when>
-					<when test="searchKeywordTypeCode != 'body'">
-						AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
-					</when>
+					<when test="searchKeywordTypeCode == 'title'">
+			    		AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'body'">
+			    		AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
 					<otherwise>
 						AND(
 							A.title LIKE CONCAT('%', #{searchKeyword}, '%')
