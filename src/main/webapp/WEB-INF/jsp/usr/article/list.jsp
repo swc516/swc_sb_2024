@@ -6,7 +6,26 @@
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <div>게시물 개수 : <span class="text-blue-700">${articlesCount}</span>개</div>
+    <div class="flex">
+      <div>
+        게시물 개수 :
+        <span class="text-blue-700">${articlesCount}</span>
+        개
+      </div>
+      <div class="flex-grow"></div>
+      <form class="flex">
+        <input type="hidden" name="boardId" value="${param.boardId}"/>
+          <select data-value="${param.searchKeywordTypeCode}" name="searchKeywordTypeCode" id="" class="select select-bordered">
+          <option disabled>검색타입</option>
+          <option value="title">제목</option>
+          <option value="body">내용</option>
+          <option value="title, body">제목, 내용</option>
+        </select>
+          <input name="searchKeyword" type="text" class="ml-2 w-72 input input-bordered" placeholder="검색어" maxlength="20" value="${param.searchKeyword}"/>
+          <button type="submit" class="ml-2 btn btn-primary">검색</button>
+      </form>
+
+    </div>
     <div class="mt-3">
       <table class="table table-fixed w-full">
         <colgroup>
@@ -32,7 +51,8 @@
               <td>${article.updateDate.substring(2,16)}</td>
               <td>${article.extra__writerName}</td>
               <td>
-                <a class="btn-text-link block w-full truncate" href="../article/detail?id=${article.id}">${article.title} </a>
+                <a class="btn-text-link block w-full truncate" href="../article/detail?id=${article.id}">${article.title}
+                </a>
               </td>
             </tr>
           </c:forEach>
