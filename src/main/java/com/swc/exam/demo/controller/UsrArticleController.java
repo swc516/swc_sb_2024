@@ -2,7 +2,6 @@ package com.swc.exam.demo.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,24 +10,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.swc.exam.demo.service.ArticleService;
 import com.swc.exam.demo.service.BoardService;
+import com.swc.exam.demo.service.ReactionPointService;
 import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Article;
 import com.swc.exam.demo.vo.Board;
 import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.Rq;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
+	private ReactionPointService reactionPointService;
 	private Rq rq;
 
-	public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, ReactionPointService reactionPointService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
+		this.reactionPointService = reactionPointService;
 		this.rq = rq;
 
 	}
@@ -65,7 +64,7 @@ public class UsrArticleController {
 	public String showDetail(Model model, int id) {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
-		boolean actorCanMakeReactionPoint = articleService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), id);
+		boolean actorCanMakeReactionPoint = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), "article", id);
 		System.out.println(actorCanMakeReactionPoint);
 		model.addAttribute("article", article);
 		model.addAttribute("actorCanMakeReactionPoint", actorCanMakeReactionPoint);
