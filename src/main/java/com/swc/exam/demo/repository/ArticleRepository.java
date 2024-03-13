@@ -133,4 +133,15 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticleHitCount(@Param("id") int id);
+
+	@Select("""
+			<script>
+			SELECT IFNULL(SUM(RP.point), 0) AS s
+			FROM reactionPoint AS Rp
+			WHERE Rp.relTypeCode = 'article'
+			AND id = #{id}
+			AND Rp.memberId = #{memberId}
+			</script>
+			""")
+	public int actorCanMakeReactionPoint(@Param("memberId") int memberId, @Param("id") int id);
 }

@@ -64,7 +64,22 @@ function ArticleDetail__increaseHitCount(){
         </tr>
         <tr>
           <th>조회수</th>
-          <td><span class="text-blue-700 article-detail__hit-count">${article.hitCount}</span></td>
+          <td>
+            <div class="flex items-center">
+              <span class="text-blue-700 article-detail__hit-count">${article.hitCount}</span>
+              <span>&nbsp;</span>
+              
+              <c:if test="${actorCanMakeReactionPoint}">
+                <button class="btn btn-xs btn-primary">
+                  좋아요👍
+                </button>
+                <span>&nbsp;</span>
+                <button class="btn btn-xs btn-secondary">
+                  싫어요👎 
+                </button>
+              </c:if>
+            </div>
+          </td>
         </tr>
         <tr>
           <th>추천</th>
@@ -96,7 +111,4 @@ function ArticleDetail__increaseHitCount(){
   </div>
 </section>
 
-<!-- 
-<iframe src="http://localhost:8080/usr/article/doIncreaseHitCountRd?id=1" frameborder="0"></iframe>
- -->
 <%@include file="../common/foot.jspf"%>
