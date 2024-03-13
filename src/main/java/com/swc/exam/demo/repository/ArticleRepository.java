@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.swc.exam.demo.vo.Article;
 
@@ -93,4 +94,14 @@ public interface ArticleRepository {
 			</script>
 			""") // AND A.title Like #{searchKeywordTypeCode} 로 사용시 에러, concat사용
 	public int getArticlesCount(@Param("boardId") int boardId, @Param("searchKeywordTypeCode") String searchKeywordTypeCode, @Param("searchKeyword") String searchKeyword);
+	
+	
+	@Update("""
+			<script>
+			UPDATE article
+			SET hitCount = hitCount + 1
+			WHERE id = #{id}
+			</script>
+			""")
+	public int increaseHitCount(@Param("id") int id);
 }

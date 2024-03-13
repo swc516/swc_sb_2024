@@ -137,4 +137,10 @@ from article;
 */
 SELECT FLOOR(RAND() * 3) + 1;
 
-SELECT COUNT(*) FROM article;
+SELECT *FROM article;
+
+# 게시물 테이블 hitCount 컬럼을 추가
+ALTER TABLE article
+ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+DESC article;
