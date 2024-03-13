@@ -67,6 +67,12 @@ function ArticleDetail__increaseHitCount(){
           <td><span class="text-blue-700 article-detail__hit-count">${article.hitCount}</span></td>
         </tr>
         <tr>
+          <th>추천</th>
+          <td>
+            <span class="text-blue-700 article-detail__hit-count">${article.extra__goodReactionPoint}</span>
+          </td>
+        </tr>
+        <tr>
           <th>제목</th>
           <td>${article.title}</td>
         </tr>
