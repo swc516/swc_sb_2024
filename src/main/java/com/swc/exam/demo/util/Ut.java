@@ -1,5 +1,7 @@
 package com.swc.exam.demo.util;
 
+import java.net.URLEncoder;
+
 public class Ut {
 
 	public static boolean empty(Object obj) {
@@ -52,4 +54,12 @@ public class Ut {
 				""", msg, uri);
 	}
 
+	 public static String getUriEncoded(String str) {
+	        try {
+	            return URLEncoder.encode(str, "UTF-8");
+	        } catch (Exception e) {
+	            return str;
+	        }
+	    }
+	
 }
