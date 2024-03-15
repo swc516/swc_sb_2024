@@ -1,5 +1,6 @@
 package com.swc.exam.demo.repository;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -40,5 +41,22 @@ public interface ReactionPointRepository {
 			`point` = -1			
 			""")
 	public void addBadReactionPoint(@Param("memberId")int memberId, @Param("relTypeCode")String relTypeCode, @Param("id")int id);
+
+	@Delete("""
+			DELETE FROM reactionPoint
+			WHERE relTypeCode = #{relTypeCode}
+			AND relId = #{id}
+			AND memberId= #{memberId}
+			""")
+	public void deleteGoodReactionPoint(@Param("memberId")int memberId, @Param("relTypeCode")String relTypeCode, @Param("id")int id);
+
+	@Delete("""
+			DELETE FROM reactionPoint
+			WHERE relTypeCode = #{relTypeCode}
+			AND relId = #{id}
+			AND memberId= #{memberId}
+			""")
+	public void deleteBadReactionPoint(@Param("memberId")int memberId, @Param("relTypeCode")String relTypeCode, @Param("id")int id);
+
 
 }

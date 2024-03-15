@@ -56,6 +56,11 @@
         </c:if>
         <c:if test="${rq.isLogined()}">
           <li>
+            <a href="/usr/member/modify" class="h-full flex items-center px-3 hover:underline">
+              <span>${rq.loginedMember.nickname}'s Profile</span>
+            </a>
+          </li>
+          <li>
             <a href="/usr/member/doLogout" class="h-full flex items-center px-3 hover:underline">
               <span>로그아웃</span>
             </a>
@@ -67,7 +72,7 @@
 
   <section class="mt-5">
     <div class="container mx-auto px-3">
-      <h1>${pageTitle} 페이지</h1>
+      <h1>${pageTitle}페이지</h1>
     </div>
   </section>
 
