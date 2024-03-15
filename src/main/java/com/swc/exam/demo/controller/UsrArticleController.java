@@ -63,11 +63,24 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-		
-		boolean actorCanMakeReactionPoint = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), "article", id);
-		System.out.println(actorCanMakeReactionPoint);
 		model.addAttribute("article", article);
-		model.addAttribute("actorCanMakeReactionPoint", actorCanMakeReactionPoint);
+		
+		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), "article", id);
+		model.addAttribute("actorCanMakeReaction", actorCanMakeReactionPointRd.isSuccess());
+		model.addAttribute("actorCanMakeReactionPointRd", actorCanMakeReactionPointRd);
+		
+		
+		if ( actorCanMakeReactionPointRd.getResultCode().equals("F-2") ) {
+			int sumReactionPointByMemberId = (int)actorCanMakeReactionPointRd.getData1();
+			
+			if(sumReactionPointByMemberId > 0) {
+				model.addAttribute("actorCanCancelGoodReaction", true);
+			} else {
+				model.addAttribute("actorCanCancelBadReaction", true);
+				
+			}
+		}
+			
 
 		return "usr/article/detail";
 	}
