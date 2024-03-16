@@ -2,6 +2,7 @@ package com.swc.exam.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -40,5 +41,30 @@ public interface ReplyRepository {
 			ORDER BY R.id DESC
 			""")
 	public List<Reply> getForPrintReplies(@Param("memberId")int memberId, @Param("relTypeCode")String relTypeCode, @Param("relId")int relId);
+
+
+	@Select("""
+			SELECT R.*,
+			M.nickname AS extra__writerName
+			FROM reply AS R
+			LEFT JOIN `member` AS M
+			ON R.memberId = M.id
+			WHERE R.id = #{id}
+			""")
+	public Reply getForPrintReply(@Param("memberId")int memberId, @Param("id")int id);
+
+	@Select("""
+			SELECT R.*
+			FROM reply AS R
+			WHERE R.id = #{id}
+			""")
+	public Reply getReply(@Param("id")int id);
+	
+	@Delete("""
+			DELETE FROM reply
+			WHERE id = #{id}
+			""")
+	public void deleteReply(@Param("id")int id);
+
 
 }
