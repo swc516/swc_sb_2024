@@ -27,14 +27,28 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		registry.addInterceptor(beforeActionInterceptor)
 		.addPathPatterns("/**")
 		.excludePathPatterns("/resource/**")
-		.excludePathPatterns("/error");
+		.excludePathPatterns("/error")
+		;
 
 		registry.addInterceptor(needLoginInterceptor)
+		.addPathPatterns("/usr/member/myPage")
+		.addPathPatterns("/usr/member/checkPassword")
+		.addPathPatterns("/usr/member/doCheckPassword")
+		.addPathPatterns("/usr/member/modify")
+		.addPathPatterns("/usr/member/doModify")
+		.addPathPatterns("/usr/reply/write")
+		.addPathPatterns("/usr/reply/doWrite")
+		.addPathPatterns("/usr/reply/modify")
+		.addPathPatterns("/usr/reply/doModify")
+		.addPathPatterns("/usr/reply/doDelete")
 		.addPathPatterns("/usr/article/write")
 		.addPathPatterns("/usr/article/doWrite")
 		.addPathPatterns("/usr/article/modify")
 		.addPathPatterns("/usr/article/doModify")
-		.addPathPatterns("/usr/article/doGoodReaction")
-		.addPathPatterns("/usr/article/doBadReaction");
+		.addPathPatterns("/usr/reactionPoint/doGoodReaction")
+		.addPathPatterns("/usr/reactionPoint/doBadReaction")
+		.addPathPatterns("/usr/reactionPoint/doCancelGoodReaction")
+		.addPathPatterns("/usr/reactionPoint/doCancelBadReaction")
+		;
 	}
 }
