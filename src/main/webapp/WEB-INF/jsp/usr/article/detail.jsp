@@ -27,10 +27,10 @@
 	}
 	$(function() {
 		//실전코드
-		//ArticleDetail__increaseHitCount();
+		ArticleDetail__increaseHitCount();
 
 		//임시코드
-		setTimeout(ArticleDetail__increaseHitCount, 1000);
+		//setTimeout(ArticleDetail__increaseHitCount, 1000);
 	})
 </script>
 

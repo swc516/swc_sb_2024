@@ -3,10 +3,31 @@
 <c:set var="pageTitle" value="게시물 수정" />
 <%@include file="../common/head.jspf"%>
 
+<script>
+  let ArticleModify__submitFormDone = false;
+  function ArticleModify__submitFormDone(form) {
+    if (ArticleModify__submitFormDone) {
+      return;
+    }
+
+    //좌우 공백 제거
+    form.body.value = form.body.value.trim();
+
+    if (form.body.value.length == 0) {
+      alert('내용을 입력해주세요');
+      form.body.focus();
+      return;
+    }
+
+
+    ArticleModify__submitFormDone = true;
+    form.submit();
+  }
+</script>
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../article/doModify">
+    <form class="table-box-type-1" method="POST" action="../article/doModify" onsubmit="ArticleModify__submitDone(this); return false;">
       <input type="hidden" name="id" value="${article.id}" />
       <table>
         <colgroup>
