@@ -5,7 +5,7 @@
 
 <script>
 	let ReplyModify__submitFormDone = false;
-	function ReplyModify__submitFormDone(form) {
+	function ReplyModify__submitForm(form) {
 		if (ReplyModify__submitFormDone) {
 			return;
 		}
@@ -33,8 +33,8 @@
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../reply/doModify" onsubmit="ReplyModify__submitFormDone(this); return false;">
-      <input type="hidden" name="id" value="${reply.id}" />
+    <form class="table-box-type-1" method="POST" action="../reply/doModify" onsubmit="ReplyModify__submitForm(this); return false;">
+      <input type="hidden" name="id" value="${reply.id}" />                 
       <table>
         <colgroup>
           <col width="200" />

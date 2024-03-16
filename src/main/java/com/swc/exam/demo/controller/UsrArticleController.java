@@ -161,6 +161,16 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	public String doModify(int id, String title, String body) {
+		
+		if (Ut.empty(title)) {
+			return rq.jsHistoryBack("title(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(body)) {
+			return rq.jsHistoryBack("body(을)를 입력해주세요.");
+		}
+		
+		
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		if (article == null) {

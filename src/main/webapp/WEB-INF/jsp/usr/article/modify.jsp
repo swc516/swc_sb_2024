@@ -4,8 +4,9 @@
 <%@include file="../common/head.jspf"%>
 
 <script>
+
   let ArticleModify__submitFormDone = false;
-  function ArticleModify__submitFormDone(form) {
+  function ArticleModify__submitForm(form) {
     if (ArticleModify__submitFormDone) {
       return;
     }
@@ -27,7 +28,7 @@
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../article/doModify" onsubmit="ArticleModify__submitDone(this); return false;">
+    <form class="table-box-type-1" method="POST" action="../article/doModify" onsubmit="ArticleModify__submitForm(this); return false;">
       <input type="hidden" name="id" value="${article.id}" />
       <table>
         <colgroup>
@@ -65,19 +66,19 @@
           <tr>
             <th>추천</th>
             <td>
-            <span class="text-blue-700">${article.extra__goodReactionPoint}</span>
+            <span class="text-blue-700">${article.goodReactionPoint}</span>
             </td>
           </tr>
           <tr>
             <th>제목</th>
             <td>
-              <input name="title" type="text" placeholder="제목" class="w-96 input input-bordered w-full max-w-xs" value="${article.title}"/>
+              <input required name="title" type="text" placeholder="제목" class="w-96 input input-bordered w-full max-w-xs" value="${article.title}"/>
             </td>
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              <textarea class="w-full textarea textarea-bordered" name="body" rows="10" placeholder="내용">${article.body}</textarea>
+              <textarea required class="w-full textarea textarea-bordered" name="body" rows="10" placeholder="내용">${article.body}</textarea>
             </td>
           </tr>
           <tr>

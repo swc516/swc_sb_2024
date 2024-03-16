@@ -7,8 +7,10 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.swc.exam.demo.vo.Reply;
+import com.swc.exam.demo.vo.ResultData;
 
 @Mapper
 public interface ReplyRepository {
@@ -65,6 +67,14 @@ public interface ReplyRepository {
 			WHERE id = #{id}
 			""")
 	public void deleteReply(@Param("id")int id);
+
+	@Update("""
+			UPDATE reply
+			SET updateDate = NOW(), 
+			`body` = #{body}			
+			WHERE id = #{id}
+			""")
+	public void modifyReply(@Param("id")int id, @Param("body")String body);
 
 
 }
