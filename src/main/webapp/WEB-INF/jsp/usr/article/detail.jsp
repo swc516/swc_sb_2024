@@ -55,7 +55,7 @@
 			form.body.focus();
 			return;
 		}
-		
+
 		ReplyWrite__submitFormDone = true;
 		form.submit();
 	}
@@ -189,6 +189,12 @@
     <c:if test="${rq.notLogined}">
       <a class="btn btn-link" href="/usr/member/login">로그인</a> 후 이용해주세요.
     </c:if>
+  </div>
+</section>
+
+<section class="mt-5">
+  <div class="container mx-auto px-3">
+    <h1>댓글 리스트(${repliesCount})</h1>
   </div>
 </section>
 
