@@ -34,10 +34,37 @@
 	})
 </script>
 
+<script>
+	let ReplyWrite__submitFormDone = false;
+	function ReplyWrite__submitForm(form) {
+		if (ReplyWrite__submitFormDone) {
+			return;
+		}
+
+		//좌우 공백 제거
+		form.body.value = form.body.value.trim();
+
+		if (form.body.value.length == 0) {
+			alert('댓글을 입력해주세요');
+			form.body.focus();
+			return;
+		}
+
+		if (form.body.value.length < 2) {
+			alert('댓글을 2자 이상 입력해주세요.');
+			form.body.focus();
+			return;
+		}
+		
+		ReplyWrite__submitFormDone = true;
+		form.submit();
+	}
+</script>
+
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
-      <table border="1">
+      <table>
         <tbody>
         <colgroup>
           <col width="200" />
@@ -130,10 +157,11 @@
   <div class="container mx-auto px-3">
     <h1>댓글 작성</h1>
     <c:if test="${rq.logined}">
-      <form class="table-box-type-1" method="post" action="../reply/doWrite">
+      <form class="table-box-type-1" method="post" action="../reply/doWrite"
+        onsubmit="ReplyWrite__submitForm(this); return false;">
         <input type="hidden" name="relTypeCode" value="article">
         <input type="hidden" name="relId" value="${article.id}">
-        <table border="1">
+        <table>
           <tbody>
           <colgroup>
             <col width="200" />
@@ -145,7 +173,7 @@
           <tr>
             <th>내용</th>
             <td>
-              <textarea name="body" rows="5" required placeholder="내용"></textarea>
+              <textarea name="body" rows="5" placeholder="내용"></textarea>
             </td>
           </tr>
           <tr>
