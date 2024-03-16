@@ -34,6 +34,7 @@ public class ArticleService {
 		for (Article article : articles) {
 			updateForPrintData(actorId, article);
 		}
+		
 		return articles;
 	}
 
