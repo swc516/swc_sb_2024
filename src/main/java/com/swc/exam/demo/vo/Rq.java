@@ -114,4 +114,9 @@ public class Rq {
 		return Ut.getUriEncoded(getCurrentUri());
 	}
 
+	public void printReplaceJs(String msg, String uri) {
+		resp.setContentType("text/html; charset=UTF-8");
+		print(Ut.jsReplace(msg, uri));
+	}
+
 }
