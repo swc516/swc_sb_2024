@@ -126,19 +126,35 @@ public class Rq {
 	public String getLoginUri() {
 		return "../member/login?afterLoginUri=" + getAfterLoginUri();
 	}
+	
+	public String getLogoutUri() {
+		return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
+	}
 
 	public String getAfterLoginUri() {
 		String requestUri = req.getRequestURI();
 		
+		// 로그인 후 돌아가면 안되는 URI을 적기
 		switch(requestUri) {
 		case "/usr/member/login":
 		case "/usr/member/join":
 		case "/usr/member/findLoginId":
 		case "/usr/member/findLoginPw":
 			return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterLoginUri", ""));
-		
-		
 		}
+		
+		return getEncodedCurrentUri();
+	}
+	
+	public String getAfterLogoutUri() {
+		String requestUri = req.getRequestURI();
+		
+		/* 필요하면 활성화 ex) 작성 -> 로그아웃 -> 로그인 -> 작성을 작성에서 로그아웃하면 메인으로.
+		switch(requestUri) {
+		case "/usr/article/write":
+			return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterLogoutUri", ""));
+		}
+		*/
 		
 		return getEncodedCurrentUri();
 	}
