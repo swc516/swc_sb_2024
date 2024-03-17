@@ -2,41 +2,47 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="게시물 수정" />
 <%@include file="../common/head.jspf"%>
+<%@include file="../../common/toastUiEditorLib.jspf"%>
+
 
 <script>
+	let ArticleModify__submitFormDone = false;
+	function ArticleModify__submitForm(form) {
+		if (ArticleModify__submitFormDone) {
+			return;
+		}
 
-  let ArticleModify__submitFormDone = false;
-  function ArticleModify__submitForm(form) {
-    if (ArticleModify__submitFormDone) {
-      return;
-    }
+		form.title.value = form.title.value.trim();
 
-    form.title.value = form.title.value.trim();
+		if (form.title.value.length == 0) {
+			alert('제목을 입력해주세요');
+			form.title.focus();
+			return;
+		}
 
-    if (form.title.value.length == 0) {
-      alert('제목을 입력해주세요');
-      form.title.focus();
-      return;
-    }
-    
-    form.body.value = form.body.value.trim();
+		const editor = $(form).find('.toast-ui-editor').data(
+				'data-toast-editor');
+		const markdown = editor.getMarkdown().trim();
 
-    if (form.body.value.length == 0) {
-      alert('내용을 입력해주세요');
-      form.body.focus();
-      return;
-    }
+		if (markdown.length == 0) {
+			alert('내용을 입력해주세요');
+			editor.focus();
+			return;
+		}
 
+		form.body.value = markdown;
 
-    ArticleModify__submitFormDone = true;
-    form.submit();
-  }
+		ArticleModify__submitFormDone = true;
+		form.submit();
+	}
 </script>
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../article/doModify" onsubmit="ArticleModify__submitForm(this); return false;">
+    <form class="table-box-type-1" method="POST" action="../article/doModify"
+      onsubmit="ArticleModify__submitForm(this); return false;">
       <input type="hidden" name="id" value="${article.id}" />
+      <input type="hidden" name="body" />
       <table>
         <colgroup>
           <col width="200" />
@@ -45,20 +51,16 @@
           <tr>
             <th>번호</th>
             <td>
-              <div class="badge badge-primary">${article.id}</div>              
+              <div class="badge badge-primary">${article.id}</div>
             </td>
           </tr>
           <tr>
             <th>작성날짜</th>
-            <td>
-              ${article.forPrintType2RegDate}
-            </td>
+            <td>${article.forPrintType2RegDate}</td>
           </tr>
           <tr>
             <th>수정날짜</th>
-            <td>
-              ${article.forPrintType2RegDate}
-            </td>
+            <td>${article.forPrintType2RegDate}</td>
           </tr>
           <tr>
             <th>작성자</th>
@@ -68,24 +70,29 @@
             <th>조회</th>
             <td>
               <span class="text-blue-700">${article.hitCount}</span>
-              </td>
+            </td>
           </tr>
           <tr>
             <th>추천</th>
             <td>
-            <span class="text-blue-700">${article.goodReactionPoint}</span>
+              <span class="text-blue-700">${article.goodReactionPoint}</span>
             </td>
           </tr>
           <tr>
             <th>제목</th>
             <td>
-              <input name="title" type="text" placeholder="제목" class="w-96 input input-bordered w-full max-w-xs" value="${article.title}"/>
+              <input name="title" type="text" placeholder="제목" class="w-96 input input-bordered w-full max-w-xs"
+                value="${article.title}" />
             </td>
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              <textarea class="w-full textarea textarea-bordered" name="body" rows="10" placeholder="내용">${article.body}</textarea>
+              <div class="toast-ui-editor">
+                <script type="text/x-template">
+                	${article.body}
+                </script>
+              </div>
             </td>
           </tr>
           <tr>
@@ -97,14 +104,14 @@
           </tr>
         </tbody>
       </table>
-      </form>
-      <div class="btns">
-        <a class="btn btn-link" href="../article/modify?id=${article.id}">게시물 수정</a>
-        <c:if test="${article.extra__actorCanDelete}">
-          <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false) return false;"
-            href="../article/doDelete?id=${article.id}">게시물 삭제</a>
-        </c:if>
-      </div>
+    </form>
+    <div class="btns">
+      <a class="btn btn-link" href="../article/modify?id=${article.id}">게시물 수정</a>
+      <c:if test="${article.extra__actorCanDelete}">
+        <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false) return false;"
+          href="../article/doDelete?id=${article.id}">게시물 삭제</a>
+      </c:if>
+    </div>
   </div>
 </section>
 
