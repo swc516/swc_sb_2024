@@ -2,14 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="com.swc.exam.demo.util.Ut" %>
 
-<c:set var="pageTitle" value="마이" />
+<c:set var="pageTitle" value="마이페이지" />
 <%@include file="../common/head.jspf"%>
 
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
-      <table border="1">
+      <table>
         <tbody>
         <colgroup>
           <col width="200" />
@@ -31,7 +31,7 @@
           <td>${rq.loginedMember.email}</td>
         </tr>
         <tr>
-          <th>휴대폰</th>
+          <th>휴대전화번호</th>
           <td>${rq.loginedMember.cellphoneNo}</td>
         </tr>
         <tr>

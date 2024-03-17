@@ -11,7 +11,14 @@
       return;
     }
 
-    //좌우 공백 제거
+    form.title.value = form.title.value.trim();
+
+    if (form.title.value.length == 0) {
+      alert('제목을 입력해주세요');
+      form.title.focus();
+      return;
+    }
+    
     form.body.value = form.body.value.trim();
 
     if (form.body.value.length == 0) {
@@ -72,13 +79,13 @@
           <tr>
             <th>제목</th>
             <td>
-              <input required name="title" type="text" placeholder="제목" class="w-96 input input-bordered w-full max-w-xs" value="${article.title}"/>
+              <input name="title" type="text" placeholder="제목" class="w-96 input input-bordered w-full max-w-xs" value="${article.title}"/>
             </td>
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              <textarea required class="w-full textarea textarea-bordered" name="body" rows="10" placeholder="내용">${article.body}</textarea>
+              <textarea class="w-full textarea textarea-bordered" name="body" rows="10" placeholder="내용">${article.body}</textarea>
             </td>
           </tr>
           <tr>
