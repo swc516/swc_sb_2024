@@ -135,38 +135,66 @@ public class UsrMemberController {
 			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
 
+		if (replaceUri.equals("../member/modify")) {
+			String memberModifyAuthKey = memberService.genMemberModifyAuthKey(rq.getLoginedMemberId());
+
+			replaceUri += "?memberModifyAuthKey=" + memberModifyAuthKey;
+		}
+
 		return rq.jsReplace("", replaceUri);
 	}
 
 	@RequestMapping("/usr/member/modify")
-	public String showModify() {
+	public String showModify(String memberModifyAuthKey) {
+		if ( Ut.empty(memberModifyAuthKey)) {
+			return rq.historyBackJsOnview("memberModifyAuthKey(이)가 필요합니다.");
+		}
+		
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
+		
+		if(checkMemberModifyAuthKeyRd.isFail()) {
+			return rq.historyBackJsOnview(checkMemberModifyAuthKeyRd.getMsg());
+		}
+		
 		return "usr/member/modify";
 	}
 
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
-	public String doModify(String loginPw, String name, String nickname, String email, String cellphoneNo) {
+	public String doModify(String memberModifyAuthKey, String loginPw, String name, String nickname, String email, String cellphoneNo) {
+		if ( Ut.empty(memberModifyAuthKey)) {
+			return rq.jsHistoryBack("memberModifyAuthKey(이)가 필요합니다.");
+		}
+		
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
+		
+		if(checkMemberModifyAuthKeyRd.isFail()) {
+			return rq.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
+		}
+		
+		
 		if (Ut.empty(loginPw)) {
 			loginPw = null;
 		}
-		
+
 		if (Ut.empty(name)) {
 			return rq.jsHistoryBack("이름을(를) 입력해주세요.");
 		}
-		
+
 		if (Ut.empty(nickname)) {
 			return rq.jsHistoryBack("닉네임을(를) 입력해주세요.");
 		}
-		
+
 		if (Ut.empty(email)) {
 			return rq.jsHistoryBack("이메일을(를) 입력해주세요.");
 		}
-		
+
 		if (Ut.empty(cellphoneNo)) {
 			return rq.jsHistoryBack("휴대전화번호을(를) 입력해주세요.");
 		}
-		
-		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, email, cellphoneNo);
+
+		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, email,
+				cellphoneNo);
 
 		return rq.jsReplace(modifyRd.getMsg(), "/");
 	}

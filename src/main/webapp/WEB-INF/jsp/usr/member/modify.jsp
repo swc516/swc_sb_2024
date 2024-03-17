@@ -81,6 +81,7 @@
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
       <form class="table-box-type-1" method="post" action="../member/doModify" onsubmit="MemberModify__submitForm(this); return false;">
+        <input type="hidden" name="memberModifyAuthKey" value="${param.memberModifyAuthKey}" />
         <table>
           <tbody>
           <colgroup>
