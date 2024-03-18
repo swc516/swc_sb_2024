@@ -9,7 +9,8 @@
   let MemberModify__submitFormDone = false;
   function MemberModify__submitForm(form) {
     if (MemberModify__submitFormDone) {
-      return;
+		alert('처리중입니다.');
+		return;
     }
 
 	    form.loginPw.value = form.loginPw.value.trim();
@@ -26,7 +27,7 @@
 	if ( form.loginPwConfirm.value.length > 0) {
 	    if (form.loginPw.value.length == 0) {
 	      alert('비밀번호를 입력해주세요');
-	      form.loginPwConfirm.focus();
+	      form.loginPw.focus();
 	      return;
 	    }
 	}

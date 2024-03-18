@@ -7,6 +7,7 @@
 	let ReplyModify__submitFormDone = false;
 	function ReplyModify__submitForm(form) {
 		if (ReplyModify__submitFormDone) {
+			alert('처리중입니다.');
 			return;
 		}
 
@@ -33,8 +34,10 @@
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../reply/doModify" onsubmit="ReplyModify__submitForm(this); return false;">
-      <input type="hidden" name="id" value="${reply.id}" />                 
+    <form class="table-box-type-1" method="POST" action="../reply/doModify"
+      onsubmit="ReplyModify__submitForm(this); return false;">
+      <input type="hidden" name="id" value="${reply.id}" />
+      <input type="hidden" name="replaceUri" value="${param.replaceUri}">
       <table>
         <colgroup>
           <col width="200" />
@@ -86,7 +89,7 @@
             <th>댓글수정</th>
             <td>
               <input type="submit" class="btn btn-primary" value="댓글수정" />
-              <button type="button" class="btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>
+              <a class="btn btn-outline btn-success" href="${param.replaceUri}">뒤로가기</a>
             </td>
           </tr>
         </tbody>

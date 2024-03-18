@@ -9,6 +9,7 @@
 	let ArticleModify__submitFormDone = false;
 	function ArticleModify__submitForm(form) {
 		if (ArticleModify__submitFormDone) {
+			alert('처리중입니다.');
 			return;
 		}
 
