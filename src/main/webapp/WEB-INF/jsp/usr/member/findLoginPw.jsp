@@ -1,23 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="아이디 찾기 " />
+<c:set var="pageTitle" value="비밀번호 찾기 " />
 <%@include file="../common/head.jspf"%>
 
 
 <script>
-	let MemberFindLoginId__submitFormDone = false;
-	function MemberFindLoginId__submitForm(form) {
+	let MemberFindLoginPw__submitFormDone = false;
+	function MemberFindLoginPw__submitForm(form) {
 
 		/* if (MemberFindLoginId__submitFormDone) {
 		alert('처리중입니다.');
 		return;
 		} */
 
-		form.name.value = form.name.value.trim();
+		form.loginId.value = form.loginId.value.trim();
 
-		if (form.name.value.length == 0) {
-			alert('이름을 입력해주세요');
-			form.name.focus();
+		if (form.loginId.value.length == 0) {
+			alert('로그인아이디를 입력해주세요');
+			form.loginId.focus();
 			return;
 		}
 
@@ -29,7 +29,7 @@
 			return;
 		}
 
-		MemberFindLoginId__submitFormDone = true;
+		MemberFindLoginPw__submitFormDone = true;
 		form.submit();
 	}
 </script>
@@ -38,18 +38,18 @@
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="post" action="../member/doFindLoginId"
-      onsubmit="MemberFindLoginId__submitForm(this); return false;">
-      <input type="hidden" name="afterFindLoginIdUri" value="${param.afterFindLoginIdUri}" />
+    <form class="table-box-type-1" method="post" action="../member/doFindLoginPw"
+      onsubmit="MemberFindLoginPw__submitForm(this); return false;">
+      <input type="hidden" name="afterFindLoginPwUri" value="${param.afterFindLoginPwUri}" />
       <table border="1">
         <tbody>
         <colgroup>
           <col width="200" />
         </colgroup>
         <tr>
-          <th>이름</th>
+          <th>아이디</th>
           <td>
-            <input name="name" type="text" placeholder="이름" class="w-96 input input-bordered w-full max-w-xs" />
+            <input name="loginId" type="text" placeholder="로그인아이디" class="w-96 input input-bordered w-full max-w-xs" />
           </td>
         </tr>
         <tr>
@@ -59,17 +59,17 @@
           </td>
         </tr>
         <tr>
-          <th>아이디 찾기</th>
+          <th>비밀번호 찾기</th>
           <td>
-            <button type="submit" class="btn btn-primary">아이디 찾기</button>
+            <button type="submit" class="btn btn-primary">비밀번호 찾기</button>
             <button type="button" class="btn btn-outline btn-error" onclick="history.back();">뒤로가기</button>
           </td>
         </tr>
         <tr>
           <th>비고</th>
           <td>
-            <a href="${rq.loginUri}" type="submit" class="btn btn-link">로그인</a>
-            <a href="${rq.findLoginPwUri}" type="submit" class="btn btn-link">비밀번호 찾기</a>
+            <a href="${rq.loginUri} type="submit" class="btn btn-link">로그인</a>
+            <a href="${rq.findLoginPwUri}" type="submit" class="btn btn-link">아이디 찾기</a>
           </td>
         </tr>
         </tbody>
