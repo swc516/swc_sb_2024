@@ -180,7 +180,7 @@ public class UsrMemberController {
 			return rq.jsHistoryBack("loginPw(을)를 입력해주세요.");
 		}
 
-		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+		if (rq.getLoginedMember().getLoginPw().equals(Ut.sha256(loginPw)) == false) {
 			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
 

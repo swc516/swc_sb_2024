@@ -59,6 +59,7 @@ public class MemberService {
 
 	public ResultData modify(int loginedMemberId, String loginPw, String name, String nickname, String email,
 			String cellphoneNo) {
+		loginPw = Ut.sha256(loginPw);
 		memberRepository.modify(loginedMemberId, loginPw, name, nickname, email, cellphoneNo);
 
 		return ResultData.from("S-1", "회원정보가 수정되었습니다.");
