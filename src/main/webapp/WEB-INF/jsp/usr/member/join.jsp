@@ -7,7 +7,7 @@
 
 <script>
 	let MemberJoin__submitFormDone = false;
-	let validLoginId = "";
+	let validLogined = "";
 
 	function MemberJoin__submitForm(form) {
 		if (MemberJoin__submitFormDone) {
@@ -86,46 +86,45 @@
 		form.submit();
 	}
 
-	var checkLoginIdDup = _.debounce(function(form) {
-
-		<!--
-		$('.loginId-message').html('<div class="mt-2">아이디를 입력해주세요</div>');
-		-->
-
+	function checkLoginDup(el) {
+		const form = $(el).closest('form').get(0);
+		
+		if ( form.loginId.value.length == 0 ) {
+			validLogined = '';
+			return;
+		}
+		
+		if ( validLogined == form.loginId.value ) {
+			return;
+		}
+		
 		$.get('../member/getLoginIdDup', {
 			isAjax : 'Y',
-			loginId : form.loginId.value,
+			loginId : form.loginId.value
 		}, function(data) {
 			var $message = $(form.loginId).next();
-
+			
 			if (data.resultCode.substr(0, 2) == 'S-') {
 				$message.empty().append('<div class="mt-2 text-green-500">'+ data.msg +'</div>');
+				validLogined = data.data1;
 			} else {
 				$message.empty().append('<div class="mt-2 text-red-500">'+ data.msg +'</div>');
-			}
+				validLoginId = '';
+			} 
 
+			
+			
 			if (data.success) {
 				validLoginId = data.data1;
 			} else {
 				validLoginId = '';
 			}
-
 		}, 'json');
-
-	}, 300);
-
-	function JoinForm_checkLoginIdDup(input) {
-		var form = input.form;
-		form.loginId.value = form.loginId.value.trim();
-
-		var $message = $(form.loginId).next();
-
-		if (form.loginId.value.length == 0) {
-			$message.empty();
-			return;
-		}
-		checkLoginIdDup(form);
 	}
+	// 조금 더 자주 체크
+	//const checkLoginDupDebounced = _.throttle(checkLoginDup, 300);
+	const checkLoginDupDebounced = _.debounce(checkLoginDup, 300);
+
 </script>
 
 
@@ -144,7 +143,7 @@
             <th>로그인아이디</th>
             <td>
               <input class="input input-bordered" name="loginId" placeholder="로그인아이디를 입력해주세요." type="text"
-                onkeyup="JoinForm_checkLoginIdDup(this)" autocomplete="off" />
+                onkeyup="checkLoginDupDebounced(this)" autocomplete="off" />
               <div class="message-msg"></div>
             </td>
           </tr>
