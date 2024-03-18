@@ -7,7 +7,7 @@
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <form class="table-box-type-1" method="post" action="../member/doLogin">
-    <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}"/>
+      <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}" />
       <table border="1">
         <tbody>
         <colgroup>
@@ -22,7 +22,8 @@
         <tr>
           <th>로그인비밀번호</th>
           <td>
-            <input name="loginPw" type="password" placeholder="로그인비밀번호" class="w-96 input input-bordered w-full max-w-xs" />
+            <input name="loginPw" type="password" placeholder="로그인비밀번호"
+              class="w-96 input input-bordered w-full max-w-xs" />
           </td>
         </tr>
         <tr>
@@ -30,6 +31,13 @@
           <td>
             <button type="submit" class="btn btn-primary">로그인</button>
             <button type="button" class="btn btn-outline btn-error" onclick="history.back();">뒤로가기</button>
+          </td>
+        </tr>
+        <tr>
+          <th>비고</th>
+          <td>
+            <a href="${rq.findLoginIdUri}" type="submit" class="btn btn-link">아이디 찾기</a>
+            <a href="${rq.findLoginPwUri}" type="submit" class="btn btn-link">비밀번호 찾기</a>
           </td>
         </tr>
         </tbody>

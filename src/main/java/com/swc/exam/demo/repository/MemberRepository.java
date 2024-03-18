@@ -47,7 +47,7 @@ public interface MemberRepository {
 			FROM `member` AS M
 			WHERE M.name = #{name}
 			AND M.email = #{email}
-						""")
+			""")
 	Member getMemberByNameAndEmail(@Param("name") String name, @Param("email") String email);
 
 	@Update("""
