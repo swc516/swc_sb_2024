@@ -3,6 +3,8 @@
 <%@ page import="com.swc.exam.demo.util.Ut"%>
 
 <c:set var="pageTitle" value="회원가입 " />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+
 <%@include file="../common/head.jspf"%>
 
 <script>
