@@ -1,23 +1,35 @@
 package com.swc.exam.demo.vo;
 
-import lombok.Getter;
+import java.util.Map;
 
+import com.swc.exam.demo.util.Ut;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.ToString;
+
+@Data
 public class ResultData<DT> {
-	@Getter
 	private String resultCode;
-	@Getter
 	private String msg;
-	@Getter
 	private String data1Name;
-	@Getter
 	private DT data1;
-	
-	@Getter
 	private Object data2;
+	private Map<String, Object> body;
+	
+	public ResultData() {
+	}
+
+	public ResultData(String resultCode, String msg, Object... args) {
+		this.resultCode = resultCode;
+		this.msg = msg;
+		this.body = Ut.mapOf(args);
+	}
 	
 	public static ResultData from(String resultCode, String msg) {
 		return from(resultCode, msg, null, null);
 	}
+	
 	
 	public static <DT> ResultData<DT> from(String resultCode, String msg, String data1Name, DT data1) {
 		ResultData<DT> rd = new ResultData<DT>();
@@ -47,4 +59,6 @@ public class ResultData<DT> {
 		data2 = data;
 		
 	}
+	
+
 }
