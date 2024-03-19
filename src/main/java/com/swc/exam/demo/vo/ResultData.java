@@ -5,8 +5,6 @@ import java.util.Map;
 import com.swc.exam.demo.util.Ut;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.ToString;
 
 @Data
 public class ResultData<DT> {

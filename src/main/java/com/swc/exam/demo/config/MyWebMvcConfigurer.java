@@ -1,9 +1,10 @@
 package com.swc.exam.demo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.swc.exam.demo.interceptor.BeforeActionInterceptor;
@@ -24,6 +25,19 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 	@Autowired
 	NeedLogoutInterceptor needLogoutInterceptor;
 
+	@Value("${custom.genFileDirPath}")
+	private String genFileDirPath;
+	
+	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/gen/**").addResourceLocations("file:///" + genFileDirPath + "/")
+				.setCachePeriod(20);
+	}
+
+	
+	
+	
 	// 이 함수는 인터셉터를 적용하는 역할을 합니다.
 	// resource/common.css 이런거는 제외
 	@Override
