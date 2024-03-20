@@ -39,4 +39,9 @@ public class Article {
 	public String getForPrintType2UpdateDate() {
 		return updateDate.substring(2, 16);
 	}
+	
+	public String getForPrintBody() {
+		return body.replace("\n", "<br>");
+	}
+	
 }

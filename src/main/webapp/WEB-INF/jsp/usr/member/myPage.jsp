@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="com.swc.exam.demo.util.Ut" %>
+<%@ page import="com.swc.exam.demo.util.Ut"%>
 
 <c:set var="pageTitle" value="마이페이지 " />
 <%@include file="../common/head.jspf"%>
@@ -14,6 +14,13 @@
         <colgroup>
           <col width="200" />
         </colgroup>
+        <tr>
+          <th>프로필이미지</th>
+          <td>
+            <img class="w-40 h-40 object-cover" src="${rq.getProfileImgUri(rq.loginedMember.id)}"
+              onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
+          </td>
+        </tr>
         <tr>
           <th>로그인아이디</th>
           <td>${rq.loginedMember.loginId}</td>
@@ -37,7 +44,8 @@
         <tr>
           <th>비고</th>
           <td>
-            <a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" type="submit" class="btn btn-primary">회원정보 수정</a>
+            <a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" type="submit"
+              class="btn btn-primary">회원정보 수정</a>
             <button type="button" class="btn btn-outline btn-error" onclick="history.back();">뒤로가기</button>
           </td>
         </tr>
