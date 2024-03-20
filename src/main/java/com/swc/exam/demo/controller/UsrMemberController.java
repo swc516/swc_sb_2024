@@ -266,7 +266,7 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
 	public String doModify(String memberModifyAuthKey, String loginPw, String name, String nickname, String email,
-			String cellphoneNo) {
+			String cellphoneNo, MultipartRequest multipartRequest) {
 		if (Ut.empty(memberModifyAuthKey)) {
 			return rq.jsHistoryBack("memberModifyAuthKey(이)가 필요합니다.");
 		}
@@ -301,6 +301,18 @@ public class UsrMemberController {
 		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, email,
 				cellphoneNo);
 
+		
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+		
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+			
+			if(multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, rq.getLoginedMemberId());
+			}
+		}
+		
+		
 		return rq.jsReplace(modifyRd.getMsg(), "/");
 	}
 

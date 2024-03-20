@@ -65,7 +65,9 @@ public class MemberService {
 
 	public ResultData modify(int actorId, String loginPw, String name, String nickname, String email,
 			String cellphoneNo) {
-		loginPw = Ut.sha256(loginPw);
+		if(loginPw != null) {
+			loginPw = Ut.sha256(loginPw);
+		}
 		memberRepository.modify(actorId, loginPw, name, nickname, email, cellphoneNo);
 		
 		if(loginPw != null) {
