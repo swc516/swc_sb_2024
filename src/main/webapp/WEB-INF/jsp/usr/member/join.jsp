@@ -31,12 +31,12 @@
 			return;
 		}
 
-		form.loginPw.value = form.loginPw.value.trim();
+		form.loginPwInput.value = form.loginPwInput.value.trim();
 		form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
 
-		if (form.loginPw.value.length == 0) {
+		if (form.loginPwInput.value.length == 0) {
 			alert('비밀번호를 입력해주세요');
-			form.loginPw.focus();
+			form.loginPwInput.focus();
 			return;
 		}
 
@@ -46,7 +46,7 @@
 			return;
 		}
 
-		if (form.loginPw.value != form.loginPwConfirm.value) {
+		if (form.loginPwInput.value != form.loginPwConfirm.value) {
 			alert('비밀번호가 일치하지 않습니다');
 			form.loginPwConfirm.focus();
 			return;
@@ -98,7 +98,11 @@
 			}
 		}
 		
-
+		form.loginPw.value = sha256(form.loginPwInput.value);
+		form.loginPwInput.value = '';
+		form.loginPwConfirm.value = '';
+		
+		
 		MemberJoin__submitFormDone = true;
 		form.submit();
 	}
@@ -167,7 +171,8 @@
           <tr>
             <th>비밀번호</th>
             <td>
-              <input class="input input-bordered" name="loginPw" placeholder="비밀번호를 입력해주세요." type="password" />
+              <input name="loginPw" type="hidden" />
+              <input class="input input-bordered" name="loginPwInput" placeholder="비밀번호를 입력해주세요." type="password" />
             </td>
           </tr>
           <tr>

@@ -16,23 +16,28 @@
 		form.loginPw.value = form.loginPw.value.trim();
 		form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
 
-		if (form.loginPw.value.length > 0) {
+		if (form.loginPwInput.value.length > 0) {
 			if (form.loginPwConfirm.value.length == 0) {
 				alert('비밀번호 확인을 입력해주세요');
 				form.loginPwConfirm.focus();
 				return;
 			}
+
+			form.loginPw.value = sha256(form.loginPwInput.value);
+			form.loginPwInput.value = '';
+			form.loginPwConfirm.value = '';
+
 		}
 
 		if (form.loginPwConfirm.value.length > 0) {
-			if (form.loginPw.value.length == 0) {
+			if (form.loginPwInput.value.length == 0) {
 				alert('비밀번호를 입력해주세요');
 				form.loginPw.focus();
 				return;
 			}
 		}
 
-		if (form.loginPw.value != form.loginPwConfirm.value) {
+		if (form.loginPwInput.value != form.loginPwConfirm.value) {
 			alert('비밀번호가 일치하지 않습니다');
 			form.loginPwConfirm.focus();
 			return;
@@ -108,7 +113,8 @@
           <tr>
             <th>새 비밀번호</th>
             <td>
-              <input class="input input-bordered" name="loginPw" placeholder="새 비밀번호를 입력해주세요." type="password" />
+              <input name="loginPw" type="hidden" />
+              <input class="input input-bordered" name="loginPwInput" placeholder="새 비밀번호를 입력해주세요." type="password" />
             </td>
           </tr>
           <tr>
@@ -134,20 +140,23 @@
           <tr>
             <th>프로필 이미지</th>
             <td>
-              <img class="w-40 h-40 object-cover rounded-full" src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt="" onerror="${rq.removeProfileImgIfNotExitOnErrorHtmlAttr}" />
+              <img class="w-40 h-40 object-cover rounded-full" src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt=""
+                onerror="${rq.removeProfileImgIfNotExitOnErrorHtmlAttr}" />
               <input accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1"
                 placeholder="프로필 이미지를 선택해주세요." type="file" />
-                
-              <div class="mt-2">
-                <label class="cursor-pointer inline-flex">
-                  <span class="label-text mr-2 mt-1">이미지 삭제</span>
-                  <div>
-                    <input type="checkbox"  name="deleteFile__member__0__extra__profileImg__1" value="Y" class="checkbox"/>
-                    <span class="checkbox-mark"></span>
-                  </div>
-                </label>
-              </div>
-            
+
+              <c:if test="${hasProfileImg}">
+                <div class="mt-2">
+                  <label class="cursor-pointer inline-flex">
+                    <span class="label-text mr-2 mt-1">이미지 삭제</span>
+                    <div>
+                      <input type="checkbox" name="deleteFile__member__0__extra__profileImg__1" value="Y"
+                        class="checkbox" />
+                      <span class="checkbox-mark"></span>
+                    </div>
+                  </label>
+                </div>
+              </c:if>
             </td>
           </tr>
           <tr>

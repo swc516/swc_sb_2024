@@ -3,6 +3,7 @@ package com.swc.exam.demo.controller;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +25,7 @@ public class UsrMemberController {
 	// @Autowired
 	private MemberService memberService;
 	private GenFileService genFileService;
-	
+
 	private Rq rq;
 
 	public UsrMemberController(MemberService memberService, GenFileService genFileService, Rq rq) {
@@ -38,27 +39,25 @@ public class UsrMemberController {
 	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email,
 			@RequestParam(defaultValue = "/") String afterLoginUri, MultipartRequest multipartRequest) {
 
-
 		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 
 		if (joinRd.isFail()) {
 			return rq.jsHistoryBack(joinRd.getResultCode(), joinRd.getMsg());
 		}
-		
-		int newMemberId = (int)joinRd.getBody().get("id");
+
+		int newMemberId = (int) joinRd.getBody().get("id");
 
 		String afterJoinUri = "../member/login?afterLoginUri=" + Ut.getUriEncoded(afterLoginUri);
-		
+
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-		
+
 		for (String fileInputName : fileMap.keySet()) {
 			MultipartFile multipartFile = fileMap.get(fileInputName);
-			
-			if(multipartFile.isEmpty() == false) {
+
+			if (multipartFile.isEmpty() == false) {
 				genFileService.save(multipartFile, newMemberId);
 			}
 		}
-		
 
 		return rq.jsReplace("회원가입이 완료되었습니다. 로그인 후 이용해주세요.", afterJoinUri);
 	}
@@ -78,12 +77,12 @@ public class UsrMemberController {
 		}
 
 		rq.login(member);
-		
+
 		String msg = Ut.f("%s님 환영합니다", member.getNickname());
-		
+
 		boolean isUsingTempPassword = memberService.isUsingTempPassword(member.getId());
-		
-		if ( isUsingTempPassword ) {
+
+		if (isUsingTempPassword) {
 			msg = "임시 비밀번호를 변경해주세요";
 			afterLoginUri = "/usr/member/myPage";
 		}
@@ -106,7 +105,6 @@ public class UsrMemberController {
 	public String doFindLoginId(String name, String email,
 			@RequestParam(defaultValue = "/") String afterFindLoginIdUri) {
 
-
 		Member member = memberService.getMemberByNameAndEmail(name, email);
 
 		if (member == null) {
@@ -126,7 +124,6 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doFindLoginPw(String loginId, String email,
 			@RequestParam(defaultValue = "/") String afterFindLoginPwUri) {
-
 
 		Member member = memberService.getMemberByLoginId(loginId);
 
@@ -184,7 +181,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doCheckPassword(String loginPw, String replaceUri) {
 
-		if (rq.getLoginedMember().getLoginPw().equals(Ut.sha256(loginPw)) == false) {
+		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
 			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
 
@@ -198,7 +195,7 @@ public class UsrMemberController {
 	}
 
 	@RequestMapping("/usr/member/modify")
-	public String showModify(String memberModifyAuthKey) {
+	public String showModify(String memberModifyAuthKey, Model model) {
 		if (Ut.empty(memberModifyAuthKey)) {
 			return rq.historyBackJsOnview("memberModifyAuthKey(이)가 필요합니다.");
 		}
@@ -210,14 +207,18 @@ public class UsrMemberController {
 			return rq.historyBackJsOnview(checkMemberModifyAuthKeyRd.getMsg());
 		}
 
+		boolean hasProfileImg = genFileService.hasProfileImgByRelId(rq.getLoginedMemberId());
+		model.addAttribute("hasProfileImg", hasProfileImg);
+		
 		return "usr/member/modify";
 	}
 
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
-	public String doModify(HttpServletRequest request, String memberModifyAuthKey, String loginPw, String name, String nickname, String email,
-			String cellphoneNo, MultipartRequest multipartRequest, @RequestParam(defaultValue = "/")String afterLogoutUri) {
-		
+	public String doModify(HttpServletRequest request, String memberModifyAuthKey, String loginPw, String name,
+			String nickname, String email, String cellphoneNo, MultipartRequest multipartRequest,
+			@RequestParam(defaultValue = "/") String afterLogoutUri) {
+
 		if (Ut.empty(memberModifyAuthKey)) {
 			return rq.jsHistoryBack("memberModifyAuthKey(이)가 필요합니다.");
 		}
@@ -236,21 +237,20 @@ public class UsrMemberController {
 		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, email,
 				cellphoneNo);
 
-		if(request.getParameter("deleteFile__member__0__extra__profileImg__1") != null) {
+		if (request.getParameter("deleteFile__member__0__extra__profileImg__1") != null) {
 			genFileService.deleteGenFiles("member", rq.getLoginedMemberId(), "extra", "profileImg", 1);
 		}
-		
+
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-		
+
 		for (String fileInputName : fileMap.keySet()) {
 			MultipartFile multipartFile = fileMap.get(fileInputName);
-			
-			if(multipartFile.isEmpty() == false) {
+
+			if (multipartFile.isEmpty() == false) {
 				genFileService.save(multipartFile, rq.getLoginedMemberId());
 			}
 		}
-		
-		
+
 		return rq.jsReplace(modifyRd.getMsg(), "/");
 	}
 

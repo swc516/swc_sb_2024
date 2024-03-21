@@ -40,8 +40,6 @@ public class MemberService {
 			return ResultData.from("F-8", Ut.f("해당 이름(%s)과 이메일(%s)은 이미 사용중입니다.", name, email));
 		}
 
-		// 암호화
-		loginPw = Ut.sha256(loginPw);
 
 		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 		int id = memberRepository.getLastInsertId();
@@ -65,9 +63,7 @@ public class MemberService {
 
 	public ResultData modify(int actorId, String loginPw, String name, String nickname, String email,
 			String cellphoneNo) {
-		if(loginPw != null) {
-			loginPw = Ut.sha256(loginPw);
-		}
+		
 		memberRepository.modify(actorId, loginPw, name, nickname, email, cellphoneNo);
 		
 		if(loginPw != null) {

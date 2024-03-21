@@ -50,6 +50,13 @@
         WHERE 1
         AND id = #{id}
     </select>
+    
+    <select id="hasProfileImgByRelId" resultType="boolean">
+        SELECT count(*)
+        FROM genFile
+        WHERE type2Code = 'profileImg'
+        AND relId = #{relId}
+    </select>
 
     <select id="getGenFiles" resultType="GenFile">
         SELECT *

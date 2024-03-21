@@ -12,13 +12,20 @@
 			return;
 		}
 
-		form.loginPw.value = form.loginPw.value.trim();
+		form.loginPwInput.value = form.loginPwInput.value.trim();
 
-		if (form.loginPw.value.length == 0) {
+		if (form.loginPwInput.value.length == 0) {
 			alert('비밀번호를 입력해주세요.');
-			form.loginPw.focus();
+			form.loginPwInput.focus();
 			return;
 		}
+		
+		form.loginPw.value = sha256(form.loginPwInput.value);
+		form.loginPwInput.value = null;
+		
+		
+		
+		
 
 		MemberCheckPassword__submitFormDone = true;
 		form.submit();
@@ -42,8 +49,8 @@
         <tr>
           <th>로그인비밀번호</th>
           <td>
-            <input name="loginPw" type="password" placeholder="로그인비밀번호"
-              class="w-96 input input-bordered w-full max-w-xs" />
+            <input name="loginPw" type="hidden"/>
+            <input name="loginPwInput" type="password" placeholder="로그인비밀번호" class="w-96 input input-bordered w-full max-w-xs" />
           </td>
         </tr>
         <tr>

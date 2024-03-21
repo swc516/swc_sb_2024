@@ -212,6 +212,10 @@ public class GenFileService {
     public GenFile getGenFile(int id) {
         return genFileRepository.getGenFileById(id);
     }
+    
+    public boolean hasProfileImgByRelId(int id) {
+    	return genFileRepository.hasProfileImgByRelId(id);
+    }
 
     public Map<Integer, Map<String, GenFile>> getFilesMapKeyRelIdAndFileNo(String relTypeCode, List<Integer> relIds,
                                                                            String typeCode, String type2Code) {
@@ -244,6 +248,7 @@ public class GenFileService {
             }
         }
     }
+
 
 	
 
