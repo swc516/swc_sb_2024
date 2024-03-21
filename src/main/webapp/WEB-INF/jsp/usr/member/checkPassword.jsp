@@ -4,10 +4,32 @@
 <%@include file="../common/head.jspf"%>
 
 
+<script>
+	let MemberCheckPassword__submitFormDone = false;
+	function MemberCheckPassword__submitForm(form) {
+		if (MemberCheckPassword__submitFormDone) {
+			alert('처리중입니다.');
+			return;
+		}
+
+		form.loginPw.value = form.loginPw.value.trim();
+
+		if (form.loginPw.value.length == 0) {
+			alert('비밀번호를 입력해주세요.');
+			form.loginPw.focus();
+			return;
+		}
+
+		MemberCheckPassword__submitFormDone = true;
+		form.submit();
+	}
+</script>
+
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="post" action="../member/doCheckPassword">
-    <input type="hidden" name="replaceUri" value="${param.replaceUri}"/>
+    <form class="table-box-type-1" method="post" action="../member/doCheckPassword"
+      onsubmit="MemberCheckPassword__submitForm(this); return false;">
+      <input type="hidden" name="replaceUri" value="${param.replaceUri}" />
       <table>
         <tbody>
         <colgroup>
@@ -15,13 +37,13 @@
         </colgroup>
         <tr>
           <th>로그인아이디</th>
-          <td>${rq.loginedMember.loginId}
-          </td>
+          <td>${rq.loginedMember.loginId}</td>
         </tr>
         <tr>
           <th>로그인비밀번호</th>
           <td>
-            <input name="loginPw" type="password" placeholder="로그인비밀번호" class="w-96 input input-bordered w-full max-w-xs" required/>
+            <input name="loginPw" type="password" placeholder="로그인비밀번호"
+              class="w-96 input input-bordered w-full max-w-xs" />
           </td>
         </tr>
         <tr>

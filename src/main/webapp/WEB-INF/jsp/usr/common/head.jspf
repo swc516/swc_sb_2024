@@ -61,6 +61,7 @@
         <c:if test="${rq.logined}">
           <li>
             <a href="/usr/member/myPage" class="h-full flex items-center px-3 hover:underline">
+               <img class="w-8 h-8 ml-1 mr-1 rounded-full object-cover" src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt="" onerror="${rq.profileFallbackImgOnErrorHtml}" />
               <span>${rq.loginedMember.nickname}'s Profile</span>
             </a>
           </li>

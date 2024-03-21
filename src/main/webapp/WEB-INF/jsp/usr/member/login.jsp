@@ -3,10 +3,41 @@
 <c:set var="pageTitle" value="로그인" />
 <%@include file="../common/head.jspf"%>
 
+<script>
+  let MemberLogin__submitFormDone = false;
+  function MemberLogin__submitForm(form) {
+    if (MemberLogin__submitFormDone) {
+      alert('처리중입니다.');
+      return;
+    }
+
+    form.loginId.value = form.loginId.value.trim();
+    
+    if (form.loginId.value.length == 0) {
+        alert('아이디를 입력해주세요.');
+        form.loginId.focus();
+        return;
+    }
+    
+
+    form.loginPw.value = form.loginPw.value.trim();
+    
+    if (form.loginPw.value.length == 0) {
+        alert('비밀번호를 입력해주세요.');
+        form.loginPw.focus();
+        return;
+    }
+    
+
+    MemberLogin__submitFormDone = true;
+    form.submit();
+  }
+</script>
+
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="post" action="../member/doLogin">
+    <form class="table-box-type-1" method="post" action="../member/doLogin" onsubmit="MemberLogin__submitForm(this); return false;">
       <input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}" />
       <table border="1">
         <tbody>
