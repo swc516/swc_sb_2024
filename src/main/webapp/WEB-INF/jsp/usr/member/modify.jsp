@@ -3,7 +3,7 @@
 <%@ page import="com.swc.exam.demo.util.Ut"%>
 
 <c:set var="pageTitle" value="회원정보수정 " />
-<%@include file="../common/head.jspf"%>
+<%@include file="../../common/head.jspf"%>
 
 <script>
 	let MemberModify__submitFormDone = false;
@@ -187,4 +187,4 @@
   </div>
 </section>
 
-<%@include file="../common/foot.jspf"%>
+<%@include file="../../common/foot.jspf"%>

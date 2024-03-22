@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="게시물 작성" />
-<%@include file="../common/head.jspf"%>
+<%@include file="../../common/head.jspf"%>
 <%@include file="../../common/toastUiEditorLib.jspf"%>
 
 
@@ -110,4 +110,4 @@
   </div>
 </section>
 
-<%@include file="../common/foot.jspf"%>
+<%@include file="../../common/foot.jspf"%>

@@ -3,7 +3,7 @@
 <%@ page import="com.swc.exam.demo.util.Ut"%>
 
 <c:set var="pageTitle" value="마이페이지 " />
-<%@include file="../common/head.jspf"%>
+<%@include file="../../common/head.jspf"%>
 
 
 <section class="mt-5">
@@ -55,4 +55,4 @@
   </div>
 </section>
 
-<%@include file="../common/foot.jspf"%>
+<%@include file="../../common/foot.jspf"%>

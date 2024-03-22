@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="게시물 내용" />
-<%@include file="../common/head.jspf"%>
+<%@include file="../../common/head.jspf"%>
 <%@include file="../../common/toastUiEditorLib.jspf"%>
 
 
@@ -192,7 +192,7 @@
           <tr>
             <th>내용</th>
             <td>
-              <textarea name="body" rows="5" placeholder="내용"></textarea>
+              <textarea class="textarea textarea-bordered" name="body" rows="5" placeholder="내용"></textarea>
             </td>
           </tr>
           <tr>
@@ -260,4 +260,4 @@
   </div>
 </section>
 
-<%@include file="../common/foot.jspf"%>
+<%@include file="../../common/foot.jspf"%>
