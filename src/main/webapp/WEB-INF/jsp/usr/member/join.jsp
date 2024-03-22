@@ -140,6 +140,10 @@
 			} else {
 				validLoginId = '';
 			}
+			
+			if( data.resultCode == 'F-B' ){
+				alert(data.msg);
+			}
 		}, 'json');
 	}
 	// 조금 더 자주 체크

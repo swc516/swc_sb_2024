@@ -21,7 +21,7 @@ public class NeedAdminInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
 
 		if (!rq.isAdmin()) {
-			if( rq.isAdmin()) {
+			if( rq.isAjax()) {
 				resp.setContentType("application/json; charset=UTF-8");
 				rq.print("{\"resultCode\":\"F-A\", \"msg\":\"권한이 없습니다.\"}");
 			} else {
