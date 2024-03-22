@@ -76,7 +76,7 @@
           <th>번호</th>
           <td>${article.id}</td>
         </tr>
-        <tr> 
+        <tr>
           <th>작성날짜</th>
           <td>${article.forPrintType2RegDate}</td>
         </tr>
@@ -87,8 +87,9 @@
         <tr>
           <th>작성자</th>
           <td>
-          <img class="w-40 h-40 object-cover" src="${rq.getProfileImgUri(article.memberId)}" onerror="${rq.profileFallbackImgOnErrorHtml}" alt=""/>
-          <span>${article.extra__writerName}</span>
+            <img class="w-40 h-40 object-cover" src="${rq.getProfileImgUri(article.memberId)}"
+              onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
+            <span>${article.extra__writerName}</span>
           </td>
         </tr>
         <tr>
@@ -192,7 +193,7 @@
           <tr>
             <th>내용</th>
             <td>
-              <textarea class="textarea textarea-bordered" name="body" rows="5" placeholder="내용"></textarea>
+              <textarea class="w-full textarea textarea-bordered" name="body" rows="5" placeholder="내용"></textarea>
             </td>
           </tr>
           <tr>
@@ -211,6 +212,31 @@
   </div>
 </section>
 
+<script>
+	function ReplyList_deleteReply(btn) {
+		const $clicked = $(btn);
+		const $target = $clicked.closest('[data-id]');
+		const id = $target.attr('data-id');
+
+		$clicked.html('삭제중...');
+
+		$.post('../reply/doDeleteAjax', {
+			id : id
+		}, function(data) {
+			if (data.success) {
+				$target.remove();
+			} else {
+				if (data.msg) {
+					alert(data.msg);
+				}
+
+				$clicked.html('삭제실패');
+			}
+
+		}, 'json');
+	}
+</script>
+
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <h1>댓글 리스트(${replies.size()})</h1>
@@ -221,8 +247,8 @@
         <col width="100" />
         <col width="50" />
         <col width="100" />
-        <col width="200" />
         <col />
+        <col width="200" />
       </colgroup>
       <thead>
         <tr>
@@ -231,28 +257,28 @@
           <th>수정날짜</th>
           <th>추천</th>
           <th>작성자</th>
-          <th>비고</th>
           <th>내용</th>
+          <th>비고</th>
         </tr>
       </thead>
       <tbody>
         <c:forEach var="reply" items="${replies}">
-          <tr class="hover">
+          <tr data-id="${reply.id}" class="hover">
             <td>${reply.id}</td>
             <td>${reply.forPrintType1RegDate}</td>
             <td>${reply.forPrintType1UpdateDate}</td>
             <td>${reply.goodReactionPoint}</td>
             <td>${reply.extra__writerName}</td>
+            <td>${reply.forPrintBody}</td>
             <td>
               <c:if test="${reply.extra__actorCanModify}">
                 <a class="btn btn-link" href="../reply/modify?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">수정</a>
               </c:if>
               <c:if test="${reply.extra__actorCanDelete}">
-                <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
-                  href="../reply/doDelete?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">삭제</a>
+                <a class="btn btn-link"
+                  onclick="if ( confirm('정말 삭제하시겠습니까?') ) {ReplyList_deleteReply(this); } return false;">삭제</a>
               </c:if>
             </td>
-            <td>${reply.forPrintBody}</td>
           </tr>
         </c:forEach>
       </tbody>
