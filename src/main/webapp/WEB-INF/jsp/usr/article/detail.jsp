@@ -86,9 +86,9 @@
         </tr>
         <tr>
           <th>작성자</th>
-          <td>
-            <img class="w-40 h-40 object-cover" src="${rq.getProfileImgUri(article.memberId)}"
-              onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
+          <td colspan="1">
+            <img style="float: left" class="w-6 h-6 ml-1 mr-1 rounded-full object-cover"
+              src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt="" onerror="${rq.profileFallbackImgOnErrorHtml}" />
             <span>${article.extra__writerName}</span>
           </td>
         </tr>
@@ -188,7 +188,11 @@
           </colgroup>
           <tr>
             <th>작성자</th>
-            <td>${rq.loginedMember.nickname}</td>
+            <td>
+              <img style="float: left" class="w-6 h-6 ml-1 mr-1 rounded-full object-cover"
+                src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt="" onerror="${rq.profileFallbackImgOnErrorHtml}" />
+              ${rq.loginedMember.nickname}
+            </td>
           </tr>
           <tr>
             <th>내용</th>
@@ -243,22 +247,22 @@
     <table class="table table-fixed w-full">
       <colgroup>
         <col width="50" />
-        <col width="100" />
-        <col width="100" />
-        <col width="50" />
-        <col width="100" />
+        <col width="150" />
+        <col width="150" />
         <col />
         <col width="200" />
+        <col width="200" />
+        <col width="50" />
       </colgroup>
       <thead>
         <tr>
           <th>번호</th>
           <th>작성날짜</th>
           <th>수정날짜</th>
-          <th>추천</th>
-          <th>작성자</th>
           <th>내용</th>
+          <th>작성자</th>
           <th>비고</th>
+          <th>추천</th>
         </tr>
       </thead>
       <tbody>
@@ -267,9 +271,12 @@
             <td>${reply.id}</td>
             <td>${reply.forPrintType1RegDate}</td>
             <td>${reply.forPrintType1UpdateDate}</td>
-            <td>${reply.goodReactionPoint}</td>
-            <td>${reply.extra__writerName}</td>
             <td>${reply.forPrintBody}</td>
+            <td>
+              <img style="float: left" class="w-6 h-6 ml-1 mr-1 rounded-full object-cover"
+                src="${rq.getProfileImgUri(reply.memberId)}" alt="" onerror="${rq.profileFallbackImgOnErrorHtml}" />
+              ${reply.extra__writerName}
+            </td>
             <td>
               <c:if test="${reply.extra__actorCanModify}">
                 <a class="btn btn-link" href="../reply/modify?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">수정</a>
@@ -279,6 +286,7 @@
                   onclick="if ( confirm('정말 삭제하시겠습니까?') ) {ReplyList_deleteReply(this); } return false;">삭제</a>
               </c:if>
             </td>
+            <td>${reply.goodReactionPoint}</td>
           </tr>
         </c:forEach>
       </tbody>

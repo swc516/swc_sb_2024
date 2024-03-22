@@ -18,7 +18,7 @@
         <select data-value="${param.searchKeywordTypeCode}" name="searchKeywordTypeCode" id=""
           class="select select-bordered">
           <option disabled>검색타입</option>
-           <c:choose>
+          <c:choose>
             <c:when test="${param.searchKeywordTypeCode eq 'title'}">
               <option value="title" selected>제목</option>
             </c:when>
@@ -26,7 +26,7 @@
               <option value="title">제목</option>
             </c:otherwise>
           </c:choose>
-           <c:choose>
+          <c:choose>
             <c:when test="${param.searchKeywordTypeCode eq 'body'}">
               <option value="body" selected>내용</option>
             </c:when>
@@ -34,7 +34,7 @@
               <option value="body">내용</option>
             </c:otherwise>
           </c:choose>
-           <c:choose>
+          <c:choose>
             <c:when test="${param.searchKeywordTypeCode eq 'title, body'}">
               <option value="title, body" selected>제목, 내용</option>
             </c:when>
@@ -51,37 +51,39 @@
     <div class="mt-3">
       <table class="table table-fixed w-full">
         <colgroup>
-          <col width="50" />
           <col width="100" />
-          <col width="100" />
+          <col/>
+          <col width="150" />
           <col width="50" />
           <col width="50" />
-          <col width="100" />
+          <col width="150" />
         </colgroup>
         <thead>
           <tr>
             <th>번호</th>
-            <th>작성날짜</th>
-            <th>수정날짜</th>
+            <th>제목</th>
+            <th>작성자</th>
             <th>조회</th>
             <th>추천</th>
-            <th>작성자</th>
-            <th>제목</th>
+            <th>작성날짜</th>
           </tr>
         </thead>
         <tbody>
           <c:forEach var="article" items="${articles}">
             <tr class="hover">
               <td>${article.id}</td>
-              <td>${article.forPrintType1RegDate}</td>
-              <td>${article.forPrintType1UpdateDate}</td>
-              <td>${article.hitCount}</td>
-              <td>${article.goodReactionPoint}</td>
-              <td>${article.extra__writerName}</td>
               <td>
                 <a class="btn-text-link block w-full truncate" href="${rq.getArticleDetailUriFromArticleList(article)}">${article.title}
                 </a>
               </td>
+              <td>
+                <img style="float: left" class="w-6 h-6 ml-1 mr-1 rounded-full object-cover"
+                  src="${rq.getProfileImgUri(article.memberId)}" alt="" onerror="${rq.profileFallbackImgOnErrorHtml}" />
+                ${article.extra__writerName}
+              </td>
+              <td>${article.hitCount}</td>
+              <td>${article.goodReactionPoint}</td>
+              <td>${article.forPrintType1RegDate}</td>
             </tr>
           </c:forEach>
         </tbody>

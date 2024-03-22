@@ -88,11 +88,11 @@
         <colgroup>
           <col width="50" />
           <col width="80" />
-          <col width="80" />
           <col width="130" />
-          <col width="130" />
-          <col />
-          <col />
+          <col width="150" />
+          <col width="150" />
+          <col width="150" />
+          <col width="150" />
         </colgroup>
         <thead>
           <tr>

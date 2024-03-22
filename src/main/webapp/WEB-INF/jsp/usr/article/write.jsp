@@ -6,52 +6,51 @@
 
 
 <script>
+	let ArticleWrite__submitFormDone = false;
+	function ArticleWrite__submitForm(form) {
+		if (ArticleWrite__submitFormDone) {
+			alert('처리중입니다.');
+			return;
+		}
 
-  let ArticleWrite__submitFormDone = false;
-  function ArticleWrite__submitForm(form) {
-    if (ArticleWrite__submitFormDone) {
-    	alert('처리중입니다.');
-      return;
-    }
+		form.boardId.value = form.boardId.value.trim();
 
-    form.boardId.value = form.boardId.value.trim();
+		if (form.boardId.value == '게시판을 선택해주세요.') {
+			alert('게시판을 선택해주세요.');
+			form.boardId.focus();
+			return;
+		}
 
-    if (form.boardId.value == '게시판을 선택해주세요.') {
-      alert('게시판을 선택해주세요.');
-      form.boardId.focus();
-      return;
-    }
+		form.title.value = form.title.value.trim();
 
-    form.title.value = form.title.value.trim();
+		if (form.title.value.length == 0) {
+			alert('제목을 입력해주세요');
+			form.title.focus();
+			return;
+		}
 
-    if (form.title.value.length == 0) {
-      alert('제목을 입력해주세요');
-      form.title.focus();
-      return;
-    }
-    
-    const editor = $(form).find('.toast-ui-editor').data('data-toast-editor');
-    const markdown = editor.getMarkdown().trim();
+		const editor = $(form).find('.toast-ui-editor').data(
+				'data-toast-editor');
+		const markdown = editor.getMarkdown().trim();
 
-    if (markdown.length == 0) {
-      alert('내용을 입력해주세요');
-      editor.focus();
-      return;
-    }
-    
-    form.body.value = markdown;
+		if (markdown.length == 0) {
+			alert('내용을 입력해주세요');
+			editor.focus();
+			return;
+		}
 
+		form.body.value = markdown;
 
-    ArticleWrite__submitFormDone = true;
-    form.submit();
-  }
-
- </script>
+		ArticleWrite__submitFormDone = true;
+		form.submit();
+	}
+</script>
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <form class="table-box-type-1" method="POST" action="../article/doWrite" onsubmit="ArticleWrite__submitForm(this); return false;">
-    <input type="hidden" name="body"/>
+    <form class="table-box-type-1" method="POST" action="../article/doWrite"
+      onsubmit="ArticleWrite__submitForm(this); return false;">
+      <input type="hidden" name="body" />
       <table>
         <colgroup>
           <col width="200" />
@@ -59,26 +58,20 @@
         <tbody>
           <tr>
             <th>작성자</th>
-            <td>${rq.loginedMember.nickname}</td>
+            <td>
+              <img style="float: left" class="w-6 h-6 ml-1 mr-1 rounded-full object-cover"
+                src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt="" onerror="${rq.profileFallbackImgOnErrorHtml}" />
+              ${rq.loginedMember.nickname}
+            </td>
           </tr>
           <tr>
-            <th>게시판</th>
+            <th>게시판$</th>
             <td>
               <select class="select select-bordered" name="boardId">
                 <option disabled selected>게시판을 선택해주세요.</option>
                 <option value="1">공지</option>
                 <option value="2">자유</option>
               </select>
-            <!-- 
-              <label>
-                공지
-                <input type="radio" name="boardId" value="1" />
-              </label>
-              <label>
-                자유
-                <input type="radio" name="boardId" value="2" />
-              </label>
-             -->
             </td>
           </tr>
           <tr>
