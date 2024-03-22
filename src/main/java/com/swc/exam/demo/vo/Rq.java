@@ -258,5 +258,9 @@ public class Rq {
 		}
 		return loginedMember.isAdmin();
 	}
+	
+	
+	
+
 
 }

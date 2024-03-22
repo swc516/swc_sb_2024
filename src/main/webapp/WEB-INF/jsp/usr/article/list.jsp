@@ -52,7 +52,7 @@
       <table class="table table-fixed w-full">
         <colgroup>
           <col width="100" />
-          <col/>
+          <col />
           <col width="150" />
           <col width="50" />
           <col width="50" />
@@ -115,8 +115,13 @@
         <a class="btn btn-sm" href="${pageBaseUri}&page=${pagesCount}">${pagesCount}</a>
       </c:if>
     </div>
+    <c:if test="${param.boardId ne 1}">
+      <form action="/usr/article/write" method="post">
+        <input type="hidden" name="boardId" value="${param.boardId}" />
+        <button type="submit" class="btn btn-primary">게시물 작성</button>
+      </form>
+    </c:if>
   </div>
-
 </section>
 
 <%@include file="../../common/foot.jspf"%>

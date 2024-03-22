@@ -95,13 +95,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		;
 		
 		registry.addInterceptor(needAdminInterceptor)
-		.addPathPatterns("/adm/**")
-		.excludePathPatterns("/adm/member/login")
-		.excludePathPatterns("/adm/member/doLogin")
-		.excludePathPatterns("/adm/member/findLoginId")
-		.excludePathPatterns("/adm/member/doFindLoginId")
-		.excludePathPatterns("/adm/member/findLoginPw")
-		.excludePathPatterns("/adm/member/doFindLoginPw")
+		.addPathPatterns("/adm/home/main")
+		.addPathPatterns("/adm/member/list")
 		;
 
 	}

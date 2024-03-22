@@ -27,7 +27,8 @@ public class UsrArticleController {
 	private ReplyService replyService;
 	private Rq rq;
 
-	public UsrArticleController(ArticleService articleService, BoardService boardService, ReactionPointService reactionPointService, ReplyService replyService, Rq rq) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService,
+			ReactionPointService reactionPointService, ReplyService replyService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
 		this.reactionPointService = reactionPointService;
@@ -68,26 +69,43 @@ public class UsrArticleController {
 	public String showDetail(Model model, int id) {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		model.addAttribute("article", article);
-		
-		
+
 		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
 		model.addAttribute("replies", replies);
-		
-		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), "article", id);
+
+		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(),
+				"article", id);
 		model.addAttribute("actorCanMakeReaction", actorCanMakeReactionPointRd.isSuccess());
-		
-		
-		if ( actorCanMakeReactionPointRd.getResultCode().equals("F-2") ) {
-			int sumReactionPointByMemberId = (int)actorCanMakeReactionPointRd.getData1();
-			
-			if(sumReactionPointByMemberId > 0) {
+
+		if (actorCanMakeReactionPointRd.getResultCode().equals("F-2")) {
+			int sumReactionPointByMemberId = (int) actorCanMakeReactionPointRd.getData1();
+
+			if (sumReactionPointByMemberId > 0) {
 				model.addAttribute("actorCanCancelGoodReaction", true);
 			} else {
 				model.addAttribute("actorCanCancelBadReaction", true);
-				
 			}
 		}
-			
+
+		for (int i = 0; i < replies.size(); i++) {
+			ResultData actorCanMakeReactionPointForReplyRd = reactionPointService
+					.actorCanMakeReactionPoint(rq.getLoginedMemberId(), "reply", replies.get(i).getId());
+
+			if (!rq.isLogined()) {
+				replies.get(i).setExtra__actorCanMakeReactionPoint(!actorCanMakeReactionPointForReplyRd.isSuccess());
+			} else {
+				replies.get(i).setExtra__actorCanMakeReactionPoint(actorCanMakeReactionPointForReplyRd.isSuccess());
+			}
+			if (actorCanMakeReactionPointForReplyRd.getResultCode().equals("F-2")) {
+				int sumReactionPointByMemberId = (int) actorCanMakeReactionPointForReplyRd.getData1();
+
+				if (sumReactionPointByMemberId > 0) {
+					replies.get(i).setExtra__actorCanCancelGoodReaction(true);
+				} else {
+					replies.get(i).setExtra__actorCanCancelBadReaction(true);
+				}
+			}
+		}
 
 		return "usr/article/detail";
 	}
@@ -105,7 +123,7 @@ public class UsrArticleController {
 				articleService.getArticleHitCount(id));
 
 		rd.setData2("id", id);
-		
+
 		return rd;
 	}
 
@@ -132,7 +150,9 @@ public class UsrArticleController {
 		}
 
 		if (article.getMemberId() != rq.getLoginedMemberId()) {
-			return rq.jsHistoryBack("권한이 없습니다.");
+			if (!rq.isAdmin()) {
+				return rq.jsHistoryBack("권한이 없습니다.");
+			}
 		}
 
 		articleService.deleteArticle(id);
@@ -149,10 +169,11 @@ public class UsrArticleController {
 
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
 
-		if (actorCanModifyRd.isFail()) {
-			return rq.historyBackJsOnview(actorCanModifyRd.getMsg());
+		if (!rq.isAdmin()) {
+			if (actorCanModifyRd.isFail()) {
+				return rq.historyBackJsOnview(actorCanModifyRd.getMsg());
+			}
 		}
-
 		model.addAttribute("article", article);
 
 		return "usr/article/modify";
@@ -161,7 +182,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	public String doModify(int id, String title, String body) {
-		
+
 		if (Ut.empty(title)) {
 			return rq.jsHistoryBack("title(을)를 입력해주세요.");
 		}
@@ -169,8 +190,7 @@ public class UsrArticleController {
 		if (Ut.empty(body)) {
 			return rq.jsHistoryBack("body(을)를 입력해주세요.");
 		}
-		
-		
+
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		if (article == null) {
@@ -179,8 +199,10 @@ public class UsrArticleController {
 
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
 
-		if (actorCanModifyRd.isFail()) {
-			return rq.jsHistoryBack(actorCanModifyRd.getMsg());
+		if (!rq.isAdmin()) {
+			if (actorCanModifyRd.isFail()) {
+				return rq.jsHistoryBack(actorCanModifyRd.getMsg());
+			}
 		}
 
 		articleService.modifyArticle(id, title, body);
@@ -188,13 +210,27 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/write")
-	public String showWrite(Model model) {
+	public String showWrite(Model model, String boardId) {
+		if (boardId.equals("1")) {
+			if (!rq.isAdmin()) {
+				return rq.historyBackJsOnview("관리자 권한이 필요합니다.");
+			}
+		}
+
+		model.addAttribute("boardId", boardId);
 		return "usr/article/write";
 	}
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	public String doWrite(int boardId, String title, String body, String replaceUri) {
+
+		if (boardId == 1) {
+			if (!rq.isAdmin()) {
+				return rq.jsReplace("관리자 권한이 필요합니다.", "/");
+			}
+		}
+
 		if (Ut.empty(title)) {
 			return rq.jsHistoryBack("title(을)를 입력해주세요.");
 		}

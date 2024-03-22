@@ -63,8 +63,8 @@
 		form.submit();
 	}
 </script>
-
 <section class="mt-5">
+
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
       <table>
@@ -104,7 +104,6 @@
             <div class="flex items-center">
               <span class="text-blue-700">${article.goodReactionPoint}</span>
               <span>&nbsp;</span>
-
               <c:if test="${actorCanMakeReaction}">
                 <a
                   href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
@@ -132,6 +131,8 @@
                   href="/usr/reactionPoint/doCencelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
                   class="btn btn-xs btn-secondary"> 싫어요👎 </a>
               </c:if>
+              <span>&nbsp;</span>
+              <span class="text-red-700">${article.badReactionPoint}</span>
             </div>
           </td>
         </tr>
@@ -160,10 +161,10 @@
         <a class="btn btn-link" href="${param.listUri}">뒤로가기</a>
       </c:if>
 
-      <c:if test="${article.extra__actorCanModify}">
+      <c:if test="${article.extra__actorCanModify || rq.admin}">
         <a class="btn btn-link" href="../article/modify?id=${article.id}">게시물 수정</a>
       </c:if>
-      <c:if test="${article.extra__actorCanDelete}">
+      <c:if test="${article.extra__actorCanDelete || rq.admin}">
         <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false) return false;"
           href="../article/doDelete?id=${article.id}">게시물 삭제</a>
       </c:if>
@@ -251,8 +252,9 @@
         <col width="150" />
         <col />
         <col width="200" />
-        <col width="200" />
         <col width="50" />
+        <col width="50" />
+        <col width="200" />
       </colgroup>
       <thead>
         <tr>
@@ -261,8 +263,9 @@
           <th>수정날짜</th>
           <th>내용</th>
           <th>작성자</th>
+          <th>좋아요</th>
+          <th>싫어요</th>
           <th>비고</th>
-          <th>추천</th>
         </tr>
       </thead>
       <tbody>
@@ -278,20 +281,68 @@
               ${reply.extra__writerName}
             </td>
             <td>
-              <c:if test="${reply.extra__actorCanModify}">
+              <span class="text-blue-700">${reply.goodReactionPoint}</span>
+            </td>
+            <td>
+              <span class="text-red-700">${reply.badReactionPoint}</span>
+            </td>
+            <td>
+              <c:if test="${reply.extra__actorCanModify || rq.admin}">
                 <a class="btn btn-link" href="../reply/modify?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">수정</a>
               </c:if>
-              <c:if test="${reply.extra__actorCanDelete}">
+              <c:if test="${reply.extra__actorCanDelete || rq.admin}">
                 <a class="btn btn-link"
                   onclick="if ( confirm('정말 삭제하시겠습니까?') ) {ReplyList_deleteReply(this); } return false;">삭제</a>
               </c:if>
             </td>
-            <td>${reply.goodReactionPoint}</td>
+            <td>
+            
+            <div class="flex items-center">
+              <span class="text-blue-700">${reply.goodReactionPoint}</span>
+              <span>&nbsp;</span>
+              
+              <c:if test="${reply.extra__actorCanMakeReactionPoint}">
+                <a
+                  href="/usr/reactionPoint/doGoodReaction?relTypeCode=reply&relId=${reply.id}&replaceUri=${rq.encodedCurrentUri}"
+                  class="btn btn-xs btn-primary btn-outline"> 좋아요👍 </a>
+                <span>&nbsp;</span>
+                <a
+                  href="/usr/reactionPoint/doBadReaction?relTypeCode=reply&relId=${reply.id}&replaceUri=${rq.encodedCurrentUri}"
+                  class="btn btn-xs btn-secondary btn-outline"> 싫어요👎 </a>
+              </c:if>
+
+              <c:if test="${reply.extra__actorCanCancelGoodReaction}">
+                <a
+                  href="/usr/reactionPoint/doCencelGoodReaction?relTypeCode=reply&relId=${reply.id}&replaceUri=${rq.encodedCurrentUri}"
+                  class="btn btn-xs btn-primary"> 좋아요👍 </a>
+                <span>&nbsp;</span>
+                <a onclick="alert(this.title); return false;" href="#" title="먼저 좋아요를 취소해주세요."
+                  class="btn btn-xs btn-secondary btn-outline"> 싫어요👎 </a>
+              </c:if>
+
+              <c:if test="${reply.extra__actorCanCancelBadReaction}">
+                <a onclick="alert(this.title); return false;" href="#" title="먼저 싫어요를 취소해주세요."
+                  class="btn btn-xs btn-primary btn-outline"> 좋아요👍 </a>
+                <span>&nbsp;</span>
+                <a
+                  href="/usr/reactionPoint/doCencelBadReaction?relTypeCode=reply&relId=${reply.id}&replaceUri=${rq.encodedCurrentUri}"
+                  class="btn btn-xs btn-secondary"> 싫어요👎 </a>
+              </c:if>
+              
+              
+              <span>&nbsp;</span>
+              <span class="text-red-700">${reply.badReactionPoint}</span>
+            </div>
+            
+          
+            </td>
           </tr>
         </c:forEach>
       </tbody>
     </table>
   </div>
 </section>
+
+
 
 <%@include file="../../common/foot.jspf"%>

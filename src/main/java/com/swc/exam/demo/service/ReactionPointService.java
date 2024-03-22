@@ -9,10 +9,12 @@ import com.swc.exam.demo.vo.ResultData;
 public class ReactionPointService {
 	private ReactionPointRepository reactionPointRepository;
 	private ArticleService articleService;
+	private ReplyService replyService;
 	
-	public ReactionPointService(ReactionPointRepository reactionPointRepository, ArticleService articleService) {
+	public ReactionPointService(ReactionPointRepository reactionPointRepository, ArticleService articleService, ReplyService replyService) {
 		this.reactionPointRepository = reactionPointRepository;
 		this.articleService = articleService;
+		this.replyService = replyService;
 		
 	}
 
@@ -36,6 +38,9 @@ public class ReactionPointService {
 		case "article":
 			articleService.increaseGoodReactionPoint(relId);
 			break;
+		case "reply":
+			replyService.increaseGoodReactionPoint(relId);
+			break;
 		}
 		
 		return ResultData.from("S-1", "좋아요 처리 되었습니다.");
@@ -47,6 +52,9 @@ public class ReactionPointService {
 		switch(relTypeCode) { 
 		case "article":
 			articleService.increaseBadReactionPoint(relId);
+			break;
+		case "reply":
+			replyService.increaseBadReactionPoint(relId);
 			break;
 		}
 		
@@ -60,6 +68,9 @@ public class ReactionPointService {
 		case "article":
 			articleService.decreaseGoodReactionPoint(relId);
 			break;
+		case "reply":
+			replyService.decreaseGoodReactionPoint(relId);
+			break;
 		}
 		
 		return ResultData.from("S-1", "좋아요 취소 처리 되었습니다.");
@@ -71,6 +82,9 @@ public class ReactionPointService {
 		switch(relTypeCode) { 
 		case "article":
 			articleService.decreaseBadReactionPoint(relId);
+			break;
+		case "reply":
+			replyService.decreaseBadReactionPoint(relId);
 			break;
 		}
 		

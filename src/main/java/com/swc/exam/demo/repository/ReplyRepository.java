@@ -75,6 +75,45 @@ public interface ReplyRepository {
 			WHERE id = #{id}
 			""")
 	public void modifyReply(@Param("id")int id, @Param("body")String body);
+	
+	@Update("""
+			<script>
+			UPDATE reply
+			SET goodReactionPoint = goodReactionPoint + 1
+			WHERE id = #{id}
+			</script>
+			""")
+	public int increaseGoodReactionPoint(@Param("id")int id);
+
+	
+	@Update("""
+			<script>
+			UPDATE reply
+			SET badReactionPoint = badReactionPoint + 1
+			WHERE id = #{id}
+			</script>
+			""")
+	public int increaseBadReactionPoint(@Param("id")int id);
+
+	
+	@Update("""
+			<script>
+			UPDATE reply
+			SET goodReactionPoint = goodReactionPoint - 1
+			WHERE id = #{id}
+			</script>
+			""")
+	public int decreaseGoodReactionPoint(@Param("id")int id);
+	
+	@Update("""
+			<script>
+			UPDATE reply
+			SET badReactionPoint = badReactionPoint - 1
+			WHERE id = #{id}
+			</script>
+			""")
+	public int decreaseBadReactionPoint(@Param("id")int id);
+	
 
 
 }

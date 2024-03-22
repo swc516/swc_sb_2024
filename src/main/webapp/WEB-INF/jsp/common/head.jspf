@@ -69,11 +69,6 @@ Theme__init();
           </a>
         </li>
         <li>
-          <a href="/usr/article/write" class="h-full flex items-center px-3 hover:underline">
-            <span>작성</span>
-          </a>
-        </li>
-        <li>
           <a href="/usr/article/list?boardId=1" class="h-full flex items-center px-3 hover:underline">
             <span>공지사항 게시판</span>
           </a>
@@ -105,8 +100,8 @@ Theme__init();
           </li>
           <c:if test="${rq.admin}">
             <li>
-              <a href="/adm/member/list" class="h-full flex items-center px-3 hover:underline">
-                <span>관리자</span>
+              <a href="/adm/home/main" class="h-full flex items-center px-3 hover:underline">
+                <span>●관리자</span>
               </a>
             </li>
           </c:if>

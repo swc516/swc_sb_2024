@@ -51,6 +51,14 @@
     <form class="table-box-type-1" method="POST" action="../article/doWrite"
       onsubmit="ArticleWrite__submitForm(this); return false;">
       <input type="hidden" name="body" />
+      <c:choose>
+        <c:when test="${boardId eq '1'}">
+          <input type="hidden" name="boardId" value="1" />
+        </c:when>
+        <c:when test="${boardId eq '2'}">
+          <input type="hidden" name="boardId" value="2" />
+        </c:when>
+      </c:choose>
       <table>
         <colgroup>
           <col width="200" />
@@ -62,16 +70,6 @@
               <img style="float: left" class="w-6 h-6 ml-1 mr-1 rounded-full object-cover"
                 src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt="" onerror="${rq.profileFallbackImgOnErrorHtml}" />
               ${rq.loginedMember.nickname}
-            </td>
-          </tr>
-          <tr>
-            <th>게시판$</th>
-            <td>
-              <select class="select select-bordered" name="boardId">
-                <option disabled selected>게시판을 선택해주세요.</option>
-                <option value="1">공지</option>
-                <option value="2">자유</option>
-              </select>
             </td>
           </tr>
           <tr>

@@ -23,6 +23,7 @@ public class UsrReactionPointController {
 	@RequestMapping("/usr/reactionPoint/doGoodReaction")
 	@ResponseBody
 	public String doGoodReaction(String relTypeCode, int relId, String replaceUri) {
+		
 		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);
 		
 		if ( actorCanMakeReactionPointRd.isFail()) {

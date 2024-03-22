@@ -55,7 +55,7 @@ public class UsrReplyController {
 
 		}
 
-		//return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
+		// return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
 		return rq.jsReplace("", replaceUri);
 	}
 
@@ -74,7 +74,9 @@ public class UsrReplyController {
 		}
 
 		if (reply.isExtra__actorCanDelete() == false) {
-			return rq.jsHistoryBack(Ut.f("%d번 댓글을 삭제할 권한이 없습니다.", id));
+			if (!rq.isAdmin()) {
+				return rq.jsHistoryBack(Ut.f("%d번 댓글을 삭제할 권한이 없습니다.", id));
+			}
 		}
 
 		ResultData deleteReplyRd = replyService.deleteReply(id);
@@ -90,13 +92,13 @@ public class UsrReplyController {
 
 		return rq.jsReplace(deleteReplyRd.getMsg(), replaceUri);
 	}
-	
+
 	@RequestMapping("/usr/reply/doDeleteAjax")
 	@ResponseBody
 	public ResultData doDeleteAjax(int id) {
 
 		if (Ut.empty(id)) {
-			return ResultData.from("F-1","id(을)를 입력해주세요.");
+			return ResultData.from("F-1", "id(을)를 입력해주세요.");
 		}
 
 		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), id);
@@ -106,16 +108,15 @@ public class UsrReplyController {
 		}
 
 		if (reply.isExtra__actorCanDelete() == false) {
-			return ResultData.from("F-3", Ut.f("%d번 댓글을 삭제할 권한이 없습니다.", id));
+			if (!rq.isAdmin()) {
+				return ResultData.from("F-3", Ut.f("%d번 댓글을 삭제할 권한이 없습니다.", id));
+			}
 		}
 
 		ResultData deleteReplyRd = replyService.deleteReply(id);
 
-
 		return ResultData.from("S-1", deleteReplyRd.getMsg());
 	}
-
-	
 
 	@RequestMapping("/usr/reply/modify")
 	public String modify(int id, String replaceUri, Model model) {
@@ -130,8 +131,10 @@ public class UsrReplyController {
 			return rq.jsHistoryBack(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
 		}
 
-		if (reply.isExtra__actorCanDelete() == false) {
-			return rq.jsHistoryBack(Ut.f("%d번 댓글을 수정할 권한이 없습니다.", id));
+		if (reply.isExtra__actorCanModify() == false) {
+			if (!rq.isAdmin()) {
+				return rq.jsHistoryBack(Ut.f("%d번 댓글을 수정할 권한이 없습니다.", id));
+			}
 		}
 
 		String relDataTitle = null;
@@ -148,7 +151,7 @@ public class UsrReplyController {
 
 		return "usr/reply/modify";
 	}
-	
+
 	@RequestMapping("/usr/reply/doModify")
 	@ResponseBody
 	public String doModify(int id, String body, String replaceUri) {
@@ -164,13 +167,14 @@ public class UsrReplyController {
 		}
 
 		if (reply.isExtra__actorCanDelete() == false) {
-			return rq.jsHistoryBack(Ut.f("%d번 댓글을 수정할 권한이 없습니다.", id));
+			if (!rq.isAdmin()) {
+				return rq.jsHistoryBack(Ut.f("%d번 댓글을 수정할 권한이 없습니다.", id));
+			}
 		}
-		
+
 		if (Ut.empty(body)) {
 			return rq.jsHistoryBack("body(을)를 입력해주세요.");
 		}
-
 
 		ResultData modifyReplyRd = replyService.modifyReply(id, body);
 
