@@ -332,4 +332,50 @@ ALTER TABLE attr ADD INDEX (relTypeCode, typeCode, type2Code);
 # attr에 만료날짜 추가
 ALTER TABLE attr ADD COLUMN expireDate DATETIME NULL AFTER `value`;
 
-DESC attr;
+# 로그인 비밀번호의 컬럼 길이를 100으로 늘림
+ALTER TABLE `member` MODIFY COLUMN loginPw VARCHAR(100) NOT NULL;
+
+
+
+
+
+CREATE TABLE genFile (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  regDate DATETIME DEFAULT NULL,
+  updateDate DATETIME DEFAULT NULL,
+  delDate DATETIME DEFAULT NULL,
+  delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+  relTypeCode CHAR(50) NOT NULL,
+  relId INT(10) UNSIGNED NOT NULL,
+  originFileName VARCHAR(100) NOT NULL,
+  fileExt CHAR(10) NOT NULL,
+  typeCode CHAR(20) NOT NULL,
+  type2Code CHAR(20) NOT NULL,
+  fileSize INT(10) UNSIGNED NOT NULL,
+  fileExtTypeCode CHAR(10) NOT NULL,
+  fileExtType2Code CHAR(10) NOT NULL,
+  fileNo SMALLINT(2) UNSIGNED NOT NULL,
+  fileDir CHAR(20) NOT NULL,
+  PRIMARY KEY (id),
+  KEY relId (relTypeCode,relId,typeCode,type2Code,fileNo)
+);
+
+
+#회원 생성용
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'user3',
+loginPw = 'user3',
+authLevel = 3,
+`name` = '사용자3',
+`nickname` = '사용자3',
+cellphoneNo = '01011112222',
+email = 'user3@gmail.com';
+
+
+# 기존 회원의 비밀번호를 암호화 해서 저장
+UPDATE `member` 
+SET loginPw = SHA2(loginPw, 256);
+
+SELECT * FROM `member`;
