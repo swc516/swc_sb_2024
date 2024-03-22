@@ -64,10 +64,18 @@
         <c:if test="${rq.logined}">
           <li>
             <a href="/usr/member/myPage" class="h-full flex items-center px-3 hover:underline">
-               <img class="w-8 h-8 ml-1 mr-1 rounded-full object-cover" src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt="" onerror="${rq.profileFallbackImgOnErrorHtml}" />
+              <img class="w-8 h-8 ml-1 mr-1 rounded-full object-cover" src="${rq.getProfileImgUri(rq.loginedMember.id)}"
+                alt="" onerror="${rq.profileFallbackImgOnErrorHtml}" />
               <span>${rq.loginedMember.nickname}'s Profile</span>
             </a>
           </li>
+          <c:if test="${rq.admin}">
+            <li>
+              <a href="/adm/member/list" class="h-full flex items-center px-3 hover:underline">
+                <span>관리자</span>
+              </a>
+            </li>
+          </c:if>
           <li>
             <a href="${rq.logoutUri}" class="h-full flex items-center px-3 hover:underline">
               <span>로그아웃</span>

@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.swc.exam.demo.interceptor.BeforeActionInterceptor;
+import com.swc.exam.demo.interceptor.NeedAdminInterceptor;
 import com.swc.exam.demo.interceptor.NeedLoginInterceptor;
 import com.swc.exam.demo.interceptor.NeedLogoutInterceptor;
 
@@ -24,6 +25,10 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 	// needLogoutInterceptor 인터셉터 불러오기
 	@Autowired
 	NeedLogoutInterceptor needLogoutInterceptor;
+	
+	// needAdminInterceptor 인터셉터 불러오기
+	@Autowired
+	NeedAdminInterceptor needAdminInterceptor;
 
 	@Value("${custom.genFileDirPath}")
 	private String genFileDirPath;
@@ -68,6 +73,13 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		.addPathPatterns("/usr/reactionPoint/doBadReaction")
 		.addPathPatterns("/usr/reactionPoint/doCancelGoodReaction")
 		.addPathPatterns("/usr/reactionPoint/doCancelBadReaction")
+		.addPathPatterns("/adm/**")
+		.excludePathPatterns("/adm/member/login")
+		.excludePathPatterns("/adm/member/doLogin")
+		.excludePathPatterns("/adm/member/findLoginId")
+		.excludePathPatterns("/adm/member/doFindLoginId")
+		.excludePathPatterns("/adm/member/findLoginPw")
+		.excludePathPatterns("/adm/member/doFindLoginPw")
 		;
 		
 		registry.addInterceptor(needLogoutInterceptor)
@@ -81,5 +93,16 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		.addPathPatterns("/usr/member/findLoginPw")
 		.addPathPatterns("/usr/member/doFindLoginPw")
 		;
+		
+		registry.addInterceptor(needAdminInterceptor)
+		.addPathPatterns("/adm/**")
+		.excludePathPatterns("/adm/member/login")
+		.excludePathPatterns("/adm/member/doLogin")
+		.excludePathPatterns("/adm/member/findLoginId")
+		.excludePathPatterns("/adm/member/doFindLoginId")
+		.excludePathPatterns("/adm/member/findLoginPw")
+		.excludePathPatterns("/adm/member/doFindLoginPw")
+		;
+
 	}
 }

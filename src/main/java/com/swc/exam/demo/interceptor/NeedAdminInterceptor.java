@@ -9,23 +9,29 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class NeedLoginInterceptor implements HandlerInterceptor {
+public class NeedAdminInterceptor implements HandlerInterceptor {
 
 	private Rq rq;
 
-	public NeedLoginInterceptor(Rq rq){
+	public NeedAdminInterceptor(Rq rq){
 		this.rq = rq;
 }
 
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
 
-		if (!rq.isLogined()) {
-			String afterLoginUri = rq.getAfterLoginUri();
-			rq.printReplaceJs("로그인 후 이용해주세요.", "/usr/member/login?afterLoginUri=" + afterLoginUri);
+		if (!rq.isAdmin()) {
+			if( rq.isAdmin()) {
+				resp.setContentType("application/json; charset=UTF-8");
+				rq.print("{\"resultCode\":\"F-A\", \"msg\":\"권한이 없습니다.\"}");
+			} else {
+				String afterLoginUri = rq.getAfterLoginUri();
+				rq.printHistoryBackJs("관리자 권한이 필요합니다.");
+			}
+			
 			return false;
 		}
-
+		
 		return HandlerInterceptor.super.preHandle(req, resp, handler);
 	}
 }
