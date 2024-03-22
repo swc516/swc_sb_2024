@@ -2,6 +2,7 @@ package com.swc.exam.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -86,6 +87,7 @@ public interface MemberRepository {
 			SELECT COUNT(*) AS cnt
 			FROM `member` AS M
 			WHERE 1
+			AND delStatus = 0
 			<if test="authLevel != 0">
 				AND M.authLevel = #{authLevel}
 			</if>
@@ -120,6 +122,7 @@ public interface MemberRepository {
 			SELECT M.*
 			FROM `member` AS M
 			WHERE 1
+			AND delStatus = 0
 			<if test="authLevel != 0">
 				AND M.authLevel = #{authLevel}
 			</if>
@@ -153,4 +156,17 @@ public interface MemberRepository {
 			""")
 	List<Member> getForPrintMembers(int authLevel, String searchKeywordTypeCode, String searchKeyword, int limitStart,
 			int limitTake);
+
+	
+	@Update("""
+			<script>
+			UPDATE `member`
+			<set>
+				delStatus = 1,
+				delDate = NOW()
+			</set>
+			WHERE id = #{id}
+			</script>
+			""" )
+	void deleteMember(int id);
 }

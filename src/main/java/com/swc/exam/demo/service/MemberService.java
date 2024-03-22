@@ -43,7 +43,6 @@ public class MemberService {
 			return ResultData.from("F-8", Ut.f("해당 이름(%s)과 이메일(%s)은 이미 사용중입니다.", name, email));
 		}
 
-
 		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 		int id = memberRepository.getLastInsertId();
 
@@ -66,10 +65,10 @@ public class MemberService {
 
 	public ResultData modify(int actorId, String loginPw, String name, String nickname, String email,
 			String cellphoneNo) {
-		
+
 		memberRepository.modify(actorId, loginPw, name, nickname, email, cellphoneNo);
-		
-		if(loginPw != null) {
+
+		if (loginPw != null) {
 			attrService.remove("member", actorId, "extra", "useTempPassword");
 		}
 
@@ -123,15 +122,29 @@ public class MemberService {
 
 	}
 
-	public List<Member> getForPrintMembers(int authLevel, String searchKeywordTypeCode, String searchKeyword, int itemsCountInAPage,
-			int page) {
+	public List<Member> getForPrintMembers(int authLevel, String searchKeywordTypeCode, String searchKeyword,
+			int itemsCountInAPage, int page) {
 
 		int limitStart = (page - 1) * itemsCountInAPage;
 		int limitTake = itemsCountInAPage;
-		
-		
-		List<Member> members = memberRepository.getForPrintMembers(authLevel, searchKeywordTypeCode, searchKeyword, limitStart, limitTake);
-		
+
+		List<Member> members = memberRepository.getForPrintMembers(authLevel, searchKeywordTypeCode, searchKeyword,
+				limitStart, limitTake);
+
 		return members;
+	}
+
+	public void deleteMembers(List<Integer> memberIds) {
+		for (int memberId : memberIds) {
+			Member member = getMemberById(memberId);
+
+			if (member != null) {
+				deleteMember(member);
+			}
+		}
+	}
+
+	private void deleteMember(Member member) {
+		memberRepository.deleteMember(member.getId());
 	}
 }
