@@ -1,10 +1,13 @@
 package com.swc.exam.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.swc.exam.demo.repository.MemberRepository;
 import com.swc.exam.demo.util.Ut;
+import com.swc.exam.demo.vo.Article;
 import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.ResultData;
 
@@ -113,5 +116,22 @@ public class MemberService {
 
 	public boolean isUsingTempPassword(int actorId) {
 		return attrService.getValue("member", actorId, "extra", "useTempPassword").equals("1");
+	}
+
+	public int getMembersCount(int authLevel, String searchKeywordTypeCode, String searchKeyword) {
+		return memberRepository.getMembersCount(authLevel, searchKeywordTypeCode, searchKeyword);
+
+	}
+
+	public List<Member> getForPrintMembers(int authLevel, String searchKeywordTypeCode, String searchKeyword, int itemsCountInAPage,
+			int page) {
+
+		int limitStart = (page - 1) * itemsCountInAPage;
+		int limitTake = itemsCountInAPage;
+		
+		
+		List<Member> members = memberRepository.getForPrintMembers(authLevel, searchKeywordTypeCode, searchKeyword, limitStart, limitTake);
+		
+		return members;
 	}
 }

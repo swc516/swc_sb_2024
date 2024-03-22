@@ -18,9 +18,30 @@
         <select data-value="${param.searchKeywordTypeCode}" name="searchKeywordTypeCode" id=""
           class="select select-bordered">
           <option disabled>검색타입</option>
-          <option value="title">제목</option>
-          <option value="body">내용</option>
-          <option value="title, body">제목, 내용</option>
+           <c:choose>
+            <c:when test="${param.searchKeywordTypeCode eq 'title'}">
+              <option value="title" selected>제목</option>
+            </c:when>
+            <c:otherwise>
+              <option value="title">제목</option>
+            </c:otherwise>
+          </c:choose>
+           <c:choose>
+            <c:when test="${param.searchKeywordTypeCode eq 'body'}">
+              <option value="body" selected>내용</option>
+            </c:when>
+            <c:otherwise>
+              <option value="body">내용</option>
+            </c:otherwise>
+          </c:choose>
+           <c:choose>
+            <c:when test="${param.searchKeywordTypeCode eq 'title, body'}">
+              <option value="title, body" selected>제목, 내용</option>
+            </c:when>
+            <c:otherwise>
+              <option value="title, body">제목, 내용</option>
+            </c:otherwise>
+          </c:choose>
         </select>
         <input name="searchKeyword" type="text" class="ml-2 w-72 input input-bordered" placeholder="검색어" maxlength="20"
           value="${param.searchKeyword}" />
