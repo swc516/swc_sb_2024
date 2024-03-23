@@ -51,10 +51,10 @@
         AND id = #{id}
     </select>
     
-    <select id="hasProfileImgByRelId" resultType="boolean">
+    <select id="hasImg" resultType="boolean">
         SELECT count(*)
         FROM genFile
-        WHERE type2Code = 'profileImg'
+        WHERE type2Code = #{type2Code}
         AND relId = #{relId}
     </select>
 

@@ -207,8 +207,8 @@ public class UsrMemberController {
 			return rq.historyBackJsOnview(checkMemberModifyAuthKeyRd.getMsg());
 		}
 
-		boolean hasProfileImg = genFileService.hasProfileImgByRelId(rq.getLoginedMemberId());
-		model.addAttribute("hasProfileImg", hasProfileImg);
+		boolean hasImg = genFileService.hasImg("profileImg", rq.getLoginedMemberId());
+		model.addAttribute("hasImg", hasImg);
 		
 		return "usr/member/modify";
 	}
@@ -237,7 +237,7 @@ public class UsrMemberController {
 		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, email,
 				cellphoneNo);
 
-		if (request.getParameter("deleteFile__member__0__extra__profileImg__1") != null) {
+		if (request.getParameter("deleteFileMemberExtraProfileImg") != null) {
 			genFileService.deleteGenFiles("member", rq.getLoginedMemberId(), "extra", "profileImg", 1);
 		}
 

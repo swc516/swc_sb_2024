@@ -260,7 +260,7 @@ public class Rq {
 	}
 	
 	public String getMoviePosterImgUri(int movidId) {
-		return "/common/genFile/file/movie/" + movidId + "/extra/moviePosterImg/1";
+		return "/common/genFile/file/movie/" + movidId + "/extra/posterImg/1";
 	}
 	
 	public String getMoviePosterFallbackImgUri() {

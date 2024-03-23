@@ -16,10 +16,13 @@ import com.swc.exam.demo.service.GenFileService;
 import com.swc.exam.demo.service.MemberService;
 import com.swc.exam.demo.service.MovieService;
 import com.swc.exam.demo.util.Ut;
+import com.swc.exam.demo.vo.Article;
 import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.Movie;
 import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.Rq;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class AdmMovieController {
@@ -85,7 +88,6 @@ public class AdmMovieController {
 				genFileService.save(multipartFile, newMovieId);
 			}
 		}
-		
 		return rq.jsReplace(addRd.getMsg(), "/adm/movie/list");
 	}
 	
@@ -106,4 +108,44 @@ public class AdmMovieController {
 		return rq.jsReplace("해당 영화가 삭제되었습니다.", replaceUri);
 	}
 
+	
+	@RequestMapping("/adm/movie/modify")
+	public String showModify(Model model, int id) {
+		Movie movie = movieService.getForPrintMovie(id);
+
+		if (movie == null) {
+			return rq.historyBackJsOnview(Ut.f("%d번 영화가 존재하지 않습니다.", id));
+		}
+		
+		boolean hasImg = genFileService.hasImg("posterImg", id);
+		model.addAttribute("hasImg", hasImg);
+		
+		model.addAttribute("movie", movie);
+
+		return "/adm/movie/modify";
+	}
+
+	@RequestMapping("/adm/movie/doModify")
+	@ResponseBody
+	public String doModify(HttpServletRequest request, int id, String title, String body, String runDate, MultipartRequest multipartRequest) {
+
+
+		ResultData modifyRd = movieService.modify(id, title, body, runDate);
+
+		if (request.getParameter("deleteFileMovieExtraPosterImg") != null) {
+			genFileService.deleteGenFiles("movie", id, "extra", "posterImg", 1);
+		}
+
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+
+			if (multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, rq.getLoginedMemberId());
+			}
+		}
+
+		return rq.jsReplace(modifyRd.getMsg(), "/adm/movie/list");
+	}
 }

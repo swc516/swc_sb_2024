@@ -145,12 +145,12 @@
               <input accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1"
                 placeholder="프로필 이미지를 선택해주세요." type="file" />
 
-              <c:if test="${hasProfileImg}">
+              <c:if test="${hasImg}">
                 <div class="mt-2">
                   <label class="cursor-pointer inline-flex">
                     <span class="label-text mr-2 mt-1">이미지 삭제</span>
                     <div>
-                      <input type="checkbox" name="deleteFile__member__0__extra__profileImg__1" value="Y"
+                      <input type="checkbox" name="deleteFileMemberExtraProfileImg" value="Y"
                         class="checkbox" />
                       <span class="checkbox-mark"></span>
                     </div>

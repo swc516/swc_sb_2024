@@ -23,35 +23,30 @@ public class MovieService {
 	}
 
 	public ResultData add(String title, String body, String runDate) {
-		String runDateDate = runDate.substring(0,10);
-		String runDateTime = runDate.substring(11,16);
-		
-		runDate = runDateDate + " " +runDateTime;
+
 		movieRepository.add(title, body, runDate);
-		
-		
+
 		int id = movieRepository.getLastInsertId();
 
 		return new ResultData("S-1", "영화 추가가 완료되었습니다.", "id", id);
 	}
-	
+
 	public int getMoviesCount(String searchKeywordTypeCode, String searchKeyword) {
 		return movieRepository.getMoviesCount(searchKeywordTypeCode, searchKeyword);
 
 	}
 
-	public List<Movie> getForPrintMovies(String searchKeywordTypeCode, String searchKeyword,
-			int itemsCountInAPage, int page) {
+	public List<Movie> getForPrintMovies(String searchKeywordTypeCode, String searchKeyword, int itemsCountInAPage,
+			int page) {
 
 		int limitStart = (page - 1) * itemsCountInAPage;
 		int limitTake = itemsCountInAPage;
 
-		List<Movie> movies = movieRepository.getForPrintMovies(searchKeywordTypeCode, searchKeyword,
-				limitStart, limitTake);
+		List<Movie> movies = movieRepository.getForPrintMovies(searchKeywordTypeCode, searchKeyword, limitStart,
+				limitTake);
 
 		return movies;
 	}
-
 
 	public void deleteMovies(List<Integer> movieIds) {
 		for (int movieId : movieIds) {
@@ -70,5 +65,16 @@ public class MovieService {
 	public Movie getMovieById(int id) {
 		return movieRepository.getMovieById(id);
 	}
-	
+
+	public Movie getForPrintMovie(int id) {
+		Movie movie = movieRepository.getForPrintMovie(id);
+		return movie;
+	}
+
+	public ResultData modify(int id, String title, String body, String runDate) {
+		movieRepository.modify(id, title, body, runDate);
+
+		return ResultData.from("S-1", "영화정보가 수정되었습니다.");
+	}
+
 }

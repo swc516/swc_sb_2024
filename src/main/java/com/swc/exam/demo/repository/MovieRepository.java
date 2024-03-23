@@ -108,4 +108,33 @@ public interface MovieRepository {
 			AND delStatus = 0
 						""")
 	Movie getMovieById(int id);
+
+	@Select("""
+			<script>
+			SELECT *
+			FROM movie
+			WHERE id = #{id}
+			</script>
+			""")
+	Movie getForPrintMovie(int id);
+
+	@Update("""
+			<script>
+			UPDATE movie
+			<set>
+				updateDate = NOW(),
+				<if test="title != null">
+					title = #{title},
+				</if>
+				<if test="body != null">
+					body = #{body},
+				</if>
+				<if test="runDate != null">
+					runDate = #{runDate},
+				</if>
+			</set>
+			WHERE id = #{id}
+			</script>
+			""")
+	void modify(int id, String title, String body, String runDate);
 }

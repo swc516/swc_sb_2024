@@ -80,12 +80,15 @@
               </th>
               <td>${movie.id}</td>
               <td>
-                <img class="w-20 h-20 ml-1 mr-1 object-cover"
-                  src="${rq.getMoviePosterImgUri(movie.id)}" alt="" onerror="${rq.moviePosterFallbackImgOnErrorHtml}" />
+                <img class="w-20 h-20 ml-1 mr-1 object-cover" src="${rq.getMoviePosterImgUri(movie.id)}" alt=""
+                  onerror="${rq.moviePosterFallbackImgOnErrorHtml}" />
               </td>
               <td>${movie.forPrintType1RegDate}</td>
               <td>${movie.forPrintType1UpdateDate}</td>
-              <td>${movie.title}</td>
+              <td>
+                <a class="btn-text-link block w-full truncate" href="/adm/movie/modify?id=${movie.id}">${movie.title}
+                </a>
+              </td>
               <td>${movie.body}</td>
               <td>${movie.runDate}</td>
             </tr>

@@ -17,7 +17,7 @@ public interface GenFileRepository {
 
 	GenFile getGenFileById(@Param("id") int id);
 	
-	boolean hasProfileImgByRelId(@Param("relId") int relId);
+	boolean hasImg(String type2Code, int relId);
 
 	void changeRelId(@Param("id") int id, @Param("relId") int relId);
 
