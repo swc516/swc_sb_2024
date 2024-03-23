@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="관리자페이지 - 영화리스트 " />
+<c:set var="pageTitle" value="관리자페이지 - 영화관 리스트 " />
 <%@include file="../../common/head.jspf"%>
 
 
@@ -8,38 +8,15 @@
   <div class="container mx-auto px-3">
     <div class="flex">
       <div>
-        영화 수 :
-        <span class="text-blue-700">${moviesCount}</span>
-        개
+        영화관 수 :
+        <span class="text-blue-700">${cinemasCount}</span>
+        관
       </div>
       <div class="flex-grow"></div>
       <form class="flex">
         <select data-value="${param.searchKeywordTypeCode}" name="searchKeywordTypeCode" class="select select-bordered">
           <option disabled>검색타입</option>
-          <c:choose>
-            <c:when test="${param.searchKeywordTypeCode eq 'title'}">
-              <option value="title" selected>영화명</option>
-            </c:when>
-            <c:otherwise>
-              <option value="title">영화명</option>
-            </c:otherwise>
-          </c:choose>
-          <c:choose>
-            <c:when test="${param.searchKeywordTypeCode eq 'body'}">
-              <option value="body" selected>영화소개</option>
-            </c:when>
-            <c:otherwise>
-              <option value="body">영화소개</option>
-            </c:otherwise>
-          </c:choose>
-          <c:choose>
-            <c:when test="${param.searchKeywordTypeCode eq 'title, body'}">
-              <option value="title, body" selected>영화명, 영화소개</option>
-            </c:when>
-            <c:otherwise>
-              <option value="title, body">영화명, 영화소개</option>
-            </c:otherwise>
-          </c:choose>
+          <option value="region" selected>지역</option>
         </select>
 
         <input name="searchKeyword" type="text" class="ml-2 w-72 input input-bordered" placeholder="검색어" maxlength="20"
@@ -55,42 +32,30 @@
           <col width="130" />
           <col width="150" />
           <col width="150" />
-          <col width="150" />
-          <col width="150" />
         </colgroup>
         <thead>
           <tr>
             <th>
-              <input class="checkbox-all-movie-id" type="checkbox" />
+              <input class="checkbox-all-cinema-id" type="checkbox" />
             </th>
             <th>번호</th>
-            <th>포스터</th>
             <th>추가날짜</th>
             <th>갱신날짜</th>
-            <th>영화명</th>
-            <th>영화소개</th>
-            <th>상영마감일자</th>
+            <th>영화관명</th>
           </tr>
         </thead>
         <tbody>
-          <c:forEach var="movie" items="${movies}">
+          <c:forEach var="cinema" items="${cinemas}">
             <tr class="hover">
               <th>
-                <input class="checkbox-movie-id" value="${movie.id}" type="checkbox" />
+                <input class="checkbox-cinema-id" value="${cinema.id}" type="checkbox" />
               </th>
-              <td>${movie.id}</td>
+              <td>${cinema.id}</td>
+              <td>${cinema.forPrintType1RegDate}</td>
+              <td>${cinema.forPrintType1UpdateDate}</td>
               <td>
-                <img class="w-20 h-40 ml-1 mr-1 object-cover" src="${rq.getMoviePosterImgUri(movie.id)}" alt=""
-                  onerror="${rq.moviePosterFallbackImgOnErrorHtml}" />
+                <a class="btn-text-link block w-full truncate" href="/adm/cinema/detail?id=${cinema.id}">${cinema.region}</a>
               </td>
-              <td>${movie.forPrintType1RegDate}</td>
-              <td>${movie.forPrintType1UpdateDate}</td>
-              <td>
-                <a class="btn-text-link block w-full truncate" href="/adm/movie/modify?id=${movie.id}">${movie.title}
-                </a>
-              </td>
-              <td>${movie.body}</td>
-              <td>${movie.runDate}</td>
             </tr>
           </c:forEach>
         </tbody>
@@ -98,43 +63,43 @@
     </div>
 
     <script>
-      $('.checkbox-all-movie-id').change(function() {
+      $('.checkbox-all-cinema-id').change(function() {
       	const $all = $(this);
       	const allChecked = $all.prop('checked');
       
-      	$('.checkbox-movie-id').prop('checked', allChecked);
+      	$('.checkbox-cinema-id').prop('checked', allChecked);
       
       })
       
-      $('.checkbox-movie-id').change(function() {
-		const checkboxMovieIdCount = $('.checkbox-movie-id').length;
-		const checkboxMovieIdCheckedCount = $('.checkbox-movie-id:checked').length;
+      $('.checkbox-cinema-id').change(function() {
+		const checkboxCinemaIdCount = $('.checkbox-cinema-id').length;
+		const checkboxCinemaIdCheckedCount = $('.checkbox-cinema-id:checked').length;
 
-		const allChecked = checkboxMovieIdCount == checkboxMovieIdCheckedCount;
+		const allChecked = checkboxCinemaIdCount == checkboxCinemaIdCheckedCount;
 
-		$('.checkbox-all-movie-id').prop(
+		$('.checkbox-all-cinema-id').prop(
 				'checked', allChecked);
 		})
 	</script>
 
     <div>
-      <button class="btn btn-error btn-delete-selected-movies">선택삭제</button>
+      <button class="btn btn-error btn-delete-selected-cinemas">선택삭제</button>
     </div>
 
-    <form method="post" name="do-delete-movies-form" action="../movie/doDelete">
+    <form method="post" name="do-delete-cinemas-form" action="../cinema/doDelete">
       <input type="hidden" name="ids" value="" />
       <input type="hidden" name="replaceUri" value="${rq.currentUri}" />
     </form>
     <div>
-      <a class="btn btn-success" href="/adm/movie/add">영화추가</a>
+      <a class="btn btn-success" href="/adm/cinema/add">영화관 추가</a>
     </div>
 
     <script>
-     $('.btn-delete-selected-movies').click(function(){
-    	 const values = $('.checkbox-movie-id:checked').map((index, el) => el.value).toArray();
+     $('.btn-delete-selected-cinemas').click(function(){
+    	 const values = $('.checkbox-cinema-id:checked').map((index, el) => el.value).toArray();
     	 
     	 if(values.length == 0) {
-    		 alert('삭제할 영화을 선택해주세요.');
+    		 alert('삭제할 영화관을 선택해주세요.');
     		 return;
     	 }
     	 
@@ -142,8 +107,8 @@
     		 return;
     	 }
     	 
-    	 document['do-delete-movies-form'].ids.value = values.join(',');     
-    	 document['do-delete-movies-form'].submit();   
+    	 document['do-delete-cinemas-form'].ids.value = values.join(',');     
+    	 document['do-delete-cinemas-form'].submit();   
      })
     </script>
 

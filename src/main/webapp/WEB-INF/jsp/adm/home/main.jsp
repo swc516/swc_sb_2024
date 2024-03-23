@@ -44,7 +44,7 @@
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
-      <a href="/adm/theater/list" type="submit" class="btn btn-primary">상영관 관리</a>
+      <a href="/adm/cinema/list" type="submit" class="btn btn-primary">영화관 관리</a>
     </div>
   </div>
 </section>

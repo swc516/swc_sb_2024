@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Theater {
 	private int id;
-	private String regDate;
-	private String updateDate;
-	private String region;
-	private boolean delStatus;
-	private String delDate;
+	private String relTypeCode;
+	private int relId;
+	private String theater;
+	private char seatId;
+	private int seatNo;
 }

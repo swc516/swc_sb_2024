@@ -419,8 +419,8 @@ runDate = '2024-03-24 06:00:00';
 
 SELECT * FROM movie;
 
-#상영관 테이블 생성
-CREATE TABLE theater (
+#영화관 테이블 생성
+CREATE TABLE cinema (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
@@ -429,34 +429,25 @@ CREATE TABLE theater (
     delDate DATETIME
     );
     
-INSERT INTO theater
+INSERT INTO cinema
 SET regDate = NOW(),
 updateDate = NOW(),
 region = "서울_방학";
     
-    #좌석 테이블 생성
-CREATE TABLE seat (
+    #상영관 테이블 생성
+CREATE TABLE theater (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    regDate DATETIME NOT NULL,
-    updateDate DATETIME NOT NULL,
     relTypeCode CHAR(30) NOT NULL,
     relId INT(10) UNSIGNED NOT NULL,
-    seatId CHAR(10),
-    seatNo INT(5),
-    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-    delDate DATETIME
-    );
-    
-INSERT INTO seat
-SET regDate = NOW(),
-updateDate = '2024-03-16 20:13',
-relTypeCode = "서울_방학",
-relId = 1,
-seatId = "D",
-seatNo = 4
-;
+    theater CHAR(20) NOT NULL,
+    seatId CHAR(10) NOT NULL,
+    seatNo INT(5) UNSIGNED NOT NULL
+);
+
+
+SELECT * FROM cinema; 
 
 SELECT * FROM theater; 
-SELECT * FROM seat;
 SELECT * FROM genFile;
 SELECT * FROM movie; 
+SELECT * FROM `member`; 
