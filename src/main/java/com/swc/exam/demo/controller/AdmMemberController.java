@@ -63,7 +63,7 @@ public class AdmMemberController {
 		return "adm/member/list";
 	}
 
-	@RequestMapping("/adm/member/doDeleteMembers")
+	@RequestMapping("/adm/member/doDelete")
 	@ResponseBody
 	public String doDelete(@RequestParam(defaultValue = "") String ids,
 			@RequestParam(defaultValue = "/adm/member/list") String replaceUri) {

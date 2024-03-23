@@ -259,7 +259,17 @@ public class Rq {
 		return loginedMember.isAdmin();
 	}
 	
+	public String getMoviePosterImgUri(int movidId) {
+		return "/common/genFile/file/movie/" + movidId + "/extra/moviePosterImg/1";
+	}
 	
+	public String getMoviePosterFallbackImgUri() {
+		return "https://via.placeholder.com/300/?text=^_^";
+	}
+	
+	public String getMoviePosterFallbackImgOnErrorHtml() {
+		return "this.src='" + getMoviePosterFallbackImgUri() + "'";
+	}
 	
 
 

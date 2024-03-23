@@ -74,12 +74,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		.addPathPatterns("/usr/reactionPoint/doCancelGoodReaction")
 		.addPathPatterns("/usr/reactionPoint/doCancelBadReaction")
 		.addPathPatterns("/adm/**")
-		.excludePathPatterns("/adm/member/login")
-		.excludePathPatterns("/adm/member/doLogin")
-		.excludePathPatterns("/adm/member/findLoginId")
-		.excludePathPatterns("/adm/member/doFindLoginId")
-		.excludePathPatterns("/adm/member/findLoginPw")
-		.excludePathPatterns("/adm/member/doFindLoginPw")
+
 		;
 		
 		registry.addInterceptor(needLogoutInterceptor)
@@ -97,6 +92,9 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		registry.addInterceptor(needAdminInterceptor)
 		.addPathPatterns("/adm/home/main")
 		.addPathPatterns("/adm/member/list")
+		.addPathPatterns("/adm/movie/list")
+		.addPathPatterns("/adm/movie/add")
+		.addPathPatterns("/adm/movie/doAdd")
 		;
 
 	}

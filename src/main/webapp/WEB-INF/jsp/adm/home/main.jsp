@@ -34,5 +34,19 @@
     </div>
   </div>
 </section>
+<section class="mt-5">
+  <div class="container mx-auto px-3">
+    <div class="table-box-type-1">
+      <a href="/adm/movie/list" type="submit" class="btn btn-primary">영화 관리</a>
+    </div>
+  </div>
+</section>
+<section class="mt-5">
+  <div class="container mx-auto px-3">
+    <div class="table-box-type-1">
+      <a href="/adm/theater/list" type="submit" class="btn btn-primary">상영관 관리</a>
+    </div>
+  </div>
+</section>
 
 <%@include file="../../common/foot.jspf"%>

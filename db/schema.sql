@@ -110,8 +110,8 @@ updateDate = NOW(),
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'free1',
-`name` = '자유';
+`code` = 'free',
+`name` = '자유게시판';
 
 # 게시판 테이블에 boardId 컬럼 추가
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER memberId;
@@ -225,7 +225,7 @@ SUM(IF(Rp.point > 0, Rp.point, 0)) AS goodReactionPoint,
 SUM(IF(Rp.point < 0, Rp.point * -1, 0)) AS badReactionPoint
 FROM reactionPoint AS Rp
 WHERE relTypeCode = 'article'
-GROUP BY Rp.relTypeCode, Rp.relId
+GROUP BY Rp.relTypeCode, Rp.relId;
 
 SELECT * FROM article;
 
@@ -293,7 +293,7 @@ LEFT JOIN `member` AS M
 ON R.memberId = M.id
 WHERE R.relTypeCode = 'article'
 AND R.relId = 3
-ORDER BY R.id DESC
+ORDER BY R.id DESC;
 
 
 # 댓글 좋아요 수, 싫어요 수 칼럼 추가
@@ -378,4 +378,85 @@ email = 'user3@gmail.com';
 UPDATE `member` 
 SET loginPw = SHA2(loginPw, 256);
 
+SELECT * FROM `reactionPoint`;
+SELECT * FROM `reply`;
 SELECT * FROM `member`;
+
+
+#영화 테이블 생성
+
+CREATE TABLE movie (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    title CHAR(30) NOT NULL,
+    `body`  CHAR(100) NOT NULL,
+    rate DOUBLE(5,3) NOT NULL DEFAULT 0,
+    `count` INT(10) NOT NULL DEFAULT 0,
+    runDate DATETIME NOT NULL,
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    delDate DATETIME
+    );
+    
+    
+#영화, 테스트 데이터 생성
+INSERT INTO movie
+SET regDate = NOW(),
+updateDate = NOW(),
+title = "영화1",
+`body` = "영화내용1",
+runDate = '2024-05-01 06:00:00';
+
+INSERT INTO movie
+SET regDate = NOW(),
+updateDate = NOW(),
+title = "영화2",
+`body` = "영화내용2",
+rate = 0.0,
+`count` = 0,
+runDate = '2024-03-24 06:00:00';
+
+
+SELECT * FROM movie;
+
+#상영관 테이블 생성
+CREATE TABLE theater (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    region CHAR(30) NOT NULL,
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    delDate DATETIME
+    );
+    
+INSERT INTO theater
+SET regDate = NOW(),
+updateDate = NOW(),
+region = "서울_방학";
+    
+    #좌석 테이블 생성
+CREATE TABLE seat (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    relTypeCode CHAR(30) NOT NULL,
+    relId INT(10) UNSIGNED NOT NULL,
+    seatId CHAR(10),
+    seatNo INT(5),
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    delDate DATETIME
+    );
+    
+INSERT INTO seat
+SET regDate = NOW(),
+updateDate = '2024-03-16 20:13',
+relTypeCode = "서울_방학",
+relId = 1,
+seatId = "D",
+seatNo = 4
+;
+
+SELECT * FROM theater; 
+SELECT * FROM seat;
+SELECT * FROM genFile;
+SELECT * FROM movie; 

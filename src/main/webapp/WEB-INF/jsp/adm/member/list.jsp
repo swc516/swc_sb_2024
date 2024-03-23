@@ -149,7 +149,7 @@
       <button class="btn btn-error btn-delete-selected-members">선택삭제</button>
     </div>
 
-    <form method="post" name="do-delete-members-form" action="../member/doDeleteMembers">
+    <form method="post" name="do-delete-members-form" action="../member/doDelete">
       <input type="hidden" name="ids" value=""/>
       <input type="hidden" name="replaceUri" value="${rq.currentUri}"/>
     </form>

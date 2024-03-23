@@ -114,16 +114,14 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Integer> doIncreaseHitCountRd(int id) {
 		ResultData<Integer> increaseHitCountRd = articleService.increaseHitCount(id);
-
-		if (increaseHitCountRd.isFail()) {
+		if ( increaseHitCountRd.isFail() ) {
 			return increaseHitCountRd;
 		}
-
-		ResultData<Integer> rd = ResultData.newData(increaseHitCountRd, "hitCount",
-				articleService.getArticleHitCount(id));
-
+		
+		ResultData<Integer> rd = ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));
+		
 		rd.setData2("id", id);
-
+		
 		return rd;
 	}
 
