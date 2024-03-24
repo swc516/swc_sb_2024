@@ -23,18 +23,17 @@ public class TheaterService {
 		this.theaterRepository = theaterRepository;
 	}
 
-	public ResultData add(String relTypeCode, int relId, String theater, char seatIdChar, int seatNo) {
+	public ResultData add(String relTypeCode, int relId, String theaterName, char seatId, String seatNo,
+			String seatStatus) {
 		int A = 65;
-		int seatId = seatIdChar;
-		for(int i = A; i <= seatId; i++) {
-			
-			for (int j = 1; j <= seatNo; j++) {
-				theaterRepository.add(relTypeCode, relId, theater, (char)i, j);
-			}
-			
-		}
+		int seatIdtoInt = seatId;
+		for (int i = A; i <= seatIdtoInt; i++) {
 
-		
+			for (int j = 1; j <= Integer.parseInt(seatNo); j++) {
+				theaterRepository.add(relTypeCode, relId, theaterName, (char) i, j, seatStatus);
+			}
+
+		}
 
 		return new ResultData("S-1", "영화관 추가가 완료되었습니다.");
 	}
@@ -44,19 +43,28 @@ public class TheaterService {
 
 	}
 
-	public List<Theater> getForPrintTheater(String searchKeywordTypeCode, String searchKeyword, int itemsCountInAPage,
-			int page) {
+	public void deleteTheater(String theaterName) {
+		theaterRepository.deleteTheater(theaterName);
+	}
 
-		int limitStart = (page - 1) * itemsCountInAPage;
-		int limitTake = itemsCountInAPage;
+	public List<Theater> getForPrintTheaters(String relTypeCode) {
+		List<Theater> theaters = theaterRepository.getForPrintTheaters(relTypeCode);
+		return theaters;
+	}
 
-		List<Theater> theater = theaterRepository.getForPrintTheaters(limitStart, limitTake);
-
+	public List<Theater> getForPrintTheater(String relTypeCode, String theaterName) {
+		List<Theater> theater = theaterRepository.getForPrintTheater(relTypeCode, theaterName);
 		return theater;
 	}
 
-	public void deleteTheater(String theater) {
-		theaterRepository.deleteTheater(theater);
+	public void modifySeat(String theaterName, String relTypeCode, String[] seats, String seatStatus) {
+		for (String seat : seats) {
+			String[] seatSplit = seat.split("-");
+			char seatId = seatSplit[0].trim().charAt(0);
+			int seatNo = Integer.parseInt(seatSplit[1]);
+			String newSeatStatus = seatStatus;
+			theaterRepository.modifySeat(theaterName, relTypeCode, seatId, seatNo, newSeatStatus);
+		}
 	}
 
 }

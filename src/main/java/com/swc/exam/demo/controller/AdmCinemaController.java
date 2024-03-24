@@ -19,6 +19,7 @@ import com.swc.exam.demo.vo.Cinema;
 import com.swc.exam.demo.vo.Movie;
 import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.Rq;
+import com.swc.exam.demo.vo.Theater;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -53,7 +54,7 @@ public class AdmCinemaController {
 
 		model.addAttribute("cinemas", cinemas);
 		model.addAttribute("cinemasCount", cinemasCount);
-
+		
 		return "adm/cinema/list";
 	}
 	
@@ -120,6 +121,11 @@ public class AdmCinemaController {
 	public String showDetail(Model model, int id) {
 		Cinema cinema = cinemaService.getForPrintCinema(id);
 		model.addAttribute("cinema", cinema);
+		
+		String relTypeCode = cinema.getRegion();
+		
+		List<Theater> theaters = cinemaService.getForPrintTheaters(relTypeCode);
+		model.addAttribute("theaters", theaters);
 		
 		return "/adm/cinema/detail";
 	}

@@ -13,15 +13,19 @@ import com.swc.exam.demo.vo.Article;
 import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.Movie;
 import com.swc.exam.demo.vo.ResultData;
+import com.swc.exam.demo.vo.Theater;
 import com.swc.exam.demo.vo.Cinema;
 
 @Service
 public class CinemaService {
 
 	private CinemaRepository cinemaRepository;
-
-	public CinemaService(CinemaRepository cinemaRepository) {
+	private TheaterService theaterService;
+	
+	
+	public CinemaService(CinemaRepository cinemaRepository, TheaterService theaterService) {
 		this.cinemaRepository = cinemaRepository;
+		this.theaterService = theaterService;
 	}
 
 	public ResultData add(String region) {
@@ -79,4 +83,9 @@ public class CinemaService {
 		return ResultData.from("S-1", "영화관 정보가 수정되었습니다.");
 	}
 
+	public List<Theater> getForPrintTheaters(String relTypeCode) {
+		List<Theater> theater = theaterService.getForPrintTheaters(relTypeCode);
+		return theater;
+	}
+	
 }

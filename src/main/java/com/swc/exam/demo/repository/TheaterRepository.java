@@ -21,11 +21,12 @@ public interface TheaterRepository {
 			INSERT INTO theater
 			SET relTypeCode = #{relTypeCode},
 			relId = #{relId},
-			theater = #{theater},
+			theaterName = #{theaterName},
 			seatId = #{seatId},
-			seatNo = #{seatNo}
+			seatNo = #{seatNo},
+			seatStatus = #{seatStatus}
 			""")
-	void add(String relTypeCode, int relId, String theater, char seatId, int seatNo);
+	void add(String relTypeCode, int relId, String theaterName, char seatId, int seatNo, String seatStatus);
 
 	@Select("SELECT LAST_INSERT_ID()")
 	int getLastInsertId();
@@ -42,40 +43,43 @@ public interface TheaterRepository {
 	
 	@Select("""
 			<script>
-			SELECT *
+			SELECT theaterName
 			FROM theater
-			ORDER BY id DESC
-			<if test="limitStart != -1">
-			LIMIT #{limitStart}, #{limitTake}
-			</if>
+			WHERE relTypeCode = #{relTypeCode}
+			GROUP BY theaterName
 			</script>
 			""")
-	List<Theater> getForPrintTheaters(int limitStart, int limitTake);
+	List<Theater> getForPrintTheaters(String relTypeCode);
 
 	@Delete("""
 			<script>
 			DELETE FROM theater
-			WHERE theater = #{theater}
+			WHERE theaterName = #{theaterName}
 			</script>
 			""" )
-	void deleteTheater(String theater);
+	void deleteTheater(String theaterName);
 
 	@Select("""
 			<script>
 			SELECT *
 			FROM theater
-			WHERE  
-			theater = #{theater}
+			WHERE relTypeCode= #{relTypeCode}
+			AND theaterName = #{theaterName}
 			</script>
 			""")
-	Theater getForPrintTheater(String theater);
+	List<Theater> getForPrintTheater(String relTypeCode, String theaterName);
 
+	
 	@Update("""
 			<script>
 			UPDATE theater
-			SET theater = #{theater}
-			WHERE id = #{id}
+			SET seatStatus = #{seatStatus}
+			WHERE theaterName = #{theaterName}
+			AND relTypeCode = #{relTypeCode}
+			AND seatId = #{seatId}
+			AND seatNo = #{seatNo}
 			</script>
 			""")
-	void modify(int id, String theater);
+	void modifySeat(String theaterName, String relTypeCode, char seatId, int seatNo, String seatStatus);
+
 }

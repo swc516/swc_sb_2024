@@ -49,7 +49,7 @@
           <tr>
             <th>상영관 명</th>
             <td>
-              <input class="w-96 input input-bordered w-full max-w-xs" type="text" name="theater"
+              <input class="w-96 input input-bordered w-full max-w-xs" type="text" name="theaterName"
                 placeholder="1관 (***관) / 괄호는 선택" />
             </td>
           </tr>

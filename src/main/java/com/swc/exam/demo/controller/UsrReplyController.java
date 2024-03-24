@@ -29,7 +29,7 @@ public class UsrReplyController {
 
 	@RequestMapping("/usr/reply/doWrite")
 	@ResponseBody
-	public String doJoin(String relTypeCode, int relId, String body, String replaceUri) {
+	public String doWrite(String relTypeCode, int relId, String body, String replaceUri) {
 
 		if (Ut.empty(relTypeCode)) {
 			return rq.jsHistoryBack("relTypeCode(을)를 입력해주세요.");

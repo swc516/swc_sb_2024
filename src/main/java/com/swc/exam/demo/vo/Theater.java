@@ -11,7 +11,11 @@ public class Theater {
 	private int id;
 	private String relTypeCode;
 	private int relId;
-	private String theater;
+	private String theaterName;
 	private char seatId;
-	private int seatNo;
+	private String seatNo;
+	private boolean seatSell;
+	private String seatStatus;
+	private String movie;
+	private String movieTime;
 }
