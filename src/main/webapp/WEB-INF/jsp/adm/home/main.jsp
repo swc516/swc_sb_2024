@@ -5,48 +5,40 @@
 <c:set var="pageTitle" value="관리자 " />
 <%@include file="../../common/head.jspf"%>
 
-
-<section class="mt-5">
-  <div class="container mx-auto px-3">
-    <div class="table-box-type-1">
+<div class="container mx-auto px-3">
+  <section class="mt-5">
+    <span style="font-size:30px">▶게시글 관련</span><br>
+    <span class="container mx-auto px-3">
       <a href="/usr/article/write?boardId=1" type="submit" class="btn btn-primary">공지사항 작성</a>
-    </div>
-  </div>
-</section>
-<section class="mt-5">
-  <div class="container mx-auto px-3">
-    <div class="table-box-type-1">
+    </span>
+    <span class="container mx-auto px-3">
+      <a href="/adm/member/list" type="submit" class="btn btn-error">전체 게시글 관리</a>
+    </span>
+    <span class="container mx-auto px-3">
+      <a href="/adm/member/list" type="submit" class="btn btn-error">전체 댓글 관리</a>
+    </span>
+  </section>
+</div>
+
+<div class="container mx-auto px-3">
+  <section class="mt-5">
+    <span style="font-size:30px">▶회원 관련</span><br>
+    <span class="container mx-auto px-3">
       <a href="/adm/member/list" type="submit" class="btn btn-primary">회원리스트</a>
-    </div>
-  </div>
-</section>
-<section class="mt-5">
-  <div class="container mx-auto px-3">
-    <div class="table-box-type-1">
-      <a href="/adm/member/list" type="submit" class="btn btn-primary">전체 게시글 관리</a>
-    </div>
-  </div>
-</section>
-<section class="mt-5">
-  <div class="container mx-auto px-3">
-    <div class="table-box-type-1">
-      <a href="/adm/member/list" type="submit" class="btn btn-primary">전체 댓글 관리</a>
-    </div>
-  </div>
-</section>
-<section class="mt-5">
-  <div class="container mx-auto px-3">
-    <div class="table-box-type-1">
+    </span>
+  </section>
+</div>
+
+<div class="container mx-auto px-3">
+  <section class="mt-5">
+    <span style="font-size:30px">▶영화관 관련</span><br>
+    <span class="container mx-auto px-3">
       <a href="/adm/movie/list" type="submit" class="btn btn-primary">영화 관리</a>
-    </div>
-  </div>
-</section>
-<section class="mt-5">
-  <div class="container mx-auto px-3">
-    <div class="table-box-type-1">
+    </span>
+    <span class="container mx-auto px-3">
       <a href="/adm/cinema/list" type="submit" class="btn btn-primary">영화관 관리</a>
-    </div>
-  </div>
-</section>
+    </span>
+  </section>
+</div>
 
 <%@include file="../../common/foot.jspf"%>

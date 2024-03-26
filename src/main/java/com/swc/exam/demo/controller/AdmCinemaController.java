@@ -91,7 +91,7 @@ public class AdmCinemaController {
 		
 		cinemaService.deleteCinemas(cinemaIds);
 
-		return rq.jsReplace("해당 영화가 삭제되었습니다.", replaceUri);
+		return rq.jsReplace("해당 영화관이 삭제되었습니다.", replaceUri);
 	}
 	
 	
@@ -100,7 +100,7 @@ public class AdmCinemaController {
 		Cinema cinema = cinemaService.getForPrintCinema(id);
 
 		if (cinema == null) {
-			return rq.historyBackJsOnview(Ut.f("%d번 영화가 존재하지 않습니다.", id));
+			return rq.historyBackJsOnview(Ut.f("%d번 영화관이 존재하지 않습니다.", id));
 		}
 		
 		model.addAttribute("cinema", cinema);

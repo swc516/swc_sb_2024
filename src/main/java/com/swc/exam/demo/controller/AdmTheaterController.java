@@ -37,7 +37,6 @@ public class AdmTheaterController {
 		this.rq = rq;
 	}
 
-
 	@RequestMapping("/adm/theater/add")
 	public String showAdd(Model model, int id) {
 		Cinema cinema = cinemaService.getCinemaById(id);
@@ -74,18 +73,37 @@ public class AdmTheaterController {
 		model.addAttribute("theaters", theaters);
 		model.addAttribute("theaterName", theaters.get(0).getTheaterName());
 
+		String seatIds = "";
+		int lastSeatId = theaters.get(theaters.size() - 1).getSeatId();
+		for (int i = 'A'; i <= lastSeatId; i++) {
+			char seatId = (char) i;
+			seatIds += seatId;
+		}
+
+		char[] seatIdArr = seatIds.toCharArray();
+		model.addAttribute("seatIdArr", seatIdArr);
+
+		int lastSeatNo = Integer.parseInt(theaters.get(theaters.size() - 1).getSeatNo());
+		int[] seatNos = new int[lastSeatNo];
+		for (int i = 0; i < lastSeatNo; i++) {
+			seatNos[i] = i+1;
+		}
+
+		model.addAttribute("seatNoArr", seatNos);
+
+		
 
 		return "adm/theater/detail";
 	}
 
-
 	@RequestMapping("/adm/theater/doModify")
 	@ResponseBody
-	public String doModify(String theaterName, String relTypeCode, String[] seats, String seatStatus, String replaceUri) {
+	public String doModify(String theaterName, String relTypeCode, String[] seats, String seatStatus,
+			String replaceUri) {
 		theaterService.modifySeat(theaterName, relTypeCode, seats, seatStatus);
-		
-		return rq.jsReplace("좌석정보가 수정되었습니다", "/adm/theater/detail?relTypeCode=" + relTypeCode + "&theaterName="+theaterName);
+
+		return rq.jsReplace("좌석정보가 수정되었습니다",
+				"/adm/theater/detail?relTypeCode=" + relTypeCode + "&theaterName=" + theaterName);
 	}
-	
 
 }

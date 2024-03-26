@@ -80,6 +80,7 @@
 		$('.checkbox-all-cinema-id').prop(
 				'checked', allChecked);
 		})
+		
 	</script>
 
     <div>
