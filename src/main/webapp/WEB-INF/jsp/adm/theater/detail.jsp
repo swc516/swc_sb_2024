@@ -3,6 +3,7 @@
 <c:set var="pageTitle" value="${param.relTypeCode} / ${theaterName} 정보" />
 <%@include file="../../common/head.jspf"%>
 <%@include file="../../common/toastUiEditorLib.jspf"%>
+
 <section>
   <div>
     <form action="../theater/doModify" method="post">
@@ -20,7 +21,7 @@
                   value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
               </c:if>
               <c:if test="${theater.seatStatus eq '없음'}">
-                <input class="checkbox checkbox-warning" type="checkbox" name="seats" 
+                <input class="checkbox checkbox-warning" type="checkbox" name="seats"
                   value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
               </c:if>
             </c:when>
@@ -37,7 +38,7 @@
                     value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
                 </c:if>
                 <c:if test="${theater.seatStatus eq '없음'}">
-                  <input class="checkbox checkbox-warning" type="checkbox" name="seats" 
+                  <input class="checkbox checkbox-warning" type="checkbox" name="seats"
                     value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
                 </c:if>
               </c:if>
@@ -55,13 +56,24 @@
         <input type="radio" name="seatStatus" value="없음">
         없음
         <br>
-        <button type="submit">수정</button>
+        <input class="checkbox-all" type="checkbox" />전체선택
+        <br>
+        
+        <button class="btn btn-primary" type="submit">수정</button>
       </div>
     </form>
   </div>
 </section>
 
+<script>
+  $('.checkbox-all').change(function() {
+    const $all = $(this);
+    const allChecked = $all.prop('checked');
 
+    $('.checkbox').prop('checked', allChecked);
+
+  })
+</script>
 
 <%@include file="../../common/foot.jspf"%>
 

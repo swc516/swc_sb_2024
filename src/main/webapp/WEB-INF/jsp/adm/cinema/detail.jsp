@@ -43,13 +43,12 @@
 </section>
 
 <section>
-  <c:forEach var="theater" items="${theaters}">
     <div class="container mx-auto px-3">
-      <div class="table-box-type-1">
-        <a class="btn btn-success" href="../theater/detail?relTypeCode=${cinema.region}&theaterName=${theater.theaterName}">${theater.theaterName}</a>
-      </div>
-    </div>
-  </c:forEach>
+    <c:forEach var="theater" items="${theaters}">
+      <a class="btn btn-success"
+        href="../theater/detail?relTypeCode=${cinema.region}&theaterName=${theater.theaterName}">${theater.theaterName}</a>
+    </c:forEach>
+  </div>
 </section>
 
 

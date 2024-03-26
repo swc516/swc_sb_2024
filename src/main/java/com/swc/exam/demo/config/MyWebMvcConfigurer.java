@@ -95,6 +95,21 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		.addPathPatterns("/adm/movie/list")
 		.addPathPatterns("/adm/movie/add")
 		.addPathPatterns("/adm/movie/doAdd")
+		.addPathPatterns("/adm/movie/modify")
+		.addPathPatterns("/adm/movie/doModify")
+		.addPathPatterns("/adm/movie/doDelete")
+		.addPathPatterns("/adm/cinema/add")
+		.addPathPatterns("/adm/cinema/doAdd")
+		.addPathPatterns("/adm/cinema/detail")
+		.addPathPatterns("/adm/cinema/list")
+		.addPathPatterns("/adm/cinema/modify")
+		.addPathPatterns("/adm/cinema/doModify")
+		.addPathPatterns("/adm/cinema/doDelete")
+		.addPathPatterns("/adm/theater/add")
+		.addPathPatterns("/adm/theater/doAdd")
+		.addPathPatterns("/adm/theater/doDelete")
+		.addPathPatterns("/adm/theater/detail")
+		.addPathPatterns("/adm/theater/doModify")
 		;
 
 	}
