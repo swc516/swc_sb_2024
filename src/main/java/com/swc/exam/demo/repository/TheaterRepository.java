@@ -82,4 +82,13 @@ public interface TheaterRepository {
 			""")
 	void modifySeat(String theaterName, String relTypeCode, char seatId, int seatNo, String seatStatus);
 
+	@Update("""
+			<script>
+			UPDATE theater
+			SET relTypeCode = #{region}
+			WHERE relId = #{id}
+			</script>
+			""")
+	void modify(int id, String region);
+
 }

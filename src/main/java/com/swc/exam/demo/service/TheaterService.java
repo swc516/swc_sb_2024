@@ -67,4 +67,8 @@ public class TheaterService {
 		}
 	}
 
+	public void modify(int id, String region) {
+		theaterRepository.modify(id, region);
+	}
+
 }

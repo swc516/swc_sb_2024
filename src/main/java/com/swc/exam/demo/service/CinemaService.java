@@ -79,6 +79,7 @@ public class CinemaService {
 
 	public ResultData modify(int id, String region) {
 		cinemaRepository.modify(id, region);
+		theaterService.modify(id, region);
 
 		return ResultData.from("S-1", "영화관 정보가 수정되었습니다.");
 	}
