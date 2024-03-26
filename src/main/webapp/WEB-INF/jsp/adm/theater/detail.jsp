@@ -3,122 +3,158 @@
 <c:set var="pageTitle" value="${param.relTypeCode} / ${theaterName} 정보" />
 <%@include file="../../common/head.jspf"%>
 <%@include file="../../common/toastUiEditorLib.jspf"%>
+<script>
+	
+</script>
 
 <section>
   <div>
-    <form action="../theater/doModify" method="post">
-      <div class="container mx-auto px-3" style="text-align: center">
+    <form action="../theater/doModify" method="post" name="cb">
+      <div class="container mx-auto px-3">
         <c:set var="i" value="${0}" />
         <div class="divider divider-info">Screen</div>
-        <c:forEach var="theater" items="${theaters}" varStatus="status">
-          <c:choose>
-            <c:when test="${theater.seatId == 65+i}">
-              <c:if test="${theater.seatStatus eq '일반'}">
+        <table style="margin-left: auto; margin-right: auto;">
+          <tr>
+            <td>＃</td>
+            <c:forEach var="seatNo" items="${seatNoArr}">
+              <td style="text-align: center">${seatNo}</td>
+            </c:forEach>
+          </tr>
+          <c:forEach var="theater" items="${theaters}">
+            <c:if test="${theater.seatNo == 1}">
+              <tr>
+                <td style="text-align: center">${theater.seatId}</td>
+            </c:if>
+            <td>
+              <c:if test="${theater.seatStatus == '일반'}">
                 <input class="checkbox seatId-${theater.seatId} seatNo-${theater.seatNo}" type="checkbox" name="seats"
                   value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
               </c:if>
-              <c:if test="${theater.seatStatus eq '장애'}">
-                <input class="checkbox checkbox-success seatId-${theater.seatId} seatNo-${theater.seatNo}" type="checkbox" name="seats"
-                  value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
+              <c:if test="${theater.seatStatus == '장애'}">
+                <input class="checkbox checkbox-success seatId-${theater.seatId} seatNo-${theater.seatNo}"
+                  type="checkbox" name="seats" value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
               </c:if>
-              <c:if test="${theater.seatStatus eq '없음'}">
-                <input class="checkbox checkbox-warning seatId-${theater.seatId} seatNo-${theater.seatNo}" type="checkbox" name="seats"
-                  value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
+              <c:if test="${theater.seatStatus == '없음'}">
+                <input class="checkbox checkbox-error seatId-${theater.seatId} seatNo-${theater.seatNo}" type="checkbox"
+                  name="seats" value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
               </c:if>
-            </c:when>
-            <c:otherwise>
-              <c:set var="i" value="${i+1}" />
-              <br>
-              <c:if test="${theater.seatId == 65+i}">
-                <c:if test="${theater.seatStatus eq '일반'}">
-                  <input class="checkbox seatId-${theater.seatId} seatNo-${theater.seatNo}" type="checkbox" name="seats"
-                    value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
-                </c:if>
-                <c:if test="${theater.seatStatus eq '장애'}">
-                  <input class="checkbox checkbox-success seatId-${theater.seatId} seatNo-${theater.seatNo}" type="checkbox" name="seats"
-                    value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
-                </c:if>
-                <c:if test="${theater.seatStatus eq '없음'}">
-                  <input class="checkbox checkbox-warning seatId-${theater.seatId} seatNo-${theater.seatNo}" type="checkbox" name="seats"
-                    value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
-                </c:if>
-              </c:if>
-            </c:otherwise>
-          </c:choose>
-        </c:forEach>
+            </td>
+          </c:forEach>
+        </table>
+
         <br>
-        <input type="hidden" name="replaceUri" value="${rq.currentUri}">
-        <input type="hidden" name="theaterName" value="${theaterName}">
-        <input type="hidden" name="relTypeCode" value="${param.relTypeCode}">
-        <input type="radio" name="seatStatus" value="일반">
-        일반
-        <input type="radio" name="seatStatus" value="장애">
-        장애
-        <input type="radio" name="seatStatus" value="없음">
-        없음
+
+        <label>
+          일반
+          <input type="radio" name="seatStatus" value="일반" class="radio">
+        </label><br>
+        <label>
+          장애
+          <input type="radio" name="seatStatus" value="장애" class="radio radio-success">
+        </label><br>
+        <label>
+          없음
+          <input type="radio" name="seatStatus" value="없음" class="radio radio-error">
+        </label>
         <br>
-        <input class="checkbox-all checkbox checkbox-primary" type="checkbox" />
-        전체선택
+        <br>
+        <label>
+          전체선택
+          <input class="checkbox-all checkbox checkbox-primary" type="checkbox" />
+        </label>
+        <label>
+          선택좌석 출력 갱신(일괄선택 후 한번 눌러주세요)
+          <input class="checkbox empty" type="checkbox" />
+        </label>
         <br>
         <c:forEach var="seatIdArr" items="${seatIdArr}">
-          <input class="checkbox-${seatIdArr} checkbox checkbox-xs" type="checkbox" />&nbsp;${seatIdArr}열
-        &nbsp;&nbsp;
-        <script>
-			$('.checkbox-${seatIdArr}').change(
-					function() {
-						const $all = $(this);
-						const allChecked = $all.prop('checked');
+          <label>
+            &nbsp;${seatIdArr}
+            <input class="checkbox-${seatIdArr} checkbox checkbox-xs" type="checkbox" id="${seatIdArr}" />
+          </label>
+          <script>
+											$('.checkbox-${seatIdArr}')
+													.change(
+															function() {
+																const $all = $(this);
+																const allChecked = $all
+																		.prop('checked');
 
-						$('.seatId-${seatIdArr}').prop('checked', allChecked);
+																$(
+																		'.seatId-${seatIdArr}')
+																		.prop(
+																				'checked',
+																				allChecked);
 
-					})
+															})
 
-			$('.seatId-${seatIdArr}')
-					.change(
-							function() {
-								const checkboxSeatIdCount = $('.seatId-${seatIdArr}').length;
-								const checkboxSeatIdCheckedCount = $('.seatId-${seatIdArr}:checked').length;
+											$('.seatId-${seatIdArr}')
+													.change(
+															function() {
+																const checkboxSeatIdCount = $('.seatId-${seatIdArr}').length;
+																const checkboxSeatIdCheckedCount = $('.seatId-${seatIdArr}:checked').length;
 
-								const allChecked = checkboxSeatIdCount == checkboxSeatIdCheckedCount;
+																const allChecked = checkboxSeatIdCount == checkboxSeatIdCheckedCount;
 
-								$('.checkbox-${seatIdArr}')
-										.prop('checked', allChecked);
-							})
-							
-		</script>
+																$(
+																		'.checkbox-${seatIdArr}')
+																		.prop(
+																				'checked',
+																				allChecked);
+															})
+										</script>
         </c:forEach>
-        <br><br>
-         <c:forEach var="seatNoArr" items="${seatNoArr}">
-          <input class="checkbox-${seatNoArr} checkbox checkbox-xs" type="checkbox" />&nbsp;${seatNoArr}행
-        &nbsp;&nbsp;
-        <script>
-      $('.checkbox-${seatNoArr}').change(
-          function() {
-            const $all = $(this);
-            const allChecked = $all.prop('checked');
+        <br>
+        <br>
+        <c:forEach var="seatNoArr" items="${seatNoArr}">
+          <label>
+            &nbsp;${seatNoArr}
+            <input class="checkbox-${seatNoArr} checkbox checkbox-xs" type="checkbox" id="${seatNoArr}" />
+          </label>
+          <script>
+											$('.checkbox-${seatNoArr}')
+													.change(
+															function() {
+																const $all = $(this);
+																const allChecked = $all
+																		.prop('checked');
 
-            $('.seatNo-${seatNoArr}').prop('checked', allChecked);
+																$(
+																		'.seatNo-${seatNoArr}')
+																		.prop(
+																				'checked',
+																				allChecked);
 
-          })
+															})
 
-      $('.seatId-${seatNoArr}')
-          .change(
-              function() {
-                const checkboxSeatNoCount = $('.seatNo-${seatNoArr}').length;
-                const checkboxSeatNoCheckedCount = $('.seatNo-${seatNoArr}:checked').length;
+											$('.seatId-${seatNoArr}')
+													.change(
+															function() {
+																const checkboxSeatNoCount = $('.seatNo-${seatNoArr}').length;
+																const checkboxSeatNoCheckedCount = $('.seatNo-${seatNoArr}:checked').length;
 
-                const allChecked = checkboxSeatNoCount == checkboxSeatNoCheckedCount;
+																const allChecked = checkboxSeatNoCount == checkboxSeatNoCheckedCount;
 
-                $('.checkbox-${seatNoArr}')
-                    .prop('checked', allChecked);
-              })
-              
-    </script>
+																$(
+																		'.checkbox-${seatNoArr}')
+																		.prop(
+																				'checked',
+																				allChecked);
+															})
+										</script>
         </c:forEach>
-
-        <button class="btn btn-primary" type="submit">수정</button>
+        <div>
+          <button class="btn btn-primary" type="submit">수정</button>
+        </div>
+        <br>
+      선택된 좌석 :
+      <span id="multiPrint"></span>
+      <br>
       </div>
 
+      <input type="hidden" name="replaceUri" value="${rq.currentUri}">
+      <input type="hidden" name="theaterName" value="${theaterName}">
+      <input type="hidden" name="relTypeCode" value="${param.relTypeCode}">
     </form>
   </div>
 </section>
@@ -131,22 +167,29 @@
 		$('.checkbox').prop('checked', allChecked);
 
 	})
-	
 
-	$('.checkbox')
-			.change(
-					function() {
-						const checkboxSeatCount = $('.checkbox').length;
-						const checkboxSeatCheckedCount = $('.checkbox:checked').length;
+	$('.checkbox').change(function() {
+		const checkboxSeatCount = $('.checkbox').length;
+		const checkboxSeatCheckedCount = $('.checkbox:checked').length;
 
-						const allChecked = checkboxSeatCount == checkboxSeatCheckedCount;
+		const allChecked = checkboxSeatCount == checkboxSeatCheckedCount;
 
-						$('.checkbox-all')
-								.prop('checked', allChecked);
-					})
-					
-					
+		$('.checkbox-all').prop('checked', allChecked);
+	})
 
+	$(document).ready(function() {
+		// .check 클래스 중 어떤 원소가 체크되었을 때 발생하는 이벤트
+		$(".checkbox").click(function() { // 여기서 .click은 체크박스의 체크를 뜻한다.
+			var str = ""; // 여러개가 눌렸을 때 전부 출력이 될 수 있게 하나의 객체에 담는다.
+			$(".checkbox").each(function() { // .each()는 forEach를 뜻한다.
+				if ($(this).is(":checked")) // ":checked"를 이용하여 체크가 되어있는지 아닌지 확인한다.
+					str += $(this).val().slice(-7, -3) + " "; // 체크된 객체를 str에 저장한다.
+
+			});
+			$("#multiPrint").text(str); // #multiPrint에 체크된 원소를 출력한다.
+		});
+
+	});
 </script>
 
 <%@include file="../../common/foot.jspf"%>
