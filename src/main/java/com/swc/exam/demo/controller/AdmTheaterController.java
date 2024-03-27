@@ -60,11 +60,11 @@ public class AdmTheaterController {
 
 	@RequestMapping("/adm/theater/doDelete")
 	@ResponseBody
-	public String doDelete(String TheaterName, @RequestParam(defaultValue = "/adm/cinema/list") String replaceUri) {
+	public String doDelete(String relTypeCode, String theaterName, String id, @RequestParam(defaultValue = "/adm/cinema/detail") String replaceUri) {
 
-		theaterService.deleteTheater(TheaterName);
+		theaterService.deleteTheater(relTypeCode, theaterName);
 
-		return rq.jsReplace("해당 상영관이 삭제되었습니다.", replaceUri);
+		return rq.jsReplace("해당 상영관이 삭제되었습니다.", replaceUri+"?id="+id);
 	}
 
 	@RequestMapping("/adm/theater/detail")
@@ -106,5 +106,6 @@ public class AdmTheaterController {
 		return rq.jsReplace("좌석정보가 수정되었습니다",
 				"/adm/theater/detail?relTypeCode=" + relTypeCode + "&theaterName=" + theaterName);
 	}
+	
 
 }

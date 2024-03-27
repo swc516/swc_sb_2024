@@ -55,9 +55,10 @@ public interface TheaterRepository {
 			<script>
 			DELETE FROM theater
 			WHERE theaterName = #{theaterName}
+			AND relTypeCode = #{relTypeCode}
 			</script>
 			""" )
-	void deleteTheater(String theaterName);
+	void deleteTheater(String relTypeCode, String theaterName);
 
 	@Select("""
 			<script>

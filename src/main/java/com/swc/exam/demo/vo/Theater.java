@@ -14,8 +14,5 @@ public class Theater {
 	private String theaterName;
 	private char seatId;
 	private String seatNo;
-	private boolean seatSell;
 	private String seatStatus;
-	private String movie;
-	private String movieTime;
 }

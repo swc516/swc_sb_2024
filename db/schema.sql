@@ -439,9 +439,10 @@ CREATE TABLE theater (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     relTypeCode CHAR(30) NOT NULL,
     relId INT(10) UNSIGNED NOT NULL,
-    theater CHAR(20) NOT NULL,
+    theaterName CHAR(20) NOT NULL,
     seatId CHAR(10) NOT NULL,
-    seatNo INT(5) UNSIGNED NOT NULL
+    seatNo INT(5) UNSIGNED NOT NULL,
+    seatStatus CHAR(20) NOT NULL
 );
 
 
@@ -451,3 +452,4 @@ SELECT * FROM theater;
 SELECT * FROM genFile;
 SELECT * FROM movie; 
 SELECT * FROM `member`; 
+

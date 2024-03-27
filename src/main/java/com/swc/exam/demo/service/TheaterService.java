@@ -43,8 +43,8 @@ public class TheaterService {
 
 	}
 
-	public void deleteTheater(String theaterName) {
-		theaterRepository.deleteTheater(theaterName);
+	public void deleteTheater(String relTypeCode, String theaterName) {
+		theaterRepository.deleteTheater(relTypeCode, theaterName);
 	}
 
 	public List<Theater> getForPrintTheaters(String relTypeCode) {

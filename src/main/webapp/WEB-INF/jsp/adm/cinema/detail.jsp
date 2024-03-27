@@ -41,12 +41,11 @@
     </div>
   </div>
 </section>
-
 <section>
     <div class="container mx-auto px-3">
     <c:forEach var="theater" items="${theaters}">
       <a class="btn btn-success"
-        href="../theater/detail?relTypeCode=${cinema.region}&theaterName=${theater.theaterName}">${theater.theaterName}</a>
+        href="../theater/detail?relTypeCode=${cinema.region}&theaterName=${theater.theaterName}&id=${cinema.id}">${theater.theaterName}</a>
     </c:forEach>
   </div>
 </section>

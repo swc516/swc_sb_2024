@@ -11,7 +11,6 @@
   <div>
     <form action="../theater/doModify" method="post" name="cb">
       <div class="container mx-auto px-3">
-        <c:set var="i" value="${0}" />
         <div class="divider divider-info">Screen</div>
         <table style="margin-left: auto; margin-right: auto;">
           <tr>
@@ -64,7 +63,7 @@
         </label>
         <label>
           선택좌석 출력 갱신(일괄선택 후 한번 눌러주세요)
-          <input class="checkbox empty" type="checkbox" />
+          <input class="checkbox empty" type="checkbox" name="empty"/>
         </label>
         <br>
         <c:forEach var="seatIdArr" items="${seatIdArr}">
@@ -144,7 +143,8 @@
 										</script>
         </c:forEach>
         <div>
-          <button class="btn btn-primary" type="submit">수정</button>
+          <button class="btn btn-primary" type="submit">좌석정보 수정</button>
+          <a class="btn btn-error" href="../theater/doDelete?relTypeCode=${param.relTypeCode}&theaterName=${theaterName}&id=${param.id}">상영관 삭제</a>
         </div>
         <br>
       선택된 좌석 :
