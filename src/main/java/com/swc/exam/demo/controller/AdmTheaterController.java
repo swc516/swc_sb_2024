@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.swc.exam.demo.service.CinemaService;
+import com.swc.exam.demo.service.MovieService;
 import com.swc.exam.demo.service.TheaterService;
 import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Article;
@@ -29,11 +30,13 @@ public class AdmTheaterController {
 
 	private TheaterService theaterService;
 	private CinemaService cinemaService;
+	private MovieService movieService;
 	private Rq rq;
 
-	public AdmTheaterController(TheaterService theaterService, CinemaService cinemaService, Rq rq) {
+	public AdmTheaterController(TheaterService theaterService, CinemaService cinemaService, MovieService movieService, Rq rq) {
 		this.theaterService = theaterService;
 		this.cinemaService = cinemaService;
+		this.movieService = movieService;
 		this.rq = rq;
 	}
 
@@ -60,8 +63,8 @@ public class AdmTheaterController {
 
 	@RequestMapping("/adm/theater/doDelete")
 	@ResponseBody
-	public String doDelete(String relTypeCode, String theaterName, String id, @RequestParam(defaultValue = "/adm/cinema/detail") String replaceUri) {
-
+	public String doDelete(String relTypeCode, String theaterName, @RequestParam(defaultValue = "/adm/cinema/detail") String replaceUri) {
+		int id = theaterService.getTheaterId(relTypeCode, theaterName);
 		theaterService.deleteTheater(relTypeCode, theaterName);
 
 		return rq.jsReplace("해당 상영관이 삭제되었습니다.", replaceUri+"?id="+id);
@@ -108,4 +111,32 @@ public class AdmTheaterController {
 	}
 	
 
+	@RequestMapping("/adm/theater/addTime")
+	public String showAddTime(Model model, String relTypeCode, String theaterName) {
+		List<Theater> theaters = theaterService.getForPrintTheater(relTypeCode, theaterName);
+		model.addAttribute("theaters", theaters);
+		model.addAttribute("theaterName", theaters.get(0).getTheaterName());
+		model.addAttribute("region", theaters.get(0).getRelTypeCode());
+		List<Movie> movies = movieService.getForPrintPlayingMovies();
+		model.addAttribute("movies", movies);
+		
+		return "adm/theater/addTime";
+	}
+	
+
+	@RequestMapping("/adm/theater/doAddTime")
+	@ResponseBody
+	public String doAddTime(String replaceUri, String theaterName, String region, int movieId, String date, int time, String startTime, String endTime) {
+		int id = theaterService.getTheaterId(region, theaterName);
+
+		ResultData addRd = theaterService.addTime(theaterName, region, movieId, date, time, startTime, endTime);
+
+		if (addRd.isFail()) {
+			return rq.jsHistoryBack(addRd.getResultCode(), addRd.getMsg());
+		}
+
+		return rq.jsReplace(addRd.getMsg(), "/adm/theater/detail?id="+id+"&relTypeCode="+region+"&theaterName="+theaterName);
+		
+		
+	}
 }

@@ -71,4 +71,30 @@ public class TheaterService {
 		theaterRepository.modify(id, region);
 	}
 
+	public ResultData addTime(String theaterName, String region, int movieId, String date, int time, String startTime,
+			String endTime) {
+		List<Theater> theaters = theaterRepository.getForPrintTheater(region, theaterName);
+		char seatId;
+		String seatNo;
+		String seatStatus;
+		int relId;
+
+		for (Theater theater : theaters) {
+			seatId = theater.getSeatId();
+			seatNo = theater.getSeatNo();
+			seatStatus = theater.getSeatStatus();
+			relId = theater.getRelId();
+			theaterRepository.addTime(theaterName, region, relId, movieId, date, time, startTime, endTime, seatId, seatNo,
+					seatStatus);
+		}
+
+		return new ResultData("S-1", "상영회차 추가가 완료되었습니다.");
+	}
+
+	public int getTheaterId(String relTypeCode, String theaterName) {
+		int id = theaterRepository.getTheaterId(relTypeCode, theaterName);
+		return id;
+
+	}
+
 }

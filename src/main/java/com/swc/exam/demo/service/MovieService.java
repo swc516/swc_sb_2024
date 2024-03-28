@@ -77,4 +77,10 @@ public class MovieService {
 		return ResultData.from("S-1", "영화정보가 수정되었습니다.");
 	}
 
+	public List<Movie> getForPrintPlayingMovies() {
+		List<Movie> movies = movieRepository.getForPrintPlayingMovies();
+		
+		return movies;
+	}
+
 }

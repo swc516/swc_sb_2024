@@ -137,4 +137,11 @@ public interface MovieRepository {
 			</script>
 			""")
 	void modify(int id, String title, String body, String runDate);
+
+	@Select("""
+			SELECT *
+			FROM movie
+			WHERE runDate > NOW(); 
+			""")
+	List<Movie> getForPrintPlayingMovies();
 }

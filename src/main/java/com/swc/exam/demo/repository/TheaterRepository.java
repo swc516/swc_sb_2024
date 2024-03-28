@@ -92,4 +92,31 @@ public interface TheaterRepository {
 			""")
 	void modify(int id, String region);
 
+	@Insert("""
+			INSERT INTO theaterTime
+			SET theaterName = #{theaterName},
+			relTypeCode = #{region},
+			relId = #{relId},
+			movieId = #{movieId},
+			date = #{date},
+			time = #{time},
+			startTime = #{startTime},
+			endTime = #{endTime},
+			seatId = #{seatId},
+			seatNo = #{seatNo},
+			seatStatus = #{seatStatus}
+			""")
+	void addTime(String theaterName, String region, int relId, int movieId, String date, int time, String startTime,
+			String endTime, char seatId, String seatNo, String seatStatus);
+
+	@Select("""
+			SELECT relId
+			FROM theater
+			WHERE relTypeCode = #{relTypeCode}
+			AND theaterName = #{theaterName}
+			GROUP BY relTypeCode = #{relTypeCode}
+			AND theaterName = #{theaterName};
+			""")
+	int getTheaterId(String relTypeCode, String theaterName);
+
 }
