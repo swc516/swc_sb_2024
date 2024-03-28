@@ -104,8 +104,7 @@ public interface TheaterRepository {
 			endTime = #{endTime},
 			seatId = #{seatId},
 			seatNo = #{seatNo},
-			seatStatus = #{seatStatus},
-			memberId = 0
+			seatStatus = #{seatStatus}
 			""")
 	void addTime(String theaterName, String region, int relId, int movieId, String date, int time, String startTime,
 			String endTime, char seatId, String seatNo, String seatStatus);

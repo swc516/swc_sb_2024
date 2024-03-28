@@ -73,6 +73,12 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		.addPathPatterns("/usr/reactionPoint/doBadReaction")
 		.addPathPatterns("/usr/reactionPoint/doCancelGoodReaction")
 		.addPathPatterns("/usr/reactionPoint/doCancelBadReaction")
+		.addPathPatterns("/usr/ticketing/main") // test
+		.addPathPatterns("/usr/ticketing/doTicketing") // test
+		.addPathPatterns("/usr/member/myTicketingList")
+		.addPathPatterns("/usr/member/doTicketCancel")
+		
+		
 		.addPathPatterns("/adm/**")
 
 		;

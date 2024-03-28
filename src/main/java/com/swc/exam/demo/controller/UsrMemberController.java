@@ -1,5 +1,6 @@
 package com.swc.exam.demo.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.Rq;
+import com.swc.exam.demo.vo.TheaterTime;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -252,6 +254,24 @@ public class UsrMemberController {
 		}
 
 		return rq.jsReplace(modifyRd.getMsg(), "/");
+	}
+	
+	@RequestMapping("/usr/member/myTicketingList")
+	public String showMyTicketingList(Model model, int id) {
+		List<TheaterTime> lists = memberService.getMyTicketingList(id);
+		
+		model.addAttribute("lists", lists);
+		
+		
+		return "usr/member/myTicketingList";
+	}
+	
+	@RequestMapping("/usr/member/doTicketCancel")
+	@ResponseBody
+	public String doTicketCencle(Model model, int id) {
+		memberService.doTicketCancel(id);
+		
+		return rq.jsReplace("취소가 완료되었습니다.", "/usr/member/myTicketingList?id="+rq.getLoginedMemberId());
 	}
 
 }

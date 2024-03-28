@@ -12,6 +12,7 @@ import com.swc.exam.demo.vo.Article;
 import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.Movie;
 import com.swc.exam.demo.vo.ResultData;
+import com.swc.exam.demo.vo.Rq;
 import com.swc.exam.demo.vo.Theater;
 import com.swc.exam.demo.vo.TheaterTime;
 import com.swc.exam.demo.vo.Cinema;
@@ -20,9 +21,11 @@ import com.swc.exam.demo.vo.Cinema;
 public class TicketingService {
 
 	private TheaterTimeRepository theaterTimeRepository;
+	private Rq rq;
 
-	public TicketingService(TheaterTimeRepository theaterTimeRepository) {
+	public TicketingService(TheaterTimeRepository theaterTimeRepository, Rq rq) {
 		this.theaterTimeRepository = theaterTimeRepository;
+		this.rq = rq;
 	}
 
 
@@ -39,6 +42,19 @@ public class TicketingService {
 			int seatNo = Integer.parseInt(seatSplit[1]);
 			theaterTimeRepository.doTicketing(region, theaterName, date, time, seatId, seatNo, memberId);
 		}
+	}
+
+
+	public List<TheaterTime> getMyTicketingList(int id) {
+		List<TheaterTime> lists = theaterTimeRepository.getMyTicketingList(id);
+		return lists;
+	}
+
+
+	public void doTicketCancel(int id) {
+		
+		theaterTimeRepository.doTicketCancel(id);
+		
 	}
 
 }

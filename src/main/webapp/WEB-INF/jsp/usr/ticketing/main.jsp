@@ -11,6 +11,12 @@
   <div>
     <form class="table-box-type-1" method="post" enctype="multipart/form-data" action="../ticketing/doTicketing">
       <div class="container mx-auto px-3">
+      <input type="checkbox" class="checkbox"> : 일반 좌석<br>
+      <input type="checkbox" class="checkbox checkbox-success"> : 장애인 배려 좌석 <br>
+      <input type="checkbox" class="checkbox" disabled checked> : 예매가 완료된 좌석 <br>
+      <input type="checkbox" class="checkbox" disabled> : 통로 <br>
+      <hr>
+      ${param.region} 지점 / ${param.theaterName} / 상영날짜 : ${param.date} / 상영시간 : (${param.time}회차), ${playingTime}
         <div class="divider divider-info">Screen</div>
         <table style="margin-left: auto; margin-right: auto;">
           <tr>
@@ -42,9 +48,6 @@
                   </c:if>
                   <c:if test="${theaterTime.seatStatus == '없음'}">
                   
-                    <input class="checkbox checkbox-error seatId-${theaterTime.seatId} seatNo-${theaterTime.seatNo}"
-                      type="checkbox" name="seats"
-                      value=" ${theaterTime.seatId}-${theaterTime.seatNo}-${theaterTime.seatStatus}" disabled>
                   </c:if>
                 </c:otherwise>
               </c:choose>

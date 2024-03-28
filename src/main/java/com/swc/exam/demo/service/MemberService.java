@@ -10,6 +10,7 @@ import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Article;
 import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.ResultData;
+import com.swc.exam.demo.vo.TheaterTime;
 
 @Service
 public class MemberService {
@@ -19,11 +20,13 @@ public class MemberService {
 	private String siteName;
 
 	private MemberRepository memberRepository;
+	private TicketingService ticketingService;
 	private AttrService attrService;
 	private MailService mailService;
 
-	public MemberService(AttrService attrService, MemberRepository memberRepository, MailService mailService) {
+	public MemberService(AttrService attrService, TicketingService ticketingService, MemberRepository memberRepository, MailService mailService) {
 		this.memberRepository = memberRepository;
+		this.ticketingService = ticketingService;
 		this.attrService = attrService;
 		this.mailService = mailService;
 	}
@@ -146,5 +149,14 @@ public class MemberService {
 
 	private void deleteMember(Member member) {
 		memberRepository.deleteMember(member.getId());
+	}
+
+	public List<TheaterTime> getMyTicketingList(int id) {
+		List<TheaterTime> lists = ticketingService.getMyTicketingList(id);
+		return lists;
+	}
+
+	public void doTicketCancel(int id) {
+		ticketingService.doTicketCancel(id);
 	}
 }

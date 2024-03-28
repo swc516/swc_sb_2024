@@ -31,7 +31,7 @@ public interface TheaterTimeRepository {
 	@Update("""
 			<script>
 			UPDATE theaterTime
-			SET seatSell = 1, memberId = #{memberId}
+			SET seatSell = 1, memberId = #{memberId}, ticketingDate = NOW()
 			WHERE theaterName = #{theaterName}
 			AND relTypeCode = #{region}
 			AND `date` = #{date}
@@ -41,5 +41,24 @@ public interface TheaterTimeRepository {
 			</script>
 			""")
 	void doTicketing(String region, String theaterName, String date, int time, char seatId, int seatNo, int memberId);
+
+	
+	@Select("""
+			SELECT T.*,
+			M.title AS extra__movieTitle
+			FROM theaterTime AS T
+			LEFT JOIN movie AS M
+			ON T.movieId = M.id
+			WHERE memberId = #{id}
+						""")
+	List<TheaterTime> getMyTicketingList(int id);
+
+	@Update("""
+			UPDATE theaterTime
+			SET seatSell = 0, memberId = 0, ticketingDate = null
+			WHERE id = #{id}
+			""")
+	void doTicketCancel(int id);
+	
 
 }

@@ -22,4 +22,16 @@ public class TheaterTime {
 	private String seatStatus;
 	private boolean seatSell;
 	private int memberId;
+	private String ticketingDate;
+	
+	private String extra__movieTitle;
+	
+	
+	public String getForPrintType1StartTime() {
+		return startTime.substring(0, 5);
+	}
+	
+	public String getForPrintType1EndTime() {
+		return endTime.substring(0, 5);
+	}
 }

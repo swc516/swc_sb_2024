@@ -15,4 +15,6 @@ public class Theater {
 	private char seatId;
 	private String seatNo;
 	private String seatStatus;
+	
+	private String extra__seat;
 }
