@@ -144,4 +144,6 @@ public interface MovieRepository {
 			WHERE runDate > NOW(); 
 			""")
 	List<Movie> getForPrintPlayingMovies();
+	
+	
 }

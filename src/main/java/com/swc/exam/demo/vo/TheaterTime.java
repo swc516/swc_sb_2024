@@ -21,4 +21,5 @@ public class TheaterTime {
 	private String seatNo;
 	private String seatStatus;
 	private boolean seatSell;
+	private int memberId;
 }

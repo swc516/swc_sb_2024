@@ -69,6 +69,21 @@ Theme__init();
           </a>
         </li>
         <li>
+          <a href="/usr/cinema/list" class="h-full flex items-center px-3 hover:underline">
+            <span>영화관</span>
+          </a>
+        </li>
+        <li>
+          <a href="/usr/movie/list" class="h-full flex items-center px-3 hover:underline">
+            <span>상영중인 영화</span>
+          </a>
+        </li>
+        <li>
+          <a href="/usr/ticketing/main" class="h-full flex items-center px-3 hover:underline">
+            <span>예매</span>
+          </a>
+        </li>
+        <li>
           <a href="/usr/article/list?boardId=1" class="h-full flex items-center px-3 hover:underline">
             <span>공지사항</span>
           </a>

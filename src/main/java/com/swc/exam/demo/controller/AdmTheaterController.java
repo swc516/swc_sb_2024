@@ -93,7 +93,6 @@ public class AdmTheaterController {
 		}
 
 		model.addAttribute("seatNoArr", seatNos);
-		model.addAttribute("lastSeatNo", lastSeatNo);
 
 		
 
