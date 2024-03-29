@@ -20,11 +20,11 @@ public class MemberService {
 	private String siteName;
 
 	private MemberRepository memberRepository;
-	private TicketingService ticketingService;
+	private TicketService ticketingService;
 	private AttrService attrService;
 	private MailService mailService;
 
-	public MemberService(AttrService attrService, TicketingService ticketingService, MemberRepository memberRepository, MailService mailService) {
+	public MemberService(AttrService attrService, TicketService ticketingService, MemberRepository memberRepository, MailService mailService) {
 		this.memberRepository = memberRepository;
 		this.ticketingService = ticketingService;
 		this.attrService = attrService;

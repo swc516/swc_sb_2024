@@ -18,12 +18,12 @@ import com.swc.exam.demo.vo.TheaterTime;
 import com.swc.exam.demo.vo.Cinema;
 
 @Service
-public class TicketingService {
+public class TicketService {
 
 	private TheaterTimeRepository theaterTimeRepository;
 	private Rq rq;
 
-	public TicketingService(TheaterTimeRepository theaterTimeRepository, Rq rq) {
+	public TicketService(TheaterTimeRepository theaterTimeRepository, Rq rq) {
 		this.theaterTimeRepository = theaterTimeRepository;
 		this.rq = rq;
 	}

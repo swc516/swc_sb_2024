@@ -9,7 +9,7 @@
 
 <section>
   <div>
-    <form class="table-box-type-1" method="post" enctype="multipart/form-data" action="../ticketing/doTicketing">
+    <form class="table-box-type-1" method="post" enctype="multipart/form-data" action="../ticket/doTicketing">
       <div class="container mx-auto px-3">
       <input type="checkbox" class="checkbox"> : 일반 좌석<br>
       <input type="checkbox" class="checkbox checkbox-success"> : 장애인 배려 좌석 <br>

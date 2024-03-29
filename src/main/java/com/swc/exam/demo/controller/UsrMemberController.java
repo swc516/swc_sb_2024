@@ -256,14 +256,14 @@ public class UsrMemberController {
 		return rq.jsReplace(modifyRd.getMsg(), "/");
 	}
 	
-	@RequestMapping("/usr/member/myTicketingList")
+	@RequestMapping("/usr/member/myTicketList")
 	public String showMyTicketingList(Model model, int id) {
 		List<TheaterTime> lists = memberService.getMyTicketingList(id);
 		
 		model.addAttribute("lists", lists);
 		
 		
-		return "usr/member/myTicketingList";
+		return "usr/member/myTicketList";
 	}
 	
 	@RequestMapping("/usr/member/doTicketCancel")
@@ -271,7 +271,7 @@ public class UsrMemberController {
 	public String doTicketCencle(Model model, int id) {
 		memberService.doTicketCancel(id);
 		
-		return rq.jsReplace("취소가 완료되었습니다.", "/usr/member/myTicketingList?id="+rq.getLoginedMemberId());
+		return rq.jsReplace("취소가 완료되었습니다.", "/usr/member/myTicketList?id="+rq.getLoginedMemberId());
 	}
 
 }

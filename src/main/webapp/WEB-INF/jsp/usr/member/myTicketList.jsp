@@ -40,7 +40,7 @@
               <td>${list.seatId}-${list.seatNo}</td>
               <td>
                 <a
-                  href="/usr/ticketing/seatLocation?region=${list.relTypeCode}&theaterName=${list.theaterName}&mySeatId=${list.seatId}&mySeatNo=${list.seatNo}"
+                  href="/usr/ticket/seatLocation?region=${list.relTypeCode}&theaterName=${list.theaterName}&mySeatId=${list.seatId}&mySeatNo=${list.seatNo}"
                   target="_blank">위치보기</a>
               </td>
               <td>${list.seatStatus}</td>

@@ -44,7 +44,7 @@
         <tr>
           <th>비고</th>
           <td>
-            <a href="../member/myTicketingList?id=${rq.loginedMember.id}" class="btn btn-primary">나의 예매 내역</a>
+            <a href="../member/myTicketList?id=${rq.loginedMember.id}" class="btn btn-primary">나의 예매 내역</a>
             <a href="../member/checkPassword?replaceUri=${Ut.getUriEncoded('../member/modify')}" type="submit"
               class="btn btn-primary">회원정보 수정</a>
             <button type="button" class="btn btn-outline btn-error" onclick="history.back();">뒤로가기</button>
