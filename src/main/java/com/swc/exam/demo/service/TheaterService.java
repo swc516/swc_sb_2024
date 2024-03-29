@@ -29,10 +29,11 @@ public class TheaterService {
 			String seatStatus) {
 		int A = 65;
 		int seatIdtoInt = seatId;
+		int theaterId = theaterRepository.getLastTheaterId() + 1;
 		for (int i = A; i <= seatIdtoInt; i++) {
 
 			for (int j = 1; j <= Integer.parseInt(seatNo); j++) {
-				theaterRepository.add(relTypeCode, relId, theaterName, (char) i, j, seatStatus);
+				theaterRepository.add(theaterId, relTypeCode, relId, theaterName, (char) i, j, seatStatus);
 			}
 
 		}
@@ -80,14 +81,14 @@ public class TheaterService {
 		String seatNo;
 		String seatStatus;
 		int relId;
-
+		int theaterTimeId = theaterRepository.getLastTheaterTimeId() + 1;
 		for (Theater theater : theaters) {
 			seatId = theater.getSeatId();
 			seatNo = theater.getSeatNo();
 			seatStatus = theater.getSeatStatus();
 			relId = theater.getRelId();
-			theaterRepository.addTime(theaterName, region, relId, movieId, date, time, startTime, endTime, seatId, seatNo,
-					seatStatus);
+			theaterRepository.addTime(theaterTimeId, theaterName, region, relId, movieId, date, time, startTime, endTime, seatId,
+					seatNo, seatStatus);
 		}
 
 		return new ResultData("S-1", "상영회차 추가가 완료되었습니다.");

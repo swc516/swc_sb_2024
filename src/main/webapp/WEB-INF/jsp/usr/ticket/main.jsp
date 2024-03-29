@@ -50,16 +50,26 @@
         <c:forEach var="theaterTime" items="${theaterTimes}">
           <tr>
             <td>
-              <input type="radio" name="ticketing"
-                value="${param.movieId}__${theaterTime.relTypeCode}__${theaterTime.theaterName}__${theaterTime.date}__${theaterTime.time}">
+              <c:if test="${theaterTime.extra__sellSeatCount == theaterTime.extra__maxSeatCount}">
+                <input type="radio" name="ticketing"
+                  value="${param.movieId}__${theaterTime.relTypeCode}__${theaterTime.theaterName}__${theaterTime.date}__${theaterTime.time}"
+                  disabled>
+              </c:if>
+              <c:if test="${theaterTime.extra__sellSeatCount != theaterTime.extra__maxSeatCount}">
+                <input type="radio" name="ticketing"
+                  value="${param.movieId}__${theaterTime.relTypeCode}__${theaterTime.theaterName}__${theaterTime.date}__${theaterTime.time}">
+              </c:if>
             </td>
             <td>${theaterTime.theaterName})</td>
             <td>
               [${theaterTime.time}회차] ${theaterTime.getForPrintType1StartTime()} ~
-              ${theaterTime.getForPrintType1EndTime()} (${theaterTime.extra__sellSeatCount}/${theaterTime.extra__maxSeatCount})
+              ${theaterTime.getForPrintType1EndTime()}
+              (${theaterTime.extra__sellSeatCount}/${theaterTime.extra__maxSeatCount})
               <br>
             </td>
+            <c:if test="${theaterTime.extra__sellSeatCount == theaterTime.extra__maxSeatCount}">
 
+            </c:if>
           </tr>
         </c:forEach>
       </table>
@@ -67,16 +77,16 @@
   </section>
 </form>
 <section class="container mx-auto px-3">
-<div style="float:right">
-  <form action="../ticket/ticketing" method="post">
-    <input type="hidden" id="movieId" name="movieId" value="">
-    <input type="hidden" id="region" name="region" value="">
-    <input type="hidden" id="theaterName" name="theaterName" value="">
-    <input type="hidden" id="date" name="date" value="">
-    <input type="hidden" id="time" name="time" value="">
-    <input type="submit" value="예매" class="btn btn-success">
-  </form>
-</div>
+  <div style="float: right">
+    <form action="../ticket/ticketing" method="post">
+      <input type="hidden" id="movieId" name="movieId" value="">
+      <input type="hidden" id="region" name="region" value="">
+      <input type="hidden" id="theaterName" name="theaterName" value="">
+      <input type="hidden" id="date" name="date" value="">
+      <input type="hidden" id="time" name="time" value="">
+      <input type="submit" value="예매" class="btn btn-success">
+    </form>
+  </div>
 </section>
 
 <script>

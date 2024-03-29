@@ -19,14 +19,15 @@ public interface TheaterRepository {
 
 	@Insert("""
 			INSERT INTO theater
-			SET relTypeCode = #{relTypeCode},
+			SET theaterId = #{theaterId},
+			relTypeCode = #{relTypeCode},
 			relId = #{relId},
 			theaterName = #{theaterName},
 			seatId = #{seatId},
 			seatNo = #{seatNo},
 			seatStatus = #{seatStatus}
 			""")
-	void add(String relTypeCode, int relId, String theaterName, char seatId, int seatNo, String seatStatus);
+	void add(int theaterId, String relTypeCode, int relId, String theaterName, char seatId, int seatNo, String seatStatus);
 
 	@Select("SELECT LAST_INSERT_ID()")
 	int getLastInsertId();
@@ -94,7 +95,8 @@ public interface TheaterRepository {
 
 	@Insert("""
 			INSERT INTO theaterTime
-			SET theaterName = #{theaterName},
+			SET theaterTimeId = #{theaterTimeId},
+			theaterName = #{theaterName},
 			relTypeCode = #{region},
 			relId = #{relId},
 			movieId = #{movieId},
@@ -106,7 +108,7 @@ public interface TheaterRepository {
 			seatNo = #{seatNo},
 			seatStatus = #{seatStatus}
 			""")
-	void addTime(String theaterName, String region, int relId, int movieId, String date, int time, String startTime,
+	void addTime(int theaterTimeId, String theaterName, String region, int relId, int movieId, String date, int time, String startTime,
 			String endTime, char seatId, String seatNo, String seatStatus);
 
 	@Select("""
@@ -127,5 +129,18 @@ public interface TheaterRepository {
 			</script>
 			""")
 	List<Theater> getTheaterList();
+
+	
+	@Select("""
+			SELECT IFNULL(MAX(theaterId),0) 
+			FROM theater
+			""")
+	int getLastTheaterId();
+
+	@Select("""
+			SELECT IFNULL(MAX(theaterTimeId),0) 
+			FROM theaterTime
+			""")
+	int getLastTheaterTimeId();
 
 }

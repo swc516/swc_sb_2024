@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TheaterTime {
 	private int id;
+	private int theaterTimeId;
 	private String relTypeCode;
 	private int relId;
 	private String theaterName;
