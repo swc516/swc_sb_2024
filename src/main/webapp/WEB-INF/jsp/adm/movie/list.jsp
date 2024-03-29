@@ -80,7 +80,7 @@
               </th>
               <td>${movie.id}</td>
               <td>
-                <img class="w-20 h-40 ml-1 mr-1 object-cover" src="${rq.getMoviePosterImgUri(movie.id)}" alt=""
+                <img width="200" height="300" class="ml-1 mr-1" src="${rq.getMoviePosterImgUri(movie.id)}" alt=""
                   onerror="${rq.moviePosterFallbackImgOnErrorHtml}" />
               </td>
               <td>${movie.forPrintType1RegDate}</td>

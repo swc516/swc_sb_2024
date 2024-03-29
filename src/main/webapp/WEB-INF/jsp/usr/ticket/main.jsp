@@ -51,12 +51,12 @@
           <tr>
             <td>
               <input type="radio" name="ticketing"
-                value="${theaterTime.relTypeCode}__${theaterTime.theaterName}__${theaterTime.date}__${theaterTime.time}">
+                value="${param.movieId}__${theaterTime.relTypeCode}__${theaterTime.theaterName}__${theaterTime.date}__${theaterTime.time}">
             </td>
             <td>${theaterTime.theaterName})</td>
             <td>
               [${theaterTime.time}회차] ${theaterTime.getForPrintType1StartTime()} ~
-              ${theaterTime.getForPrintType1EndTime()} (100/150)
+              ${theaterTime.getForPrintType1EndTime()} (${theaterTime.extra__sellSeatCount}/${theaterTime.extra__maxSeatCount})
               <br>
             </td>
 
@@ -69,6 +69,7 @@
 <section class="container mx-auto px-3">
 <div style="float:right">
   <form action="../ticket/ticketing" method="post">
+    <input type="hidden" id="movieId" name="movieId" value="">
     <input type="hidden" id="region" name="region" value="">
     <input type="hidden" id="theaterName" name="theaterName" value="">
     <input type="hidden" id="date" name="date" value="">
@@ -83,11 +84,13 @@
 			function() {
 				var result = $(":input:radio[name=ticketing]:checked").val()
 						.split('__');
-				var region = result[0];
-				var theaterName = result[1];
-				var date = result[2];
-				var time = result[3];
+				var movieId = result[0];
+				var region = result[1];
+				var theaterName = result[2];
+				var date = result[3];
+				var time = result[4];
 
+				document.getElementById("movieId").value = movieId;
 				document.getElementById("region").value = region;
 				document.getElementById("theaterName").value = theaterName;
 				document.getElementById("date").value = date;

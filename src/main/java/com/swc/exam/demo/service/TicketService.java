@@ -83,6 +83,10 @@ public class TicketService {
 
 	public List<TheaterTime> getTheaterTimeList(int movieId, String region, String date) {
 		List<TheaterTime> theaterTimes = theaterTimeRepository.getTheaterTimeList(movieId, region, date);
+		for(TheaterTime theaterTime : theaterTimes) {
+			theaterTime.setExtra__sellSeatCount(theaterTimeRepository.getSellSeatCount(region, theaterTime.getTheaterName(), date, theaterTime.getTime()));
+			theaterTime.setExtra__maxSeatCount(theaterTimeRepository.getMaxSeatCount(region, theaterTime.getTheaterName(), date, theaterTime.getTime()));
+		}
 		return theaterTimes;
 	}
 

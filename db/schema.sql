@@ -135,15 +135,10 @@ regDate, updateDate, memberId, boardId, title, `body`
 select now(), now(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 2) + 1, CONCAT('제목_', RAND()), CONCAT('내용_', RAND())
 from article; 
 */
-SELECT FLOOR(RAND() * 3) + 1;
-
-SELECT *FROM article;
 
 # 게시물 테이블 hitCount 컬럼을 추가
 ALTER TABLE article
 ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
-
-DESC article;
 
 
 # 리액션 포인트 테이블 
@@ -158,51 +153,6 @@ CREATE TABLE reactionPoint (
     
 );
 
-# 리액션포인트 테스트 데이터
-## 1번 회원이 1번 article에 대해서 싫어요
-INSERT INTO reactionPoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 1,
-relTypeCode = 'article',
-relId = 1,
-`point` = -1;
-
-## 1번 회원이 2번 article에 대해서 좋아요
-INSERT INTO reactionPoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 1,
-relTypeCode = 'article',
-relId = 2,
-`point` = 1;
-
-## 2번 회원이 1번 article에 대해서 싫어요
-INSERT INTO reactionPoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-relTypeCode = 'article',
-relId = 1,
-`point` = -1;
-
-## 2번 회원이 2번 article에 대해서 좋아요
-INSERT INTO reactionPoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-relTypeCode = 'article',
-relId = 2,
-`point` = 1;
-
-## 3번 회원이 1번 article에 대해서 좋아요
-INSERT INTO reactionPoint
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 3,
-relTypeCode = 'article',
-relId = 1,
-`point` = 1;
 
 # 게시물 테이블 goodReactionPoint 컬럼을 추가
 ALTER TABLE article
@@ -227,7 +177,6 @@ FROM reactionPoint AS Rp
 WHERE relTypeCode = 'article'
 GROUP BY Rp.relTypeCode, Rp.relId;
 
-SELECT * FROM article;
 
 UPDATE article AS A
 INNER JOIN(
@@ -286,14 +235,6 @@ relTypeCode = 'article',
 relId = 2,
 `body` = '댓글 4';
 
-EXPLAIN SELECT R.*,
-M.nickname AS extra__writerName
-FROM reply AS R
-LEFT JOIN `member` AS M
-ON R.memberId = M.id
-WHERE R.relTypeCode = 'article'
-AND R.relId = 3
-ORDER BY R.id DESC;
 
 
 # 댓글 좋아요 수, 싫어요 수 칼럼 추가
@@ -305,8 +246,6 @@ ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 # 댓글 테이블에 인덱스 걸기
 ALTER TABLE reply ADD INDEX (relTypeCode, relId);
-
-SELECT * FROM `member`;
 
 # 부가정보테이블
 # 댓글 테이블 추가
@@ -378,13 +317,8 @@ email = 'user3@gmail.com';
 UPDATE `member` 
 SET loginPw = SHA2(loginPw, 256);
 
-SELECT * FROM `reactionPoint`;
-SELECT * FROM `reply`;
-SELECT * FROM `member`;
-
 
 #영화 테이블 생성
-
 CREATE TABLE movie (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
@@ -397,27 +331,7 @@ CREATE TABLE movie (
     delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
     delDate DATETIME
     );
-    
-    
-#영화, 테스트 데이터 생성
-INSERT INTO movie
-SET regDate = NOW(),
-updateDate = NOW(),
-title = "영화1",
-`body` = "영화내용1",
-runDate = '2024-05-01 06:00:00';
 
-INSERT INTO movie
-SET regDate = NOW(),
-updateDate = NOW(),
-title = "영화2",
-`body` = "영화내용2",
-rate = 0.0,
-`count` = 0,
-runDate = '2024-03-24 06:00:00';
-
-
-SELECT * FROM movie;
 
 #영화관 테이블 생성
 CREATE TABLE cinema (
@@ -429,27 +343,34 @@ CREATE TABLE cinema (
     delDate DATETIME
     );
     
-INSERT INTO cinema
-SET regDate = NOW(),
-updateDate = NOW(),
-region = "서울_방학";
-    
-    #상영관 테이블 생성
+#상영관 테이블 생성
 CREATE TABLE theater (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     relTypeCode CHAR(30) NOT NULL,
     relId INT(10) UNSIGNED NOT NULL,
     theaterName CHAR(20) NOT NULL,
     seatId CHAR(10) NOT NULL,
-    seatNo INT(5) UNSIGNED NOT NULL,
+    seatNo CHAR(5) NOT NULL,
     seatStatus CHAR(20) NOT NULL
 );
 
 
-SELECT * FROM cinema; 
+CREATE TABLE theaterTime (
+id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+relTypeCode CHAR(30) NOT NULL,
+relId INT(10) UNSIGNED NOT NULL,
+theaterName CHAR(20) NOT NULL,
+`time` INT(10) UNSIGNED NOT NULL,
+movieId INT(10) UNSIGNED NOT NULL,
+`date` DATE NOT NULL,
+startTime TIME NOT NULL,
+endTime TIME NOT NULL,
+seatId CHAR(10) NOT NULL,
+seatNo CHAR(5) NOT NULL,
+seatStatus CHAR(20) NOT NULL,
+seatSell TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+memberId INT(10) DEFAULT 0,
+ticketingDate DATETIME
+);
 
-SELECT * FROM theater; 
-SELECT * FROM genFile;
-SELECT * FROM movie; 
-SELECT * FROM `member`; 
 

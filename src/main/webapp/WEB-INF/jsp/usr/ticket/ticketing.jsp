@@ -16,7 +16,7 @@
       <input type="checkbox" class="checkbox" disabled checked> : 예매가 완료된 좌석 <br>
       <input type="checkbox" class="checkbox" disabled> : 통로 <br>
       <hr>
-      ${param.region} 지점 / ${param.theaterName} / 상영날짜 : ${param.date} / 상영시간 : (${param.time}회차), ${playingTime}
+      ${movieTitle} / ${param.region} 지점 / ${param.theaterName} / 상영날짜 : ${param.date} / 상영시간 : (${param.time}회차), ${playingTime}
         <div class="divider divider-info">Screen</div>
         <table style="margin-left: auto; margin-right: auto;">
           <tr>

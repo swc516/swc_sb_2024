@@ -18,9 +18,11 @@ import com.swc.exam.demo.vo.Cinema;
 public class TheaterService {
 
 	private TheaterRepository theaterRepository;
+	private MovieService movieService;
 
-	public TheaterService(TheaterRepository theaterRepository) {
+	public TheaterService(TheaterRepository theaterRepository, MovieService movieService) {
 		this.theaterRepository = theaterRepository;
+		this.movieService = movieService;
 	}
 
 	public ResultData add(String relTypeCode, int relId, String theaterName, char seatId, String seatNo,
@@ -100,6 +102,12 @@ public class TheaterService {
 	public List<Theater> getTheaterList() {
 		List<Theater> theaters = theaterRepository.getTheaterList();
 		return theaters;
+	}
+
+	public String getMovieTitleById(int movieId) {
+		Movie movie = movieService.getMovieById(movieId);
+		String movieTitle = movie.getTitle();
+		return movieTitle;
 	}
 
 }

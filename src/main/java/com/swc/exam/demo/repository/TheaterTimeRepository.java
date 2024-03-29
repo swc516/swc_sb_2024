@@ -70,5 +70,27 @@ public interface TheaterTimeRepository {
 						""")
 	List<TheaterTime> getTheaterTimeList(int movieId, String region, String date);
 
+	@Select("""
+			SELECT COUNT(*)
+			FROM theaterTime
+			WHERE seatStatus != '없음'
+			AND seatSell = 1
+			AND relTypeCode = #{region}
+			AND theaterName = #{theaterName}
+			AND `date` = #{date}
+			AND `time` = #{time}
+									""")
+	int getSellSeatCount(String region, String theaterName, String date, int time);
+
+	@Select("""
+			SELECT COUNT(*)
+			FROM theaterTime
+			WHERE seatStatus != '없음'
+			AND relTypeCode = #{region}
+			AND theaterName = #{theaterName}
+			AND `date` = #{date}
+			AND `time` = #{time}
+									""")
+	int getMaxSeatCount(String region, String theaterName, String date, int time);
 
 }

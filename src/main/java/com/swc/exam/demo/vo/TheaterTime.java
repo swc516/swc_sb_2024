@@ -25,6 +25,8 @@ public class TheaterTime {
 	private String ticketingDate;
 	
 	private String extra__movieTitle;
+	private int extra__sellSeatCount;
+	private int extra__maxSeatCount;
 	
 	
 	public String getForPrintType1StartTime() {

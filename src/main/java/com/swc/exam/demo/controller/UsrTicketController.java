@@ -22,18 +22,13 @@ import com.swc.exam.demo.vo.TheaterTime;
 public class UsrTicketController {
 
 	private TicketService ticketService;
-	private CinemaService cinemaService;
 	private TheaterService theaterService;
-	private MovieService movieService;
 
 	private Rq rq;
 
-	public UsrTicketController(TicketService ticketService, CinemaService cinemaService, TheaterService theaterService,
-			MovieService movieService, Rq rq) {
+	public UsrTicketController(TicketService ticketService, TheaterService theaterService, Rq rq) {
 		this.ticketService = ticketService;
-		this.cinemaService = cinemaService;
 		this.theaterService = theaterService;
-		this.movieService = movieService;
 		this.rq = rq;
 	}
 
@@ -60,12 +55,12 @@ public class UsrTicketController {
 	}
 
 	@RequestMapping("/usr/ticket/ticketing")
-	public String showTicketing(Model model, String region, String theaterName, String date, int time) {
+	public String showTicketing(Model model, int movieId, String region, String theaterName, String date, int time) {
 		List<TheaterTime> theaterTime = ticketService.getForPrintTheaterTimes(region, theaterName, date, time);
 		model.addAttribute("theaterTime", theaterTime);
 		model.addAttribute("playingTime",
 				theaterTime.get(0).getForPrintType1StartTime() + "~" + theaterTime.get(0).getForPrintType1EndTime());
-
+		
 		String seatIds = "";
 		int lastSeatId = theaterTime.get(theaterTime.size() - 1).getSeatId();
 		for (int i = 'A'; i <= lastSeatId; i++) {
@@ -81,8 +76,11 @@ public class UsrTicketController {
 		for (int i = 0; i < lastSeatNo; i++) {
 			seatNos[i] = i + 1;
 		}
-
 		model.addAttribute("seatNoArr", seatNos);
+
+		String movieTitle = theaterService.getMovieTitleById(movieId);
+		
+		model.addAttribute("movieTitle", movieTitle);
 
 		return "usr/ticket/ticketing";
 	}
