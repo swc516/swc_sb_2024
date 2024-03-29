@@ -97,4 +97,9 @@ public class TheaterService {
 
 	}
 
+	public List<Theater> getTheaterList() {
+		List<Theater> theaters = theaterRepository.getTheaterList();
+		return theaters;
+	}
+
 }

@@ -47,7 +47,7 @@
                       value=" ${theaterTime.seatId}-${theaterTime.seatNo}-${theaterTime.seatStatus}">
                   </c:if>
                   <c:if test="${theaterTime.seatStatus == '없음'}">
-                  
+                  　
                   </c:if>
                 </c:otherwise>
               </c:choose>

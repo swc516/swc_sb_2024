@@ -42,7 +42,6 @@ public interface TheaterTimeRepository {
 			""")
 	void doTicketing(String region, String theaterName, String date, int time, char seatId, int seatNo, int memberId);
 
-	
 	@Select("""
 			SELECT T.*,
 			M.title AS extra__movieTitle
@@ -59,6 +58,17 @@ public interface TheaterTimeRepository {
 			WHERE id = #{id}
 			""")
 	void doTicketCancel(int id);
-	
+
+	@Select("""
+			SELECT relTypeCode, theaterName, movieId, `date`,`time`, startTime, endTime
+			FROM theaterTime
+			WHERE movieId = #{movieId}
+			AND relTypeCode = #{region}
+			AND `date` = #{date}
+			GROUP BY startTime
+			ORDER BY theaterName, `time`, startTime ASC
+						""")
+	List<TheaterTime> getTheaterTimeList(int movieId, String region, String date);
+
 
 }

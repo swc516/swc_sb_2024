@@ -119,4 +119,13 @@ public interface TheaterRepository {
 			""")
 	int getTheaterId(String relTypeCode, String theaterName);
 
+	
+	@Select("""
+			<script>
+			SELECT *
+			FROM theater
+			</script>
+			""")
+	List<Theater> getTheaterList();
+
 }

@@ -94,4 +94,14 @@ public interface CinemaRepository {
 			</script>
 			""")
 	void modify(int id, String region);
+
+	
+	@Select("""
+			<script>
+			SELECT *
+			FROM cinema
+			WHERE delStatus = 0
+			</script>
+			""")
+	List<Cinema> getCinemaList();
 }

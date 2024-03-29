@@ -88,5 +88,10 @@ public class CinemaService {
 		List<Theater> theater = theaterService.getForPrintTheaters(relTypeCode);
 		return theater;
 	}
+
+	public List<Cinema> getCinemaList() {
+		List<Cinema> cinemas = cinemaRepository.getCinemaList();
+		return cinemas;
+	}
 	
 }
