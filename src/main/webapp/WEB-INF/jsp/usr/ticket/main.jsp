@@ -24,14 +24,14 @@
     </div>
     <div style="width: 20%;">
       <c:forEach var="cinema" items="${cinemas}">
-        <c:if test="${cinema.region == param.region}">
-          <input type="radio" name="region" value="${cinema.region}" onclick="document.getElementById('frm').submit();"
+        <c:if test="${cinema.id == param.cinemaId}">
+          <input type="radio" name="cinemaId" value="${cinema.id}" onclick="document.getElementById('frm').submit();"
             checked>
         </c:if>
-        <c:if test="${cinema.region != param.region }">
-          <input type="radio" name="region" value="${cinema.region}" onclick="document.getElementById('frm').submit();">
+        <c:if test="${cinema.id != param.cinemaId }">
+          <input type="radio" name="cinemaId" value="${cinema.id}" onclick="document.getElementById('frm').submit();">
         </c:if>
-  ${cinema.region} <br>
+  ${cinema.region}_${cinema.branch} <br>
       </c:forEach>
     </div>
     <div style="width: 20%;">
@@ -52,17 +52,17 @@
             <td>
               <c:if test="${theaterTime.extra__sellSeatCount == theaterTime.extra__maxSeatCount}">
                 <input type="radio" name="ticketing"
-                  value="${param.movieId}__${theaterTime.relTypeCode}__${theaterTime.theaterName}__${theaterTime.date}__${theaterTime.time}"
+                  value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.date}__${theaterTime.theaterTime}"
                   disabled>
               </c:if>
               <c:if test="${theaterTime.extra__sellSeatCount != theaterTime.extra__maxSeatCount}">
                 <input type="radio" name="ticketing"
-                  value="${param.movieId}__${theaterTime.relTypeCode}__${theaterTime.theaterName}__${theaterTime.date}__${theaterTime.time}">
+                  value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.date}__${theaterTime.theaterTime}">
               </c:if>
             </td>
-            <td>${theaterTime.theaterName})</td>
+            <td>${theaterTime.extra__theater}</td>
             <td>
-              [${theaterTime.time}회차] ${theaterTime.getForPrintType1StartTime()} ~
+              [${theaterTime.theaterTime}회차] ${theaterTime.getForPrintType1StartTime()} ~
               ${theaterTime.getForPrintType1EndTime()}
               (${theaterTime.extra__sellSeatCount}/${theaterTime.extra__maxSeatCount})
               <br>
@@ -80,10 +80,10 @@
   <div style="float: right">
     <form action="../ticket/ticketing" method="post">
       <input type="hidden" id="movieId" name="movieId" value="">
-      <input type="hidden" id="region" name="region" value="">
-      <input type="hidden" id="theaterName" name="theaterName" value="">
+      <input type="hidden" id="cinemaId" name="cinemaId" value="">
+      <input type="hidden" id="theaterInfoId" name="theaterInfoId" value="">
       <input type="hidden" id="date" name="date" value="">
-      <input type="hidden" id="time" name="time" value="">
+      <input type="hidden" id="theaterTime" name="theaterTime" value="">
       <input type="submit" value="예매" class="btn btn-success">
     </form>
   </div>
@@ -95,16 +95,16 @@
 				var result = $(":input:radio[name=ticketing]:checked").val()
 						.split('__');
 				var movieId = result[0];
-				var region = result[1];
-				var theaterName = result[2];
+				var cinemaId = result[1];
+				var theaterInfoId = result[2];
 				var date = result[3];
-				var time = result[4];
+				var theaterTime = result[4];
 
 				document.getElementById("movieId").value = movieId;
-				document.getElementById("region").value = region;
-				document.getElementById("theaterName").value = theaterName;
+				document.getElementById("cinemaId").value = cinemaId;
+				document.getElementById("theaterInfoId").value = theaterInfoId;
 				document.getElementById("date").value = date;
-				document.getElementById("time").value = time;
+				document.getElementById("theaterTime").value = theaterTime;
 			});
 </script>
 

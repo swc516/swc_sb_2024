@@ -77,10 +77,15 @@ public class MovieService {
 		return ResultData.from("S-1", "영화정보가 수정되었습니다.");
 	}
 
-	public List<Movie> getForPrintPlayingMovies() {
-		List<Movie> movies = movieRepository.getForPrintPlayingMovies();
-		
+	public List<Movie> getPlayingMovies() {
+		List<Movie> movies = movieRepository.getPlayingMovies();
 		return movies;
+	}
+
+	public String getMovieTitleById(int movieId) {
+		String movieTitle = movieRepository.getMovieTitleById(movieId);
+		return movieTitle;
+
 	}
 
 

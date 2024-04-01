@@ -143,7 +143,14 @@ public interface MovieRepository {
 			FROM movie
 			WHERE runDate > NOW(); 
 			""")
-	List<Movie> getForPrintPlayingMovies();
+	List<Movie> getPlayingMovies();
+
+	@Select("""
+			SELECT title
+			FROM movie
+			WHERE id = #{movieId}
+			""")
+	String getMovieTitleById(int movieId);
 	
 	
 }

@@ -19,7 +19,7 @@
 <script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
-  <div style="width: 400px;">
+  <div style="width: 500px;">
     <div class="divider divider-info">Screen</div>
     <table style="margin-left: auto; margin-right: auto;">
       <tr>

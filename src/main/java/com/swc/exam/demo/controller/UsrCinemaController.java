@@ -19,7 +19,7 @@ import com.swc.exam.demo.vo.Cinema;
 import com.swc.exam.demo.vo.Movie;
 import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.Rq;
-import com.swc.exam.demo.vo.Theater;
+import com.swc.exam.demo.vo.TheaterInfo;
 
 import jakarta.servlet.http.HttpServletRequest;
 

@@ -38,6 +38,9 @@
     <span class="container mx-auto px-3">
       <a href="/adm/cinema/list" type="submit" class="btn btn-primary">영화관 관리</a>
     </span>
+    <span class="container mx-auto px-3">
+      <a href="/adm/cinema/theater/addTime" type="submit" class="btn btn-primary">상영회차 관리</a>
+    </span>
   </section>
 </div>
 

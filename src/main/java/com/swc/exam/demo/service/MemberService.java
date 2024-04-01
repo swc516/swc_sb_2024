@@ -150,7 +150,7 @@ public class MemberService {
 	private void deleteMember(Member member) {
 		memberRepository.deleteMember(member.getId());
 	}
-
+/*
 	public List<TheaterTime> getMyTicketingList(int id) {
 		List<TheaterTime> lists = ticketingService.getMyTicketingList(id);
 		return lists;
@@ -159,4 +159,5 @@ public class MemberService {
 	public void doTicketCancel(int id) {
 		ticketingService.doTicketCancel(id);
 	}
+	*/
 }

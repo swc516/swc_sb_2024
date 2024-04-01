@@ -16,7 +16,22 @@
       <form class="flex">
         <select data-value="${param.searchKeywordTypeCode}" name="searchKeywordTypeCode" class="select select-bordered">
           <option disabled>검색타입</option>
-          <option value="region" selected>지역</option>
+          <c:choose>
+            <c:when test="${param.searchKeywordTypeCode eq 'branch'}">
+              <option value="region" selected>지역</option>
+            </c:when>
+            <c:otherwise>
+              <option value="region">지역</option>
+            </c:otherwise>
+          </c:choose>
+          <c:choose>
+            <c:when test="${param.searchKeywordTypeCode eq 'branch'}">
+              <option value="branch" selected>지점</option>
+            </c:when>
+            <c:otherwise>
+              <option value="branch">지점</option>
+            </c:otherwise>
+          </c:choose>
         </select>
 
         <input name="searchKeyword" type="text" class="ml-2 w-72 input input-bordered" placeholder="검색어" maxlength="20"
@@ -32,6 +47,7 @@
           <col width="130" />
           <col width="150" />
           <col width="150" />
+          <col width="300" />
         </colgroup>
         <thead>
           <tr>
@@ -41,7 +57,8 @@
             <th>번호</th>
             <th>추가날짜</th>
             <th>갱신날짜</th>
-            <th>영화관명</th>
+            <th>지역_지점</th>
+            <th>상영관</th>
           </tr>
         </thead>
         <tbody>
@@ -54,7 +71,10 @@
               <td>${cinema.forPrintType1RegDate}</td>
               <td>${cinema.forPrintType1UpdateDate}</td>
               <td>
-                <a class="btn-text-link block w-full truncate" href="/adm/cinema/detail?id=${cinema.id}">${cinema.region}</a>
+                <a class="btn-text-link block w-full truncate" href="/adm/cinema/detail?id=${cinema.id}">${cinema.region}_${cinema.branch}</a>
+              </td>
+              <td>
+                ${cinema.extra__theater}
               </td>
             </tr>
           </c:forEach>
@@ -83,9 +103,9 @@
 		
 		
 	</script>
-
+<br>
     <div>
-      <button class="btn btn-error btn-delete-selected-cinemas">선택삭제</button>
+      <a class="btn btn-error btn-delete-selected-cinemas" style="float: left">선택삭제</a>
     </div>
 
     <form method="post" name="do-delete-cinemas-form" action="../cinema/doDelete">
@@ -93,7 +113,7 @@
       <input type="hidden" name="replaceUri" value="${rq.currentUri}" />
     </form>
     <div>
-      <a class="btn btn-success" href="/adm/cinema/add">영화관 추가</a>
+      <a class="btn btn-success" href="/adm/cinema/add" style="float: right">영화관 추가</a>
     </div>
 
     <script>

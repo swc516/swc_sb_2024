@@ -16,35 +16,35 @@
       <input type="checkbox" class="checkbox" disabled checked> : 예매가 완료된 좌석 <br>
       <input type="checkbox" class="checkbox" disabled> : 통로 <br>
       <hr>
-      ${movieTitle} / ${param.region} 지점 / ${param.theaterName} / 상영날짜 : ${param.date} / 상영시간 : (${param.time}회차), ${playingTime}
+      ${movieTitle} / ${cinemaRegion}_${cinemaBranch}  / ${theater} / 상영날짜 : ${param.date} / 상영시간 : (${param.theaterTime}회차), ${playingTime}
         <div class="divider divider-info">Screen</div>
         <table style="margin-left: auto; margin-right: auto;">
           <tr>
             <td>＃</td>
-            <c:forEach var="seatNo" items="${seatNoArr}">
-              <td style="text-align: center">${seatNo}</td>
+            <c:forEach var="seatCol" items="${seatColArr}">
+              <td style="text-align: center">${seatCol}</td>
             </c:forEach>
           </tr>
-          <c:forEach var="theaterTime" items="${theaterTime}">
-            <c:if test="${theaterTime.seatNo == 1}">
+          <c:forEach var="theaterTime" items="${theaterTimes}">
+            <c:if test="${theaterTime.seatCol == 1}">
               <tr>
-                <td style="text-align: center">${theaterTime.seatId}</td>
+                <td style="text-align: center">${theaterTime.seatRow}</td>
             </c:if>
             <td>
               <c:choose>
                 <c:when test="${theaterTime.seatSell == true }">
-                  <input class="checkbox seatId-${theaterTime.seatId} seatNo-${theaterTime.seatNo}" type="checkbox"
-                    name="seats" value=" ${theaterTime.seatId}-${theaterTime.seatNo}-${theaterTime.seatStatus}" disabled checked>
+                  <input class="checkbox seatRow-${theaterTime.seatRow} seatCol-${theaterTime.seatCol}" type="checkbox"
+                    name="seats" value=" ${theaterTime.seatId}-${theaterTime.seatCol}-${theaterTime.seatStatus}" disabled checked>
                 </c:when>
                 <c:otherwise>
                   <c:if test="${theaterTime.seatStatus == '일반'}">
-                    <input class="checkbox seatId-${theaterTime.seatId} seatNo-${theaterTime.seatNo}" type="checkbox"
-                      name="seats" value=" ${theaterTime.seatId}-${theaterTime.seatNo}-${theaterTime.seatStatus}">
+                    <input class="checkbox seatRow-${theaterTime.seatRow} seatCol-${theaterTime.seatCol}" type="checkbox"
+                      name="seats" value=" ${theaterTime.seatRow}-${theaterTime.seatCol}-${theaterTime.seatStatus}">
                   </c:if>
                   <c:if test="${theaterTime.seatStatus == '장애'}">
-                    <input class="checkbox checkbox-success seatId-${theaterTime.seatId} seatNo-${theaterTime.seatNo}"
+                    <input class="checkbox checkbox-success seatRow-${theaterTime.seatRow} seatCol-${theaterTime.seatCol}"
                       type="checkbox" name="seats"
-                      value=" ${theaterTime.seatId}-${theaterTime.seatNo}-${theaterTime.seatStatus}">
+                      value=" ${theaterTime.seatRow}-${theaterTime.seatCol}-${theaterTime.seatStatus}">
                   </c:if>
                   <c:if test="${theaterTime.seatStatus == '없음'}">
                   　

@@ -7,15 +7,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Theater {
+public class TheaterInfo {
 	private int id;
-	private int theaterId;
-	private String relTypeCode;
-	private int relId;
-	private String theaterName;
-	private char seatId;
-	private String seatNo;
+	private int cinemaId;
+	private int theaterInfoId;
+	private String theater;
+	private char seatRow;
+	private int seatCol;
 	private String seatStatus;
 	
 	private String extra__seat;
+	private String extra__region;
+	private String extra__branch;
+	
 }

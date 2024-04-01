@@ -17,9 +17,7 @@
             <th>영화제목</th>
             <th>예매날짜</th>
             <th>상영날짜</th>
-            <!-- 2024년 4월 10일 -->
             <th>상영시간</th>
-            <!-- [1회차] 20:20 ~ 22:20 -->
             <th>좌석</th>
             <th>위치</th>
             <th>좌석정보</th>
@@ -41,7 +39,7 @@
               <td>
                 <a
                   href="/usr/ticket/seatLocation?region=${list.relTypeCode}&theaterName=${list.theaterName}&mySeatId=${list.seatId}&mySeatNo=${list.seatNo}"
-                  target="_blank">위치보기</a>
+                  onclick="window.open(this.href, '_blank', 'width=500, height=500'); return false;">위치보기</a>
               </td>
               <td>${list.seatStatus}</td>
               <td>

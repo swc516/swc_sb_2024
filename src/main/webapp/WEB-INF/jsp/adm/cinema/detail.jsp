@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="${cinema.region} 정보" />
+<c:set var="pageTitle" value="${cinema.region}_${cinema.branch} 정보" />
 <%@include file="../../common/head.jspf"%>
 <%@include file="../../common/toastUiEditorLib.jspf"%>
 
@@ -26,8 +26,8 @@
           <td>${cinema.forPrintType2UpdateDate}</td>
         </tr>
         <tr>
-          <th>영화관 명</th>
-          <td>${cinema.region}</td>
+          <th>지역_지점</th>
+          <td>${cinema.region}_${cinema.branch}</td>
         </tr>
         </tbody>
       </table>
@@ -35,17 +35,19 @@
     <div class="btns">
       <button class="btn btn-link" type="button" onclick="history.back();">뒤로가기</button>
       <a class="btn btn-link" href="../cinema/modify?id=${cinema.id}">영화관 수정</a>
-      <a class="btn btn-link" onclick="if ( confirm('정말 삭제하시겠습니까?') == false) return false;"
-        href="../cinema/doDelete?ids=${cinema.id}">영화관 삭제</a>
-      <a class="btn btn-link" href="../theater/add?id=${cinema.id}">상영관 추가</a>
+      <a class="btn btn-link" href="theater/addInfo?id=${cinema.id}">상영관 추가</a>
+      
+      
+      
+      
     </div>
   </div>
 </section>
 <section>
     <div class="container mx-auto px-3">
-    <c:forEach var="theater" items="${theaters}">
+    <c:forEach var="theaterInfo" items="${theaterInfos}">
       <a class="btn btn-success"
-        href="../theater/detail?relTypeCode=${cinema.region}&theaterName=${theater.theaterName}&id=${cinema.id}">${theater.theaterName}</a>
+        href="theater/detail?theaterInfoId=${theaterInfo.theaterInfoId}">${theaterInfo.theater}</a>
     </c:forEach>
   </div>
 </section>

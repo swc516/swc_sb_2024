@@ -9,37 +9,32 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.swc.exam.demo.repository.TheaterTimeRepository;
 import com.swc.exam.demo.vo.Cinema;
 import com.swc.exam.demo.vo.Movie;
 import com.swc.exam.demo.vo.Rq;
-import com.swc.exam.demo.vo.Theater;
+import com.swc.exam.demo.vo.TheaterInfo;
 import com.swc.exam.demo.vo.TheaterTime;
 
 @Service
 public class TicketService {
 
-	private TheaterTimeRepository theaterTimeRepository;
 	private MovieService movieService;
 	private CinemaService cinemaService;
-	private TheaterService theaterService;
 	private Rq rq;
 
-	public TicketService(TheaterTimeRepository theaterTimeRepository, MovieService movieService, CinemaService cinemaService, TheaterService theaterService, Rq rq) {
-		this.theaterTimeRepository = theaterTimeRepository;
+	public TicketService( MovieService movieService, CinemaService cinemaService,  Rq rq) {
 		this.movieService = movieService;
 		this.cinemaService = cinemaService;
-		this.theaterService = theaterService;
 		this.rq = rq;
 	}
 
 
-	public List<TheaterTime> getForPrintTheaterTimes(String region, String theaterName, String date, int time) {
-		List<TheaterTime> theaterTime = theaterTimeRepository.getForPrintTheaterTime(region, theaterName, date, time);
-		return theaterTime;
+	public List<TheaterTime> getForPrintTheaterTimes(int cinemaId, int theaterInfoId, String date, int theaterTime) {
+		List<TheaterTime> theaterTimes = cinemaService.getForPrintTheaterTime(cinemaId, theaterInfoId, date, theaterTime);
+		return theaterTimes;
 	}
 
-
+	/*
 	public void doTicketing(String region, String theaterName, String date, int time, String[] seats, int memberId) {
 		for (String seat : seats) {
 			String[] seatSplit = seat.split("-");
@@ -61,10 +56,10 @@ public class TicketService {
 		theaterTimeRepository.doTicketCancel(id);
 		
 	}
-
+*/
 
 	public List<Movie> getMovieList() {
-		List<Movie> movies = movieService.getForPrintPlayingMovies();
+		List<Movie> movies = movieService.getPlayingMovies();
 		return movies;
 	}
 
@@ -75,17 +70,17 @@ public class TicketService {
 	}
 
 
-	public List<Theater> getTheaterList() {
-		List<Theater> theaters = theaterService.getTheaterList();
+	public List<TheaterInfo> getTheaterList() {
+		List<TheaterInfo> theaters = cinemaService.getCinemaTheaterList(5);
 		return theaters;
 	}
 
 
-	public List<TheaterTime> getTheaterTimeList(int movieId, String region, String date) {
-		List<TheaterTime> theaterTimes = theaterTimeRepository.getTheaterTimeList(movieId, region, date);
+	public List<TheaterTime> getTheaterTimeList(int movieId, int cinemaId, String date) {
+		List<TheaterTime> theaterTimes = cinemaService.getTheaterTimeList(movieId, cinemaId, date);
 		for(TheaterTime theaterTime : theaterTimes) {
-			theaterTime.setExtra__sellSeatCount(theaterTimeRepository.getSellSeatCount(region, theaterTime.getTheaterName(), date, theaterTime.getTime()));
-			theaterTime.setExtra__maxSeatCount(theaterTimeRepository.getMaxSeatCount(region, theaterTime.getTheaterName(), date, theaterTime.getTime()));
+			theaterTime.setExtra__sellSeatCount(cinemaService.getSellSeatCount(theaterTime.getTheaterTimeId(), date, theaterTime.getTheaterTime()));
+			theaterTime.setExtra__maxSeatCount(cinemaService.getMaxSeatCount(theaterTime.getTheaterTimeId(), date, theaterTime.getTheaterTime()));
 		}
 		return theaterTimes;
 	}
@@ -104,6 +99,30 @@ public class TicketService {
 		}
 		
 		return week;
+	}
+
+
+	public String getMovieTitleById(int movieId) {
+		String movieTitle = movieService.getMovieTitleById(movieId);
+		return movieTitle;
+	}
+
+
+	public String getCinemaRegionById(int cinemaId) {
+		String cinemaRegion = cinemaService.getCinemaRegionById(cinemaId);
+		return cinemaRegion;
+	}
+
+
+	public String getCinemaBranchById(int cinemaId) {
+		String cinemaBranch = cinemaService.getCinemaBranchById(cinemaId);
+		return cinemaBranch;
+	}
+
+
+	public String getTheaterById(int theaterInfoId) {
+		String theater = cinemaService.getTheaterById(theaterInfoId);
+		return theater;
 	}
 
 }

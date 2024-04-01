@@ -11,21 +11,19 @@
 	let CinemaAdd__submitFormDone = false;
 
 	function CinemaAdd__submitForm(form) {
-		if (CinemaAdd__submitFormDone) {
-			alert('처리중입니다.');
-			return;
-		}
-
 		form.region.value = form.region.value.trim();
-
 		if (form.region.value.length == 0) {
-			alert('영화관 명을 입력해주세요');
+			alert('지역을 입력해주세요');
 			form.region.focus();
 			return;
 		}
 
-
-
+		form.branch.value = form.branch.value.trim();
+		if (form.branch.value.length == 0) {
+			alert('지점명을 입력해주세요');
+			branch.region.focus();
+			return;
+		}
 		
 		CinemaAdd__submitFormDone = true;
 		form.submit();
@@ -46,9 +44,15 @@
             <col width="200" />
           </colgroup>
           <tr>
-            <th>영화관 명<br> ex)서울_도봉</th>
+            <th>지역<br> ex)서울</th>
             <td>
-              <input class="input input-bordered" name="region" placeholder="지역_지점" type="text"/>
+              <input class="input input-bordered" name="region" placeholder="지역" type="text"/>
+            </td>
+          </tr>
+          <tr>
+            <th>지점<br> ex)도봉</th>
+            <td>
+              <input class="input input-bordered" name="branch" placeholder="지점" type="text"/>
             </td>
           </tr>
           <tr>

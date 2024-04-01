@@ -5,7 +5,7 @@
 <c:set var="pageTitle" value="관리자페이지 - 상영회차 추가 " />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
-<%@include file="../../common/head.jspf"%>
+<%@include file="../../../common/head.jspf"%>
 
 <script>
 	let TheaterAddTime__submitFormDone = false;
@@ -31,7 +31,7 @@
 			form.date.focus();
 			return;
 		}
-		
+
 		form.time.value = form.time.value.trim();
 
 		if (form.time.value.length == 0) {
@@ -39,7 +39,7 @@
 			form.time.focus();
 			return;
 		}
-		
+
 		form.startTime.value = form.startTime.value.trim();
 
 		if (form.startTime.value.length == 0) {
@@ -47,7 +47,7 @@
 			form.startTime.focus();
 			return;
 		}
-		
+
 		form.endTime.value = form.endTime.value.trim();
 
 		if (form.endTime.value.length == 0) {
@@ -55,34 +55,65 @@
 			form.endTime.focus();
 			return;
 		}
-		
 
 		TheaterAddTime__submitFormDone = true;
 		form.submit();
 	}
 </script>
-
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
 
-      <form class="table-box-type-1" method="post" enctype="multipart/form-data" action="../theater/doAddTime"
-        onsubmit="TheaterAddTime__submitForm(this); return false;">
-        <input type="hidden" name="theaterName" value="${theaterName}">
-        <input type="hidden" name="region" value="${region}">
+      <form id="frm" class="table-box-type-1" method="post" action="../theater/addTime">
         <table>
-          <tbody>
           <colgroup>
             <col width="200" />
           </colgroup>
           <tr>
-            <th>상영관 명</th>
-            <td>${theaterName}</td>
+            <th>지역</th>
+            <td>
+              <select class="select select-bordered" name="cinemaId">
+                <option value="0"></option>
+                <c:forEach var="cinema" items="${cinemas}">
+                  <c:choose>
+                    <c:when test="${cinema.id == param.cinemaId}">
+                      <option value="${cinema.id}" selected>${cinema.region}_${cinema.branch}</option>
+                    </c:when>
+                    <c:when test="${cinema.id != param.cinemaId}">
+                      <option value="${cinema.id}">${cinema.region}_${cinema.branch}</option>
+                    </c:when>
+                  </c:choose>
+                </c:forEach>
+              </select>
+              <button class="btn btn-primary">조회</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+
+
+      <form class="table-box-type-1" method="post" action="../theater/doAddTime">
+        <input type="hidden" name="cinemaId" value="${param.cinemaId}">
+        <table>
+          <colgroup>
+            <col width="200" />
+          </colgroup>
+          <tr>
+            <th>상영관</th>
+            <td>
+              <select class="select select-bordered" name="theaterInfoId">
+                <c:forEach var="theaterInfo" items="${theaterInfos}">
+                  <option value="${theaterInfo.theaterInfoId}">${theaterInfo.theater}</option>
+                </c:forEach>
+              </select>
+            </td>
+          </tr>
+          <tr>
           </tr>
           <tr>
             <th>영화</th>
             <td>
-              <select name="movieId">
+              <select class="select select-bordered" name="movieId">
                 <c:forEach var="movies" items="${movies}">
                   <option value="${movies.id}">${movies.title}</option>
                 </c:forEach>
@@ -98,30 +129,28 @@
           <tr>
             <th>회차</th>
             <td>
-              <input class="input input-bordered" name="time" type="text">
+              <input class="input input-bordered" name="theaterTime" type="text">
               회차
             </td>
           </tr>
           <tr>
             <th>상영 시간</th>
             <td>
-              <input class="input input-bordered" name="startTime" type="time">
+              <input class="input input-bordered" name="startTime" type="datetime-local">
               ~
-              <input class="input input-bordered" name="endTime" type="time">
-            </td>
-          </tr>
-          <tr>
-            <th>상영관 추가</th>
-            <td>
-              <button type="submit" class="btn btn-primary">상영관 추가</button>
-              <button type="button" class="btn btn-outline btn-error" onclick="history.back();">뒤로가기</button>
+              <input class="input input-bordered" name="endTime" type="datetime-local">
             </td>
           </tr>
           </tbody>
         </table>
+        <div style="float: right">
+          <input type="submit" value="예매" class="btn btn-success">
+        </div>
       </form>
     </div>
   </div>
 </section>
 
-<%@include file="../../common/foot.jspf"%>
+
+
+<%@include file="../../../common/foot.jspf"%>

@@ -9,32 +9,35 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TheaterTime {
 	private int id;
+	private int cinemaId;
+	private int theaterInfoId;
 	private int theaterTimeId;
-	private String relTypeCode;
-	private int relId;
-	private String theaterName;
-	private int time;
-	private int movieId;
+	private int theaterTime;
 	private String date;
 	private String startTime;
 	private String endTime;
-	private char seatId;
-	private String seatNo;
+	private int movieId;
+	private char seatRow;
+	private String seatCol;
 	private String seatStatus;
 	private boolean seatSell;
-	private int memberId;
-	private String ticketingDate;
+	private int buyMemberId;
+	private String buyDate;
 	
 	private String extra__movieTitle;
 	private int extra__sellSeatCount;
 	private int extra__maxSeatCount;
 	
+	private String extra__theater;
+	private String extra__cinemaRegion;
+	private String extra__cinemaBranch;
+	
 	
 	public String getForPrintType1StartTime() {
-		return startTime.substring(0, 5);
+		return startTime.substring(10, 16);
 	}
 	
 	public String getForPrintType1EndTime() {
-		return endTime.substring(0, 5);
+		return endTime.substring(10, 16);
 	}
 }

@@ -12,8 +12,12 @@ public class Cinema {
 	private String regDate;
 	private String updateDate;
 	private String region;
+	private String branch;
 	private boolean delStatus;
 	private String delDate;
+	
+	private String extra__theaterInfoId;
+	private String extra__theater;
 
 	public String getForPrintType1RegDate() {
 		return regDate.substring(2,16).replace(" ", "<br>");

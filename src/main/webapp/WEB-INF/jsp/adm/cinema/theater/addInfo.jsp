@@ -5,7 +5,7 @@
 <c:set var="pageTitle" value="관리자페이지 - 상영관 추가 " />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
-<%@include file="../../common/head.jspf"%>
+<%@include file="../../../common/head.jspf"%>
 
 <script>
 	let TheaterAdd__submitFormDone = false;
@@ -33,23 +33,22 @@
   <div class="container mx-auto px-3">
     <div class="table-box-type-1">
 
-      <form class="table-box-type-1" method="post" enctype="multipart/form-data" action="../theater/doAdd"
+      <form class="table-box-type-1" method="post" enctype="multipart/form-data" action="../theater/doAddInfo"
         onsubmit="TheaterAdd__submitForm(this); return false;">
-        <input type="hidden" name="region" value="${cinema.region}" />
-        <input type="hidden" name="id" value="${cinema.id}" />
+        <input type="hidden" name="cinemaId" value="${cinema.id}" />
         <table>
           <tbody>
           <colgroup>
             <col width="200" />
           </colgroup>
           <tr>
-            <th>영화관 명</th>
-            <td>${cinema.region}</td>
+            <th>지역_지점</th>
+            <td>${cinema.region}_${cinema.branch}</td>
           </tr>
           <tr>
             <th>상영관 명</th>
             <td>
-              <input class="w-96 input input-bordered w-full max-w-xs" type="text" name="theaterName"
+              <input class="w-96 input input-bordered w-full max-w-xs" type="text" name="theater"
                 placeholder="1관 (***관) / 괄호는 선택" />
             </td>
           </tr>
@@ -57,14 +56,16 @@
             <th>열</th>
             <td>
               A ~
-              <input class="w-96 input input-bordered w-full max-w-xs" type="text" name="seatId"
-                placeholder="~열까지 (대문자)" />
+              <input class="w-20 input input-bordered max-w-xs" type="text" name="seatRow" maxlength="1"/>
+              열까지 (대문자)
             </td>
           </tr>
           <tr>
             <th>행</th>
             <td>
-              <input class="w-96 input input-bordered w-full max-w-xs" type="text" name="seatNo" placeholder="~행까지 (숫자)" />
+              1 ~ 
+              <input class="w-20 input input-bordered max-w-xs" type="text" name="seatCol">
+              행까지 (숫자)
             </td>
           </tr>
           <tr>
@@ -81,4 +82,4 @@
   </div>
 </section>
 
-<%@include file="../../common/foot.jspf"%>
+<%@include file="../../../common/foot.jspf"%>

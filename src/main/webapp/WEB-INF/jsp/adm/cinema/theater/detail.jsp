@@ -1,41 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="${param.relTypeCode} / ${theaterName} 정보" />
-<%@include file="../../common/head.jspf"%>
-<%@include file="../../common/toastUiEditorLib.jspf"%>
+<c:set var="pageTitle" value="${region}_${branch} / ${theaterInfos.get(0).getTheater()} 정보" />
+<%@include file="../../../common/head.jspf"%>
 
 <section>
   <div>
     <form action="../theater/doModify" method="post" name="cb">
       <div class="container mx-auto px-3">
-      
-       <a class="btn btn-success" href="../theater/addTime?relTypeCode=${param.relTypeCode}&theaterName=${theaterName}">상영회차 추가</a>
-      
+
+        <a class="btn btn-success" href="../../cinema/detail?id=${theaterInfos.get(0).getCinemaId()}">상영관 목록으로</a>
+
         <div class="divider divider-info">Screen</div>
         <table style="margin-left: auto; margin-right: auto;">
           <tr>
             <td>＃</td>
-            <c:forEach var="seatNo" items="${seatNoArr}">
-              <td style="text-align: center">${seatNo}</td>
+            <c:forEach var="seatCol" items="${seatColArr}">
+              <td style="text-align: center">${seatCol}</td>
             </c:forEach>
           </tr>
-          <c:forEach var="theater" items="${theaters}">
-            <c:if test="${theater.seatNo == 1}">
+          <c:forEach var="theaterInfo" items="${theaterInfos}">
+            <c:if test="${theaterInfo.seatCol == 1}">
               <tr>
-                <td style="text-align: center">${theater.seatId}</td>
+                <td style="text-align: center">${theaterInfo.seatRow}</td>
             </c:if>
             <td>
-              <c:if test="${theater.seatStatus == '일반'}">
-                <input class="checkbox seatId-${theater.seatId} seatNo-${theater.seatNo}" type="checkbox" name="seats"
-                  value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
+              <c:if test="${theaterInfo.seatStatus == '일반'}">
+                <input class="checkbox seatRow-${theaterInfo.seatRow} seatCol-${theaterInfo.seatCol}" type="checkbox" name="seats"
+                  value=" ${theaterInfo.seatRow}-${theaterInfo.seatCol}-${theaterInfo.seatStatus}">
               </c:if>
-              <c:if test="${theater.seatStatus == '장애'}">
-                <input class="checkbox checkbox-success seatId-${theater.seatId} seatNo-${theater.seatNo}"
-                  type="checkbox" name="seats" value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
+              <c:if test="${theaterInfo.seatStatus == '장애'}">
+                <input class="checkbox checkbox-success seatRow-${theaterInfo.seatRow} seatCol-${theaterInfo.seatCol}"
+                  type="checkbox" name="seats" value=" ${theaterInfo.seatRow}-${theaterInfo.seatCol}-${theaterInfo.seatStatus}">
               </c:if>
-              <c:if test="${theater.seatStatus == '없음'}">
-                <input class="checkbox checkbox-error seatId-${theater.seatId} seatNo-${theater.seatNo}" type="checkbox"
-                  name="seats" value=" ${theater.seatId}-${theater.seatNo}-${theater.seatStatus}">
+              <c:if test="${theaterInfo.seatStatus == '없음'}">
+                <input class="checkbox checkbox-error seatRow-${theaterInfo.seatRow} seatCol-${theaterInfo.seatCol}"
+                  type="checkbox" name="seats" value=" ${theaterInfo.seatRow}-${theaterInfo.seatCol}-${theaterInfo.seatStatus}">
               </c:if>
             </td>
           </c:forEach>
@@ -46,11 +45,13 @@
         <label>
           일반
           <input type="radio" name="seatStatus" value="일반" class="radio">
-        </label><br>
+        </label>
+        <br>
         <label>
           장애
           <input type="radio" name="seatStatus" value="장애" class="radio radio-success">
-        </label><br>
+        </label>
+        <br>
         <label>
           없음
           <input type="radio" name="seatStatus" value="없음" class="radio radio-error">
@@ -63,16 +64,16 @@
         </label>
         <label>
           선택좌석 출력 갱신(일괄선택 후 한번 눌러주세요)
-          <input class="checkbox empty" type="checkbox" name="empty"/>
+          <input class="checkbox empty" type="checkbox" name="empty" />
         </label>
         <br>
-        <c:forEach var="seatIdArr" items="${seatIdArr}">
+        <c:forEach var="seatRow" items="${seatRowArr}">
           <label>
-            &nbsp;${seatIdArr}
-            <input class="checkbox-${seatIdArr} checkbox checkbox-xs" type="checkbox" id="${seatIdArr}" />
-          </label>
+            &nbsp;${seatRow}
+            <input class="checkbox-${seatRow} checkbox checkbox-xs" type="checkbox" id="${seatRow}" />
+           </label>
           <script>
-											$('.checkbox-${seatIdArr}')
+											$('.checkbox-${seatRow}')
 													.change(
 															function() {
 																const $all = $(this);
@@ -80,23 +81,23 @@
 																		.prop('checked');
 
 																$(
-																		'.seatId-${seatIdArr}')
+																		'.seatRow-${seatRow}')
 																		.prop(
 																				'checked',
 																				allChecked);
 
 															})
 
-											$('.seatId-${seatIdArr}')
+											$('.seatRow-${seatRow}')
 													.change(
 															function() {
-																const checkboxSeatIdCount = $('.seatId-${seatIdArr}').length;
-																const checkboxSeatIdCheckedCount = $('.seatId-${seatIdArr}:checked').length;
+																const checkboxSeatRowCount = $('.seatRow-${seatRow}').length;
+																const checkboxSeatRowCheckedCount = $('.seatRow-${seatRow}:checked').length;
 
-																const allChecked = checkboxSeatIdCount == checkboxSeatIdCheckedCount;
+																const allChecked = checkboxSeatRowCount == checkboxSeatRowCheckedCount;
 
 																$(
-																		'.checkbox-${seatIdArr}')
+																		'.checkbox-${seatRow}')
 																		.prop(
 																				'checked',
 																				allChecked);
@@ -105,13 +106,13 @@
         </c:forEach>
         <br>
         <br>
-        <c:forEach var="seatNoArr" items="${seatNoArr}">
+        <c:forEach var="seatCol" items="${seatColArr}">
           <label>
-            &nbsp;${seatNoArr}
-            <input class="checkbox-${seatNoArr} checkbox checkbox-xs" type="checkbox" id="${seatNoArr}" />
+            &nbsp;${seatCol}
+            <input class="checkbox-${seatCol} checkbox checkbox-xs" type="checkbox" id="${seatCol}" />
           </label>
           <script>
-											$('.checkbox-${seatNoArr}')
+											$('.checkbox-${seatCol}')
 													.change(
 															function() {
 																const $all = $(this);
@@ -119,23 +120,23 @@
 																		.prop('checked');
 
 																$(
-																		'.seatNo-${seatNoArr}')
+																		'.seatCol-${seatCol}')
 																		.prop(
 																				'checked',
 																				allChecked);
 
 															})
 
-											$('.seatId-${seatNoArr}')
+											$('.seatCol-${seatCol}')
 													.change(
 															function() {
-																const checkboxSeatNoCount = $('.seatNo-${seatNoArr}').length;
-																const checkboxSeatNoCheckedCount = $('.seatNo-${seatNoArr}:checked').length;
+																const checkboxSeatColCount = $('.seatCol-${seatCol}').length;
+																const checkboxSeatColCheckedCount = $('.seatCol-${seatCol}:checked').length;
 
-																const allChecked = checkboxSeatNoCount == checkboxSeatNoCheckedCount;
+																const allChecked = checkboxSeatColCount == checkboxSeatColCheckedCount;
 
 																$(
-																		'.checkbox-${seatNoArr}')
+																		'.checkbox-${seatCol}')
 																		.prop(
 																				'checked',
 																				allChecked);
@@ -144,17 +145,16 @@
         </c:forEach>
         <div>
           <button class="btn btn-primary" type="submit">좌석정보 수정</button>
-          <a class="btn btn-error" href="../theater/doDelete?relTypeCode=${param.relTypeCode}&theaterName=${theaterName}">상영관 삭제</a>
+          <a class="btn btn-error"
+            href="../theater/doTheaterInfoDelete?theaterInfoId=${theaterInfos.get(0).getTheaterInfoId()}">상영관 삭제</a>
         </div>
         <br>
-      선택된 좌석 :
-      <span id="multiPrint"></span>
-      <br>
+        선택된 좌석 :
+        <span id="multiPrint"></span>
+        <br>
       </div>
-
-      <input type="hidden" name="replaceUri" value="${rq.currentUri}">
-      <input type="hidden" name="theaterName" value="${theaterName}">
-      <input type="hidden" name="relTypeCode" value="${param.relTypeCode}">
+      <input type="hidden" name="cinemaId" value="${theaterInfos.get(0).getCinemaId()}">
+      <input type="hidden" name="theaterInfoId" value="${theaterInfos.get(0).getTheaterInfoId()}">
     </form>
   </div>
 </section>
@@ -192,7 +192,7 @@
 	});
 </script>
 
-<%@include file="../../common/foot.jspf"%>
+<%@include file="../../../common/foot.jspf"%>
 
 
 
