@@ -27,14 +27,14 @@
         <tbody>
           <c:forEach var="list" items="${lists}">
             <tr class="hover">
-              <td>${list.cinemaId}</td>
-              <td>${list.theaterInfoId}</td>
+              <td>${list.extra__cinemaRegion}_${list.extra__cinemaBranch}</td>
+              <td>${list.extra__theater}</td>
               <td>
                 <a class="btn-text-link block w-full truncate" href="/usr/movie/detail?id=${list.movieId}">${list.extra__movieTitle}</a>
               </td>
               <td>${list.buyDate}</td>
               <td>${list.date}</td>
-              <td>${list.getForPrintType1StartTime()}~${list.getForPrintType1EndTime()}</td>
+              <td>${list.getForPrintType1StartTime()} ~${list.getForPrintType1EndTime()}</td>
               <td>${list.seatRow}-${list.seatCol}</td>
               <td>
                 <a

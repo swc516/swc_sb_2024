@@ -365,12 +365,19 @@ public interface CinemaRepository {
 			int seatCol, int memberId);
 
 	@Select("""
-			SELECT T.*,
-			M.title AS extra__movieTitle
-			FROM theaterTime AS T
+			SELECT TT.*,
+			M.title AS extra__movieTitle,
+			C.region AS extra__cinemaRegion,
+			C.branch AS extra__cinemabranch,
+			TI.theater AS extra__theater
+			FROM theaterTime AS TT
 			LEFT JOIN movie AS M
-			ON T.movieId = M.id
-			WHERE buyMemberId = #{id}
+			ON TT.movieId = M.id
+			LEFT JOIN cinema AS C
+			ON TT.cinemaId = C.id
+			LEFT JOIN theaterInfo AS TI
+			ON TT.theaterInfoId = TI.theaterInfoId
+			WHERE buyMemberId = #{id};
 						""")
 	List<TheaterTime> getMyTicketingList(int id);
 
