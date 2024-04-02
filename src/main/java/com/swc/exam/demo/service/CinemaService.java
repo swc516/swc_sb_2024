@@ -22,8 +22,7 @@ public class CinemaService {
 
 	private CinemaRepository cinemaRepository;
 	private MovieService movieService;
-	
-	
+
 	public CinemaService(CinemaRepository cinemaRepository, MovieService movieService) {
 		this.cinemaRepository = cinemaRepository;
 		this.movieService = movieService;
@@ -33,10 +32,10 @@ public class CinemaService {
 
 		Cinema oldCinema = cinemaDupCheck(region, branch);
 
-		if(oldCinema != null) {
+		if (oldCinema != null) {
 			return new ResultData("F-1", "같은 지점이 이미 존재합니다.");
 		}
-		
+
 		cinemaRepository.add(region, branch);
 
 		int id = cinemaRepository.getLastInsertId();
@@ -90,10 +89,10 @@ public class CinemaService {
 	}
 
 	public ResultData modify(int id, String region, String branch) {
-		
+
 		Cinema oldCinema = cinemaDupCheck(region, branch);
-		
-		if(oldCinema != null) {
+
+		if (oldCinema != null) {
 			return ResultData.from("F-1", "같은 지점이 이미 존재합니다.");
 		}
 		cinemaRepository.modify(id, region, branch);
@@ -101,17 +100,14 @@ public class CinemaService {
 		return ResultData.from("S-1", "영화관 정보가 수정되었습니다.");
 	}
 
-
 	public List<Cinema> getCinemaList() {
 		List<Cinema> cinemas = cinemaRepository.getCinemaList();
 		return cinemas;
 	}
-	
-	///////////////////////////////////////////////////////
-	
 
-	public ResultData addTheaterInfo(int cinemaId, String theater, char seatRow, int seatCol,
-			String seatStatus) {
+	///////////////////////////////////////////////////////
+
+	public ResultData addTheaterInfo(int cinemaId, String theater, char seatRow, int seatCol, String seatStatus) {
 		int A = 65;
 		int theaterId = cinemaRepository.getLastTheaterInfoId() + 1;
 		for (int i = A; i <= seatRow; i++) {
@@ -123,8 +119,6 @@ public class CinemaService {
 
 		return new ResultData("S-1", "영화관 추가가 완료되었습니다.");
 	}
-	
-	
 
 	public List<TheaterInfo> getTheaterInfoByCinemaId(int cinemaId) {
 		List<TheaterInfo> theaterInfo = cinemaRepository.getTheaterInfoByCinemaId(cinemaId);
@@ -136,8 +130,7 @@ public class CinemaService {
 		List<TheaterInfo> theaterInfo = cinemaRepository.getTheaterInfos(cinemaId, theaterInfoId);
 		return theaterInfo;
 	}
-	
-	
+
 	public int getCinemaIdByTheaterInfoId(int theaterInfoId) {
 		return cinemaRepository.getCinemaIdByTheaterInfoId(theaterInfoId);
 	}
@@ -151,23 +144,22 @@ public class CinemaService {
 			cinemaRepository.modifySeat(theaterInfoId, seatId, seatNo, newSeatStatus);
 		}
 	}
-	
 
 	public void deleteTheaterInfo(int theaterInfoId) {
 		cinemaRepository.deleteTheaterInfo(theaterInfoId);
-		
+
 	}
-	
+
 	public List<Movie> getPlayingMovies() {
 		List<Movie> movies = movieService.getPlayingMovies();
 		return movies;
 	}
-	
+
 	public List<Cinema> getCinemaRegionList() {
 		List<Cinema> regions = cinemaRepository.getCinemaRegionList();
 		return regions;
 	}
-	
+
 	public List<Cinema> getCinemaBranchList(String region) {
 		List<Cinema> branchs = cinemaRepository.getCinemaBranchList(region);
 		return branchs;
@@ -178,9 +170,10 @@ public class CinemaService {
 		return theaterInfos;
 	}
 
-	public ResultData addTime(int cinemaId, int theaterInfoId, int movieId, String date, int theaterTime, String startTime,
-			String endTime) {
-		System.out.println("onec|" + cinemaId + "*" + theaterInfoId + "*" +movieId + "*" +date + "*" +theaterTime + "*" +startTime + "*" +endTime );
+	public ResultData addTime(int cinemaId, int theaterInfoId, int movieId, String date, int theaterTime,
+			String startTime, String endTime) {
+		System.out.println("onec|" + cinemaId + "*" + theaterInfoId + "*" + movieId + "*" + date + "*" + theaterTime
+				+ "*" + startTime + "*" + endTime);
 
 		List<TheaterInfo> theaterInfos = cinemaRepository.getTheaterInfos(cinemaId, theaterInfoId);
 		char seatRow;
@@ -191,15 +184,16 @@ public class CinemaService {
 			seatRow = theaterInfo.getSeatRow();
 			seatCol = theaterInfo.getSeatCol();
 			seatStatus = theaterInfo.getSeatStatus();
-			cinemaRepository.addTime(cinemaId, theaterInfoId, theaterTimeId, movieId, date, theaterTime, startTime, endTime, seatRow,
-					seatCol, seatStatus);
+			cinemaRepository.addTime(cinemaId, theaterInfoId, theaterTimeId, movieId, date, theaterTime, startTime,
+					endTime, seatRow, seatCol, seatStatus);
 		}
 
 		return new ResultData("S-1", "상영회차 추가가 완료되었습니다.");
 	}
 
-	public List<TheaterTime> getForPrintTheaterTime(int cinemaId, int theaterInfoId, String date, int theaterTime) {
-		List<TheaterTime> theaterTimes = cinemaRepository.getForPrintTheaterTime(cinemaId, theaterInfoId, date, theaterTime);
+	public List<TheaterTime> getForPrintTheaterTime(int cinemaId, int theaterInfoId, int theaterTimeId) {
+		List<TheaterTime> theaterTimes = cinemaRepository.getForPrintTheaterTime(cinemaId, theaterInfoId,
+				theaterTimeId);
 		return theaterTimes;
 	}
 
@@ -232,6 +226,25 @@ public class CinemaService {
 	public String getTheaterById(int theaterInfoId) {
 		String theater = cinemaRepository.getTheaterById(theaterInfoId);
 		return theater;
+	}
+
+	public void doTicketing(int theaterInfoId, int theaterTimeId, char seatRow, int seatCol, int memberId) {
+		cinemaRepository.doTicketing(theaterInfoId, theaterTimeId, seatRow, seatCol, memberId);
+
+	}
+
+	public List<TheaterTime> getMyTicketingList(int id) {
+		List<TheaterTime> lists = cinemaRepository.getMyTicketingList(id);
+		return lists;
+	}
+
+	public void doTicketCancel(int id) {
+		cinemaRepository.doTicketCancel(id);
+	}
+
+	public List<TheaterInfo> getForPrintTheaterInfo(int cinemaId, int theaterInfoId) {
+		List<TheaterInfo> theaterInfos = cinemaRepository.getForPrintTheaterInfo(cinemaId, theaterInfoId);
+		return theaterInfos;
 	}
 
 }

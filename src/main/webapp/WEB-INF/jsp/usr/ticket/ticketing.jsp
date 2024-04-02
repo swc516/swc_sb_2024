@@ -34,7 +34,7 @@
               <c:choose>
                 <c:when test="${theaterTime.seatSell == true }">
                   <input class="checkbox seatRow-${theaterTime.seatRow} seatCol-${theaterTime.seatCol}" type="checkbox"
-                    name="seats" value=" ${theaterTime.seatId}-${theaterTime.seatCol}-${theaterTime.seatStatus}" disabled checked>
+                    name="seats" value=" ${theaterTime.seatRow}-${theaterTime.seatCol}-${theaterTime.seatStatus}" disabled checked>
                 </c:when>
                 <c:otherwise>
                   <c:if test="${theaterTime.seatStatus == '일반'}">
@@ -56,11 +56,8 @@
           </c:forEach>
         </table>
 
-
-        <input type="hidden" name="region" value="${param.region}">
-        <input type="hidden" name="theaterName" value="${param.theaterName}">
-        <input type="hidden" name="date" value="${param.date}">
-        <input type="hidden" name="time" value="${param.time}">
+        <input type="hidden" name="theaterInfoId" value="${param.theaterInfoId}">
+        <input type="hidden" name="theaterTimeId" value="${param.theaterTimeId}">
         <button type="submit" class="btn btn-primary">예매하기</button>
     </form>
   </div>

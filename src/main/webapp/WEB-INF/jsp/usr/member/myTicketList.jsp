@@ -27,18 +27,18 @@
         <tbody>
           <c:forEach var="list" items="${lists}">
             <tr class="hover">
-              <td>${list.relTypeCode}</td>
-              <td>${list.theaterName}</td>
+              <td>${list.cinemaId}</td>
+              <td>${list.theaterInfoId}</td>
               <td>
                 <a class="btn-text-link block w-full truncate" href="/usr/movie/detail?id=${list.movieId}">${list.extra__movieTitle}</a>
               </td>
-              <td>${list.ticketingDate}</td>
+              <td>${list.buyDate}</td>
               <td>${list.date}</td>
               <td>${list.getForPrintType1StartTime()}~${list.getForPrintType1EndTime()}</td>
-              <td>${list.seatId}-${list.seatNo}</td>
+              <td>${list.seatRow}-${list.seatCol}</td>
               <td>
                 <a
-                  href="/usr/ticket/seatLocation?region=${list.relTypeCode}&theaterName=${list.theaterName}&mySeatId=${list.seatId}&mySeatNo=${list.seatNo}"
+                  href="/usr/ticket/seatLocation?&cinemaId=${list.cinemaId}&theaterInfoId=${list.theaterInfoId}&mySeatRow=${list.seatRow}&mySeatCol=${list.seatCol}"
                   onclick="window.open(this.href, '_blank', 'width=500, height=500'); return false;">위치보기</a>
               </td>
               <td>${list.seatStatus}</td>

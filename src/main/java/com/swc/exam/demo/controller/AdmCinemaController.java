@@ -219,7 +219,6 @@ public class AdmCinemaController {
 	@RequestMapping("/adm/cinema/theater/doAddTime")
 	@ResponseBody
 	public String doAddTime(int cinemaId, int theaterInfoId, int movieId, String date, int theaterTime, String startTime, String endTime) {
-		System.out.println("onec|" + cinemaId + "*" + theaterInfoId + "*" +movieId + "*" +date + "*" +theaterTime + "*" +startTime + "*" +endTime );
 		ResultData addRd = cinemaService.addTime(cinemaId, theaterInfoId, movieId, date, theaterTime, startTime, endTime);
 
 		if (addRd.isFail()) {

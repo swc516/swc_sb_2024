@@ -9,8 +9,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Cinema;
 import com.swc.exam.demo.vo.Movie;
+import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.Rq;
 import com.swc.exam.demo.vo.TheaterInfo;
 import com.swc.exam.demo.vo.TheaterTime;
@@ -29,34 +31,34 @@ public class TicketService {
 	}
 
 
-	public List<TheaterTime> getForPrintTheaterTimes(int cinemaId, int theaterInfoId, String date, int theaterTime) {
-		List<TheaterTime> theaterTimes = cinemaService.getForPrintTheaterTime(cinemaId, theaterInfoId, date, theaterTime);
+	public List<TheaterTime> getForPrintTheaterTimes(int cinemaId, int theaterInfoId, int theaterTimeId) {
+		List<TheaterTime> theaterTimes = cinemaService.getForPrintTheaterTime(cinemaId, theaterInfoId, theaterTimeId);
 		return theaterTimes;
 	}
 
-	/*
-	public void doTicketing(String region, String theaterName, String date, int time, String[] seats, int memberId) {
+	
+	public ResultData doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, int memberId) {
 		for (String seat : seats) {
 			String[] seatSplit = seat.split("-");
-			char seatId = seatSplit[0].trim().charAt(0);
-			int seatNo = Integer.parseInt(seatSplit[1]);
-			theaterTimeRepository.doTicketing(region, theaterName, date, time, seatId, seatNo, memberId);
+			char seatRow = seatSplit[0].trim().charAt(0);
+			int seatCol = Integer.parseInt(seatSplit[1]);
+			cinemaService.doTicketing(theaterInfoId, theaterTimeId, seatRow, seatCol, memberId);
 		}
+		
+		return ResultData.from("S-1", "예매가 완료되었습니다.");
 	}
 
 
 	public List<TheaterTime> getMyTicketingList(int id) {
-		List<TheaterTime> lists = theaterTimeRepository.getMyTicketingList(id);
+		List<TheaterTime> lists = cinemaService.getMyTicketingList(id);
 		return lists;
 	}
 
 
 	public void doTicketCancel(int id) {
-		
-		theaterTimeRepository.doTicketCancel(id);
-		
+		cinemaService.doTicketCancel(id);
 	}
-*/
+
 
 	public List<Movie> getMovieList() {
 		List<Movie> movies = movieService.getPlayingMovies();
@@ -123,6 +125,12 @@ public class TicketService {
 	public String getTheaterById(int theaterInfoId) {
 		String theater = cinemaService.getTheaterById(theaterInfoId);
 		return theater;
+	}
+
+
+	public List<TheaterInfo> getForPrintTheaterInfo(int cinemaId, int theaterInfoId) {
+		List<TheaterInfo> theaterInfos = cinemaService.getForPrintTheaterInfo(cinemaId, theaterInfoId);
+		return theaterInfos;
 	}
 
 }

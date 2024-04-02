@@ -24,25 +24,25 @@
     <table style="margin-left: auto; margin-right: auto;">
       <tr>
         <td>＃</td>
-        <c:forEach var="seatNo" items="${seatNoArr}">
-          <td style="text-align: center">${seatNo}</td>
+        <c:forEach var="seatCol" items="${seatColArr}">
+          <td style="text-align: center">${seatCol}</td>
         </c:forEach>
       </tr>
-      <c:forEach var="theater" items="${theaters}">
-        <c:if test="${theater.seatNo == 1}">
+      <c:forEach var="theaterInfo" items="${theaterInfos}">
+        <c:if test="${theaterInfo.seatCol == 1}">
           <tr>
-            <td style="text-align: center">${theater.seatId}</td>
+            <td style="text-align: center">${theaterInfo.seatRow}</td>
         </c:if>
         <td>
-          <c:if test="${theater.seatStatus != '없음'}">
-            <c:if test="${theater.extra__seat != mySeat}">
+          <c:if test="${theaterInfo.seatStatus != '없음'}">
+            <c:if test="${theaterInfo.extra__seat != mySeat}">
               <input class="checkbox" type="checkbox" disabled>
             </c:if>
-            <c:if test="${theater.extra__seat == mySeat}">
+            <c:if test="${theaterInfo.extra__seat == mySeat}">
               <input class="checkbox checkbox-error" type="checkbox" checked>
             </c:if>
           </c:if>
-          <c:if test="${theater.seatStatus == '없음'}">
+          <c:if test="${theaterInfo.seatStatus == '없음'}">
 
           </c:if>
         </td>

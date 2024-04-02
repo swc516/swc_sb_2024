@@ -286,12 +286,11 @@ public interface CinemaRepository {
 	@Select("""
 			SELECT *
 			FROM theaterTime
-			WHERE `date` = #{date}
-			AND `theaterTime` = #{theaterTime}
+			WHERE theaterTimeId = #{theaterTimeId}
 			AND theaterInfoId = #{theaterInfoId}
 			AND cinemaId = #{cinemaId};
 						""")
-	List<TheaterTime> getForPrintTheaterTime(int cinemaId, int theaterInfoId, String date, int theaterTime);
+	List<TheaterTime> getForPrintTheaterTime(int cinemaId, int theaterInfoId, int theaterTimeId);
 
 	@Select("""
 			SELECT TT.*,
@@ -350,4 +349,43 @@ public interface CinemaRepository {
 			GROUP BY theater
 			""")
 	String getTheaterById(int theaterInfoId);
+
+	
+	@Update("""
+			<script>
+			UPDATE theaterTime
+			SET seatSell = 1, buyMemberId = #{memberId}, buyDate = NOW()
+			WHERE theaterInfoId = #{theaterInfoId}
+			AND theaterTimeId = #{theaterTimeId}
+			AND seatRow = #{seatRow}
+			AND seatCol = #{seatCol}
+			</script>
+			""")
+	void doTicketing(int theaterInfoId, int theaterTimeId, char seatRow,
+			int seatCol, int memberId);
+
+	@Select("""
+			SELECT T.*,
+			M.title AS extra__movieTitle
+			FROM theaterTime AS T
+			LEFT JOIN movie AS M
+			ON T.movieId = M.id
+			WHERE buyMemberId = #{id}
+						""")
+	List<TheaterTime> getMyTicketingList(int id);
+
+	@Update("""
+			UPDATE theaterTime
+			SET seatSell = 0, buyMemberId = 0, buyDate = null
+			WHERE id = #{id}
+			""")
+	void doTicketCancel(int id);
+
+	@Select("""
+			SELECT *
+			FROM theaterInfo
+			WHERE cinemaId = #{cinemaId}
+			AND theaterInfoId = #{theaterInfoId}
+			""")
+	List<TheaterInfo> getForPrintTheaterInfo(int cinemaId, int theaterInfoId);
 }
