@@ -42,12 +42,12 @@
 		const maxSizeMb = 10;
 		const maxSize = maxSizeMb * 1024 * 1024
 
-		const profileImgFileInput = form["file__movie__0__extra__moviePosterImg__1"];
+		const moviePosterImgFileInput = form["file__movie__0__extra__moviePosterImg__1"];
 
-		if (profileImgFileInput.value) {
-			if (profileImgFileInput.files[0].size > maxSize) {
+		if (moviePosterImgFileInput.value) {
+			if (moviePosterImgFileInput.files[0].size > maxSize) {
 				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
-				profileImgFileInput.focus();
+				moviePosterImgFileInput.focus();
 
 				return;
 			}
@@ -92,7 +92,7 @@
             <th>포스터</th>
             <td>
               <img class="w-40 h-40 ml-1 mr-1 object-cover" src="${rq.getMoviePosterImgUri(movie.id)}" alt=""
-                onerror="${rq.moviePosterFallbackImgOnErrorHtml}" />
+                onerror="${rq.removeMoviePosterImgIfNotExitOnErrorHtmlAttr}" />
               <input accept="image/gif, image/jpeg, image/png" name="file__movie__0__extra__moviePosterImg__1"
                 type="file" />
 
@@ -101,7 +101,7 @@
                   <label class="cursor-pointer inline-flex">
                     <span class="label-text mr-2 mt-1">이미지 삭제</span>
                     <div>
-                      <input type="checkbox" name="deleteFileMovieExtraPosterImg" value="Y"
+                      <input type="checkbox" name="deleteFileMovieExtraMoviePosterImg" value="Y"
                         class="checkbox" />
                       <span class="checkbox-mark"></span>
                     </div>

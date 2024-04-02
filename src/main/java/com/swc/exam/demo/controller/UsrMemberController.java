@@ -258,11 +258,13 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/myTicketList")
 	public String showMyTicketingList(Model model, int id) {
-		List<TheaterTime> lists = memberService.getMyTicketingList(id);
+		if(rq.getLoginedMemberId() != id) {
+			return "usr/member/myPage";
+		}
 		
+		List<TheaterTime> lists = memberService.getMyTicketingList(id);
 		model.addAttribute("lists", lists);
 			
-		
 		return "usr/member/myTicketList";
 	}
 	

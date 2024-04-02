@@ -117,10 +117,11 @@ public class AdmMovieController {
 			return rq.historyBackJsOnview(Ut.f("%d번 영화가 존재하지 않습니다.", id));
 		}
 		
-		boolean hasImg = genFileService.hasImg("posterImg", id);
+		boolean hasImg = genFileService.hasImg("moviePosterImg", id);
 		model.addAttribute("hasImg", hasImg);
 		
 		model.addAttribute("movie", movie);
+		
 
 		return "/adm/movie/modify";
 	}
@@ -132,17 +133,17 @@ public class AdmMovieController {
 
 		ResultData modifyRd = movieService.modify(id, title, body, runDate);
 
-		if (request.getParameter("deleteFileMovieExtraPosterImg") != null) {
-			genFileService.deleteGenFiles("movie", id, "extra", "posterImg", 1);
+		if (request.getParameter("deleteFileMovieExtraMoviePosterImg") != null) {
+			genFileService.deleteGenFiles("movie", id, "extra", "moviePosterImg", 1);
 		}
-
+		
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 
 		for (String fileInputName : fileMap.keySet()) {
 			MultipartFile multipartFile = fileMap.get(fileInputName);
 
 			if (multipartFile.isEmpty() == false) {
-				genFileService.save(multipartFile, rq.getLoginedMemberId());
+				genFileService.save(multipartFile, id);
 			}
 		}
 

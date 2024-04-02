@@ -55,6 +55,7 @@
           <col width="150" />
           <col width="150" />
           <col width="150" />
+          <col width="300" />
           <col width="150" />
         </colgroup>
         <thead>
@@ -79,8 +80,7 @@
               <td>${movie.forPrintType1RegDate}</td>
               <td>${movie.forPrintType1UpdateDate}</td>
               <td>
-                <a class="btn-text-link block w-full truncate" href="/adm/movie/modify?id=${movie.id}">${movie.title}
-                </a>
+                ${movie.title}
               </td>
               <td>${movie.body}</td>
               <td>${movie.runDate}</td>

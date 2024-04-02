@@ -56,6 +56,7 @@
           <col width="150" />
           <col width="150" />
           <col width="150" />
+          <col width="300" />
           <col width="150" />
         </colgroup>
         <thead>

@@ -106,7 +106,7 @@
           <tr>
             <th>포스터</th>
             <td>
-              <input accept="image/gif, image/jpeg, image/png" name="file__movie__0__extra__posterImg__1" type="file" />
+              <input accept="image/gif, image/jpeg, image/png" name="file__movie__0__extra__moviePosterImg__1" type="file" />
             </td>
           </tr>
           <tr>
