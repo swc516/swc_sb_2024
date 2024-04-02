@@ -1,6 +1,7 @@
 package com.swc.exam.demo.vo;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.context.annotation.Scope;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import com.swc.exam.demo.service.MemberService;
+import com.swc.exam.demo.service.MovieService;
 import com.swc.exam.demo.util.Ut;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,6 +31,7 @@ public class Rq {
 	
 	@Getter
 	private Member loginedMember;
+
 	
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
@@ -78,6 +81,7 @@ public class Rq {
 		}
 
 		this.isAjax = isAjax;
+
 		
 	}
 
@@ -268,7 +272,7 @@ public class Rq {
 	}
 	
 	public String getMoviePosterFallbackImgUri() {
-		return "https://via.placeholder.com/300/?text=^_^";
+		return "https://via.placeholder.com/400x600/?text=^_^";
 	}
 	
 	public String getMoviePosterFallbackImgOnErrorHtml() {

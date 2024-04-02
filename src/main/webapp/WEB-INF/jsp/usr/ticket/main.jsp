@@ -3,7 +3,7 @@
 <%@ page import="com.swc.exam.demo.util.Ut"%>
 
 
-<c:set var="pageTitle" value="영화 예매(테스트) " />
+<c:set var="pageTitle" value="영화 예매(테스트)" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
 <%@include file="../../common/head.jspf"%>

@@ -1,16 +1,31 @@
 package com.swc.exam.demo.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import java.util.List;
 
-import com.swc.exam.demo.vo.Rq;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.swc.exam.demo.service.MovieService;
+import com.swc.exam.demo.vo.Movie;
+
+import lombok.Getter;
 
 
 @Controller
 public class UsrHomeController {
+	
+	MovieService movieService;
+	
+	public UsrHomeController (MovieService movieService) {
+		this.movieService = movieService;
+	}
+	
 	@RequestMapping("/usr/home/main")
-	public String showMain() {
+	public String showMain(Model model) {
+		List<Movie> movieList = movieService.getPlayingMovies();		
+		model.addAttribute("movieList", movieList);
+			
 		return "usr/home/main";
 	}
 	

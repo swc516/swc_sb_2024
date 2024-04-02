@@ -144,7 +144,7 @@
           </tbody>
         </table>
         <div style="float: right">
-          <input type="submit" value="예매" class="btn btn-success">
+          <input type="submit" value="추가" class="btn btn-success">
         </div>
       </form>
     </div>

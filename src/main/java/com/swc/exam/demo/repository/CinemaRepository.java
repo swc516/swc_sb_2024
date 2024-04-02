@@ -302,7 +302,7 @@ public interface CinemaRepository {
 			AND TT.cinemaId = #{cinemaId}
 			AND TT.`date` = #{date}
 			GROUP BY TT.startTime
-			ORDER BY TT.startTime ASC
+			ORDER BY TT.startTime DESC
 						""")
 	List<TheaterTime> getTheaterTimeList(int movieId, int cinemaId, String date);
 
@@ -378,7 +378,7 @@ public interface CinemaRepository {
 			LEFT JOIN theaterInfo AS TI
 			ON TT.theaterInfoId = TI.theaterInfoId
 			WHERE TT.buyMemberId = #{id}
-			GROUP BY TT.id;
+			GROUP BY TT.id
 						""")
 	List<TheaterTime> getMyTicketingList(int id);
 

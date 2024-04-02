@@ -32,7 +32,7 @@ public class UsrTicketController {
 	}
 
 	@RequestMapping("/usr/ticket/main")
-	public String showMain(Model model, @RequestParam(defaultValue = "0") int movieId, @RequestParam(defaultValue = "0") int cinemaId,  @RequestParam(defaultValue = "1")String date) {
+	public String showMain(Model model, @RequestParam(defaultValue = "0") int movieId, @RequestParam(defaultValue = "0") int cinemaId, String date) {
 
 		List<Movie> movies = ticketService.getMovieList();
 		List<Cinema> cinemas = ticketService.getCinemaList();
@@ -44,6 +44,7 @@ public class UsrTicketController {
 		
 		List<TheaterTime> theaterTimes = ticketService.getTheaterTimeList(movieId, cinemaId, date);
 		model.addAttribute("theaterTimes", theaterTimes);
+		
 		
 		return "usr/ticket/main";
 	}
