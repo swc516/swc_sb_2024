@@ -377,7 +377,8 @@ public interface CinemaRepository {
 			ON TT.cinemaId = C.id
 			LEFT JOIN theaterInfo AS TI
 			ON TT.theaterInfoId = TI.theaterInfoId
-			WHERE buyMemberId = #{id};
+			WHERE TT.buyMemberId = #{id}
+			GROUP BY TT.id;
 						""")
 	List<TheaterTime> getMyTicketingList(int id);
 

@@ -261,7 +261,7 @@ public class UsrMemberController {
 		List<TheaterTime> lists = memberService.getMyTicketingList(id);
 		
 		model.addAttribute("lists", lists);
-		
+			
 		
 		return "usr/member/myTicketList";
 	}
