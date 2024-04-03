@@ -23,10 +23,11 @@ public interface MemberRepository {
 			`name` = #{name},
 			nickname = #{nickname},
 			cellphoneNo = #{cellphoneNo},
-			email = #{email}
+			email = #{email},
+			favoriteCinema = #{favoriteCinema}
 						""")
-	void join(@Param("loginId") String loginId, @Param("loginPw") String loginPw, @Param("name") String name,
-			@Param("nickname") String nickname, @Param("cellphoneNo") String cellphoneNo, @Param("email") String email);
+	void join( String loginId, String loginPw, String name,
+			 String nickname, String cellphoneNo, String email, int favoriteCinema);
 
 	@Select("SELECT LAST_INSERT_ID()")
 	int getLastInsertId();
@@ -37,7 +38,7 @@ public interface MemberRepository {
 			WHERE M.id = #{id}
 			AND delStatus = 0
 						""")
-	Member getMemberById(@Param("id") int id);
+	Member getMemberById( int id);
 
 	@Select("""
 			SELECT *
@@ -45,7 +46,7 @@ public interface MemberRepository {
 			WHERE M.loginId = #{loginId}
 			AND delStatus = 0
 						""")
-	Member getMemberByLoginId(@Param("loginId") String loginId);
+	Member getMemberByLoginId( String loginId);
 
 	@Select("""
 			SELECT *
@@ -53,7 +54,7 @@ public interface MemberRepository {
 			WHERE M.name = #{name}
 			AND M.email = #{email}
 			""")
-	Member getMemberByNameAndEmail(@Param("name") String name, @Param("email") String email);
+	Member getMemberByNameAndEmail(String name, String email);
 
 	@Update("""
 			<script>
@@ -69,18 +70,21 @@ public interface MemberRepository {
 				<if test="nickname != null">
 					nickname = #{nickname},
 				</if>
+				<if test="cellphoneNo != null">
+					cellphoneNo = #{cellphoneNo},
+				</if>
 				<if test="email != null">
 					email = #{email},
 				</if>
-				<if test="cellphoneNo != null">
-					cellphoneNo = #{cellphoneNo},
+				<if test="favoriteCinema != null">
+					favoriteCinema = #{favoriteCinema},
 				</if>
 			</set>
 			WHERE id = #{id}
 			</script>
 			""")
-	void modify(@Param("id") int loginedMemberId, String loginPw, String name, String nickname, String email,
-			String cellphoneNo);
+	void modify(int id, String loginPw, String name, String nickname, String cellphoneNo, String email,
+			 int favoriteCinema);
 
 	@Select("""
 			<script>
@@ -169,4 +173,12 @@ public interface MemberRepository {
 			</script>
 			""" )
 	void deleteMember(int id);
+
+	
+	@Select("""
+			SELECT favoriteCinema
+			FROM `member`
+			WHERE id = #{id}			
+			""")
+	int getMemberFavoriteCinema(int id);
 }

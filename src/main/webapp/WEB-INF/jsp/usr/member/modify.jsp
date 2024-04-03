@@ -150,8 +150,7 @@
                   <label class="cursor-pointer inline-flex">
                     <span class="label-text mr-2 mt-1">이미지 삭제</span>
                     <div>
-                      <input type="checkbox" name="deleteFileMemberExtraProfileImg" value="Y"
-                        class="checkbox" />
+                      <input type="checkbox" name="deleteFileMemberExtraProfileImg" value="Y" class="checkbox" />
                       <span class="checkbox-mark"></span>
                     </div>
                   </label>
@@ -174,6 +173,22 @@
             </td>
           </tr>
           <tr>
+            <th>즐겨찾는 영화관</th>
+            <td>
+              <select name="favoriteCinema">
+                <option value="0">없음</option>
+                <c:forEach var="cinema" items="${cinemas}">
+                  <c:if test="${cinema.id == rq.loginedMemberFavoriteCinema}">
+                    <option value="${cinema.id}" selected>${cinema.region}_${cinema.branch}</option>
+                  </c:if>
+                  <c:if test="${cinema.id != rq.loginedMemberFavoriteCinema}">
+                    <option value="${cinema.id}">${cinema.region}_${cinema.branch}</option>
+                  </c:if>
+                </c:forEach>
+              </select>
+            </td>
+          </tr>
+          <tr>
             <th>회원정보수정</th>
             <td>
               <button type="submit" class="btn btn-primary">회원정보 수정</button>
@@ -186,5 +201,4 @@
     </div>
   </div>
 </section>
-
 <%@include file="../../common/foot.jspf"%>

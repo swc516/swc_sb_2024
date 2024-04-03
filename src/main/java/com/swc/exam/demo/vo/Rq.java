@@ -31,7 +31,12 @@ public class Rq {
 	
 	@Getter
 	private Member loginedMember;
+	
+	@Getter
+	private int loginedMemberFavoriteCinema;
 
+	@Getter
+	private String today;
 	
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
@@ -49,16 +54,23 @@ public class Rq {
 		boolean isLogined = false;
 		int loginedMemberId = 0;
 		Member loginedMember = null;
+		int loginedMemberFavoriteCinema = 0;
+		
+		String today = Ut.getForPrintWeek().get(0);
+		this.today = today;
 		
 		if ( session.getAttribute("loginedMemberId") != null ) {
 			isLogined = true;
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 			loginedMember = memberService.getMemberById(loginedMemberId);
+			loginedMemberFavoriteCinema = memberService.getMemberFavoriteCinema(loginedMemberId);
 		}
 		
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
+		this.loginedMemberFavoriteCinema = loginedMemberFavoriteCinema;
+		
 			
 
 		String requestUri = req.getRequestURI();

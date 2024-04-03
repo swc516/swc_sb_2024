@@ -89,8 +89,6 @@ public class TicketService {
 
 
 	public List<String> getForPrintWeek() {
-
-		
 		GregorianCalendar cal = new GregorianCalendar();
 		SimpleDateFormat dFormat = new SimpleDateFormat("YY-MM-dd");
 		List<String> week = new ArrayList<>();

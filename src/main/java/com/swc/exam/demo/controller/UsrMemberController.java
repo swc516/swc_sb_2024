@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import com.swc.exam.demo.service.GenFileService;
 import com.swc.exam.demo.service.MemberService;
 import com.swc.exam.demo.util.Ut;
+import com.swc.exam.demo.vo.Cinema;
 import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.Rq;
@@ -38,10 +39,10 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email,
+	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email, int favoriteCinema,
 			@RequestParam(defaultValue = "/") String afterLoginUri, MultipartRequest multipartRequest) {
 
-		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
+		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email, favoriteCinema);
 
 		if (joinRd.isFail()) {
 			return rq.jsHistoryBack(joinRd.getResultCode(), joinRd.getMsg());
@@ -143,7 +144,10 @@ public class UsrMemberController {
 	}
 
 	@RequestMapping("/usr/member/join")
-	public String showJoin() {
+	public String showJoin(Model model) {
+		List<Cinema> cinemas = memberService.getCinemaList();
+		model.addAttribute("cinemas", cinemas);
+		
 		return "usr/member/join";
 	}
 
@@ -212,13 +216,16 @@ public class UsrMemberController {
 		boolean hasImg = genFileService.hasImg("profileImg", rq.getLoginedMemberId());
 		model.addAttribute("hasImg", hasImg);
 		
+		List<Cinema> cinemas = memberService.getCinemaList();
+		model.addAttribute("cinemas", cinemas);
+		
 		return "usr/member/modify";
 	}
 
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
 	public String doModify(HttpServletRequest request, String memberModifyAuthKey, String loginPw, String name,
-			String nickname, String email, String cellphoneNo, MultipartRequest multipartRequest,
+			String nickname, String cellphoneNo, String email, int favoriteCinema, MultipartRequest multipartRequest,
 			@RequestParam(defaultValue = "/") String afterLogoutUri) {
 
 		if (Ut.empty(memberModifyAuthKey)) {
@@ -236,8 +243,8 @@ public class UsrMemberController {
 			loginPw = null;
 		}
 
-		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, email,
-				cellphoneNo);
+		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNo, email, favoriteCinema
+				);
 
 		if (request.getParameter("deleteFileMemberExtraProfileImg") != null) {
 			genFileService.deleteGenFiles("member", rq.getLoginedMemberId(), "extra", "profileImg", 1);

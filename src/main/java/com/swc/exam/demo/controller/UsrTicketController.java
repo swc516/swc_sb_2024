@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.swc.exam.demo.service.CinemaService;
 import com.swc.exam.demo.service.MovieService;
 import com.swc.exam.demo.service.TicketService;
+import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Cinema;
 import com.swc.exam.demo.vo.Movie;
 import com.swc.exam.demo.vo.ResultData;
@@ -36,8 +37,9 @@ public class UsrTicketController {
 
 		List<Movie> movies = ticketService.getMovieList();
 		List<Cinema> cinemas = ticketService.getCinemaList();
-		List<String> week = ticketService.getForPrintWeek();
-
+		List<String> week = Ut.getForPrintWeek();
+		
+		
 		model.addAttribute("week", week);
 		model.addAttribute("movies", movies);
 		model.addAttribute("cinemas", cinemas);

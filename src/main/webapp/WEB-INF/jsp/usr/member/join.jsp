@@ -83,65 +83,67 @@
 			form.cellphoneNo.focus();
 			return;
 		}
-		
+
 		const maxSizeMb = 10;
-		const maxSize = maxSizeMb * 1024 * 1024 
-		
+		const maxSize = maxSizeMb * 1024 * 1024
+
 		const profileImgFileInput = form["file__member__0__extra__profileImg__1"];
-		
-		if( profileImgFileInput.value ) {
-			if ( profileImgFileInput.files[0].size > maxSize ) {
+
+		if (profileImgFileInput.value) {
+			if (profileImgFileInput.files[0].size > maxSize) {
 				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
 				profileImgFileInput.focus();
-				
+
 				return;
 			}
 		}
-		
+
 		form.loginPw.value = sha256(form.loginPwInput.value);
 		form.loginPwInput.value = '';
 		form.loginPwConfirm.value = '';
-		
-		
+
 		MemberJoin__submitFormDone = true;
 		form.submit();
 	}
 
 	function checkLoginDup(el) {
 		const form = $(el).closest('form').get(0);
-		
-		if ( form.loginId.value.length == 0 ) {
+
+		if (form.loginId.value.length == 0) {
 			validLogined = '';
 			return;
 		}
-		
-		if ( validLogined == form.loginId.value ) {
+
+		if (validLogined == form.loginId.value) {
 			return;
 		}
-		
+
 		$.get('../member/getLoginIdDup', {
 			isAjax : 'Y',
 			loginId : form.loginId.value
 		}, function(data) {
 			var $message = $(form.loginId).next();
-			
+
 			if (data.resultCode.substr(0, 2) == 'S-') {
-				$message.empty().append('<div class="mt-2 text-green-500">'+ data.msg +'</div>');
+				$message.empty().append(
+						'<div class="mt-2 text-green-500">' + data.msg
+								+ '</div>');
 				validLogined = data.data1;
 			} else {
-				$message.empty().append('<div class="mt-2 text-red-500">'+ data.msg +'</div>');
+				$message.empty()
+						.append(
+								'<div class="mt-2 text-red-500">' + data.msg
+										+ '</div>');
 				validLoginId = '';
-			} 
+			}
 
-			
-			
 			if (data.success) {
 				validLoginId = data.data1;
 			} else {
 				validLoginId = '';
 			}
-			
-			if( data.resultCode == 'F-B' ){
+
+			if (data.resultCode == 'F-B') {
 				alert(data.msg);
 			}
 		}, 'json');
@@ -149,7 +151,6 @@
 	// 조금 더 자주 체크
 	//const checkLoginDupDebounced = _.throttle(checkLoginDup, 300);
 	const checkLoginDupDebounced = _.debounce(checkLoginDup, 300);
-
 </script>
 
 
@@ -200,7 +201,8 @@
           <tr>
             <th>프로필 이미지</th>
             <td>
-              <input accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1" placeholder="프로필 이미지를 선택해주세요." type="file" />
+              <input accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1"
+                placeholder="프로필 이미지를 선택해주세요." type="file" />
             </td>
           </tr>
           <tr>
@@ -214,6 +216,17 @@
             <td>
               <input class="input input-bordered" name="cellphoneNo" placeholder="휴대전화번호" type="text"
                 value="${rq.loginedMember.cellphoneNo}" />
+            </td>
+          </tr>
+          <tr>
+            <th>즐겨찾는 영화관</th>
+            <td>
+              <select name="favoriteCinema">
+                <option value="0" selected>없음</option>
+                <c:forEach var="cinema" items="${cinemas}">
+                  <option value="${cinema.id}">${cinema.region}_${cinema.branch}</option>
+                </c:forEach>
+              </select>
             </td>
           </tr>
           <tr>

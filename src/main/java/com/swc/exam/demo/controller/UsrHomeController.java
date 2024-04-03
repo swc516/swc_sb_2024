@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.swc.exam.demo.service.MovieService;
+import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Movie;
 
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class UsrHomeController {
 	public String showMain(Model model) {
 		List<Movie> movieList = movieService.getPlayingMovies();		
 		model.addAttribute("movieList", movieList);
-			
+		
 		return "usr/home/main";
 	}
 	

@@ -18,6 +18,7 @@ public class Member {
 	private String nickname;
 	private String cellphoneNo;
 	private String email;
+	private int favoriteCinema;
 	private boolean delStatus;
 	private String delDate;
 

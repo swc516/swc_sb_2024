@@ -8,7 +8,7 @@
     <c:forEach var="movie" items="${movieList}">
       <div class="card card-compact w-80 bg-base-100 shadow-xl" style="float: left; margin:20px">
         <figure>
-          <a href="../ticket/main?movieId=${movie.id}&cinemaId="><img src="${rq.getMoviePosterImgUri(movie.id)}" onerror="${rq.moviePosterFallbackImgOnErrorHtml}" /></a>
+          <a href="../ticket/main?movieId=${movie.id}&cinemaId=${rq.loginedMemberFavoriteCinema}&date=${rq.today}"><img src="${rq.getMoviePosterImgUri(movie.id)}" onerror="${rq.moviePosterFallbackImgOnErrorHtml}" /></a>
         </figure>
         <div class="card-body">
           <h2 class="card-title">${movie.title}</h2>
@@ -21,7 +21,6 @@
     </c:forEach>
   </div>
 </section>
-
 
 
 

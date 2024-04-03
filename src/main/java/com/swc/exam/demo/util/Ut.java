@@ -5,8 +5,11 @@ import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -440,6 +443,19 @@ public class Ut {
 		}
 
 		return data;
+	}
+	
+	public static List<String> getForPrintWeek() {
+		GregorianCalendar cal = new GregorianCalendar();
+		SimpleDateFormat dFormat = new SimpleDateFormat("YY-MM-dd");
+		List<String> week = new ArrayList<>();
+		for(int i = 1; i<=7;i++) {
+		String date = dFormat.format(cal.getTime());
+		week.add(date);
+		cal.add(Calendar.DATE, 1);
+		}
+		
+		return week;
 	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.swc.exam.demo.repository.MemberRepository;
 import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Article;
+import com.swc.exam.demo.vo.Cinema;
 import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.TheaterTime;
@@ -23,16 +24,18 @@ public class MemberService {
 	private TicketService ticketingService;
 	private AttrService attrService;
 	private MailService mailService;
+	private CinemaService cinemaService;
 
-	public MemberService(AttrService attrService, TicketService ticketingService, MemberRepository memberRepository, MailService mailService) {
+	public MemberService(AttrService attrService, TicketService ticketingService, MemberRepository memberRepository, MailService mailService, CinemaService cinemaService) {
 		this.memberRepository = memberRepository;
 		this.ticketingService = ticketingService;
 		this.attrService = attrService;
 		this.mailService = mailService;
+		this.cinemaService = cinemaService;
 	}
 
 	public ResultData join(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
-			String email) {
+			String email, int favoriteCinema) {
 		// 로그인아이디 중복체크
 		Member oldMember = getMemberByLoginId(loginId);
 
@@ -46,7 +49,7 @@ public class MemberService {
 			return ResultData.from("F-8", Ut.f("해당 이름(%s)과 이메일(%s)은 이미 사용중입니다.", name, email));
 		}
 
-		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
+		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email, favoriteCinema);
 		int id = memberRepository.getLastInsertId();
 
 		return new ResultData("S-1", "회원가입이 완료되었습니다.", "id", id);
@@ -66,10 +69,10 @@ public class MemberService {
 		return memberRepository.getMemberById(id);
 	}
 
-	public ResultData modify(int actorId, String loginPw, String name, String nickname, String email,
-			String cellphoneNo) {
+	public ResultData modify(int actorId, String loginPw, String name, String nickname, String cellphoneNo, String email,
+			int favoriteCinema) {
 
-		memberRepository.modify(actorId, loginPw, name, nickname, email, cellphoneNo);
+		memberRepository.modify(actorId, loginPw, name, nickname, cellphoneNo, email, favoriteCinema);
 
 		if (loginPw != null) {
 			attrService.remove("member", actorId, "extra", "useTempPassword");
@@ -113,7 +116,7 @@ public class MemberService {
 
 	private void setTempPassword(Member actor, String tempPassword) {
 		attrService.setValue("member", actor.getId(), "extra", "useTempPassword", "1", null);
-		memberRepository.modify(actor.getId(), Ut.sha256(tempPassword), null, null, null, null);
+		memberRepository.modify(actor.getId(), Ut.sha256(tempPassword), null, null, null, null, 0);
 	}
 
 	public boolean isUsingTempPassword(int actorId) {
@@ -158,6 +161,16 @@ public class MemberService {
 
 	public void doTicketCancel(int id) {
 		ticketingService.doTicketCancel(id);
+	}
+
+	public List<Cinema> getCinemaList() {
+		List<Cinema> cinemas = cinemaService.getCinemaList();
+		return cinemas;
+	}
+
+	public int getMemberFavoriteCinema(int memberId) {
+		int loginedMemberFavoriteCiname = memberRepository.getMemberFavoriteCinema(memberId);
+		return loginedMemberFavoriteCiname;
 	}
 	
 }
