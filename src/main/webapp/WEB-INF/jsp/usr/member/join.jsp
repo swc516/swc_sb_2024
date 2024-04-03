@@ -221,7 +221,7 @@
           <tr>
             <th>즐겨찾는 영화관</th>
             <td>
-              <select name="favoriteCinema">
+              <select class="select select-bordered" name="favoriteCinema">
                 <option value="0" selected>없음</option>
                 <c:forEach var="cinema" items="${cinemas}">
                   <option value="${cinema.id}">${cinema.region}_${cinema.branch}</option>

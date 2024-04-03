@@ -50,90 +50,110 @@ Theme__init();
 </head>
 <body>
   <header>
-    <div class="flex h-20 container mx-auto">
-      <a href="/" class="flex items-center px-3 hover:underline">
-        <span>로고</span>
-      </a>
-      <div class="flex-grow"></div>
-      <ul class="flex">
-        <li>
-          <a href="javascript:Theme__toggle();" class="h-full flex items-center px-3 hover:underline btn-theme-toggle">
+
+    <div class="navbar bg-base-300 rounded-box">
+      <div class="flex-1 px-2 lg:flex-none">
+        <a class="text-lg font-bold" href="/">로고</a>
+      </div>
+      <div class="flex justify-end flex-1 px-2">
+        <div class="flex items-stretch">
+          <a class="btn btn-ghost rounded-btn btn-theme-toggle" href="javascript:Theme__toggle();">
             <span>밝게</span>
-            
             <span>어둡게</span>
           </a>
-        </li>
-        <li>
-          <a href="/" class="h-full flex items-center px-3 hover:underline">
-            <span>홈</span>
-          </a>
-        </li>
-        <li>
-          <a href="/usr/cinema/list" class="h-full flex items-center px-3 hover:underline">
-            <span>영화관</span>
-          </a>
-        </li>
-        <li>
-          <a href="/usr/movie/list" class="h-full flex items-center px-3 hover:underline">
-            <span>상영중인 영화</span>
-          </a>
-        </li>
-        <li>
-          <a href="/usr/ticket/main?cinemaId=${rq.loginedMemberFavoriteCinema}&date=${rq.today}" class="h-full flex items-center px-3 hover:underline">
-            <span>예매</span>
-          </a>
-        </li>
-        <li>
-          <a href="/usr/article/list?boardId=1" class="h-full flex items-center px-3 hover:underline">
-            <span>공지사항</span>
-          </a>
-        </li>
-        <li>
-          <a href="/usr/article/list?boardId=2" class="h-full flex items-center px-3 hover:underline">
-            <span>자유게시판</span>
-          </a>
-        </li>
-        <c:if test="${!rq.logined}">
-          <li>
-            <a href="${rq.loginUri}" class="h-full flex items-center px-3 hover:underline">
-              <span>로그인</span>
-            </a>
-          </li>
-          <li>
-            <a href="${rq.joinUri}" class="h-full flex items-center px-3 hover:underline">
-              <span>회원가입</span>
-            </a>
-          </li>
-        </c:if>
-        <c:if test="${rq.logined}">
-          <li>
-            <a href="/usr/member/myPage" class="h-full flex items-center px-3 hover:underline">
-              <img class="w-8 h-8 ml-1 mr-1 rounded-full object-cover" src="${rq.getProfileImgUri(rq.loginedMember.id)}"
-                alt="" onerror="${rq.profileFallbackImgOnErrorHtml}" />
-              <span>${rq.loginedMember.nickname}'s Profile</span>
-            </a>
-          </li>
-          <c:if test="${rq.admin}">
-            <li>
-              <a href="/adm/home/main" class="h-full flex items-center px-3 hover:underline">
-                <span>●관리자</span>
-              </a>
-            </li>
+
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">영화 ▾</div>
+            <ul tabindex="0" class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+              <li>
+                <a class="btn btn-ghost rounded-btn" href="/usr/cinema/list">영화관</a>
+              </li>
+              <li>
+                <a class="btn btn-ghost rounded-btn" href="/usr/movie/list">상영중인 영화</a>
+              </li>
+            </ul>
+          </div>
+
+          <a class="btn btn-ghost rounded-btn"
+            href="/usr/ticket/main?cinemaId=${rq.loginedMemberFavoriteCinema}&date=${rq.today}">예매</a>
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">게시판 ▾</div>
+            <ul tabindex="0" class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+              <li>
+                <a class="btn btn-ghost rounded-btn" href="/usr/article/list?boardId=1">공지사항</a>
+              </li>
+              <li>
+                <a class="btn btn-ghost rounded-btn" href="/usr/article/list?boardId=2">자유게시판</a>
+              </li>
+            </ul>
+          </div>
+
+          <c:if test="${!rq.logined}">
+            <a class="btn btn-ghost rounded-btn" href="${rq.loginUri}">로그인</a>
+            <a class="btn btn-ghost rounded-btn" href="${rq.joinUri}">회원가입</a>
           </c:if>
-          <li>
-            <a href="${rq.logoutUri}" class="h-full flex items-center px-3 hover:underline">
-              <span>로그아웃</span>
-            </a>
-          </li>
-        </c:if>
-      </ul>
+          <c:if test="${rq.logined}">
+
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">
+                <img class="w-8 h-8 ml-1 mr-1 rounded-full object-cover"
+                  src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt="" onerror="${rq.profileFallbackImgOnErrorHtml}" />
+                ${rq.loginedMember.nickname}'s Profile ▾
+              </div>
+              <ul tabindex="0" class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+                <li>
+                  <a class="btn btn-ghost rounded-btn" href="/usr/member/myPage">내 정보</a>
+                </li>
+                <li>
+                  <a class="btn btn-ghost rounded-btn" href="/usr/member/myTicketList?id=${rq.loginedMember.id}">나의
+                    예매 정보</a>
+                </li>
+              </ul>
+            </div>
+
+
+            <c:if test="${rq.admin}">
+
+              <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">관리자 ▾</div>
+                <ul tabindex="0" class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+                  <li>
+                    <a class="btn btn-ghost rounded-btn" href="/adm/home/main">관리자 메뉴</a>
+                  </li>
+                    <div class="divider divider-neutral"></div>
+                  <li>
+                    <a class="btn btn-ghost rounded-btn" href="/adm/member/list">회원 리스트</a>
+                  </li>
+                  <li>
+                    <a class="btn btn-ghost rounded-btn" href="/usr/article/write?boardId=1">공지사항 작성</a>
+                  </li>
+                  <li>
+                    <a class="btn btn-ghost rounded-btn" href="/adm/movie/list">영화 관리</a>
+                  </li>
+                  <li>
+                    <a class="btn btn-ghost rounded-btn" href="/adm/cinema/list">영화관 관리</a>
+                  </li>
+                  <li>
+                    <a class="btn btn-ghost rounded-btn" href="/adm/cinema/theater/addTime">상영회차 관리</a>
+                  </li>
+                </ul>
+              </div>
+
+            </c:if>
+            <a class="btn btn-ghost rounded-btn" href="${rq.logoutUri}">로그아웃</a>
+          </c:if>
+
+
+
+        </div>
+      </div>
     </div>
+
+
   </header>
 
   <section class="mt-5">
-    <div style="font-size:50px"class="container mx-auto px-3">
-      ${pageTitle}
-    </div>
+    <div style="font-size: 50px" class="container mx-auto px-3">${pageTitle}</div>
   </section>
 
   <main>
