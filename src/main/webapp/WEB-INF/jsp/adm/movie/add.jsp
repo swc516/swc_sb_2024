@@ -98,9 +98,45 @@
             </td>
           </tr>
           <tr>
-            <th>상영마감일자</th>
+            <th>국가</th>
             <td>
-              <input class="input input-bordered" name="runDate" type="datetime-local" />
+              <input class="input input-bordered" name="country" placeholder="국가" type="text" />
+            </td>
+          </tr>
+          <tr>
+            <th>상영시간</th>
+            <td>
+              <input class="input input-bordered" name="runningTime" placeholder="상영시간" type="text" />분
+            </td>
+          </tr>
+          <tr>
+            <th>감독</th>
+            <td>
+              <input class="input input-bordered" name="director" placeholder="감독" type="text"/>
+            </td>
+          </tr>
+          <tr>
+            <th>배우</th>
+            <td>
+              <input class="input input-bordered" name="actor" placeholder="배우" type="text" />
+            </td>
+          </tr>
+          <tr>
+            <th>장르</th>
+            <td>
+              <input class="input input-bordered" name="genre" placeholder="장르" type="text"/>
+            </td>
+          </tr>
+          <tr>
+            <th>개봉날짜</th>
+            <td>
+              <input class="input input-bordered" name="releaseDate" type="date" />
+            </td>
+          </tr>
+          <tr>
+            <th>트레일러 주소</th>
+            <td>
+              <input class="input input-bordered" name="trailer" placeholder="uri" type="text"/>
             </td>
           </tr>
           <tr>

@@ -70,7 +70,6 @@
             <th>갱신날짜</th>
             <th>영화명</th>
             <th>영화소개</th>
-            <th>상영마감일자</th>
           </tr>
         </thead>
         <tbody>
@@ -91,7 +90,6 @@
                 </a>
               </td>
               <td>${movie.body}</td>
-              <td>${movie.runDate}</td>
             </tr>
           </c:forEach>
         </tbody>

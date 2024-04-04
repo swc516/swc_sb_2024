@@ -69,8 +69,8 @@ public class AdmMovieController {
 	
 	@RequestMapping("/adm/movie/doAdd")
 	@ResponseBody
-	public String doAdd(String title, String body, String runDate, MultipartRequest multipartRequest) {
-		ResultData addRd = movieService.add(title, body, runDate);
+	public String doAdd(String title, String body, String country, int runningTime, String director, String actor, String genre, String releaseDate, String trailer, MultipartRequest multipartRequest) {
+		ResultData addRd = movieService.add(title, body, country, runningTime, director, actor, genre, releaseDate, trailer);
 		
 		if (addRd.isFail()) {
 			return rq.jsHistoryBack(addRd.getResultCode(), addRd.getMsg());
@@ -128,10 +128,10 @@ public class AdmMovieController {
 
 	@RequestMapping("/adm/movie/doModify")
 	@ResponseBody
-	public String doModify(HttpServletRequest request, int id, String title, String body, String runDate, MultipartRequest multipartRequest) {
+	public String doModify(HttpServletRequest request, int id, String title, String body, String country, int runningTime, String director, String actor, String genre, String releaseDate, String trailer, MultipartRequest multipartRequest) {
 
 
-		ResultData modifyRd = movieService.modify(id, title, body, runDate);
+		ResultData modifyRd = movieService.modify(id, title, body, country, runningTime, director, actor, genre, releaseDate, trailer);
 
 		if (request.getParameter("deleteFileMovieExtraMoviePosterImg") != null) {
 			genFileService.deleteGenFiles("movie", id, "extra", "moviePosterImg", 1);

@@ -13,9 +13,15 @@ public class Movie {
 	private String updateDate;
 	private String title;
 	private String body;
+	private int runningTime;
+	private String country;
+	private String director;
+	private String actor;
+	private String genre;
+	private String releaseDate;
+	private String trailer;
 	private double rate;
 	private int count;
-	private String runDate;
 	private boolean delStatus;
 	private String delDate;
 

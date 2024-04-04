@@ -61,4 +61,12 @@ public class UsrMovieController {
 		return "usr/movie/list";
 	}
 	
+	
+	@RequestMapping("/usr/movie/detail")
+	public String showList(Model model,	int id) {
+		Movie movie = movieService.getForPrintMovie(id);
+		model.addAttribute("movie", movie);
+		
+		return "usr/movie/detail";
+	}
 }

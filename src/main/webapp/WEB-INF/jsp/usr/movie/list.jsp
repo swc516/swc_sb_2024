@@ -66,7 +66,6 @@
             <th>갱신날짜</th>
             <th>영화명</th>
             <th>영화소개</th>
-            <th>상영마감일자</th>
           </tr>
         </thead>
         <tbody>
@@ -80,10 +79,9 @@
               <td>${movie.forPrintType1RegDate}</td>
               <td>${movie.forPrintType1UpdateDate}</td>
               <td>
-                ${movie.title}
+                <a class="btn-text-link block w-full truncate" href="../movie/detail?id=${movie.id}">${movie.title}</a>
               </td>
               <td>${movie.body}</td>
-              <td>${movie.runDate}</td>
             </tr>
           </c:forEach>
         </tbody>

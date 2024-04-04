@@ -22,9 +22,9 @@ public class MovieService {
 		this.movieRepository = movieRepository;
 	}
 
-	public ResultData add(String title, String body, String runDate) {
+	public ResultData add(String title, String body, String country, int runningTime, String director, String actor, String genre, String releaseDate, String trailer) {
 
-		movieRepository.add(title, body, runDate);
+		movieRepository.add(title, body, country, runningTime, director, actor, genre, releaseDate, trailer);
 
 		int id = movieRepository.getLastInsertId();
 
@@ -71,8 +71,8 @@ public class MovieService {
 		return movie;
 	}
 
-	public ResultData modify(int id, String title, String body, String runDate) {
-		movieRepository.modify(id, title, body, runDate);
+	public ResultData modify(int id, String title, String body, String country, int runningTime, String director, String actor, String genre, String releaseDate, String trailer) {
+		movieRepository.modify(id, title, body, country, runningTime, director, actor, genre, releaseDate, trailer);
 
 		return ResultData.from("S-1", "영화정보가 수정되었습니다.");
 	}

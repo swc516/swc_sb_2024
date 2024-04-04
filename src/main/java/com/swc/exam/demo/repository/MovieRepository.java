@@ -21,9 +21,15 @@ public interface MovieRepository {
 			updateDate = NOW(),
 			title = #{title},
 			`body` = #{body},
-			runDate = #{runDate}
+			country = #{country},
+			runningTime = #{runningTime},
+			director = #{director},
+			actor = #{actor},
+			genre = #{genre},
+			releaseDate = #{releaseDate},
+			trailer = #{trailer}
 			""")
-	void add(@Param("title") String title, @Param("body") String body, @Param("runDate") String runDate);
+	void add(String title, String body, String country, int runningTime, String director, String actor, String genre, String releaseDate, String trailer);
 
 	@Select("SELECT LAST_INSERT_ID()")
 	int getLastInsertId();
@@ -129,19 +135,37 @@ public interface MovieRepository {
 				<if test="body != null">
 					body = #{body},
 				</if>
-				<if test="runDate != null">
-					runDate = #{runDate},
+				<if test="country != null">
+					country = #{country},
+				</if>
+				<if test="runningTime != null">
+					runningTime = #{runningTime},
+				</if>
+				<if test="director != null">
+					director = #{director},
+				</if>
+				<if test="actor != null">
+					actor = #{actor},
+				</if>
+				<if test="genre != null">
+					genre = #{genre},
+				</if>
+				<if test="releaseDate != null">
+					releaseDate = #{releaseDate},
+				</if>
+				<if test="trailer != null">
+					trailer = #{trailer},
 				</if>
 			</set>
 			WHERE id = #{id}
 			</script>
 			""")
-	void modify(int id, String title, String body, String runDate);
+	void modify(int id, String title, String body, String country, int runningTime, String director, String actor, String genre, String releaseDate, String trailer);
 
 	@Select("""
 			SELECT *
 			FROM movie
-			WHERE runDate > NOW(); 
+			WHERE delStatus = 0; 
 			""")
 	List<Movie> getPlayingMovies();
 

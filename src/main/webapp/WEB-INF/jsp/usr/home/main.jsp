@@ -8,20 +8,19 @@
     <c:forEach var="movie" items="${movieList}">
       <div class="card card-compact w-80 bg-base-100 shadow-xl" style="float: left; margin:20px">
         <figure>
-          <a href="../ticket/main?movieId=${movie.id}&cinemaId=${rq.loginedMemberFavoriteCinema}&date=${rq.today}"><img src="${rq.getMoviePosterImgUri(movie.id)}" onerror="${rq.moviePosterFallbackImgOnErrorHtml}" /></a>
+          <a href="../movie/detail?id=${movie.id}"><img src="${rq.getMoviePosterImgUri(movie.id)}" onerror="${rq.moviePosterFallbackImgOnErrorHtml}" /></a>
         </figure>
         <div class="card-body">
           <h2 class="card-title">${movie.title}</h2>
           <p>${movie.body}</p>
           <div class="card-actions justify-end">
-            <a class="btn btn-primary" href="../movie/detail?movieId=${movie.id}">자세히</a>
+            <a class="btn btn-primary" href="../ticket/main?movieId=${movie.id}&cinemaId=${rq.loginedMemberFavoriteCinema}&date=${rq.today}">예매</a>
           </div>
         </div>
       </div>
     </c:forEach>
   </div>
 </section>
-
 
 
 <%@include file="../../common/foot.jspf"%>
