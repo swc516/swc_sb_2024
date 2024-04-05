@@ -1,5 +1,7 @@
 package com.swc.exam.demo.vo;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +26,9 @@ public class Movie {
 	private int count;
 	private boolean delStatus;
 	private String delDate;
+	
+	private String[] extra__directors;
+	private List<String> extra__actors;
 
 	public String getForPrintType1RegDate() {
 		return regDate.substring(2,16).replace(" ", "<br>");

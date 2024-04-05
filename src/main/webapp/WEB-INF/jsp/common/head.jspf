@@ -62,7 +62,7 @@ Theme__init();
               <span>어둡게</span>
             </a>
 
-            <div class="dropdown dropdown-end">
+            <div class="dropdown dropdown-end" style="z-index:1">
               <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">영화 ▾</div>
               <ul tabindex="0" class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
                 <li>
@@ -76,7 +76,7 @@ Theme__init();
 
             <a class="btn btn-ghost rounded-btn"
               href="/usr/ticket/main?cinemaId=${rq.loginedMemberFavoriteCinema}&date=${rq.today}">예매</a>
-            <div class="dropdown dropdown-end">
+            <div class="dropdown dropdown-end" style="z-index:1">
               <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">게시판 ▾</div>
               <ul tabindex="0" class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
                 <li>
@@ -94,7 +94,7 @@ Theme__init();
             </c:if>
             <c:if test="${rq.logined}">
 
-              <div class="dropdown dropdown-end">
+              <div class="dropdown dropdown-end" style="z-index:1">
                 <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">
                   <img class="w-8 h-8 ml-1 mr-1 rounded-full object-cover"
                     src="${rq.getProfileImgUri(rq.loginedMember.id)}" alt=""
@@ -115,7 +115,7 @@ Theme__init();
 
               <c:if test="${rq.admin}">
 
-                <div class="dropdown dropdown-end">
+                <div class="dropdown dropdown-end" style="z-index:1">
                   <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">관리자 ▾</div>
                   <ul tabindex="0" class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
                     <li>

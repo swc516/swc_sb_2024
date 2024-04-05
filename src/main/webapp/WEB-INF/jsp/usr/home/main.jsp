@@ -6,15 +6,21 @@
 <section class="mt-5">
   <div class="container mx-auto px-3 ">
     <c:forEach var="movie" items="${movieList}">
-      <div class="card card-compact w-80 bg-base-100 shadow-xl" style="float: left; margin:20px">
+      <div class="card card-compact w-80 bg-base-100 shadow-xl" style="float: left; margin: 20px">
         <figure>
-          <a href="../movie/detail?id=${movie.id}"><img src="${rq.getMoviePosterImgUri(movie.id)}" onerror="${rq.moviePosterFallbackImgOnErrorHtml}" /></a>
+          <a href="../movie/detail?id=${movie.id}">
+            <img style="width:300px; height:450px;"src="${rq.getMoviePosterImgUri(movie.id)}" onerror="${rq.moviePosterFallbackImgOnErrorHtml}" />
+          </a>
         </figure>
         <div class="card-body">
           <h2 class="card-title">${movie.title}</h2>
-          <p>${movie.body}</p>
+          <div
+            style="text-overflow: ellipsis; overflow: hidden; word-break: break-all; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical">
+            <p>${movie.body}</p>
+          </div>
           <div class="card-actions justify-end">
-            <a class="btn btn-primary" href="../ticket/main?movieId=${movie.id}&cinemaId=${rq.loginedMemberFavoriteCinema}&date=${rq.today}">예매</a>
+            <a class="btn btn-primary"
+              href="../ticket/main?movieId=${movie.id}&cinemaId=${rq.loginedMemberFavoriteCinema}&date=${rq.today}">예매</a>
           </div>
         </div>
       </div>
