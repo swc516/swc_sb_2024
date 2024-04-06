@@ -1,5 +1,7 @@
 package com.swc.exam.demo.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -89,8 +91,8 @@ public class UsrTicketController {
 
 	@RequestMapping("/usr/ticket/doTicketing")
 	@ResponseBody
-	public String showMain(int theaterInfoId, int theaterTimeId, String[] seats) {
-		ResultData doTicketingRd = ticketService.doTicketing(theaterInfoId, theaterTimeId, seats, rq.getLoginedMemberId());
+	public String doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, String movieTitle, String cinema, String theater, int time, String playingTime) {
+		ResultData doTicketingRd = ticketService.doTicketing(theaterInfoId, theaterTimeId, seats, rq.getLoginedMemberId(), movieTitle, cinema, theater, time, playingTime);
 		if (doTicketingRd.isSuccess()) {
 			return rq.jsReplace("예매가 완료되었습니다.", "../member/myTicketList?id="+rq.getLoginedMemberId());
 		}
@@ -98,16 +100,27 @@ public class UsrTicketController {
 	}
 
 	@RequestMapping("/usr/ticket/seatLocation")
-	public String showSeatLocation(Model model, int cinemaId, int theaterInfoId, char mySeatRow, int mySeatCol) {
-		List<TheaterInfo> theaterInfos = ticketService.getForPrintTheaterInfo(cinemaId, theaterInfoId);
+	public String showSeatLocation(Model model, String cinema, String theater, String mySeats) {
+		String[] seatSplit = mySeats.split(",");
+		List<String> mySeatList = new ArrayList<String>();
+		
+		for(String seats: seatSplit) {
+			mySeatList.add(seats.substring(0,seats.length()-3).trim());
+		}
+		
+		List<TheaterInfo> theaterInfos = ticketService.getForPrintTheaterInfo(cinema, theater);
 
 		for (TheaterInfo theaterInfo : theaterInfos) {
-			theaterInfo.setExtra__seat(theaterInfo.getSeatRow() + "-" + theaterInfo.getSeatCol());
+			String seat = theaterInfo.getSeatRow() + "-" + theaterInfo.getSeatCol();
+			for(String mySeat: mySeatList) {
+				if(seat.equals(mySeat))
+				theaterInfo.setExtra__mySeat(true);
+			}
 		}
 
 		model.addAttribute("theaterInfos", theaterInfos);
 		model.addAttribute("theater", theaterInfos.get(0).getTheater());
-		model.addAttribute("mySeat", mySeatRow + "-" + mySeatCol);
+		model.addAttribute("mySeat", "A-7, A-8");
 
 		String seatRows = "";
 		int lastSeatRow = theaterInfos.get(theaterInfos.size() - 1).getSeatRow();

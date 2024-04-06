@@ -19,6 +19,7 @@ import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.Rq;
 import com.swc.exam.demo.vo.TheaterTime;
+import com.swc.exam.demo.vo.Ticket;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -39,10 +40,12 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email, int favoriteCinema,
-			@RequestParam(defaultValue = "/") String afterLoginUri, MultipartRequest multipartRequest) {
+	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email,
+			int favoriteCinema, @RequestParam(defaultValue = "/") String afterLoginUri,
+			MultipartRequest multipartRequest) {
 
-		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email, favoriteCinema);
+		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email,
+				favoriteCinema);
 
 		if (joinRd.isFail()) {
 			return rq.jsHistoryBack(joinRd.getResultCode(), joinRd.getMsg());
@@ -147,7 +150,7 @@ public class UsrMemberController {
 	public String showJoin(Model model) {
 		List<Cinema> cinemas = memberService.getCinemaList();
 		model.addAttribute("cinemas", cinemas);
-		
+
 		return "usr/member/join";
 	}
 
@@ -215,10 +218,10 @@ public class UsrMemberController {
 
 		boolean hasImg = genFileService.hasImg("profileImg", rq.getLoginedMemberId());
 		model.addAttribute("hasImg", hasImg);
-		
+
 		List<Cinema> cinemas = memberService.getCinemaList();
 		model.addAttribute("cinemas", cinemas);
-		
+
 		return "usr/member/modify";
 	}
 
@@ -243,8 +246,8 @@ public class UsrMemberController {
 			loginPw = null;
 		}
 
-		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNo, email, favoriteCinema
-				);
+		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNo, email,
+				favoriteCinema);
 
 		if (request.getParameter("deleteFileMemberExtraProfileImg") != null) {
 			genFileService.deleteGenFiles("member", rq.getLoginedMemberId(), "extra", "profileImg", 1);
@@ -262,25 +265,45 @@ public class UsrMemberController {
 
 		return rq.jsReplace(modifyRd.getMsg(), "/");
 	}
-	
+
 	@RequestMapping("/usr/member/myTicketList")
 	public String showMyTicketingList(Model model, int id) {
-		if(rq.getLoginedMemberId() != id) {
+		if (rq.getLoginedMemberId() != id) {
 			return "usr/member/myPage";
 		}
-		
-		List<TheaterTime> lists = memberService.getMyTicketingList(id);
+
+		List<Ticket> lists = memberService.getMyTicketingList(id);
+
+		for (Ticket list : lists) {
+			String[] split1 = list.getSeat().split(", ");
+			String seatId = "";
+			String seatInfo = "";
+			for (int i = 0; i < split1.length; i++) {
+				String[] split2 = split1[i].split("_");
+				if (i == split1.length-1) {
+					seatId += split2[0];
+					seatInfo += split2[1];
+				} else {
+					seatId += split2[0] + ", ";
+					seatInfo += split2[1] + ", ";
+				}
+			}
+			list.setExtra__seatId(seatId);
+			list.setExtra__seatInfo(seatInfo);
+		}
+
 		model.addAttribute("lists", lists);
-			
+
 		return "usr/member/myTicketList";
 	}
-	
+
 	@RequestMapping("/usr/member/doTicketCancel")
 	@ResponseBody
-	public String doTicketCencle(Model model, int id) {
-		memberService.doTicketCancel(id);
-		
-		return rq.jsReplace("취소가 완료되었습니다.", "/usr/member/myTicketList?id="+rq.getLoginedMemberId());
+	public String doTicketCencle(Model model, int id, String seatIds) {
+
+		memberService.doTicketCancel(id, seatIds);
+
+		return rq.jsReplace("취소가 완료되었습니다.", "/usr/member/myTicketList?id=" + rq.getLoginedMemberId());
 	}
 
 }

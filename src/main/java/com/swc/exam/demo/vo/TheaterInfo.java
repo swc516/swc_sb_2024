@@ -16,7 +16,7 @@ public class TheaterInfo {
 	private int seatCol;
 	private String seatStatus;
 	
-	private String extra__seat;
+	private boolean extra__mySeat;
 	private String extra__region;
 	private String extra__branch;
 	

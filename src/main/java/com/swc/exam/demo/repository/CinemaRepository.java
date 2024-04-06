@@ -364,23 +364,6 @@ public interface CinemaRepository {
 	void doTicketing(int theaterInfoId, int theaterTimeId, char seatRow,
 			int seatCol, int memberId);
 
-	@Select("""
-			SELECT TT.*,
-			M.title AS extra__movieTitle,
-			C.region AS extra__cinemaRegion,
-			C.branch AS extra__cinemabranch,
-			TI.theater AS extra__theater
-			FROM theaterTime AS TT
-			LEFT JOIN movie AS M
-			ON TT.movieId = M.id
-			LEFT JOIN cinema AS C
-			ON TT.cinemaId = C.id
-			LEFT JOIN theaterInfo AS TI
-			ON TT.theaterInfoId = TI.theaterInfoId
-			WHERE TT.buyMemberId = #{id}
-			GROUP BY TT.id
-						""")
-	List<TheaterTime> getMyTicketingList(int id);
 
 	@Update("""
 			UPDATE theaterTime
@@ -396,4 +379,22 @@ public interface CinemaRepository {
 			AND theaterInfoId = #{theaterInfoId}
 			""")
 	List<TheaterInfo> getForPrintTheaterInfo(int cinemaId, int theaterInfoId);
+
+	
+	@Select("""
+			SELECT id
+			FROM cinema
+			WHERE region = #{region}
+			AND branch = #{branch}
+			""")
+	int getCinemaIdByRegionAndBranch(String region, String branch);
+
+	@Select("""
+			SELECT theaterInfoId
+			FROM theaterInfo
+			WHERE cinemaId = #{cinemaId}
+			AND theater = #{theater}
+			GROUP BY theaterInfoId
+			""")
+	int getTheaterInfoIdByCinemaIdAndTheaterInfo(int cinemaId, String theater);
 }

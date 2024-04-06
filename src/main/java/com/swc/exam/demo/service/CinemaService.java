@@ -233,18 +233,29 @@ public class CinemaService {
 
 	}
 
-	public List<TheaterTime> getMyTicketingList(int id) {
-		List<TheaterTime> lists = cinemaRepository.getMyTicketingList(id);
-		return lists;
-	}
-
 	public void doTicketCancel(int id) {
 		cinemaRepository.doTicketCancel(id);
 	}
 
-	public List<TheaterInfo> getForPrintTheaterInfo(int cinemaId, int theaterInfoId) {
+	public List<TheaterInfo> getForPrintTheaterInfo(String cinema, String theater) {
+		int cinemaId = getCinemaIdByRegionAndBranch(cinema);
+		int theaterInfoId = getTheaterInfoIdByCinemaIdAndTheaterInfo(cinemaId, theater);
+
 		List<TheaterInfo> theaterInfos = cinemaRepository.getForPrintTheaterInfo(cinemaId, theaterInfoId);
 		return theaterInfos;
 	}
 
+	public int getCinemaIdByRegionAndBranch(String cinema) {
+		String[] cinemaSplit = cinema.split("_");
+		String region = cinemaSplit[0];
+		String branch = cinemaSplit[1];
+
+		int cinemaId = cinemaRepository.getCinemaIdByRegionAndBranch(region, branch);
+		return cinemaId;
+	}
+
+	public int getTheaterInfoIdByCinemaIdAndTheaterInfo(int cinemaId, String theater) {
+		int theaterInfoId = cinemaRepository.getTheaterInfoIdByCinemaIdAndTheaterInfo(cinemaId, theater);
+		return theaterInfoId;
+	}
 }

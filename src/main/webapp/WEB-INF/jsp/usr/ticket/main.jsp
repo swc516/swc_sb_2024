@@ -52,12 +52,12 @@
             <td>
               <c:if test="${theaterTime.extra__sellSeatCount == theaterTime.extra__maxSeatCount}">
                 <input type="radio" name="ticketing"
-                  value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.theaterTimeId}"
+                  value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.theaterTimeId}__${theaterTime.theaterTime}"
                   disabled>
               </c:if>
               <c:if test="${theaterTime.extra__sellSeatCount != theaterTime.extra__maxSeatCount}">
                 <input type="radio" name="ticketing"
-                  value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.theaterTimeId}">
+                  value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.theaterTimeId}__${theaterTime.theaterTime}">
               </c:if>
             </td>
             <td>${theaterTime.extra__theater}</td>
@@ -83,6 +83,7 @@
       <input type="hidden" id="cinemaId" name="cinemaId" value="">
       <input type="hidden" id="theaterInfoId" name="theaterInfoId" value="">
       <input type="hidden" id="theaterTimeId" name="theaterTimeId" value="">
+      <input type="hidden" id="theaterTime" name="theaterTime" value="">
       <input type="submit" value="예매" class="btn btn-success">
     </form>
   </div>
@@ -97,11 +98,13 @@
 				var cinemaId = result[1];
 				var theaterInfoId = result[2];
 				var theaterTimeId = result[3];
+				var theaterTime = result[4];
 
 				document.getElementById("movieId").value = movieId;
 				document.getElementById("cinemaId").value = cinemaId;
 				document.getElementById("theaterInfoId").value = theaterInfoId;
 				document.getElementById("theaterTimeId").value = theaterTimeId;
+				document.getElementById("theaterTime").value = theaterTime;
 			});
 </script>
 

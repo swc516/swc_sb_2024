@@ -35,10 +35,10 @@
         </c:if>
         <td>
           <c:if test="${theaterInfo.seatStatus != '없음'}">
-            <c:if test="${theaterInfo.extra__seat != mySeat}">
+            <c:if test="${theaterInfo.extra__mySeat == false}">
               <input class="checkbox" type="checkbox" disabled>
             </c:if>
-            <c:if test="${theaterInfo.extra__seat == mySeat}">
+             <c:if test="${theaterInfo.extra__mySeat == true}">
               <input class="checkbox checkbox-error" type="checkbox" checked>
             </c:if>
           </c:if>

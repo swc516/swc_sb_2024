@@ -12,6 +12,7 @@ import com.swc.exam.demo.vo.Cinema;
 import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.TheaterTime;
+import com.swc.exam.demo.vo.Ticket;
 
 @Service
 public class MemberService {
@@ -21,14 +22,14 @@ public class MemberService {
 	private String siteName;
 
 	private MemberRepository memberRepository;
-	private TicketService ticketingService;
+	private TicketService ticketService;
 	private AttrService attrService;
 	private MailService mailService;
 	private CinemaService cinemaService;
 
-	public MemberService(AttrService attrService, TicketService ticketingService, MemberRepository memberRepository, MailService mailService, CinemaService cinemaService) {
+	public MemberService(AttrService attrService, TicketService ticketService, MemberRepository memberRepository, MailService mailService, CinemaService cinemaService) {
 		this.memberRepository = memberRepository;
-		this.ticketingService = ticketingService;
+		this.ticketService = ticketService;
 		this.attrService = attrService;
 		this.mailService = mailService;
 		this.cinemaService = cinemaService;
@@ -154,13 +155,21 @@ public class MemberService {
 		memberRepository.deleteMember(member.getId());
 	}
 
-	public List<TheaterTime> getMyTicketingList(int id) {
-		List<TheaterTime> lists = ticketingService.getMyTicketingList(id);
+	public List<Ticket> getMyTicketingList(int id) {
+		List<Ticket> lists = ticketService.getMyTicketingList(id);
 		return lists;
 	}
 
-	public void doTicketCancel(int id) {
-		ticketingService.doTicketCancel(id);
+	public void doTicketCancel(int ticketId, String seatIds) {
+		ticketService.doTicketCancel(ticketId);
+		
+		String[] seatIdSplit = seatIds.split(", ");
+
+		for(String seatId : seatIdSplit) {
+			cinemaService.doTicketCancel(Integer.parseInt(seatId));
+		}
+		
+		
 	}
 
 	public List<Cinema> getCinemaList() {

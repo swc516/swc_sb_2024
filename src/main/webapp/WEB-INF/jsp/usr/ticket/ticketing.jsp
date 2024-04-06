@@ -34,17 +34,17 @@
               <c:choose>
                 <c:when test="${theaterTime.seatSell == true }">
                   <input class="checkbox seatRow-${theaterTime.seatRow} seatCol-${theaterTime.seatCol}" type="checkbox"
-                    name="seats" value=" ${theaterTime.seatRow}-${theaterTime.seatCol}-${theaterTime.seatStatus}" disabled checked>
+                    name="seats" value="${theaterTime.id}_${theaterTime.seatRow}-${theaterTime.seatCol}-${theaterTime.seatStatus}" disabled checked>
                 </c:when>
                 <c:otherwise>
                   <c:if test="${theaterTime.seatStatus == '일반'}">
                     <input class="checkbox seatRow-${theaterTime.seatRow} seatCol-${theaterTime.seatCol}" type="checkbox"
-                      name="seats" value=" ${theaterTime.seatRow}-${theaterTime.seatCol}-${theaterTime.seatStatus}">
+                      name="seats" value="${theaterTime.id}_${theaterTime.seatRow}-${theaterTime.seatCol}-${theaterTime.seatStatus}">
                   </c:if>
                   <c:if test="${theaterTime.seatStatus == '장애'}">
                     <input class="checkbox checkbox-success seatRow-${theaterTime.seatRow} seatCol-${theaterTime.seatCol}"
                       type="checkbox" name="seats"
-                      value=" ${theaterTime.seatRow}-${theaterTime.seatCol}-${theaterTime.seatStatus}">
+                      value="${theaterTime.id}_${theaterTime.seatRow}-${theaterTime.seatCol}-${theaterTime.seatStatus}">
                   </c:if>
                   <c:if test="${theaterTime.seatStatus == '없음'}">
                   　
@@ -56,6 +56,11 @@
           </c:forEach>
         </table>
 
+        <input type="hidden" name="movieTitle" value="${movieTitle}">
+        <input type="hidden" name="cinema" value="${cinemaRegion}_${cinemaBranch}">
+        <input type="hidden" name="theater" value="${theater}">
+        <input type="hidden" name="time" value="${param.theaterTime}">
+        <input type="hidden" name="playingTime" value="${playingTime}">
         <input type="hidden" name="theaterInfoId" value="${param.theaterInfoId}">
         <input type="hidden" name="theaterTimeId" value="${param.theaterTimeId}">
         <button type="submit" class="btn btn-primary">예매하기</button>

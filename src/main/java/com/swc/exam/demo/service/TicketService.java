@@ -2,6 +2,7 @@ package com.swc.exam.demo.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.swc.exam.demo.repository.TicketRepository;
 import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Cinema;
 import com.swc.exam.demo.vo.Movie;
@@ -16,15 +18,18 @@ import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.Rq;
 import com.swc.exam.demo.vo.TheaterInfo;
 import com.swc.exam.demo.vo.TheaterTime;
+import com.swc.exam.demo.vo.Ticket;
 
 @Service
 public class TicketService {
 
+	private TicketRepository ticketRepository;
 	private MovieService movieService;
 	private CinemaService cinemaService;
 	private Rq rq;
 
-	public TicketService( MovieService movieService, CinemaService cinemaService,  Rq rq) {
+	public TicketService(TicketRepository ticketRepository, MovieService movieService, CinemaService cinemaService,  Rq rq) {
+		this.ticketRepository = ticketRepository;
 		this.movieService = movieService;
 		this.cinemaService = cinemaService;
 		this.rq = rq;
@@ -37,26 +42,31 @@ public class TicketService {
 	}
 
 	
-	public ResultData doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, int memberId) {
+	public ResultData doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, int memberId, String movieTitle, String cinema, String theater, int time, String playingTime) {
 		for (String seat : seats) {
-			String[] seatSplit = seat.split("-");
-			char seatRow = seatSplit[0].trim().charAt(0);
-			int seatCol = Integer.parseInt(seatSplit[1]);
+			String[] seatSplit1 = seat.split("_");
+			String seatInfo = seatSplit1[1];
+			String[] seatSplit2 = seatInfo.split("-");
+			char seatRow = seatSplit2[0].trim().charAt(0);
+			int seatCol = Integer.parseInt(seatSplit2[1]);
 			cinemaService.doTicketing(theaterInfoId, theaterTimeId, seatRow, seatCol, memberId);
 		}
+		String totalSeat = Arrays.toString(seats).substring(1,Arrays.toString(seats).trim().length()-1);
+		ticketRepository.doTicketing(memberId, movieTitle, cinema, theater, time, playingTime, totalSeat);
+		
 		
 		return ResultData.from("S-1", "예매가 완료되었습니다.");
 	}
 
 
-	public List<TheaterTime> getMyTicketingList(int id) {
-		List<TheaterTime> lists = cinemaService.getMyTicketingList(id);
+	public List<Ticket> getMyTicketingList(int id) {
+		List<Ticket> lists = ticketRepository.getMyTicketingList(id);
 		return lists;
 	}
 
 
 	public void doTicketCancel(int id) {
-		cinemaService.doTicketCancel(id);
+		ticketRepository.doTicketCancel(id);
 	}
 
 
@@ -126,9 +136,15 @@ public class TicketService {
 	}
 
 
-	public List<TheaterInfo> getForPrintTheaterInfo(int cinemaId, int theaterInfoId) {
-		List<TheaterInfo> theaterInfos = cinemaService.getForPrintTheaterInfo(cinemaId, theaterInfoId);
+	public List<TheaterInfo> getForPrintTheaterInfo(String cinema, String theater) {
+		List<TheaterInfo> theaterInfos = cinemaService.getForPrintTheaterInfo(cinema, theater);
 		return theaterInfos;
+	}
+
+
+	public Ticket getTicketById(int ticketId) {
+		Ticket ticket = ticketRepository.getTicketById(ticketId);
+		return ticket;
 	}
 
 }
