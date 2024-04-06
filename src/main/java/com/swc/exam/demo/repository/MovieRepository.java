@@ -49,11 +49,31 @@ public interface MovieRepository {
 			    	<when test="searchKeywordTypeCode == 'body'">
 			    		AND M.body LIKE CONCAT('%', #{searchKeyword}, '%')
 			    	</when>
+			    	<when test="searchKeywordTypeCode == 'director'">
+			    		AND M.director LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'actor'">
+			    		AND M.actor LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'genre'">
+			    		AND M.genre LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'country'">
+			    		AND M.country LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
 					<otherwise>
 						AND(
 							M.title LIKE CONCAT('%', #{searchKeyword}, '%')
 							OR
 							M.body LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.director LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.actor LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.genre LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.country LIKE CONCAT('%', #{searchKeyword}, '%')
 							)
 					</otherwise>
 				</choose>
@@ -77,11 +97,31 @@ public interface MovieRepository {
 			    	<when test="searchKeywordTypeCode == 'body'">
 			    		AND M.body LIKE CONCAT('%', #{searchKeyword}, '%')
 			    	</when>
+			    	<when test="searchKeywordTypeCode == 'director'">
+			    		AND M.director LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'actor'">
+			    		AND M.actor LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'genre'">
+			    		AND M.genre LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'country'">
+			    		AND M.country LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
 					<otherwise>
 						AND(
 							M.title LIKE CONCAT('%', #{searchKeyword}, '%')
 							OR
 							M.body LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.director LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.actor LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.genre LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.country LIKE CONCAT('%', #{searchKeyword}, '%')
 							)
 					</otherwise>
 				</choose>

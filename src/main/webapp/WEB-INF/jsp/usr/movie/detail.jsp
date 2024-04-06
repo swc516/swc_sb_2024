@@ -28,17 +28,13 @@
             <c:set var="director" value="${fn:split(movie.director,',')}" />
             <c:forEach var="directorValue" items="${director}" varStatus="varStatus">
               <c:if test="${varStatus.count eq key }">
-                <a class="btn-text-link w-full truncate" target="_blank"
-                  href="https://search.naver.com/search.naver?query=${directorValue}">${directorValue}</a>
+                <a class="btn-text-link w-full truncate" href="../movie/list?searchKeywordTypeCode=director&searchKeyword=${directorValue}">${directorValue}</a>
                 <c:if test="${fn:length(director) != key}">
                   ,&nbsp;
                   </c:if>
               </c:if>
               <c:set var="key" value="${key + 1 }" />
             </c:forEach>
-
-
-
           </td>
         </tr>
         <tr>
@@ -48,8 +44,7 @@
             <c:set var="actor" value="${fn:split(movie.actor,',')}" />
             <c:forEach var="actorValue" items="${actor}" varStatus="varStatus">
               <c:if test="${varStatus.count eq key }">
-                <a class="btn-text-link w-full truncate" target="_blank"
-                  href="https://search.naver.com/search.naver?query=${actorValue}">${actorValue}</a>
+                <a class="btn-text-link w-full truncate" href="../movie/list?searchKeywordTypeCode=actor&searchKeyword=${actorValue}">${actorValue}</a>
                 <c:if test="${fn:length(actor) != key}">
                   ,&nbsp;
                   </c:if>

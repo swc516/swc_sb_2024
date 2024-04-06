@@ -38,7 +38,7 @@ public class UsrMovieController {
 	}
 	
 	@RequestMapping("/usr/movie/list")
-	public String showList(Model model,	@RequestParam(defaultValue = "title, body") 
+	public String showList(Model model,	@RequestParam(defaultValue = "title, body, director, actor, genre, country") 
 	String searchKeywordTypeCode, @RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
 		
 		int moviesCount = movieService.getMoviesCount(searchKeywordTypeCode, searchKeyword);

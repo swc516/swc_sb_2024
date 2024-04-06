@@ -33,11 +33,43 @@
             </c:otherwise>
           </c:choose>
           <c:choose>
-            <c:when test="${param.searchKeywordTypeCode eq 'title, body'}">
-              <option value="title, body" selected>영화명, 영화소개</option>
+            <c:when test="${param.searchKeywordTypeCode eq 'director'}">
+              <option value="director" selected>감독</option>
             </c:when>
             <c:otherwise>
-              <option value="title, body">영화명, 영화소개</option>
+              <option value="director">감독</option>
+            </c:otherwise>
+          </c:choose>
+          <c:choose>
+            <c:when test="${param.searchKeywordTypeCode eq 'actor'}">
+              <option value="actor" selected>배우</option>
+            </c:when>
+            <c:otherwise>
+              <option value="actor">배우</option>
+            </c:otherwise>
+          </c:choose>
+          <c:choose>
+            <c:when test="${param.searchKeywordTypeCode eq 'genre'}">
+              <option value="genre" selected>장르</option>
+            </c:when>
+            <c:otherwise>
+              <option value="genre">장르</option>
+            </c:otherwise>
+          </c:choose>
+          <c:choose>
+            <c:when test="${param.searchKeywordTypeCode eq 'country'}">
+              <option value="country" selected>제작국가</option>
+            </c:when>
+            <c:otherwise>
+              <option value="country">제작국가</option>
+            </c:otherwise>
+          </c:choose>
+          <c:choose>
+            <c:when test="${param.searchKeywordTypeCode eq 'title, body, director, actor, genre, country'}">
+              <option value="title, body, director, actor, genre, country" selected>전체</option>
+            </c:when>
+            <c:otherwise>
+              <option value="title, body, director, actor, genre, country">전체</option>
             </c:otherwise>
           </c:choose>
         </select>
