@@ -55,11 +55,34 @@
         </tr>
         <tr>
           <th>장르</th>
-          <td>${movie.genre}</td>
+          <td>
+            <c:set var="key" value="1" />
+            <c:set var="genre" value="${fn:split(movie.genre,',')}" />
+            <c:forEach var="genreValue" items="${genre}" varStatus="varStatus">
+              <c:if test="${varStatus.count eq key }">
+                <a class="btn-text-link w-full truncate" href="../movie/list?searchKeywordTypeCode=genre&searchKeyword=${genreValue}">${genreValue}</a>
+                <c:if test="${fn:length(genre) != key}">
+                  ,&nbsp;
+                  </c:if>
+              </c:if>
+              <c:set var="key" value="${key + 1 }" />
+            </c:forEach></td>
         </tr>
         <tr>
           <th>제작국가</th>
-          <td>${movie.country}</td>
+          <td>
+          <c:set var="key" value="1" />
+            <c:set var="country" value="${fn:split(movie.country,',')}" />
+            <c:forEach var="countryValue" items="${country}" varStatus="varStatus">
+              <c:if test="${varStatus.count eq key }">
+                <a class="btn-text-link w-full truncate" href="../movie/list?searchKeywordTypeCode=country&searchKeyword=${countryValue}">${countryValue}</a>
+                <c:if test="${fn:length(country) != key}">
+                  ,&nbsp;
+                  </c:if>
+              </c:if>
+              <c:set var="key" value="${key + 1 }" />
+            </c:forEach>
+          </td>
         </tr>
         <tr>
           <th>개봉일</th>

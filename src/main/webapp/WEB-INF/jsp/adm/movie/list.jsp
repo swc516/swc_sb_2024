@@ -83,13 +83,14 @@
       <table class="table table-fixed w-full">
         <colgroup>
           <col width="50" />
-          <col width="80" />
-          <col width="130" />
+          <col width="50" />
+          <col width="100" />
           <col width="150" />
-          <col width="150" />
-          <col width="150" />
-          <col width="300" />
-          <col width="150" />
+          <col width="500" />
+          <col width="100" />
+          <col width="100" />
+          <col width="100" />
+          <col width="100" />
         </colgroup>
         <thead>
           <tr>
@@ -98,10 +99,13 @@
             </th>
             <th>번호</th>
             <th>포스터</th>
-            <th>추가날짜</th>
-            <th>갱신날짜</th>
             <th>영화명</th>
             <th>영화소개</th>
+            <th>감독</th>
+            <th>배우</th>
+            <th>제작국가</th>
+            <th>장르</th>
+            <th>개봉일자</th>
           </tr>
         </thead>
         <tbody>
@@ -115,13 +119,17 @@
                 <img width="200" height="300" class="ml-1 mr-1" src="${rq.getMoviePosterImgUri(movie.id)}" alt=""
                   onerror="${rq.moviePosterFallbackImgOnErrorHtml}" />
               </td>
-              <td>${movie.forPrintType1RegDate}</td>
-              <td>${movie.forPrintType1UpdateDate}</td>
+   
               <td>
                 <a class="btn-text-link block w-full truncate" href="/adm/movie/modify?id=${movie.id}">${movie.title}
                 </a>
               </td>
               <td>${movie.body}</td>
+              <td>${movie.director}</td>
+              <td>${movie.actor}</td>
+              <td>${movie.country}</td>
+              <td>${movie.genre}</td>
+              <td>${movie.releaseDate}</td>
             </tr>
           </c:forEach>
         </tbody>
