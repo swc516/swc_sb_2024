@@ -61,6 +61,8 @@ Theme__init();
               <span>밝게</span>
               <span>어둡게</span>
             </a>
+            
+            <h1 class="btn btn-ghost rounded-btn"></h1>
 
             <div class="dropdown dropdown-end" style="z-index:1">
               <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">영화 ▾</div>
@@ -76,6 +78,7 @@ Theme__init();
 
             <a class="btn btn-ghost rounded-btn"
               href="/usr/ticket/main?cinemaId=${rq.loginedMemberFavoriteCinema}&date=${rq.today}">예매</a>
+              
             <div class="dropdown dropdown-end" style="z-index:1">
               <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">게시판 ▾</div>
               <ul tabindex="0" class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
@@ -156,5 +159,21 @@ Theme__init();
   <section class="mt-5">
     <div style="font-size: 50px" class="container mx-auto px-3">${pageTitle}</div>
   </section>
+  
+  
+    <script>
+        function clock(){
+            let timetext = document.querySelector('h1'); /* h1 태그 갖고오기 */
+            let today = new Date(); /* 날짜와 시간 */
+            let H = today.getHours();
+            let M = today.getMinutes();
+            let S = today.getSeconds();
+
+            timetext.innerHTML = H + ":" + M + ":" + S; /* html에 출력 */
+        }
+        clock();
+        setInterval(clock,1000); /* 1초마다 clock함수 실행 */
+        
+    </script>
 
   <main>

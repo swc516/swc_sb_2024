@@ -6,10 +6,12 @@
 <c:set var="pageTitle" value="영화 예매(테스트)" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
+
 <%@include file="../../common/head.jspf"%>
 
 <form id="frm" action="../ticket/main" method="post">
   <section class="container mx-auto px-3" style="display: flex; width: 100%; border: 1px solid #003458;">
+  
     <div style="width: 20%;">
       <c:forEach var="movie" items="${movies}">
         <c:if test="${movie.id == param.movieId }">
@@ -107,5 +109,7 @@
 				document.getElementById("theaterTime").value = theaterTime;
 			});
 </script>
+
+
 
 <%@include file="../../common/foot.jspf"%>
