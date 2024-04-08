@@ -172,8 +172,6 @@ public class CinemaService {
 
 	public ResultData addTime(int cinemaId, int theaterInfoId, int movieId, String date, int theaterTime,
 			String startTime, String endTime) {
-		System.out.println("onec|" + cinemaId + "*" + theaterInfoId + "*" + movieId + "*" + date + "*" + theaterTime
-				+ "*" + startTime + "*" + endTime);
 
 		List<TheaterInfo> theaterInfos = cinemaRepository.getTheaterInfos(cinemaId, theaterInfoId);
 		char seatRow;

@@ -473,4 +473,18 @@ public class Ut {
 		return BeforeFiveMinutes;
 	}
 
+	public static String getAddDay(int addDay) {
+		 String day = "";
+			
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		 Date now = new Date();
+		 
+		 Calendar cal = Calendar.getInstance();
+		 
+		 cal.add(Calendar.DAY_OF_MONTH, addDay);
+		 
+		 day = sdf.format(cal.getTime());  
+		return day;
+	}
+
 }

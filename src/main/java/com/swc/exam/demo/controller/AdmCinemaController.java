@@ -243,6 +243,347 @@ public class AdmCinemaController {
 	}
 	
 	
+	
+	@RequestMapping("/adm/cinema/theater/insertTestData")
+	@ResponseBody
+	public String insertTestData() {
+		// c id / t id/ m id/ date / theaterTime / sT / eT
+		
+		//서울 도봉/ 1관 / 댓글부대 / 오늘~ / n회차 / 시작시간 / 종료시간
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(0) , 1, Ut.getAddDay(0) + " 10:00:00" , Ut.getAddDay(0) + " 12:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(0) , 2, Ut.getAddDay(0) + " 13:00:00" , Ut.getAddDay(0) + " 15:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(0) , 3, Ut.getAddDay(0) + " 16:00:00" , Ut.getAddDay(0) + " 18:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(0) , 4, Ut.getAddDay(0) + " 19:00:00" , Ut.getAddDay(0) + " 21:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(0) , 5, Ut.getAddDay(0) + " 22:00:00" , Ut.getAddDay(1) + " 00:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(0) , 6, Ut.getAddDay(1) + " 01:00:00" , Ut.getAddDay(1) + " 03:00:00");
+		
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(1) , 1, Ut.getAddDay(1) + " 10:00:00" , Ut.getAddDay(1) + " 12:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(1) , 2, Ut.getAddDay(1) + " 13:00:00" , Ut.getAddDay(1) + " 15:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(1) , 3, Ut.getAddDay(1) + " 16:00:00" , Ut.getAddDay(1) + " 18:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(1) , 4, Ut.getAddDay(1) + " 19:00:00" , Ut.getAddDay(1) + " 21:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(1) , 5, Ut.getAddDay(1) + " 22:00:00" , Ut.getAddDay(2) + " 00:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(1) , 6, Ut.getAddDay(2) + " 01:00:00" , Ut.getAddDay(2) + " 03:00:00");
+		
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(2) , 1, Ut.getAddDay(2) + " 10:00:00" , Ut.getAddDay(2) + " 12:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(2) , 2, Ut.getAddDay(2) + " 13:00:00" , Ut.getAddDay(2) + " 15:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(2) , 3, Ut.getAddDay(2) + " 16:00:00" , Ut.getAddDay(2) + " 18:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(2) , 4, Ut.getAddDay(2) + " 19:00:00" , Ut.getAddDay(2) + " 21:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(2) , 5, Ut.getAddDay(2) + " 22:00:00" , Ut.getAddDay(3) + " 00:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(2) , 6, Ut.getAddDay(3) + " 01:00:00" , Ut.getAddDay(3) + " 03:00:00");
+		
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(3) , 1, Ut.getAddDay(3) + " 10:00:00" , Ut.getAddDay(3) + " 12:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(3) , 2, Ut.getAddDay(3) + " 13:00:00" , Ut.getAddDay(3) + " 15:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(3) , 3, Ut.getAddDay(3) + " 16:00:00" , Ut.getAddDay(3) + " 18:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(3) , 4, Ut.getAddDay(3) + " 19:00:00" , Ut.getAddDay(3) + " 21:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(3) , 5, Ut.getAddDay(3) + " 22:00:00" , Ut.getAddDay(4) + " 00:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(3) , 6, Ut.getAddDay(4) + " 01:00:00" , Ut.getAddDay(4) + " 03:00:00");
+	
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(4) , 1, Ut.getAddDay(4) + " 10:00:00" , Ut.getAddDay(4) + " 12:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(4) , 2, Ut.getAddDay(4) + " 13:00:00" , Ut.getAddDay(4) + " 15:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(4) , 3, Ut.getAddDay(4) + " 16:00:00" , Ut.getAddDay(4) + " 18:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(4) , 4, Ut.getAddDay(4) + " 19:00:00" , Ut.getAddDay(4) + " 21:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(4) , 5, Ut.getAddDay(4) + " 22:00:00" , Ut.getAddDay(5) + " 00:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(4) , 6, Ut.getAddDay(5) + " 01:00:00" , Ut.getAddDay(5) + " 03:00:00");
+		
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(5) , 1, Ut.getAddDay(5) + " 10:00:00" , Ut.getAddDay(5) + " 12:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(5) , 2, Ut.getAddDay(5) + " 13:00:00" , Ut.getAddDay(5) + " 15:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(5) , 3, Ut.getAddDay(5) + " 16:00:00" , Ut.getAddDay(5) + " 18:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(5) , 4, Ut.getAddDay(5) + " 19:00:00" , Ut.getAddDay(5) + " 21:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(5) , 5, Ut.getAddDay(5) + " 22:00:00" , Ut.getAddDay(6) + " 00:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(5) , 6, Ut.getAddDay(6) + " 01:00:00" , Ut.getAddDay(6) + " 03:00:00");
+		
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(6) , 1, Ut.getAddDay(6) + " 10:00:00" , Ut.getAddDay(6) + " 12:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(6) , 2, Ut.getAddDay(6) + " 13:00:00" , Ut.getAddDay(6) + " 15:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(6) , 3, Ut.getAddDay(6) + " 16:00:00" , Ut.getAddDay(6) + " 18:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(6) , 4, Ut.getAddDay(6) + " 19:00:00" , Ut.getAddDay(6) + " 21:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(6) , 5, Ut.getAddDay(6) + " 22:00:00" , Ut.getAddDay(7) + " 00:00:00");
+		cinemaService.addTime(1, 1, 1, Ut.getAddDay(6) , 6, Ut.getAddDay(7) + " 01:00:00" , Ut.getAddDay(7) + " 03:00:00");
+			
+		
+		
+		
+		
+		
+		//서울 도봉/ 2관 / 고질라 / 오늘~ / n회차 / 시작시간 / 종료시간	
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(0) , 1, Ut.getAddDay(0) + " 10:00:00" , Ut.getAddDay(0) + " 12:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(0) , 2, Ut.getAddDay(0) + " 13:00:00" , Ut.getAddDay(0) + " 15:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(0) , 3, Ut.getAddDay(0) + " 16:00:00" , Ut.getAddDay(0) + " 18:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(0) , 4, Ut.getAddDay(0) + " 19:00:00" , Ut.getAddDay(0) + " 21:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(0) , 5, Ut.getAddDay(0) + " 22:00:00" , Ut.getAddDay(1) + " 00:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(0) , 6, Ut.getAddDay(1) + " 01:00:00" , Ut.getAddDay(1) + " 03:00:00");
+		
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(1) , 1, Ut.getAddDay(1) + " 10:00:00" , Ut.getAddDay(1) + " 12:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(1) , 2, Ut.getAddDay(1) + " 13:00:00" , Ut.getAddDay(1) + " 15:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(1) , 3, Ut.getAddDay(1) + " 16:00:00" , Ut.getAddDay(1) + " 18:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(1) , 4, Ut.getAddDay(1) + " 19:00:00" , Ut.getAddDay(1) + " 21:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(1) , 5, Ut.getAddDay(1) + " 22:00:00" , Ut.getAddDay(2) + " 00:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(1) , 6, Ut.getAddDay(2) + " 01:00:00" , Ut.getAddDay(2) + " 03:00:00");
+		
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(2) , 1, Ut.getAddDay(2) + " 10:00:00" , Ut.getAddDay(2) + " 12:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(2) , 2, Ut.getAddDay(2) + " 13:00:00" , Ut.getAddDay(2) + " 15:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(2) , 3, Ut.getAddDay(2) + " 16:00:00" , Ut.getAddDay(2) + " 18:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(2) , 4, Ut.getAddDay(2) + " 19:00:00" , Ut.getAddDay(2) + " 21:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(2) , 5, Ut.getAddDay(2) + " 22:00:00" , Ut.getAddDay(3) + " 00:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(2) , 6, Ut.getAddDay(3) + " 01:00:00" , Ut.getAddDay(3) + " 03:00:00");
+		
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(3) , 1, Ut.getAddDay(3) + " 10:00:00" , Ut.getAddDay(3) + " 12:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(3) , 2, Ut.getAddDay(3) + " 13:00:00" , Ut.getAddDay(3) + " 15:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(3) , 3, Ut.getAddDay(3) + " 16:00:00" , Ut.getAddDay(3) + " 18:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(3) , 4, Ut.getAddDay(3) + " 19:00:00" , Ut.getAddDay(3) + " 21:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(3) , 5, Ut.getAddDay(3) + " 22:00:00" , Ut.getAddDay(4) + " 00:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(3) , 6, Ut.getAddDay(4) + " 01:00:00" , Ut.getAddDay(4) + " 03:00:00");
+	
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(4) , 1, Ut.getAddDay(4) + " 10:00:00" , Ut.getAddDay(4) + " 12:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(4) , 2, Ut.getAddDay(4) + " 13:00:00" , Ut.getAddDay(4) + " 15:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(4) , 3, Ut.getAddDay(4) + " 16:00:00" , Ut.getAddDay(4) + " 18:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(4) , 4, Ut.getAddDay(4) + " 19:00:00" , Ut.getAddDay(4) + " 21:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(4) , 5, Ut.getAddDay(4) + " 22:00:00" , Ut.getAddDay(5) + " 00:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(4) , 6, Ut.getAddDay(5) + " 01:00:00" , Ut.getAddDay(5) + " 03:00:00");
+		
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(5) , 1, Ut.getAddDay(5) + " 10:00:00" , Ut.getAddDay(5) + " 12:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(5) , 2, Ut.getAddDay(5) + " 13:00:00" , Ut.getAddDay(5) + " 15:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(5) , 3, Ut.getAddDay(5) + " 16:00:00" , Ut.getAddDay(5) + " 18:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(5) , 4, Ut.getAddDay(5) + " 19:00:00" , Ut.getAddDay(5) + " 21:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(5) , 5, Ut.getAddDay(5) + " 22:00:00" , Ut.getAddDay(6) + " 00:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(5) , 6, Ut.getAddDay(6) + " 01:00:00" , Ut.getAddDay(6) + " 03:00:00");
+		
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(6) , 1, Ut.getAddDay(6) + " 10:00:00" , Ut.getAddDay(6) + " 12:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(6) , 2, Ut.getAddDay(6) + " 13:00:00" , Ut.getAddDay(6) + " 15:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(6) , 3, Ut.getAddDay(6) + " 16:00:00" , Ut.getAddDay(6) + " 18:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(6) , 4, Ut.getAddDay(6) + " 19:00:00" , Ut.getAddDay(6) + " 21:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(6) , 5, Ut.getAddDay(6) + " 22:00:00" , Ut.getAddDay(7) + " 00:00:00");
+		cinemaService.addTime(1, 2, 2, Ut.getAddDay(6) , 6, Ut.getAddDay(7) + " 01:00:00" , Ut.getAddDay(7) + " 03:00:00");
+		
+		
+		
+		//서울 용산/ 1관 / 댓글부대 / 오늘~ / n회차 / 시작시간 / 종료시간	
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(0) , 1, Ut.getAddDay(0) + " 10:00:00" , Ut.getAddDay(0) + " 12:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(0) , 2, Ut.getAddDay(0) + " 13:00:00" , Ut.getAddDay(0) + " 15:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(0) , 3, Ut.getAddDay(0) + " 16:00:00" , Ut.getAddDay(0) + " 18:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(0) , 4, Ut.getAddDay(0) + " 19:00:00" , Ut.getAddDay(0) + " 21:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(0) , 5, Ut.getAddDay(0) + " 22:00:00" , Ut.getAddDay(1) + " 00:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(0) , 6, Ut.getAddDay(1) + " 01:00:00" , Ut.getAddDay(1) + " 03:00:00");
+		
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(1) , 1, Ut.getAddDay(1) + " 10:00:00" , Ut.getAddDay(1) + " 12:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(1) , 2, Ut.getAddDay(1) + " 13:00:00" , Ut.getAddDay(1) + " 15:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(1) , 3, Ut.getAddDay(1) + " 16:00:00" , Ut.getAddDay(1) + " 18:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(1) , 4, Ut.getAddDay(1) + " 19:00:00" , Ut.getAddDay(1) + " 21:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(1) , 5, Ut.getAddDay(1) + " 22:00:00" , Ut.getAddDay(2) + " 00:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(1) , 6, Ut.getAddDay(2) + " 01:00:00" , Ut.getAddDay(2) + " 03:00:00");
+		
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(2) , 1, Ut.getAddDay(2) + " 10:00:00" , Ut.getAddDay(2) + " 12:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(2) , 2, Ut.getAddDay(2) + " 13:00:00" , Ut.getAddDay(2) + " 15:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(2) , 3, Ut.getAddDay(2) + " 16:00:00" , Ut.getAddDay(2) + " 18:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(2) , 4, Ut.getAddDay(2) + " 19:00:00" , Ut.getAddDay(2) + " 21:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(2) , 5, Ut.getAddDay(2) + " 22:00:00" , Ut.getAddDay(3) + " 00:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(2) , 6, Ut.getAddDay(3) + " 01:00:00" , Ut.getAddDay(3) + " 03:00:00");
+		
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(3) , 1, Ut.getAddDay(3) + " 10:00:00" , Ut.getAddDay(3) + " 12:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(3) , 2, Ut.getAddDay(3) + " 13:00:00" , Ut.getAddDay(3) + " 15:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(3) , 3, Ut.getAddDay(3) + " 16:00:00" , Ut.getAddDay(3) + " 18:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(3) , 4, Ut.getAddDay(3) + " 19:00:00" , Ut.getAddDay(3) + " 21:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(3) , 5, Ut.getAddDay(3) + " 22:00:00" , Ut.getAddDay(4) + " 00:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(3) , 6, Ut.getAddDay(4) + " 01:00:00" , Ut.getAddDay(4) + " 03:00:00");
+		
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(4) , 1, Ut.getAddDay(4) + " 10:00:00" , Ut.getAddDay(4) + " 12:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(4) , 2, Ut.getAddDay(4) + " 13:00:00" , Ut.getAddDay(4) + " 15:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(4) , 3, Ut.getAddDay(4) + " 16:00:00" , Ut.getAddDay(4) + " 18:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(4) , 4, Ut.getAddDay(4) + " 19:00:00" , Ut.getAddDay(4) + " 21:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(4) , 5, Ut.getAddDay(4) + " 22:00:00" , Ut.getAddDay(5) + " 00:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(4) , 6, Ut.getAddDay(5) + " 01:00:00" , Ut.getAddDay(5) + " 03:00:00");
+		
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(5) , 1, Ut.getAddDay(5) + " 10:00:00" , Ut.getAddDay(5) + " 12:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(5) , 2, Ut.getAddDay(5) + " 13:00:00" , Ut.getAddDay(5) + " 15:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(5) , 3, Ut.getAddDay(5) + " 16:00:00" , Ut.getAddDay(5) + " 18:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(5) , 4, Ut.getAddDay(5) + " 19:00:00" , Ut.getAddDay(5) + " 21:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(5) , 5, Ut.getAddDay(5) + " 22:00:00" , Ut.getAddDay(6) + " 00:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(5) , 6, Ut.getAddDay(6) + " 01:00:00" , Ut.getAddDay(6) + " 03:00:00");
+		
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(6) , 1, Ut.getAddDay(6) + " 10:00:00" , Ut.getAddDay(6) + " 12:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(6) , 2, Ut.getAddDay(6) + " 13:00:00" , Ut.getAddDay(6) + " 15:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(6) , 3, Ut.getAddDay(6) + " 16:00:00" , Ut.getAddDay(6) + " 18:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(6) , 4, Ut.getAddDay(6) + " 19:00:00" , Ut.getAddDay(6) + " 21:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(6) , 5, Ut.getAddDay(6) + " 22:00:00" , Ut.getAddDay(7) + " 00:00:00");
+		cinemaService.addTime(2, 3, 1, Ut.getAddDay(6) , 6, Ut.getAddDay(7) + " 01:00:00" , Ut.getAddDay(7) + " 03:00:00");
+		
+		
+		
+		//서울 용산/ 2관 / 파묘 / 오늘~ / n회차 / 시작시간 / 종료시간	
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(0) , 1, Ut.getAddDay(0) + " 10:00:00" , Ut.getAddDay(0) + " 12:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(0) , 2, Ut.getAddDay(0) + " 13:00:00" , Ut.getAddDay(0) + " 15:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(0) , 3, Ut.getAddDay(0) + " 16:00:00" , Ut.getAddDay(0) + " 18:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(0) , 4, Ut.getAddDay(0) + " 19:00:00" , Ut.getAddDay(0) + " 21:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(0) , 5, Ut.getAddDay(0) + " 22:00:00" , Ut.getAddDay(1) + " 00:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(0) , 6, Ut.getAddDay(1) + " 01:00:00" , Ut.getAddDay(1) + " 03:00:00");
+		
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(1) , 1, Ut.getAddDay(1) + " 10:00:00" , Ut.getAddDay(1) + " 12:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(1) , 2, Ut.getAddDay(1) + " 13:00:00" , Ut.getAddDay(1) + " 15:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(1) , 3, Ut.getAddDay(1) + " 16:00:00" , Ut.getAddDay(1) + " 18:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(1) , 4, Ut.getAddDay(1) + " 19:00:00" , Ut.getAddDay(1) + " 21:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(1) , 5, Ut.getAddDay(1) + " 22:00:00" , Ut.getAddDay(2) + " 00:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(1) , 6, Ut.getAddDay(2) + " 01:00:00" , Ut.getAddDay(2) + " 03:00:00");
+		
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(2) , 1, Ut.getAddDay(2) + " 10:00:00" , Ut.getAddDay(2) + " 12:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(2) , 2, Ut.getAddDay(2) + " 13:00:00" , Ut.getAddDay(2) + " 15:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(2) , 3, Ut.getAddDay(2) + " 16:00:00" , Ut.getAddDay(2) + " 18:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(2) , 4, Ut.getAddDay(2) + " 19:00:00" , Ut.getAddDay(2) + " 21:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(2) , 5, Ut.getAddDay(2) + " 22:00:00" , Ut.getAddDay(3) + " 00:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(2) , 6, Ut.getAddDay(3) + " 01:00:00" , Ut.getAddDay(3) + " 03:00:00");
+		
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(3) , 1, Ut.getAddDay(3) + " 10:00:00" , Ut.getAddDay(3) + " 12:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(3) , 2, Ut.getAddDay(3) + " 13:00:00" , Ut.getAddDay(3) + " 15:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(3) , 3, Ut.getAddDay(3) + " 16:00:00" , Ut.getAddDay(3) + " 18:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(3) , 4, Ut.getAddDay(3) + " 19:00:00" , Ut.getAddDay(3) + " 21:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(3) , 5, Ut.getAddDay(3) + " 22:00:00" , Ut.getAddDay(4) + " 00:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(3) , 6, Ut.getAddDay(4) + " 01:00:00" , Ut.getAddDay(4) + " 03:00:00");
+		
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(4) , 1, Ut.getAddDay(4) + " 10:00:00" , Ut.getAddDay(4) + " 12:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(4) , 2, Ut.getAddDay(4) + " 13:00:00" , Ut.getAddDay(4) + " 15:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(4) , 3, Ut.getAddDay(4) + " 16:00:00" , Ut.getAddDay(4) + " 18:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(4) , 4, Ut.getAddDay(4) + " 19:00:00" , Ut.getAddDay(4) + " 21:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(4) , 5, Ut.getAddDay(4) + " 22:00:00" , Ut.getAddDay(5) + " 00:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(4) , 6, Ut.getAddDay(5) + " 01:00:00" , Ut.getAddDay(5) + " 03:00:00");
+		
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(5) , 1, Ut.getAddDay(5) + " 10:00:00" , Ut.getAddDay(5) + " 12:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(5) , 2, Ut.getAddDay(5) + " 13:00:00" , Ut.getAddDay(5) + " 15:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(5) , 3, Ut.getAddDay(5) + " 16:00:00" , Ut.getAddDay(5) + " 18:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(5) , 4, Ut.getAddDay(5) + " 19:00:00" , Ut.getAddDay(5) + " 21:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(5) , 5, Ut.getAddDay(5) + " 22:00:00" , Ut.getAddDay(6) + " 00:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(5) , 6, Ut.getAddDay(6) + " 01:00:00" , Ut.getAddDay(6) + " 03:00:00");
+		
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(6) , 1, Ut.getAddDay(6) + " 10:00:00" , Ut.getAddDay(6) + " 12:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(6) , 2, Ut.getAddDay(6) + " 13:00:00" , Ut.getAddDay(6) + " 15:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(6) , 3, Ut.getAddDay(6) + " 16:00:00" , Ut.getAddDay(6) + " 18:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(6) , 4, Ut.getAddDay(6) + " 19:00:00" , Ut.getAddDay(6) + " 21:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(6) , 5, Ut.getAddDay(6) + " 22:00:00" , Ut.getAddDay(7) + " 00:00:00");
+		cinemaService.addTime(2, 4, 3, Ut.getAddDay(6) , 6, Ut.getAddDay(7) + " 01:00:00" , Ut.getAddDay(7) + " 03:00:00");
+		
+		
+		
+		//경기 의정부/ 1관 / 댓글부대 / 오늘~ / n회차 / 시작시간 / 종료시간	
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(0) , 1, Ut.getAddDay(0) + " 10:00:00" , Ut.getAddDay(0) + " 12:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(0) , 2, Ut.getAddDay(0) + " 13:00:00" , Ut.getAddDay(0) + " 15:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(0) , 3, Ut.getAddDay(0) + " 16:00:00" , Ut.getAddDay(0) + " 18:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(0) , 4, Ut.getAddDay(0) + " 19:00:00" , Ut.getAddDay(0) + " 21:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(0) , 5, Ut.getAddDay(0) + " 22:00:00" , Ut.getAddDay(1) + " 00:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(0) , 6, Ut.getAddDay(1) + " 01:00:00" , Ut.getAddDay(1) + " 03:00:00");
+		
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(1) , 1, Ut.getAddDay(1) + " 10:00:00" , Ut.getAddDay(1) + " 12:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(1) , 2, Ut.getAddDay(1) + " 13:00:00" , Ut.getAddDay(1) + " 15:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(1) , 3, Ut.getAddDay(1) + " 16:00:00" , Ut.getAddDay(1) + " 18:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(1) , 4, Ut.getAddDay(1) + " 19:00:00" , Ut.getAddDay(1) + " 21:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(1) , 5, Ut.getAddDay(1) + " 22:00:00" , Ut.getAddDay(2) + " 00:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(1) , 6, Ut.getAddDay(2) + " 01:00:00" , Ut.getAddDay(2) + " 03:00:00");
+		
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(2) , 1, Ut.getAddDay(2) + " 10:00:00" , Ut.getAddDay(2) + " 12:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(2) , 2, Ut.getAddDay(2) + " 13:00:00" , Ut.getAddDay(2) + " 15:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(2) , 3, Ut.getAddDay(2) + " 16:00:00" , Ut.getAddDay(2) + " 18:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(2) , 4, Ut.getAddDay(2) + " 19:00:00" , Ut.getAddDay(2) + " 21:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(2) , 5, Ut.getAddDay(2) + " 22:00:00" , Ut.getAddDay(3) + " 00:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(2) , 6, Ut.getAddDay(3) + " 01:00:00" , Ut.getAddDay(3) + " 03:00:00");
+		
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(3) , 1, Ut.getAddDay(3) + " 10:00:00" , Ut.getAddDay(3) + " 12:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(3) , 2, Ut.getAddDay(3) + " 13:00:00" , Ut.getAddDay(3) + " 15:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(3) , 3, Ut.getAddDay(3) + " 16:00:00" , Ut.getAddDay(3) + " 18:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(3) , 4, Ut.getAddDay(3) + " 19:00:00" , Ut.getAddDay(3) + " 21:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(3) , 5, Ut.getAddDay(3) + " 22:00:00" , Ut.getAddDay(4) + " 00:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(3) , 6, Ut.getAddDay(4) + " 01:00:00" , Ut.getAddDay(4) + " 03:00:00");
+		
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(4) , 1, Ut.getAddDay(4) + " 10:00:00" , Ut.getAddDay(4) + " 12:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(4) , 2, Ut.getAddDay(4) + " 13:00:00" , Ut.getAddDay(4) + " 15:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(4) , 3, Ut.getAddDay(4) + " 16:00:00" , Ut.getAddDay(4) + " 18:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(4) , 4, Ut.getAddDay(4) + " 19:00:00" , Ut.getAddDay(4) + " 21:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(4) , 5, Ut.getAddDay(4) + " 22:00:00" , Ut.getAddDay(5) + " 00:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(4) , 6, Ut.getAddDay(5) + " 01:00:00" , Ut.getAddDay(5) + " 03:00:00");
+		
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(5) , 1, Ut.getAddDay(5) + " 10:00:00" , Ut.getAddDay(5) + " 12:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(5) , 2, Ut.getAddDay(5) + " 13:00:00" , Ut.getAddDay(5) + " 15:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(5) , 3, Ut.getAddDay(5) + " 16:00:00" , Ut.getAddDay(5) + " 18:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(5) , 4, Ut.getAddDay(5) + " 19:00:00" , Ut.getAddDay(5) + " 21:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(5) , 5, Ut.getAddDay(5) + " 22:00:00" , Ut.getAddDay(6) + " 00:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(5) , 6, Ut.getAddDay(6) + " 01:00:00" , Ut.getAddDay(6) + " 03:00:00");
+		
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(6) , 1, Ut.getAddDay(6) + " 10:00:00" , Ut.getAddDay(6) + " 12:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(6) , 2, Ut.getAddDay(6) + " 13:00:00" , Ut.getAddDay(6) + " 15:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(6) , 3, Ut.getAddDay(6) + " 16:00:00" , Ut.getAddDay(6) + " 18:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(6) , 4, Ut.getAddDay(6) + " 19:00:00" , Ut.getAddDay(6) + " 21:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(6) , 5, Ut.getAddDay(6) + " 22:00:00" , Ut.getAddDay(7) + " 00:00:00");
+		cinemaService.addTime(3, 5, 1, Ut.getAddDay(6) , 6, Ut.getAddDay(7) + " 01:00:00" , Ut.getAddDay(7) + " 03:00:00");
+		
+		
+		//경기 의정부/ 2관 / 듄2 / 오늘~ / n회차 / 시작시간 / 종료시간	
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(0) , 1, Ut.getAddDay(0) + " 10:00:00" , Ut.getAddDay(0) + " 12:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(0) , 2, Ut.getAddDay(0) + " 13:00:00" , Ut.getAddDay(0) + " 15:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(0) , 3, Ut.getAddDay(0) + " 16:00:00" , Ut.getAddDay(0) + " 18:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(0) , 4, Ut.getAddDay(0) + " 19:00:00" , Ut.getAddDay(0) + " 21:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(0) , 5, Ut.getAddDay(0) + " 22:00:00" , Ut.getAddDay(1) + " 00:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(0) , 6, Ut.getAddDay(1) + " 01:00:00" , Ut.getAddDay(1) + " 03:00:00");
+		
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(1) , 1, Ut.getAddDay(1) + " 10:00:00" , Ut.getAddDay(1) + " 12:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(1) , 2, Ut.getAddDay(1) + " 13:00:00" , Ut.getAddDay(1) + " 15:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(1) , 3, Ut.getAddDay(1) + " 16:00:00" , Ut.getAddDay(1) + " 18:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(1) , 4, Ut.getAddDay(1) + " 19:00:00" , Ut.getAddDay(1) + " 21:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(1) , 5, Ut.getAddDay(1) + " 22:00:00" , Ut.getAddDay(2) + " 00:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(1) , 6, Ut.getAddDay(2) + " 01:00:00" , Ut.getAddDay(2) + " 03:00:00");
+		
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(2) , 1, Ut.getAddDay(2) + " 10:00:00" , Ut.getAddDay(2) + " 12:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(2) , 2, Ut.getAddDay(2) + " 13:00:00" , Ut.getAddDay(2) + " 15:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(2) , 3, Ut.getAddDay(2) + " 16:00:00" , Ut.getAddDay(2) + " 18:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(2) , 4, Ut.getAddDay(2) + " 19:00:00" , Ut.getAddDay(2) + " 21:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(2) , 5, Ut.getAddDay(2) + " 22:00:00" , Ut.getAddDay(3) + " 00:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(2) , 6, Ut.getAddDay(3) + " 01:00:00" , Ut.getAddDay(3) + " 03:00:00");
+		
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(3) , 1, Ut.getAddDay(3) + " 10:00:00" , Ut.getAddDay(3) + " 12:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(3) , 2, Ut.getAddDay(3) + " 13:00:00" , Ut.getAddDay(3) + " 15:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(3) , 3, Ut.getAddDay(3) + " 16:00:00" , Ut.getAddDay(3) + " 18:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(3) , 4, Ut.getAddDay(3) + " 19:00:00" , Ut.getAddDay(3) + " 21:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(3) , 5, Ut.getAddDay(3) + " 22:00:00" , Ut.getAddDay(4) + " 00:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(3) , 6, Ut.getAddDay(4) + " 01:00:00" , Ut.getAddDay(4) + " 03:00:00");
+		
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(4) , 1, Ut.getAddDay(4) + " 10:00:00" , Ut.getAddDay(4) + " 12:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(4) , 2, Ut.getAddDay(4) + " 13:00:00" , Ut.getAddDay(4) + " 15:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(4) , 3, Ut.getAddDay(4) + " 16:00:00" , Ut.getAddDay(4) + " 18:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(4) , 4, Ut.getAddDay(4) + " 19:00:00" , Ut.getAddDay(4) + " 21:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(4) , 5, Ut.getAddDay(4) + " 22:00:00" , Ut.getAddDay(5) + " 00:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(4) , 6, Ut.getAddDay(5) + " 01:00:00" , Ut.getAddDay(5) + " 03:00:00");
+		
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(5) , 1, Ut.getAddDay(5) + " 10:00:00" , Ut.getAddDay(5) + " 12:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(5) , 2, Ut.getAddDay(5) + " 13:00:00" , Ut.getAddDay(5) + " 15:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(5) , 3, Ut.getAddDay(5) + " 16:00:00" , Ut.getAddDay(5) + " 18:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(5) , 4, Ut.getAddDay(5) + " 19:00:00" , Ut.getAddDay(5) + " 21:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(5) , 5, Ut.getAddDay(5) + " 22:00:00" , Ut.getAddDay(6) + " 00:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(5) , 6, Ut.getAddDay(6) + " 01:00:00" , Ut.getAddDay(6) + " 03:00:00");
+		
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(6) , 1, Ut.getAddDay(6) + " 10:00:00" , Ut.getAddDay(6) + " 12:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(6) , 2, Ut.getAddDay(6) + " 13:00:00" , Ut.getAddDay(6) + " 15:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(6) , 3, Ut.getAddDay(6) + " 16:00:00" , Ut.getAddDay(6) + " 18:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(6) , 4, Ut.getAddDay(6) + " 19:00:00" , Ut.getAddDay(6) + " 21:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(6) , 5, Ut.getAddDay(6) + " 22:00:00" , Ut.getAddDay(7) + " 00:00:00");
+		cinemaService.addTime(3, 6, 4, Ut.getAddDay(6) , 6, Ut.getAddDay(7) + " 01:00:00" , Ut.getAddDay(7) + " 03:00:00");
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return rq.jsHistoryBack("테스트 데이터가 추가되었습니다");
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 	@Scheduled(cron="0 0 5 * * ?")
     public void deleteAfterTheaterTime() {
 		 cinemaService.doDeleteAfterTheaterTime();
