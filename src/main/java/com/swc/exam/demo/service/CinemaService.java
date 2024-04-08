@@ -258,4 +258,8 @@ public class CinemaService {
 		int theaterInfoId = cinemaRepository.getTheaterInfoIdByCinemaIdAndTheaterInfo(cinemaId, theater);
 		return theaterInfoId;
 	}
+
+	public void doDeleteAfterTheaterTime() {
+		cinemaRepository.doDeleteAfterTheaterTime();
+	}
 }

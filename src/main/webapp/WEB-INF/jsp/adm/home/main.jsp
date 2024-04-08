@@ -44,4 +44,13 @@
   </section>
 </div>
 
+<div class="container mx-auto px-3">
+  <section class="mt-5">
+    <span style="font-size:30px">▶TEST</span><br>
+    <span class="container mx-auto px-3">
+      <a href="/adm/cinema/doDeleteAfterTheaterTime" type="submit" class="btn btn-primary">시간 지난 회차 삭제</a>
+    </span>
+  </section>
+</div>
+
 <%@include file="../../common/foot.jspf"%>

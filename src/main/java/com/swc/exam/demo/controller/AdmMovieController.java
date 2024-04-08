@@ -149,4 +149,7 @@ public class AdmMovieController {
 
 		return rq.jsReplace(modifyRd.getMsg(), "/adm/movie/list");
 	}
+	
+	
+
 }

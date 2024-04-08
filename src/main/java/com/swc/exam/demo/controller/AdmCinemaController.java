@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -229,5 +230,22 @@ public class AdmCinemaController {
 				"/adm/cinema/theater/addTime?cinemaId=" + cinemaId);
 
 	}
+	
+	
+	@RequestMapping("/adm/cinema/doDeleteAfterTheaterTime")
+	@ResponseBody
+	public String doDeleteAfterTheaterTime() {
+		
+		cinemaService.doDeleteAfterTheaterTime();
+		
+
+		return rq.jsHistoryBack("완료되었습니다.");
+	}
+	
+	
+	@Scheduled(cron="0 0 5 * * ?")
+    public void deleteAfterTheaterTime() {
+		 cinemaService.doDeleteAfterTheaterTime();
+		 }
 
 }

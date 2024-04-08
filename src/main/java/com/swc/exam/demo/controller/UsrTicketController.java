@@ -1,5 +1,6 @@
 package com.swc.exam.demo.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -40,8 +41,9 @@ public class UsrTicketController {
 		List<Movie> movies = ticketService.getMovieList();
 		List<Cinema> cinemas = ticketService.getCinemaList();
 		List<String> week = Ut.getForPrintWeek();
+		String beforeFiveMinutes = Ut.getForPrintBeforeFiveMinutes();
 		
-		
+		model.addAttribute("beforeFiveMinutes", beforeFiveMinutes);
 		model.addAttribute("week", week);
 		model.addAttribute("movies", movies);
 		model.addAttribute("cinemas", cinemas);

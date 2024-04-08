@@ -302,10 +302,12 @@ public interface CinemaRepository {
 			AND TT.cinemaId = #{cinemaId}
 			AND TT.`date` = #{date}
 			GROUP BY TT.startTime
-			ORDER BY TT.startTime DESC
+			ORDER BY TT.theaterTime ASC,
+			TT.startTime ASC
+			
 						""")
 	List<TheaterTime> getTheaterTimeList(int movieId, int cinemaId, String date);
-
+	
 	@Select("""
 			SELECT COUNT(*)
 			FROM theaterTime
@@ -397,4 +399,11 @@ public interface CinemaRepository {
 			GROUP BY theaterInfoId
 			""")
 	int getTheaterInfoIdByCinemaIdAndTheaterInfo(int cinemaId, String theater);
+
+	@Delete("""
+			DELETE 
+			FROM theaterTime			
+			WHERE endTime < NOW();
+			""")
+	void doDeleteAfterTheaterTime();
 }

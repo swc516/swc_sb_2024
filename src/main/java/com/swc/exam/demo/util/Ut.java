@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -456,6 +457,20 @@ public class Ut {
 		}
 		
 		return week;
+	}
+	
+	public static String getForPrintBeforeFiveMinutes() {
+		 String BeforeFiveMinutes = "";
+		
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 Date now = new Date();
+		
+		 Calendar cal = Calendar.getInstance();
+		 
+		 cal.add(Calendar.MINUTE, 5);
+		 BeforeFiveMinutes = sdf.format(cal.getTime());  
+		 
+		return BeforeFiveMinutes;
 	}
 
 }

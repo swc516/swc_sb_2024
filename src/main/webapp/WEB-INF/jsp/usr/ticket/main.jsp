@@ -50,12 +50,12 @@
         <c:forEach var="theaterTime" items="${theaterTimes}">
           <tr>
             <td>
-              <c:if test="${theaterTime.extra__sellSeatCount == theaterTime.extra__maxSeatCount}">
+              <c:if test="${theaterTime.extra__sellSeatCount == theaterTime.extra__maxSeatCount || theaterTime.startTime <= beforeFiveMinutes}">
                 <input type="radio" name="ticketing"
                   value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.theaterTimeId}__${theaterTime.theaterTime}"
                   disabled>
               </c:if>
-              <c:if test="${theaterTime.extra__sellSeatCount != theaterTime.extra__maxSeatCount}">
+              <c:if test="${theaterTime.extra__sellSeatCount != theaterTime.extra__maxSeatCount && theaterTime.startTime > beforeFiveMinutes}">
                 <input type="radio" name="ticketing"
                   value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.theaterTimeId}__${theaterTime.theaterTime}">
               </c:if>
