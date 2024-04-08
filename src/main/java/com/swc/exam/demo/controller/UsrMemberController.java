@@ -280,18 +280,25 @@ public class UsrMemberController {
 			String seatInfo = "";
 			for (int i = 0; i < split1.length; i++) {
 				String[] split2 = split1[i].split("_");
+				
 				if (i == split1.length-1) {
 					seatId += split2[0];
-					seatInfo += split2[1];
+					String[] split3 = split2[1].split("-");
+					seatInfo += split3[0]+split3[1];
 				} else {
 					seatId += split2[0] + ", ";
-					seatInfo += split2[1] + ", ";
+					String[] split3 = split2[1].split("-");
+					seatInfo += split3[0]+split3[1] + ", ";
 				}
 			}
 			list.setExtra__seatId(seatId);
 			list.setExtra__seatInfo(seatInfo);
+			
 		}
-
+		String beforeThirthMinutes = Ut.getForPrintBeforeMinutes(30);
+		
+		
+		model.addAttribute("beforeFiveMinutes", beforeThirthMinutes);
 		model.addAttribute("lists", lists);
 
 		return "usr/member/myTicketList";

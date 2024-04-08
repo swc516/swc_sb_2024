@@ -459,7 +459,7 @@ public class Ut {
 		return week;
 	}
 	
-	public static String getForPrintBeforeFiveMinutes() {
+	public static String getForPrintBeforeMinutes(int minute) {
 		 String BeforeFiveMinutes = "";
 		
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -467,7 +467,7 @@ public class Ut {
 		
 		 Calendar cal = Calendar.getInstance();
 		 
-		 cal.add(Calendar.MINUTE, 5);
+		 cal.add(Calendar.MINUTE, minute);
 		 BeforeFiveMinutes = sdf.format(cal.getTime());  
 		 
 		return BeforeFiveMinutes;

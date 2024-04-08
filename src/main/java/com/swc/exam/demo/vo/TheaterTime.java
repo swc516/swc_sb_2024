@@ -34,10 +34,10 @@ public class TheaterTime {
 	
 	
 	public String getForPrintType1StartTime() {
-		return startTime.substring(10, 16);
+		return startTime.substring(11, 16);
 	}
 	
 	public String getForPrintType1EndTime() {
-		return endTime.substring(10, 16);
+		return endTime.substring(11, 16);
 	}
 }

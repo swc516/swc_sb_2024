@@ -28,7 +28,7 @@ public class TicketService {
 	private CinemaService cinemaService;
 	private Rq rq;
 
-	public TicketService(TicketRepository ticketRepository, MovieService movieService, CinemaService cinemaService,  Rq rq) {
+	public TicketService(TicketRepository ticketRepository, MovieService movieService, CinemaService cinemaService, Rq rq) {
 		this.ticketRepository = ticketRepository;
 		this.movieService = movieService;
 		this.cinemaService = cinemaService;
@@ -42,7 +42,7 @@ public class TicketService {
 	}
 
 	
-	public ResultData doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, int memberId, String movieTitle, String cinema, String theater, int time, String playingTime) {
+	public ResultData doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, int memberId, String movieTitle, String cinema, String theater, int time, String startTime, String playingTime) {
 		for (String seat : seats) {
 			String[] seatSplit1 = seat.split("_");
 			String seatInfo = seatSplit1[1];
@@ -52,7 +52,7 @@ public class TicketService {
 			cinemaService.doTicketing(theaterInfoId, theaterTimeId, seatRow, seatCol, memberId);
 		}
 		String totalSeat = Arrays.toString(seats).substring(1,Arrays.toString(seats).trim().length()-1);
-		ticketRepository.doTicketing(memberId, movieTitle, cinema, theater, time, playingTime, totalSeat);
+		ticketRepository.doTicketing(memberId, movieTitle, cinema, theater, time, startTime, playingTime, totalSeat);
 		
 		
 		return ResultData.from("S-1", "예매가 완료되었습니다.");

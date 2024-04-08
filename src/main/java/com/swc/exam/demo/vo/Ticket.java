@@ -15,11 +15,13 @@ public class Ticket {
 	private String cinema;
 	private String theater;
 	private int time;
+	private String startTime;
 	private String playingTime;
 	private String seat;
 	
 	private String extra__seatInfo;
 	private String extra__seatId;
+	private String extra__dateAndStartTime;
 
 
 }

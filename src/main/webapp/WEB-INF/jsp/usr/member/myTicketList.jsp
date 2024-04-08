@@ -8,18 +8,43 @@
   <div class="container mx-auto px-3">
     <div class="mt-3">
       <c:forEach var="list" items="${lists}">
-              ${list.cinema}
-              ${list.theater}
-              ${list.time}회
-              ${list.movieTitle}
-              ${list.buyDate}
-              ${list.playingTime}
-              ${list.extra__seatInfo}
-                <a
-          href="/usr/ticket/seatLocation?&cinema=${list.cinema}&theater=${list.theater}&mySeats=${list.extra__seatInfo}"
-          onclick="window.open(this.href, '_blank', 'width=500, height=500'); return false;">위치보기</a>
+        <div class="stats bg-primary text-primary-content">
 
-        <a href="../member/doTicketCancel?id=${list.id}&seatIds=${list.extra__seatId}" class="btn btn-error">취소하기</a>
+          <div class="stat">
+            <div class="stat-title">${list.cinema} ${list.theater},(${list.time}회) ${list.startTime.substring(0,10)}</div>
+            <div class="stat-value">${list.playingTime}</div>
+            <div class="stat-title">
+              <a
+                href="/usr/ticket/seatLocation?&cinema=${list.cinema}&theater=${list.theater}&mySeats=${list.extra__seatInfo}"
+                onclick="window.open(this.href, '_blank', 'width=500, height=500'); return false;">좌석위치</a>
+            </div>
+            <div class="stat-value">${list.extra__seatInfo}</div>
+          </div>
+          
+          <div class="stat">
+            <div class="stat-title">영화제목
+            </div>
+            <div class="stat-value">${list.movieTitle }</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-title">예매날짜</div>
+            <div class="stat-value">${list.buyDate}</div>
+          </div>
+
+
+
+
+           <c:if test="${list.startTime > beforeThirtyMinutes}">
+            <div class="stat">
+              <div class="stat-title"></div>
+              <div class="stat-value">
+                <a href="../member/doTicketCancel?id=${list.id}&seatIds=${list.extra__seatId}" class="btn btn-error">취소하기</a>
+              </div>
+            </div>
+          </c:if>
+        </div>
+        <br>
         <br>
       </c:forEach>
     </div>

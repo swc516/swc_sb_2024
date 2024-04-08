@@ -27,7 +27,6 @@ import com.swc.exam.demo.vo.TheaterTime;
 public class UsrTicketController {
 
 	private TicketService ticketService;
-
 	private Rq rq;
 
 	public UsrTicketController(TicketService ticketService, Rq rq) {
@@ -41,7 +40,7 @@ public class UsrTicketController {
 		List<Movie> movies = ticketService.getMovieList();
 		List<Cinema> cinemas = ticketService.getCinemaList();
 		List<String> week = Ut.getForPrintWeek();
-		String beforeFiveMinutes = Ut.getForPrintBeforeFiveMinutes();
+		String beforeFiveMinutes = Ut.getForPrintBeforeMinutes(5);
 		
 		model.addAttribute("beforeFiveMinutes", beforeFiveMinutes);
 		model.addAttribute("week", week);
@@ -59,7 +58,7 @@ public class UsrTicketController {
 	public String showTicketing(Model model, int movieId, int cinemaId, int theaterInfoId, int theaterTimeId) {
 		List<TheaterTime> theaterTimes = ticketService.getForPrintTheaterTimes(cinemaId, theaterInfoId, theaterTimeId);
 		model.addAttribute("theaterTimes", theaterTimes);
-		model.addAttribute("playingTime", theaterTimes.get(0).getForPrintType1StartTime() + "~" + theaterTimes.get(0).getForPrintType1EndTime());
+		model.addAttribute("playingTime", theaterTimes.get(0).getForPrintType1StartTime() + " ~ " + theaterTimes.get(0).getForPrintType1EndTime());
 		
 		String seatRows = "";
 		int lastSeatRow = theaterTimes.get(theaterTimes.size() - 1).getSeatRow();
@@ -93,8 +92,8 @@ public class UsrTicketController {
 
 	@RequestMapping("/usr/ticket/doTicketing")
 	@ResponseBody
-	public String doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, String movieTitle, String cinema, String theater, int time, String playingTime) {
-		ResultData doTicketingRd = ticketService.doTicketing(theaterInfoId, theaterTimeId, seats, rq.getLoginedMemberId(), movieTitle, cinema, theater, time, playingTime);
+	public String doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, String movieTitle, String cinema, String theater, int time, String startTime, String playingTime) {
+		ResultData doTicketingRd = ticketService.doTicketing(theaterInfoId, theaterTimeId, seats, rq.getLoginedMemberId(), movieTitle, cinema, theater, time, startTime, playingTime);
 		if (doTicketingRd.isSuccess()) {
 			return rq.jsReplace("예매가 완료되었습니다.", "../member/myTicketList?id="+rq.getLoginedMemberId());
 		}
@@ -105,15 +104,16 @@ public class UsrTicketController {
 	public String showSeatLocation(Model model, String cinema, String theater, String mySeats) {
 		String[] seatSplit = mySeats.split(",");
 		List<String> mySeatList = new ArrayList<String>();
-		
+		// E-7-일반
 		for(String seats: seatSplit) {
-			mySeatList.add(seats.substring(0,seats.length()-3).trim());
+			mySeatList.add(seats.trim());
+			
 		}
 		
 		List<TheaterInfo> theaterInfos = ticketService.getForPrintTheaterInfo(cinema, theater);
 
 		for (TheaterInfo theaterInfo : theaterInfos) {
-			String seat = theaterInfo.getSeatRow() + "-" + theaterInfo.getSeatCol();
+			String seat = theaterInfo.getSeatRow() + "" + theaterInfo.getSeatCol();
 			for(String mySeat: mySeatList) {
 				if(seat.equals(mySeat))
 				theaterInfo.setExtra__mySeat(true);

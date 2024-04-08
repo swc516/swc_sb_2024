@@ -16,7 +16,7 @@
       <input type="checkbox" class="checkbox" disabled checked> : 예매가 완료된 좌석 <br>
       <input type="checkbox" class="checkbox" disabled> : 통로 <br>
       <hr>
-      ${movieTitle} / ${cinemaRegion}_${cinemaBranch}  / ${theater} / 상영날짜 : ${param.date} / 상영시간 : (${param.theaterTime}회차), ${playingTime}
+      ${movieTitle} / ${cinemaRegion}_${cinemaBranch}  / ${theater} / 상영날짜 : ${theaterTimes.get(0).startTime} / 상영시간 : (${theaterTimes.get(0).theaterTime}회차), ${playingTime}
         <div class="divider divider-info">Screen</div>
         <table style="margin-left: auto; margin-right: auto;">
           <tr>
@@ -59,7 +59,8 @@
         <input type="hidden" name="movieTitle" value="${movieTitle}">
         <input type="hidden" name="cinema" value="${cinemaRegion}_${cinemaBranch}">
         <input type="hidden" name="theater" value="${theater}">
-        <input type="hidden" name="time" value="${param.theaterTime}">
+        <input type="hidden" name="time" value="${theaterTimes.get(0).theaterTime}">
+        <input type="hidden" name="startTime" value="${theaterTimes.get(0).startTime}">
         <input type="hidden" name="playingTime" value="${playingTime}">
         <input type="hidden" name="theaterInfoId" value="${param.theaterInfoId}">
         <input type="hidden" name="theaterTimeId" value="${param.theaterTimeId}">
