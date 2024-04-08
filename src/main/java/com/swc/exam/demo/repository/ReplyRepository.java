@@ -113,6 +113,79 @@ public interface ReplyRepository {
 			</script>
 			""")
 	public int decreaseBadReactionPoint(@Param("id")int id);
+
+	@Select("""
+			SELECT M.id
+			FROM MEMBER AS M
+			LEFT JOIN reply AS R
+			ON M.id = R.memberId
+			WHERE M.nickname = #{searchKeyword}
+			GROUP BY M.nickname
+			""")
+	public String getMemberId(String searchKeyword);
+
+
+	@Select("""
+			<script>
+			SELECT COUNT(*) AS cnt
+			FROM reply AS R
+			WHERE 1
+			<if test="searchKeyword != ''">
+					<choose>
+				    	<when test="searchKeywordTypeCode == 'memberId'">
+				    		AND R.memberId LIKE CONCAT('%', #{searchKeyword}, '%')
+				    	</when>
+				    	<when test="searchKeywordTypeCode == 'body'">
+				    		AND R.body LIKE CONCAT('%', #{searchKeyword}, '%')
+				    	</when>
+						<otherwise>
+							AND(
+								R.memberId LIKE CONCAT('%', #{searchKeyword}, '%')
+								OR
+								R.body LIKE CONCAT('%', #{searchKeyword}, '%')
+								)
+						</otherwise>
+				</choose>
+			</if>
+			</script>
+			""")
+	public int getReplysCount(String searchKeywordTypeCode, String searchKeyword);
+
+
+	@Select("""
+			<script>
+				SELECT R.*,
+				M.nickname AS extra__writerName
+				FROM reply AS R
+				LEFT JOIN `member` AS M
+				ON R.memberId = M.id
+				WHERE 1
+				<if test="searchKeyword != ''">
+					<choose>
+				    	<when test="searchKeywordTypeCode == 'memberId'">
+				    		AND R.memberId LIKE CONCAT('%', #{searchKeyword}, '%')
+				    	</when>
+				    	<when test="searchKeywordTypeCode == 'body'">
+				    		AND R.body LIKE CONCAT('%', #{searchKeyword}, '%')
+				    	</when>
+						<otherwise>
+							AND(
+								R.memberId LIKE CONCAT('%', #{searchKeyword}, '%')
+								OR
+								R.body LIKE CONCAT('%', #{searchKeyword}, '%')
+								)
+						</otherwise>
+					</choose>
+				</if>
+				ORDER BY R.id DESC
+				<if test="limitStart != -1">
+					LIMIT #{limitStart}, #{limitTake}
+				</if>
+			</script>
+			""")
+	public List<Reply> getForPrintReplys(int limitStart, int limitTake, String searchKeyword,
+			String searchKeywordTypeCode);
+
 	
 
 

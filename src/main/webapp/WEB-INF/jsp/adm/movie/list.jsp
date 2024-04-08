@@ -106,20 +106,26 @@
             <th>제작국가</th>
             <th>장르</th>
             <th>개봉일자</th>
+            <th>비고</th>
           </tr>
         </thead>
         <tbody>
           <c:forEach var="movie" items="${movies}">
             <tr class="hover">
               <th>
-                <input class="checkbox-movie-id" value="${movie.id}" type="checkbox" />
+                <c:if test="${movie.delStatus == false}">
+                  <input class="checkbox-movie-id" value="${movie.id}" type="checkbox" />
+                </c:if>
+                <c:if test="${movie.delStatus == true}">
+                  <input class="checkbox-movie-id" value="${movie.id}" type="checkbox" disabled />
+                </c:if>
               </th>
               <td>${movie.id}</td>
               <td>
                 <img width="200" height="300" class="ml-1 mr-1" src="${rq.getMoviePosterImgUri(movie.id)}" alt=""
                   onerror="${rq.moviePosterFallbackImgOnErrorHtml}" />
               </td>
-   
+
               <td>
                 <a class="btn-text-link block w-full truncate" href="/adm/movie/modify?id=${movie.id}">${movie.title}
                 </a>
@@ -130,6 +136,11 @@
               <td>${movie.country}</td>
               <td>${movie.genre}</td>
               <td>${movie.releaseDate}</td>
+              <td>
+                <c:if test="${movie.delStatus == true}">
+                  <a class="btn btn-success" href="/adm/movie/deleteCancel?id=${movie.id}">삭제 취소
+                </c:if>
+                </td>
             </tr>
           </c:forEach>
         </tbody>

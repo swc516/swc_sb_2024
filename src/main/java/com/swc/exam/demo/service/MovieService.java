@@ -47,6 +47,23 @@ public class MovieService {
 
 		return movies;
 	}
+	
+	public int getAllMoviesCount(String searchKeywordTypeCode, String searchKeyword) {
+		return movieRepository.getAllMoviesCount(searchKeywordTypeCode, searchKeyword);
+		
+	}
+	
+	public List<Movie> getForPrintAllMovies(String searchKeywordTypeCode, String searchKeyword, int itemsCountInAPage,
+			int page) {
+		
+		int limitStart = (page - 1) * itemsCountInAPage;
+		int limitTake = itemsCountInAPage;
+		
+		List<Movie> movies = movieRepository.getForPrintAllMovies(searchKeywordTypeCode, searchKeyword, limitStart,
+				limitTake);
+		
+		return movies;
+	}
 
 	public void deleteMovies(List<Integer> movieIds) {
 		for (int movieId : movieIds) {
@@ -86,6 +103,10 @@ public class MovieService {
 		String movieTitle = movieRepository.getMovieTitleById(movieId);
 		return movieTitle;
 
+	}
+
+	public void doDeleteCancel(int id) {
+		movieRepository.doDeleteCancel(id);
 	}
 
 

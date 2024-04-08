@@ -12,10 +12,10 @@
       <a href="/usr/article/write?boardId=1" type="submit" class="btn btn-primary">공지사항 작성</a>
     </span>
     <span class="container mx-auto px-3">
-      <a href="/adm/member/list" type="submit" class="btn btn-error">전체 게시글 관리</a>
+      <a href="/adm/article/list" type="submit" class="btn btn-primary">전체 게시글 관리</a>
     </span>
     <span class="container mx-auto px-3">
-      <a href="/adm/member/list" type="submit" class="btn btn-error">전체 댓글 관리</a>
+      <a href="/adm/reply/list" type="submit" class="btn btn-primary">전체 댓글 관리</a>
     </span>
   </section>
 </div>
@@ -48,7 +48,7 @@
   <section class="mt-5">
     <span style="font-size:30px">▶TEST</span><br>
     <span class="container mx-auto px-3">
-      <a href="/adm/cinema/doDeleteAfterTheaterTime" type="submit" class="btn btn-primary">시간 지난 회차 삭제</a>
+      <a href="#" type="submit" class="btn btn-primary"></a>
     </span>
   </section>
 </div>

@@ -129,4 +129,25 @@ public class ReplyService {
 
 	}
 
+	public String getMemberId(String searchKeyword) {
+		String memberId = replyRepository.getMemberId(searchKeyword);
+		return memberId;
+	}
+
+	public int getReplysCount(String searchKeywordTypeCode, String searchKeyword) {
+		return replyRepository.getReplysCount(searchKeywordTypeCode, searchKeyword);
+	}
+
+	public List<Reply> getForPrintReplys(String searchKeyword, String searchKeywordTypeCode, int itemsCountInAPage,
+			int page) {
+		int limitStart = (page - 1) * itemsCountInAPage;
+		int limitTake = itemsCountInAPage;
+
+		List<Reply> replys = replyRepository.getForPrintReplys(limitStart, limitTake, searchKeyword,
+				searchKeywordTypeCode);
+
+		
+		return replys;
+	}
+
 }

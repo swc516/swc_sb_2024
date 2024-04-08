@@ -45,6 +45,12 @@ public interface ArticleRepository {
 				</if>
 				<if test="searchKeyword != ''">
 					<choose>
+				    	<when test="searchKeywordTypeCode == 'boardId'">
+				    		AND A.boardId LIKE CONCAT('%', #{searchKeyword}, '%')
+				    	</when>
+				    	<when test="searchKeywordTypeCode == 'memberId'">
+				    		AND A.memberId LIKE CONCAT('%', #{searchKeyword}, '%')
+				    	</when>
 						<when test="searchKeywordTypeCode == 'title'">
 				    		AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
 				    	</when>
@@ -53,6 +59,10 @@ public interface ArticleRepository {
 				    	</when>
 						<otherwise>
 							AND(
+								A.boardId LIKE CONCAT('%', #{searchKeyword}, '%')
+								OR
+								A.memberId LIKE CONCAT('%', #{searchKeyword}, '%')
+								OR
 								A.title LIKE CONCAT('%', #{searchKeyword}, '%')
 								OR
 								A.body LIKE CONCAT('%', #{searchKeyword}, '%')
@@ -81,20 +91,30 @@ public interface ArticleRepository {
 				AND A.boardId = #{boardId}
 			</if>
 			<if test="searchKeyword != ''">
-				<choose>
-					<when test="searchKeywordTypeCode == 'title'">
-			    		AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
-			    	</when>
-			    	<when test="searchKeywordTypeCode == 'body'">
-			    		AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
-			    	</when>
-					<otherwise>
-						AND(
-							A.title LIKE CONCAT('%', #{searchKeyword}, '%')
-							OR
-							A.body LIKE CONCAT('%', #{searchKeyword}, '%')
-							)
-					</otherwise>
+					<choose>
+				    	<when test="searchKeywordTypeCode == 'boardId'">
+				    		AND A.boardId LIKE CONCAT('%', #{searchKeyword}, '%')
+				    	</when>
+				    	<when test="searchKeywordTypeCode == 'memberId'">
+				    		AND A.memberId LIKE CONCAT('%', #{searchKeyword}, '%')
+				    	</when>
+						<when test="searchKeywordTypeCode == 'title'">
+				    		AND A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+				    	</when>
+				    	<when test="searchKeywordTypeCode == 'body'">
+				    		AND A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+				    	</when>
+						<otherwise>
+							AND(
+								A.boardId LIKE CONCAT('%', #{searchKeyword}, '%')
+								OR
+								A.memberId LIKE CONCAT('%', #{searchKeyword}, '%')
+								OR
+								A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+								OR
+								A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+								)
+						</otherwise>
 				</choose>
 			</if>
 			</script>
@@ -167,6 +187,17 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public Article getArticle(@Param("id")int id);
+
+	
+	@Select("""
+			SELECT M.id
+			FROM MEMBER AS M
+			LEFT JOIN article AS A
+			ON M.id = A.memberId
+			WHERE M.nickname = #{searchKeyword}
+			GROUP BY M.nickname
+			""")
+	public String getMemberId(String searchKeyword);
 
 
 

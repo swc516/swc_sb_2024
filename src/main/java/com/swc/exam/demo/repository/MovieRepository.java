@@ -133,6 +133,104 @@ public interface MovieRepository {
 			</script>
 			""")
 	List<Movie> getForPrintMovies(String searchKeywordTypeCode, String searchKeyword, int limitStart, int limitTake);
+	
+	
+	@Select("""
+			<script>
+			SELECT COUNT(*) AS cnt
+			FROM `movie` AS M
+			WHERE 1
+			<if test="searchKeyword != ''">
+				<choose>
+					<when test="searchKeywordTypeCode == 'title'">
+			    		AND M.title LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'body'">
+			    		AND M.body LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'director'">
+			    		AND M.director LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'actor'">
+			    		AND M.actor LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'genre'">
+			    		AND M.genre LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'country'">
+			    		AND M.country LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+					<otherwise>
+						AND(
+							M.title LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.body LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.director LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.actor LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.genre LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.country LIKE CONCAT('%', #{searchKeyword}, '%')
+							)
+					</otherwise>
+				</choose>
+			</if>
+			</script>
+			""")
+	int getAllMoviesCount(String searchKeywordTypeCode, String searchKeyword);
+	
+	
+	@Select("""
+			<script>
+			SELECT M.*
+			FROM `movie` AS M
+			WHERE 1
+			<if test="searchKeyword != ''">
+				<choose>
+					<when test="searchKeywordTypeCode == 'title'">
+			    		AND M.title LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'body'">
+			    		AND M.body LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'director'">
+			    		AND M.director LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'actor'">
+			    		AND M.actor LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'genre'">
+			    		AND M.genre LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+			    	<when test="searchKeywordTypeCode == 'country'">
+			    		AND M.country LIKE CONCAT('%', #{searchKeyword}, '%')
+			    	</when>
+					<otherwise>
+						AND(
+							M.title LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.body LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.director LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.actor LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.genre LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.country LIKE CONCAT('%', #{searchKeyword}, '%')
+							)
+					</otherwise>
+				</choose>
+			</if>
+			ORDER BY M.id DESC
+			<if test="limitStart != -1">
+			LIMIT #{limitStart}, #{limitTake}
+			</if>
+			</script>
+			""")
+	List<Movie> getForPrintAllMovies(String searchKeywordTypeCode, String searchKeyword, int limitStart, int limitTake);
 
 	
 	@Update("""
@@ -215,6 +313,13 @@ public interface MovieRepository {
 			WHERE id = #{movieId}
 			""")
 	String getMovieTitleById(int movieId);
+
+	@Update("""
+			UPDATE movie
+			SET delStatus = 0
+			WHERE id = #{id}
+			""")
+	void doDeleteCancel(int id);
 	
 	
 }

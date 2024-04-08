@@ -41,11 +41,11 @@ public class AdmMovieController {
 	public String showList(Model model,	@RequestParam(defaultValue = "title, body") 
 	String searchKeywordTypeCode, @RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
 		
-		int moviesCount = movieService.getMoviesCount(searchKeywordTypeCode, searchKeyword);
+		int moviesCount = movieService.getAllMoviesCount(searchKeywordTypeCode, searchKeyword);
 
 		int itemsCountInAPage = 10;
 		int pagesCount = (int) Math.ceil((double) moviesCount / itemsCountInAPage);
-		List<Movie> movies = movieService.getForPrintMovies(searchKeywordTypeCode, searchKeyword,
+		List<Movie> movies = movieService.getForPrintAllMovies(searchKeywordTypeCode, searchKeyword,
 				itemsCountInAPage, page);
 		
 		model.addAttribute("page", page);
@@ -150,6 +150,14 @@ public class AdmMovieController {
 		return rq.jsReplace(modifyRd.getMsg(), "/adm/movie/list");
 	}
 	
+	
+	
+	@RequestMapping("/adm/movie/deleteCancel")
+	@ResponseBody
+	public String doDeleteCancel(int id) {
+		movieService.doDeleteCancel(id);
+		return rq.jsReplace("완료되었습니다", "../movie/list");
+	}
 	
 
 }
