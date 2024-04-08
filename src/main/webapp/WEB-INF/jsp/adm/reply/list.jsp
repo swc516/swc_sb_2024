@@ -68,7 +68,7 @@
           <c:forEach var="reply" items="${replys}">
             <tr class="hover">
               <th>
-                <input class="checkbox-article-id" value="${reply.id}" type="checkbox" />
+                <input class="checkbox-reply-id" value="${reply.id}" type="checkbox" />
               </th>
               <td>${reply.relId}</td>
               <td>
@@ -90,40 +90,40 @@
     </div>
 
     <script>
-      $('.checkbox-all-article-id').change(function() {
+      $('.checkbox-all-reply-id').change(function() {
       	const $all = $(this);
       	const allChecked = $all.prop('checked');
       
-      	$('.checkbox-article-id').prop('checked', allChecked);
+      	$('.checkbox-reply-id').prop('checked', allChecked);
       
       })
       
-      $('.checkbox-article-id').change(function() {
-		const checkboxArticleIdCount = $('.checkbox-article-id').length;
-		const checkboxArticleIdCheckedCount = $('.checkbox-article-id:checked').length;
+      $('.checkbox-reply-id').change(function() {
+		const checkboxReplyIdCount = $('.checkbox-reply-id').length;
+		const checkboxReplyIdCheckedCount = $('.checkbox-reply-id:checked').length;
 
-		const allChecked = checkboxArticleIdCount == checkboxArticleIdCheckedCount;
+		const allChecked = checkboxReplyIdCount == checkboxReplyIdCheckedCount;
 
-		$('.checkbox-all-article-id').prop(
+		$('.checkbox-all-reply-id').prop(
 				'checked', allChecked);
 		})
 	</script>
   
     <div>
-      <button class="btn btn-error btn-delete-selected-articles">선택삭제</button>
+      <button class="btn btn-error btn-delete-selected-replys">선택삭제</button>
     </div>
 
-    <form method="post" name="do-delete-articles-form" action="../article/doDelete">
+    <form method="post" name="do-delete-replys-form" action="../reply/doDelete">
       <input type="hidden" name="ids" value=""/>
       <input type="hidden" name="replaceUri" value="${rq.currentUri}"/>
     </form>
 
     <script>
-     $('.btn-delete-selected-articles').click(function(){
-    	 const values = $('.checkbox-article-id:checked').map((index, el) => el.value).toArray();
+     $('.btn-delete-selected-replys').click(function(){
+    	 const values = $('.checkbox-reply-id:checked').map((index, el) => el.value).toArray();
     	 
     	 if(values.length == 0) {
-    		 alert('삭제할 게시글을 선택해주세요.');
+    		 alert('삭제할 댓글을 선택해주세요.');
     		 return;
     	 }
     	 
@@ -131,8 +131,8 @@
     		 return;
     	 }
     	 
-    	 document['do-delete-articles-form'].ids.value = values.join(',');     
-    	 document['do-delete-articles-form'].submit();   
+    	 document['do-delete-replys-form'].ids.value = values.join(',');     
+    	 document['do-delete-replys-form'].submit();   
      })
     </script>
 

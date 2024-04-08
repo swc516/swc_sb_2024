@@ -69,7 +69,7 @@ public class AdmReplyController {
 		replyService.deleteReplys(replyIds);
 		
 
-		return rq.jsReplace("해당 게시글이 삭제되었습니다.", replaceUri);
+		return rq.jsReplace("해당 댓글이 삭제되었습니다.", replaceUri);
 	}
 
 }

@@ -146,8 +146,14 @@ public class ReplyService {
 		List<Reply> replys = replyRepository.getForPrintReplys(limitStart, limitTake, searchKeyword,
 				searchKeywordTypeCode);
 
-		
 		return replys;
 	}
 
+	public void deleteReplys(List<Integer> replyIds) {
+		for (int replyId : replyIds) {
+			deleteReply(replyId);
+	
+		}
+	}
+	
 }

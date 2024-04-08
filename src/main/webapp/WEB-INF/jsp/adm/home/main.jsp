@@ -48,7 +48,7 @@
   <section class="mt-5">
     <span style="font-size:30px">▶TEST</span><br>
     <span class="container mx-auto px-3">
-      <a href="#" type="submit" class="btn btn-primary"></a>
+      <a href="/adm/cinema/theater/insertTestData" type="submit" class="btn btn-primary">상영회차/데이터 넣기</a>
     </span>
   </section>
 </div>
