@@ -127,10 +127,9 @@ public class AdmCinemaController {
 		return rq.jsReplace(modifyRd.getMsg(), "/adm/cinema/list");
 	}
 
-	///////////////////////////////////////////////////////////////////////
 
 	@RequestMapping("/adm/cinema/theater/addInfo")
-	public String showAdd(Model model, int id) {
+	public String showAddInfo(Model model, int id) {
 		Cinema cinema = cinemaService.getCinemaById(id);
 		model.addAttribute("cinema", cinema);
 
@@ -139,7 +138,7 @@ public class AdmCinemaController {
 
 	@RequestMapping("/adm/cinema/theater/doAddInfo")
 	@ResponseBody
-	public String doAdd(int cinemaId, String theater, char seatRow, int seatCol) {
+	public String doAddInfo(int cinemaId, String theater, char seatRow, int seatCol) {
 		String seatStatus = "일반";
 		ResultData addRd = cinemaService.addTheaterInfo(cinemaId, theater, seatRow, seatCol, seatStatus);
 
@@ -229,17 +228,6 @@ public class AdmCinemaController {
 		return rq.jsReplace(addRd.getMsg(),
 				"/adm/cinema/theater/addTime?cinemaId=" + cinemaId);
 
-	}
-	
-	
-	@RequestMapping("/adm/cinema/doDeleteAfterTheaterTime")
-	@ResponseBody
-	public String doDeleteAfterTheaterTime() {
-		
-		cinemaService.doDeleteAfterTheaterTime();
-		
-
-		return rq.jsHistoryBack("완료되었습니다.");
 	}
 	
 	
@@ -560,18 +548,6 @@ public class AdmCinemaController {
 		cinemaService.addTime(3, 6, 4, Ut.getAddDay(6) , 4, Ut.getAddDay(6) + " 19:00:00" , Ut.getAddDay(6) + " 21:00:00");
 		cinemaService.addTime(3, 6, 4, Ut.getAddDay(6) , 5, Ut.getAddDay(6) + " 22:00:00" , Ut.getAddDay(7) + " 00:00:00");
 		cinemaService.addTime(3, 6, 4, Ut.getAddDay(6) , 6, Ut.getAddDay(7) + " 01:00:00" , Ut.getAddDay(7) + " 03:00:00");
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		return rq.jsHistoryBack("테스트 데이터가 추가되었습니다");
 	}

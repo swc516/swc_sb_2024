@@ -71,7 +71,7 @@
         <thead>
           <tr>
             <th>
-              <input class="checkbox-all-member-id" type="checkbox" />
+              <input class="checkbox-all-article-id" type="checkbox" />
             </th>
             <th>번호</th>
             <th>게시판</th>

@@ -19,17 +19,10 @@ import com.swc.exam.demo.vo.Rq;
 @Controller
 public class AdmArticleController {
 	private ArticleService articleService;
-	private BoardService boardService;
-	private ReactionPointService reactionPointService;
-	private ReplyService replyService;
 	private Rq rq;
 
-	public AdmArticleController(ArticleService articleService, BoardService boardService,
-			ReactionPointService reactionPointService, ReplyService replyService, Rq rq) {
+	public AdmArticleController(ArticleService articleService, Rq rq) {
 		this.articleService = articleService;
-		this.boardService = boardService;
-		this.reactionPointService = reactionPointService;
-		this.replyService = replyService;
 		this.rq = rq;
 
 	}

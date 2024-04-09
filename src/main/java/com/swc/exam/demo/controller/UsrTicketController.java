@@ -17,6 +17,7 @@ import com.swc.exam.demo.service.MovieService;
 import com.swc.exam.demo.service.TicketService;
 import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Cinema;
+import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.Movie;
 import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.Rq;
@@ -87,6 +88,12 @@ public class UsrTicketController {
 		model.addAttribute("cinemaRegion", cinemaRegion);
 		model.addAttribute("cinemaBranch", cinemaBranch);
 		model.addAttribute("theater", theater);
+		
+		Member loginedMember = rq.getLoginedMember();
+		
+		model.addAttribute("email", loginedMember.getEmail());
+		model.addAttribute("name", loginedMember.getName());
+		model.addAttribute("cellphoneNo", loginedMember.getCellphoneNo());
 
 		return "/usr/ticket/ticketing";
 	}
@@ -146,5 +153,6 @@ public class UsrTicketController {
 
 		return "usr/ticket/seatLocation";
 	}
+	
 
 }

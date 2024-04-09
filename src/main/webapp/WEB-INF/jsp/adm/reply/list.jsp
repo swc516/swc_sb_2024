@@ -54,8 +54,9 @@
         <thead>
           <tr>
             <th>
-              <input class="checkbox-all-member-id" type="checkbox" />
+              <input class="checkbox-all-reply-id" type="checkbox" />
             </th>
+            <th>번호</th>
             <th>글번호</th>
             <th>내용</th>
             <th>작성자</th>
@@ -70,6 +71,7 @@
               <th>
                 <input class="checkbox-reply-id" value="${reply.id}" type="checkbox" />
               </th>
+              <td>${reply.id}</td>
               <td>${reply.relId}</td>
               <td>
                 <a class="btn-text-link block w-full truncate" href="/usr/article/detail?id=${reply.relId}">${reply.body}
