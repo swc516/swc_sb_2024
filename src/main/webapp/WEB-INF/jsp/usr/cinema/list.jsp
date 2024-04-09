@@ -47,7 +47,7 @@
               <td>${cinema.forPrintType1RegDate}</td>
               <td>${cinema.forPrintType1UpdateDate}</td>
               <td>
-                <a class="btn-text-link block w-full truncate" href="/usr/cinema/detail?id=${cinema.id}">${cinema.region}</a>
+                <a class="btn-text-link block w-full truncate" href="/usr/cinema/detail?id=${cinema.id}">${cinema.region}_${cinema.branch}</a>
               </td>
             </tr>
           </c:forEach>

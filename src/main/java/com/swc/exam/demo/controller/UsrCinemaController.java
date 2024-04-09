@@ -58,6 +58,14 @@ public class UsrCinemaController {
 		return "usr/cinema/list";
 	}
 	
+	@RequestMapping("/usr/cinema/detail")
+	public String showDetail(Model model, int id) {
+		Cinema cinema = cinemaService.getForPrintCinema(id);
+		model.addAttribute("cinema", cinema);
+		
+		return "usr/cinema/detail";
+	}
+	
 	
 	
 }
