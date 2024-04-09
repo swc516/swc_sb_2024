@@ -8,7 +8,7 @@
   <div class="container mx-auto px-3">
     <div class="mt-3">
       <c:forEach var="list" items="${lists}">
-        <div class="stats bg-primary text-primary-content">
+        <div class="stats bg-warning text-primary-content">
 
           <div class="stat">
             <div class="stat-title">${list.cinema} ${list.theater},(${list.time}회) ${list.startTime.substring(0,10)}</div>
@@ -33,9 +33,7 @@
           </div>
 
 
-
-
-           <c:if test="${list.startTime > beforeThirtyMinutes}">
+           <c:if test="${list.startTime > beforeThirthMinutes}">
             <div class="stat">
               <div class="stat-title"></div>
               <div class="stat-value">

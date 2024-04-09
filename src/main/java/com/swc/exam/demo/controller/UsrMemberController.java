@@ -298,7 +298,7 @@ public class UsrMemberController {
 		String beforeThirthMinutes = Ut.getForPrintBeforeMinutes(30);
 		
 		
-		model.addAttribute("beforeFiveMinutes", beforeThirthMinutes);
+		model.addAttribute("beforeThirthMinutes", beforeThirthMinutes);
 		model.addAttribute("lists", lists);
 
 		return "usr/member/myTicketList";

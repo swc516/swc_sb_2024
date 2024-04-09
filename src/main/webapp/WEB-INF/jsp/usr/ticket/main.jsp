@@ -11,7 +11,7 @@
 
 <form id="frm" action="../ticket/main" method="post">
   <section class="container mx-auto px-3" style="display: flex; width: 100%; border: 1px solid #003458;">
-  
+
     <div style="width: 20%;">
       <c:forEach var="movie" items="${movies}">
         <c:if test="${movie.id == param.movieId }">
@@ -52,13 +52,15 @@
         <c:forEach var="theaterTime" items="${theaterTimes}">
           <tr>
             <td>
-              <c:if test="${theaterTime.extra__sellSeatCount == theaterTime.extra__maxSeatCount || theaterTime.startTime <= beforeFiveMinutes}">
-                <input type="radio" name="ticketing"
+              <c:if
+                test="${theaterTime.extra__sellSeatCount == theaterTime.extra__maxSeatCount || theaterTime.startTime <= beforeFiveMinutes}">
+                <input type="radio" name="ticketing" id="radio"
                   value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.theaterTimeId}"
                   disabled>
               </c:if>
-              <c:if test="${theaterTime.extra__sellSeatCount != theaterTime.extra__maxSeatCount && theaterTime.startTime > beforeFiveMinutes}">
-                <input type="radio" name="ticketing"
+              <c:if
+                test="${theaterTime.extra__sellSeatCount != theaterTime.extra__maxSeatCount && theaterTime.startTime > beforeFiveMinutes}">
+                <input type="radio" name="ticketing" id="radio"
                   value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.theaterTimeId}">
               </c:if>
             </td>
@@ -81,16 +83,26 @@
 <section class="container mx-auto px-3">
   <div style="float: right">
     <form action="../ticket/ticketing" method="post">
-      <input type="hidden" id="movieId" name="movieId" value="">
-      <input type="hidden" id="cinemaId" name="cinemaId" value="">
-      <input type="hidden" id="theaterInfoId" name="theaterInfoId" value="">
-      <input type="hidden" id="theaterTimeId" name="theaterTimeId" value="">
-      <input type="submit" value="예매" class="btn btn-success">
+      <input type="hidden" id="movieId" name="movieId" value="0">
+      <input type="hidden" id="cinemaId" name="cinemaId" value="0">
+      <input type="hidden" id="theaterInfoId" name="theaterInfoId" value="0">
+      <input type="hidden" id="theaterTimeId" name="theaterTimeId" value="0">
+      <input type="submit" value="예매" class="btn btn-success" onclick="send(); return false;">
     </form>
   </div>
 </section>
-
 <script>
+	function send() {
+		var check = document.getElementById("movieId").value;
+		if (check == 0) {
+			alert('상영회차를 선택해주세요');
+			return;
+		} else{
+			
+			form.submit();
+		}
+	}
+
 	$("input:radio[name=ticketing]").click(
 			function() {
 				var result = $(":input:radio[name=ticketing]:checked").val()
@@ -104,6 +116,7 @@
 				document.getElementById("cinemaId").value = cinemaId;
 				document.getElementById("theaterInfoId").value = theaterInfoId;
 				document.getElementById("theaterTimeId").value = theaterTimeId;
+
 			});
 </script>
 

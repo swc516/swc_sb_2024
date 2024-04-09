@@ -56,6 +56,7 @@ public class UsrTicketController {
 
 	@RequestMapping("/usr/ticket/ticketing")
 	public String showTicketing(Model model, int movieId, int cinemaId, int theaterInfoId, int theaterTimeId) {
+		
 		List<TheaterTime> theaterTimes = ticketService.getForPrintTheaterTimes(cinemaId, theaterInfoId, theaterTimeId);
 		model.addAttribute("theaterTimes", theaterTimes);
 		model.addAttribute("playingTime", theaterTimes.get(0).getForPrintType1StartTime() + " ~ " + theaterTimes.get(0).getForPrintType1EndTime());
@@ -87,8 +88,9 @@ public class UsrTicketController {
 		model.addAttribute("cinemaBranch", cinemaBranch);
 		model.addAttribute("theater", theater);
 
-		return "usr/ticket/ticketing";
+		return "/usr/ticket/ticketing";
 	}
+
 
 	@RequestMapping("/usr/ticket/doTicketing")
 	@ResponseBody
