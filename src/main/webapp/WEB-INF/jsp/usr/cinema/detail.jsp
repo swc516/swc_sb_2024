@@ -3,7 +3,9 @@
 <c:set var="pageTitle" value="${cinema.region}_${cinema.branch} 정보" />
 <%@include file="../../common/head.jspf"%>
 <%@include file="../../common/toastUiEditorLib.jspf"%>
-
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9oyhhwaj32"></script>
 <section class="mt-5">
 
   <div class="container mx-auto px-3">
@@ -32,8 +34,10 @@
         </tbody>
       </table>
     </div>
+
+
   </div>
+
+
 </section>
-
-
 <%@include file="../../common/foot.jspf"%>

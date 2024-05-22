@@ -219,6 +219,7 @@ public class Rq {
 		case "/usr/member/findLoginId":
 		case "/usr/member/findLoginPw":
 		case "/adm/member/list":
+		case "/usr/ticket/ticketing":
 			return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterLoginUri", ""));
 		}
 		
@@ -228,12 +229,13 @@ public class Rq {
 	public String getAfterLogoutUri() {
 		String requestUri = req.getRequestURI();
 		
-		/* 필요하면 활성화 ex) 작성 -> 로그아웃 -> 로그인 -> 작성을 작성에서 로그아웃하면 메인으로.
+		// 필요하면 활성화 ex) 작성 -> 로그아웃 -> 로그인 -> 작성을 작성에서 로그아웃하면 메인으로.
 		switch(requestUri) {
 		case "/usr/article/write":
+		case "/usr/member/myTicketList":
 			return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterLogoutUri", ""));
 		}
-		*/
+		
 		
 		return getEncodedCurrentUri();
 	}

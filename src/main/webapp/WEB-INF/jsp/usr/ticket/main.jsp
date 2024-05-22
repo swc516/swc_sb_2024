@@ -3,7 +3,7 @@
 <%@ page import="com.swc.exam.demo.util.Ut"%>
 
 
-<c:set var="pageTitle" value="영화 예매(테스트)" />
+<c:set var="pageTitle" value="영화 예매" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
 
@@ -21,7 +21,7 @@
         <c:if test="${movie.id != param.movieId }">
           <input type="radio" name="movieId" value="${movie.id}" onclick="document.getElementById('frm').submit();">
         </c:if>
-  ${movie.title} <br>
+  <a href="/usr/movie/detail?id=${movie.id}">${movie.title}</a> <br>
       </c:forEach>
     </div>
     <div style="width: 20%;">

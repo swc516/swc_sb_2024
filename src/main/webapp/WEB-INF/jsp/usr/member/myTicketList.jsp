@@ -11,7 +11,8 @@
         <div class="stats bg-warning text-primary-content">
 
           <div class="stat">
-            <div class="stat-title">${list.cinema} ${list.theater},(${list.time}회) ${list.startTime.substring(0,10)}</div>
+            <div class="stat-title">${list.cinema}${list.theater},(${list.time}회)
+              ${list.startTime.substring(0,10)}</div>
             <div class="stat-value">${list.playingTime}</div>
             <div class="stat-title">
               <a
@@ -20,10 +21,9 @@
             </div>
             <div class="stat-value">${list.extra__seatInfo}</div>
           </div>
-          
+
           <div class="stat">
-            <div class="stat-title">영화제목
-            </div>
+            <div class="stat-title">영화제목</div>
             <div class="stat-value">${list.movieTitle }</div>
           </div>
 
@@ -32,15 +32,25 @@
             <div class="stat-value">${list.buyDate}</div>
           </div>
 
-
-           <c:if test="${list.startTime > beforeThirthMinutes}">
-            <div class="stat">
-              <div class="stat-title"></div>
-              <div class="stat-value">
-                <a href="../member/doTicketCancel?id=${list.id}&seatIds=${list.extra__seatId}" class="btn btn-error">취소하기</a>
+          <c:choose>
+            <c:when test="${list.startTime > beforeThirthMinutes}">
+              <div class="stat">
+                <div class="stat-title"></div>
+                <div class="stat-value">
+                  <a href="../member/doTicketCancel?id=${list.id}&seatIds=${list.extra__seatId}" class="btn btn-error">취소하기</a>
+                </div>
               </div>
-            </div>
-          </c:if>
+            </c:when>
+            <c:when test="${list.startTime < beforeThirthMinutes}">
+              <div class="stat">
+                <div class="stat-title"></div>
+                <div class="stat-value">
+                  <a href="#" class="btn btn-error">취소불가</a>
+                </div>
+              </div>
+            </c:when>
+          </c:choose>
+
         </div>
         <br>
         <br>
