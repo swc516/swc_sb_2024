@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.swc.exam.demo.repository.ReplyRepository;
 import com.swc.exam.demo.repository.TicketRepository;
 import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Cinema;
@@ -26,12 +27,14 @@ public class TicketService {
 	private TicketRepository ticketRepository;
 	private MovieService movieService;
 	private CinemaService cinemaService;
+	private ReplyService replyService;
 	private Rq rq;
 
-	public TicketService(TicketRepository ticketRepository, MovieService movieService, CinemaService cinemaService, Rq rq) {
+	public TicketService(TicketRepository ticketRepository, MovieService movieService, CinemaService cinemaService, ReplyService replyService, Rq rq) {
 		this.ticketRepository = ticketRepository;
 		this.movieService = movieService;
 		this.cinemaService = cinemaService;
+		this.replyService = replyService;
 		this.rq = rq;
 	}
 
@@ -145,6 +148,17 @@ public class TicketService {
 	public Ticket getTicketById(int ticketId) {
 		Ticket ticket = ticketRepository.getTicketById(ticketId);
 		return ticket;
+	}
+
+
+	public void writeReview(int memberId, String movieTitle, String body, double rate) {
+		String relTypeCode = "movie";
+		int relId = movieService.getMovieIdByTitle(movieTitle);
+		replyService.writeReview(memberId, relTypeCode, relId, body, rate);
+		double rateAvg = replyService.getRateAvg(relTypeCode, relId);
+		movieService.updateRate(relId, rateAvg);
+		
+		
 	}
 
 }

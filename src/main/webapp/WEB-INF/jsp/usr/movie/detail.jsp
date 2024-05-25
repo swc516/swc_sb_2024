@@ -102,6 +102,10 @@
             <img src="${rq.getMoviePosterImgUri(movie.id)}" onerror="${rq.moviePosterFallbackImgOnErrorHtml}" />
           </td>
         </tr>
+        <tr>
+          <th>평점</th>
+          <td>${movie.rateAvg}</td>
+        </tr>
         </tbody>
       </table>
     </div>
@@ -109,7 +113,31 @@
 </section>
 
 
+<section class="mt-5">
+  <div class="container mx-auto px-3">
+    <div class="table-box-type-1">
+      <table>
+        <tbody>
+        <colgroup>
+          <col width="200" />
+        </colgroup>
+        <tr>
+          <th>평점 및 리뷰</th>
+        </tr>
+        <tr>
+        <c:forEach var="review" items="${reviews}">
+          <td width="8%">${review.rate}</td>
+          <td width="88%">${review.body}</td>
+          <td width="10%">${review.extra__writerName}</td>
+        </tr>
+        </c:forEach>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
+<br>
 
 
 

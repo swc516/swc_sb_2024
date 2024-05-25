@@ -27,6 +27,20 @@ public interface ReplyRepository {
 	public void writeReply(@Param("memberId") int memberId, @Param("relTypeCode") String relTypeCode, @Param("relId") int relId, @Param("body") String body);
 
 	
+	
+	@Insert("""
+			INSERT INTO reply
+			SET regDate = NOW(),
+			updateDate = NOW(),
+			memberId= #{memberId},
+			relTypeCode = #{relTypeCode},
+			relId = #{relId},
+			body = #{body},
+			rate = #{rate}
+			""")
+	public void writeReview(@Param("memberId") int memberId, @Param("relTypeCode") String relTypeCode, @Param("relId") int relId, @Param("body") String body, double rate);
+	
+	
 	@Select("""
 			SELECT LAST_INSERT_ID()
 			""")
@@ -185,6 +199,30 @@ public interface ReplyRepository {
 			""")
 	public List<Reply> getForPrintReplys(int limitStart, int limitTake, String searchKeyword,
 			String searchKeywordTypeCode);
+
+
+
+	@Select("""
+			SELECT AVG(rate)
+			FROM reply
+			WHERE relTypeCode = #{relTypeCode}
+			AND relId = #{relId}
+			""")
+	public double getRateAvg(String relTypeCode, int relId);
+
+
+	@Select("""
+			SELECT R.*,
+			M.nickname AS extra__writerName
+			FROM reply AS R
+			LEFT JOIN `member` AS M
+			ON R.memberId = M.id
+			WHERE R.relTypeCode = 'movie'
+			AND R.relId = #{id}
+			""")
+	public List<Reply> getForPrintReviews(int id);
+
+
 
 	
 

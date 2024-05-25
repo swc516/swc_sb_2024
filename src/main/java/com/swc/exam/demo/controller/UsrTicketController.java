@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,32 +38,33 @@ public class UsrTicketController {
 	}
 
 	@RequestMapping("/usr/ticket/main")
-	public String showMain(Model model, @RequestParam(defaultValue = "0") int movieId, @RequestParam(defaultValue = "0") int cinemaId, String date) {
+	public String showMain(Model model, @RequestParam(defaultValue = "0") int movieId,
+			@RequestParam(defaultValue = "0") int cinemaId, String date) {
 
 		List<Movie> movies = ticketService.getMovieList();
 		List<Cinema> cinemas = ticketService.getCinemaList();
 		List<String> week = Ut.getForPrintWeek();
 		String beforeFiveMinutes = Ut.getForPrintBeforeMinutes(5);
-		
+
 		model.addAttribute("beforeFiveMinutes", beforeFiveMinutes);
 		model.addAttribute("week", week);
 		model.addAttribute("movies", movies);
 		model.addAttribute("cinemas", cinemas);
-		
+
 		List<TheaterTime> theaterTimes = ticketService.getTheaterTimeList(movieId, cinemaId, date);
 		model.addAttribute("theaterTimes", theaterTimes);
-		
-		
+
 		return "usr/ticket/main";
 	}
 
 	@RequestMapping("/usr/ticket/ticketing")
 	public String showTicketing(Model model, int movieId, int cinemaId, int theaterInfoId, int theaterTimeId) {
-		
+
 		List<TheaterTime> theaterTimes = ticketService.getForPrintTheaterTimes(cinemaId, theaterInfoId, theaterTimeId);
 		model.addAttribute("theaterTimes", theaterTimes);
-		model.addAttribute("playingTime", theaterTimes.get(0).getForPrintType1StartTime() + " ~ " + theaterTimes.get(0).getForPrintType1EndTime());
-		
+		model.addAttribute("playingTime", theaterTimes.get(0).getForPrintType1StartTime() + " ~ "
+				+ theaterTimes.get(0).getForPrintType1EndTime());
+
 		String seatRows = "";
 		int lastSeatRow = theaterTimes.get(theaterTimes.size() - 1).getSeatRow();
 		for (int i = 'A'; i <= lastSeatRow; i++) {
@@ -83,14 +86,14 @@ public class UsrTicketController {
 		String cinemaRegion = ticketService.getCinemaRegionById(cinemaId);
 		String cinemaBranch = ticketService.getCinemaBranchById(cinemaId);
 		String theater = ticketService.getTheaterById(theaterInfoId);
-		
+
 		model.addAttribute("movieTitle", movieTitle);
 		model.addAttribute("cinemaRegion", cinemaRegion);
 		model.addAttribute("cinemaBranch", cinemaBranch);
 		model.addAttribute("theater", theater);
-		
+
 		Member loginedMember = rq.getLoginedMember();
-		
+
 		model.addAttribute("email", loginedMember.getEmail());
 		model.addAttribute("name", loginedMember.getName());
 		model.addAttribute("cellphoneNo", loginedMember.getCellphoneNo());
@@ -98,13 +101,14 @@ public class UsrTicketController {
 		return "/usr/ticket/ticketing";
 	}
 
-
 	@RequestMapping("/usr/ticket/doTicketing")
 	@ResponseBody
-	public String doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, String movieTitle, String cinema, String theater, int time, String startTime, String playingTime) {
-		ResultData doTicketingRd = ticketService.doTicketing(theaterInfoId, theaterTimeId, seats, rq.getLoginedMemberId(), movieTitle, cinema, theater, time, startTime, playingTime);
+	public String doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, String movieTitle, String cinema,
+			String theater, int time, String startTime, String playingTime) {
+		ResultData doTicketingRd = ticketService.doTicketing(theaterInfoId, theaterTimeId, seats,
+				rq.getLoginedMemberId(), movieTitle, cinema, theater, time, startTime, playingTime);
 		if (doTicketingRd.isSuccess()) {
-			return rq.jsReplace("예매가 완료되었습니다.", "../member/myTicketList?id="+rq.getLoginedMemberId());
+			return rq.jsReplace("예매가 완료되었습니다.", "../member/myTicketList?id=" + rq.getLoginedMemberId());
 		}
 		return rq.jsReplace("예매에 실패했습니다.", "usr/ticket/main");
 	}
@@ -114,18 +118,18 @@ public class UsrTicketController {
 		String[] seatSplit = mySeats.split(",");
 		List<String> mySeatList = new ArrayList<String>();
 		// E-7-일반
-		for(String seats: seatSplit) {
+		for (String seats : seatSplit) {
 			mySeatList.add(seats.trim());
-			
+
 		}
-		
+
 		List<TheaterInfo> theaterInfos = ticketService.getForPrintTheaterInfo(cinema, theater);
 
 		for (TheaterInfo theaterInfo : theaterInfos) {
 			String seat = theaterInfo.getSeatRow() + "" + theaterInfo.getSeatCol();
-			for(String mySeat: mySeatList) {
-				if(seat.equals(mySeat))
-				theaterInfo.setExtra__mySeat(true);
+			for (String mySeat : mySeatList) {
+				if (seat.equals(mySeat))
+					theaterInfo.setExtra__mySeat(true);
 			}
 		}
 
@@ -153,6 +157,22 @@ public class UsrTicketController {
 
 		return "usr/ticket/seatLocation";
 	}
+
+	@GetMapping("/usr/ticket/writeReview")
+	public String writeReviewForm() {
+		return "/usr/ticket/writeReview";
+	}
 	
+	@PostMapping("/usr/ticket/writeReview")
+	public String writeReview(String movieTitle, String body, double rate) {
+		System.out.println("테스트 제목 : " + movieTitle);
+		System.out.println("테스트 바디 : " + body);
+		System.out.println("테스트 레이트 : " + rate);
+		System.out.println("테스트 멤버아이디 : " + rq.getLoginedMemberId());
+		
+		ticketService.writeReview(rq.getLoginedMemberId(), movieTitle, body, rate);
+		
+		return "/usr/ticket/writeReview";
+	}
 
 }

@@ -11,15 +11,18 @@ import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Article;
 import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.Movie;
+import com.swc.exam.demo.vo.Reply;
 import com.swc.exam.demo.vo.ResultData;
 
 @Service
 public class MovieService {
 
 	private MovieRepository movieRepository;
+	private ReplyService replyService;
 
-	public MovieService(MovieRepository movieRepository) {
+	public MovieService(MovieRepository movieRepository, ReplyService replyService) {
 		this.movieRepository = movieRepository;
+		this.replyService = replyService;
 	}
 
 	public ResultData add(String title, String body, String country, int runningTime, String director, String actor, String genre, String releaseDate, String trailer) {
@@ -107,6 +110,22 @@ public class MovieService {
 
 	public void doDeleteCancel(int id) {
 		movieRepository.doDeleteCancel(id);
+	}
+
+	public int getMovieIdByTitle(String movieTitle) {
+		int movieId = movieRepository.getMoviedIdByTitle(movieTitle);
+		return movieId;
+	}
+
+	public void updateRate(int relId, double rateAvg) {
+		
+		movieRepository.updateRate(relId, rateAvg);
+		
+	}
+
+	public List<Reply> getForPrintReviews(int id) {
+		List<Reply> reviews = replyService.getForPrintReviews(id);
+		return reviews;
 	}
 
 

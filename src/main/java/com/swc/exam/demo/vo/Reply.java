@@ -15,6 +15,8 @@ public class Reply {
 	private String relTypeCode;
 	private int relId;
 	private String body;
+	private double rate;
+	
 	private int hitCount;
 	private int goodReactionPoint;
 	private int badReactionPoint;

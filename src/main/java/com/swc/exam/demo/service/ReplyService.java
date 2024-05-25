@@ -27,6 +27,13 @@ public class ReplyService {
 
 		return ResultData.from("S-1", Ut.f("%d번 댓글이 생성되었습니다.", id), "id", id);
 	}
+	
+	public ResultData<Integer> writeReview(int actorId, String relTypeCode, int relId, String body, double rate) {
+		replyRepository.writeReview(actorId, relTypeCode, relId, body, rate);
+		int id = replyRepository.getLastInsertId();
+		
+		return ResultData.from("S-1", Ut.f("%d번 리뷰가 생성되었습니다.", id), "id", id);
+	}
 
 	public List<Reply> getForPrintReplies(int actorId, String relTypeCode, int relId) {
 		List<Reply> replies = replyRepository.getForPrintReplies(actorId, relTypeCode, relId);
@@ -154,6 +161,16 @@ public class ReplyService {
 			deleteReply(replyId);
 	
 		}
+	}
+
+	public double getRateAvg(String relTypeCode, int relId) {
+		double rateAvg = replyRepository.getRateAvg(relTypeCode, relId);
+		return rateAvg;
+	}
+
+	public List<Reply> getForPrintReviews(int id) {
+		List<Reply> review = replyRepository.getForPrintReviews(id);
+		return review;
 	}
 	
 }

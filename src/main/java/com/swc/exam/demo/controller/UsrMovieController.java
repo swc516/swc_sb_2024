@@ -19,6 +19,7 @@ import com.swc.exam.demo.util.Ut;
 import com.swc.exam.demo.vo.Article;
 import com.swc.exam.demo.vo.Member;
 import com.swc.exam.demo.vo.Movie;
+import com.swc.exam.demo.vo.Reply;
 import com.swc.exam.demo.vo.ResultData;
 import com.swc.exam.demo.vo.Rq;
 
@@ -66,6 +67,9 @@ public class UsrMovieController {
 	public String showList(Model model,	int id) {
 		Movie movie = movieService.getForPrintMovie(id);
 		model.addAttribute("movie", movie);
+		
+		List<Reply> reviews = movieService.getForPrintReviews(id);
+		model.addAttribute("reviews", reviews);
 		
 		return "usr/movie/detail";
 	}

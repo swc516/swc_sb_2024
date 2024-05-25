@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.swc.exam.demo.service.MovieService;
@@ -22,7 +23,7 @@ public class UsrHomeController {
 		this.movieService = movieService;
 	}
 	
-	@RequestMapping("/usr/home/main")
+	@GetMapping("/usr/home/main")
 	public String showMain(Model model) {
 		List<Movie> movieList = movieService.getPlayingMovies();		
 		model.addAttribute("movieList", movieList);

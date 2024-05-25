@@ -320,6 +320,20 @@ public interface MovieRepository {
 			WHERE id = #{id}
 			""")
 	void doDeleteCancel(int id);
+
+	@Select("""
+			SELECT id
+			FROM movie
+			WHERE title = #{movieTitle}
+			""")
+	int getMoviedIdByTitle(String movieTitle);
+
+	@Update("""
+			UPDATE movie
+			SET rateAvg = #{rateAvg}
+			WHERE id = #{relId}
+			""")
+	void updateRate(int relId, double rateAvg);
 	
 	
 }

@@ -50,6 +50,10 @@
               </div>
             </c:when>
           </c:choose>
+            <a
+                href="/usr/ticket/writeReview?movieTitle=${list.movieTitle}"
+                onclick="window.open(this.href, '_blank', 'width=1000, height=300'); return false;">리뷰 작성</a>
+            </div>
 
         </div>
         <br>

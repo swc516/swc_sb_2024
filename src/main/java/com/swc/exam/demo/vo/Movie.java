@@ -22,7 +22,7 @@ public class Movie {
 	private String genre;
 	private String releaseDate;
 	private String trailer;
-	private double rate;
+	private double rateAvg;
 	private int count;
 	private boolean delStatus;
 	private String delDate;
