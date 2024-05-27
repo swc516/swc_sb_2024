@@ -172,5 +172,10 @@ public class ReplyService {
 		List<Reply> review = replyRepository.getForPrintReviews(id);
 		return review;
 	}
+
+	public int hasReviewWrite(int loginedMemberId, int movieId) {
+		int check = replyRepository.hasReviewWrite(loginedMemberId, movieId);
+		return check;
+	}
 	
 }

@@ -223,6 +223,16 @@ public interface ReplyRepository {
 	public List<Reply> getForPrintReviews(int id);
 
 
+	@Select("""
+			SELECT COUNT(*) 
+			FROM reply
+			WHERE memberId = #{loginedMemberId}
+			AND relTypeCode = 'movie'
+			AND relId = #{movieId}
+			""")
+	public int hasReviewWrite(int loginedMemberId, int movieId);
+
+
 
 	
 

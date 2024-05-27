@@ -13,7 +13,7 @@
           <div class="stat">
             <div class="stat-title">${list.cinema}${list.theater},(${list.time}회)
               ${list.startTime.substring(0,10)}</div>
-            <div class="stat-value">${list.playingTime}</div>
+            <div class="stat-value">${list.getForPrintPlayingTime() }</div>
             <div class="stat-title">
               <a
                 href="/usr/ticket/seatLocation?&cinema=${list.cinema}&theater=${list.theater}&mySeats=${list.extra__seatInfo}"
@@ -50,10 +50,15 @@
               </div>
             </c:when>
           </c:choose>
-            <a
-                href="/usr/ticket/writeReview?movieTitle=${list.movieTitle}"
-                onclick="window.open(this.href, '_blank', 'width=1000, height=300'); return false;">리뷰 작성</a>
+          <c:if test="${list.hasReviewWrite()}">
+            <div class="stat">
+              <div class="stat-title"></div>
+              <div class="stat-value">
+                <a href="/usr/ticket/writeReviewForm?movieTitle=${list.movieTitle}" class="btn btn-success"
+                  onclick="window.open(this.href, '_blank', 'width=1000, height=300'); return false;">리뷰 작성</a>
+              </div>
             </div>
+          </c:if>
 
         </div>
         <br>

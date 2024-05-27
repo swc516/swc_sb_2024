@@ -460,17 +460,20 @@ public class Ut {
 	}
 	
 	public static String getForPrintBeforeMinutes(int minute) {
-		 String BeforeFiveMinutes = "";
+		//day 0 = 오늘
+		//day 1 = 내일 
+		// . . .
+		
+		 String beforeMinutes = "";
 		
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		 Date now = new Date();
 		
 		 Calendar cal = Calendar.getInstance();
 		 
 		 cal.add(Calendar.MINUTE, minute);
-		 BeforeFiveMinutes = sdf.format(cal.getTime());  
+		 beforeMinutes = sdf.format(cal.getTime());  
 		 
-		return BeforeFiveMinutes;
+		return beforeMinutes;
 	}
 
 	public static String getAddDay(int addDay) {

@@ -44,9 +44,7 @@ public class UsrTicketController {
 		List<Movie> movies = ticketService.getMovieList();
 		List<Cinema> cinemas = ticketService.getCinemaList();
 		List<String> week = Ut.getForPrintWeek();
-		String beforeFiveMinutes = Ut.getForPrintBeforeMinutes(5);
 
-		model.addAttribute("beforeFiveMinutes", beforeFiveMinutes);
 		model.addAttribute("week", week);
 		model.addAttribute("movies", movies);
 		model.addAttribute("cinemas", cinemas);
@@ -62,8 +60,8 @@ public class UsrTicketController {
 
 		List<TheaterTime> theaterTimes = ticketService.getForPrintTheaterTimes(cinemaId, theaterInfoId, theaterTimeId);
 		model.addAttribute("theaterTimes", theaterTimes);
-		model.addAttribute("playingTime", theaterTimes.get(0).getForPrintType1StartTime() + " ~ "
-				+ theaterTimes.get(0).getForPrintType1EndTime());
+		model.addAttribute("playingTime", theaterTimes.get(0).getForPrintStartTime() + " ~ "
+				+ theaterTimes.get(0).getForPrintEndTime());
 
 		String seatRows = "";
 		int lastSeatRow = theaterTimes.get(theaterTimes.size() - 1).getSeatRow();
@@ -104,9 +102,9 @@ public class UsrTicketController {
 	@RequestMapping("/usr/ticket/doTicketing")
 	@ResponseBody
 	public String doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, String movieTitle, String cinema,
-			String theater, int time, String startTime, String playingTime) {
+			String theater, int time, String startTime, String endTime) {
 		ResultData doTicketingRd = ticketService.doTicketing(theaterInfoId, theaterTimeId, seats,
-				rq.getLoginedMemberId(), movieTitle, cinema, theater, time, startTime, playingTime);
+				rq.getLoginedMemberId(), movieTitle, cinema, theater, time, startTime, endTime);
 		if (doTicketingRd.isSuccess()) {
 			return rq.jsReplace("예매가 완료되었습니다.", "../member/myTicketList?id=" + rq.getLoginedMemberId());
 		}
@@ -158,21 +156,23 @@ public class UsrTicketController {
 		return "usr/ticket/seatLocation";
 	}
 
-	@GetMapping("/usr/ticket/writeReview")
-	public String writeReviewForm() {
+	@RequestMapping("/usr/ticket/writeReviewForm")
+	public String writeReviewForm(Model model, String movieTitle) {
+		int check = ticketService.hasReviewWrite(rq.getLoginedMemberId(), movieTitle);
+		
+		if(check == 0) {
+			model.addAttribute("closeWindow", false);
+		}
+		
 		return "/usr/ticket/writeReview";
 	}
 	
-	@PostMapping("/usr/ticket/writeReview")
-	public String writeReview(String movieTitle, String body, double rate) {
-		System.out.println("테스트 제목 : " + movieTitle);
-		System.out.println("테스트 바디 : " + body);
-		System.out.println("테스트 레이트 : " + rate);
-		System.out.println("테스트 멤버아이디 : " + rq.getLoginedMemberId());
-		
+	@RequestMapping("/usr/ticket/writeReview")
+	@ResponseBody
+	public String writeReview(Model model, String movieTitle, String body, double rate) {
 		ticketService.writeReview(rq.getLoginedMemberId(), movieTitle, body, rate);
-		
-		return "/usr/ticket/writeReview";
+		model.addAttribute("closeWindow", false);
+		return "<script>alert('리뷰가 작성되었습니다.'); window.close();</script>";
 	}
 
 }

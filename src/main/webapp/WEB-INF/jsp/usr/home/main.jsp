@@ -19,6 +19,90 @@
             <p>${movie.body}</p>
           </div>
           <div class="card-actions justify-end">
+          
+         <c:choose>
+           <c:when test="${movie.rateAvg == 5}">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+           </c:when>
+           <c:when test="${movie.rateAvg >= 4.5}">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/harf.png" width="17">
+           </c:when>
+           <c:when test="${movie.rateAvg >= 4}">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/empty.png" width="17">
+           </c:when>
+           <c:when test="${movie.rateAvg >= 3.5}">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/harf.png" width="17">
+             <img src="/rate/empty.png" width="17">
+           </c:when>
+           <c:when test="${movie.rateAvg >= 3}">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+           </c:when>
+           <c:when test="${movie.rateAvg >= 2.5}">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/harf.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+           </c:when>
+           <c:when test="${movie.rateAvg >= 2}">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+           </c:when>
+           <c:when test="${movie.rateAvg >= 1.5}">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/harf.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+           </c:when>
+           <c:when test="${movie.rateAvg >= 1}">
+             <img src="/rate/full.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+           </c:when>
+           <c:when test="${movie.rateAvg >= 0.5}">
+             <img src="/rate/harf.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+           </c:when>
+           <c:when test="${movie.rateAvg >= 0}">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+             <img src="/rate/empty.png" width="17">
+           </c:when>
+         </c:choose>
+         
+         (${movie.rateAvg})
+          </div>
+          <div class="card-actions justify-end">
             <a class="btn btn-primary"
               href="../ticket/main?movieId=${movie.id}&cinemaId=${rq.loginedMemberFavoriteCinema}&date=${rq.today}">예매</a>
           </div>

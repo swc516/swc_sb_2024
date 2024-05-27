@@ -45,7 +45,7 @@ public class TicketService {
 	}
 
 	
-	public ResultData doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, int memberId, String movieTitle, String cinema, String theater, int time, String startTime, String playingTime) {
+	public ResultData doTicketing(int theaterInfoId, int theaterTimeId, String[] seats, int memberId, String movieTitle, String cinema, String theater, int time, String startTime, String endTime) {
 		for (String seat : seats) {
 			String[] seatSplit1 = seat.split("_");
 			String seatInfo = seatSplit1[1];
@@ -55,7 +55,7 @@ public class TicketService {
 			cinemaService.doTicketing(theaterInfoId, theaterTimeId, seatRow, seatCol, memberId);
 		}
 		String totalSeat = Arrays.toString(seats).substring(1,Arrays.toString(seats).trim().length()-1);
-		ticketRepository.doTicketing(memberId, movieTitle, cinema, theater, time, startTime, playingTime, totalSeat);
+		ticketRepository.doTicketing(memberId, movieTitle, cinema, theater, time, startTime, endTime, totalSeat);
 		
 		
 		return ResultData.from("S-1", "예매가 완료되었습니다.");
@@ -159,6 +159,13 @@ public class TicketService {
 		movieService.updateRate(relId, rateAvg);
 		
 		
+	}
+
+
+	public int hasReviewWrite(int loginedMemberId, String movieTitle) {
+		int movieId = movieService.getMovieIdByTitle(movieTitle);
+		int check = replyService.hasReviewWrite(loginedMemberId, movieId);
+		return check;
 	}
 
 }

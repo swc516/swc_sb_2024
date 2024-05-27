@@ -30,7 +30,7 @@
         : 예매가 완료된 좌석
         <br>
         <hr>
-        ${movieTitle} / ${cinemaRegion}_${cinemaBranch} / ${theater} / 상영날짜 : ${theaterTimes.get(0).startTime} / 상영시간 :
+        ${movieTitle} / ${cinemaRegion}_${cinemaBranch} / ${theater} / 상영날짜 : ${theaterTimes.get(0).date} / 상영시간 :
         (${theaterTimes.get(0).theaterTime}회차), ${playingTime}
         <div class="divider divider-info">Screen</div>
         <table style="margin-left: auto; margin-right: auto;">
@@ -89,7 +89,7 @@
         <input type="hidden" name="theater" value="${theater}">
         <input type="hidden" name="time" value="${theaterTimes.get(0).theaterTime}">
         <input type="hidden" name="startTime" value="${theaterTimes.get(0).startTime}">
-        <input type="hidden" name="playingTime" value="${playingTime}">
+        <input type="hidden" name="endTime" value="${theaterTimes.get(0).endTime}">
         <input type="hidden" name="theaterInfoId" value="${param.theaterInfoId}">
         <input type="hidden" name="theaterTimeId" value="${param.theaterTimeId}">
         <button type="button" class="btn btn-primary" onclick="requestPay(); return false;">예매하기</button>

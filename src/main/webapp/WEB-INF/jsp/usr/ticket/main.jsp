@@ -53,21 +53,21 @@
           <tr>
             <td>
               <c:if
-                test="${theaterTime.extra__sellSeatCount == theaterTime.extra__maxSeatCount || theaterTime.startTime <= beforeFiveMinutes}">
+                test="${theaterTime.extra__sellSeatCount == theaterTime.extra__maxSeatCount || theaterTime.startTime <= Ut.getForPrintBeforeMinutes(5)}">
                 <input type="radio" name="ticketing" id="radio"
                   value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.theaterTimeId}"
                   disabled>
               </c:if>
               <c:if
-                test="${theaterTime.extra__sellSeatCount != theaterTime.extra__maxSeatCount && theaterTime.startTime > beforeFiveMinutes}">
+                test="${theaterTime.extra__sellSeatCount != theaterTime.extra__maxSeatCount && theaterTime.startTime > Ut.getForPrintBeforeMinutes(5)}">
                 <input type="radio" name="ticketing" id="radio"
                   value="${param.movieId}__${theaterTime.cinemaId}__${theaterTime.theaterInfoId}__${theaterTime.theaterTimeId}">
               </c:if>
             </td>
             <td>${theaterTime.extra__theater}</td>
             <td>
-              [${theaterTime.theaterTime}회차] ${theaterTime.getForPrintType1StartTime()} ~
-              ${theaterTime.getForPrintType1EndTime()}
+              [${theaterTime.theaterTime}회차] ${theaterTime.getForPrintStartTime()} ~
+              ${theaterTime.getForPrintEndTime()}
               (${theaterTime.extra__sellSeatCount}/${theaterTime.extra__maxSeatCount})
               <br>
             </td>

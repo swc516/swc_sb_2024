@@ -42,10 +42,10 @@ public interface TicketRepository {
 			theater = #{theater},
 			time = #{time},
 			startTime = #{startTime},
-			playingTime = #{playingTime},
+			endTime = #{endTime},
 			seat = #{totalSeat}
 			""")
-	void doTicketing(int memberId, String movieTitle, String cinema, String theater, int time, String startTime, String playingTime, String totalSeat);
+	void doTicketing(int memberId, String movieTitle, String cinema, String theater, int time, String startTime, String endTime, String totalSeat);
 
 	@Select("""
 			SELECT *

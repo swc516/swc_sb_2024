@@ -17,21 +17,32 @@
 <link rel="stylesheet" href="/resource/common.css" />
 <!--  사이트 공통 JS -->
 <script src="/resource/common.js" defer="defer"></script>
+<script>
+	var value = "${closeWindow}";
+  	if(!value){
+  		alert('이미 리뷰를 작성했습니다.');
+  		window.close();
+  	}
+	
+</script>
 </head>
 <body>
   <div style="width: 500px;">
   <form action="/usr/ticket/writeReview" method="post">
   영화 제목 : ${param.movieTitle} <br>
     <input type="hidden" name="movieTitle" value="${param.movieTitle}">
-    <input type="text" name="body" placeholder="리뷰를 남겨주세요." class="w-96 input input-bordered w-full max-w-xs" > <br>
-    <input type="radio" name="rate" value="1" class="radio"> 1점
-    <input type="radio" name="rate" value="2" class="radio"> 2점
-    <input type="radio" name="rate" value="3" class="radio"> 3점
-    <input type="radio" name="rate" value="4" class="radio"> 4점
-    <input type="radio" name="rate" value="5" class="radio"> 5점
+    <input type="text" name="body" placeholder="리뷰를 남겨주세요." class="w-96 input input-bordered w-full max-w-xs" required> <br>
+    <input type="radio" name="rate" value="5" class="radio" checked> ★★★★★<br>
+    <input type="radio" name="rate" value="4" class="radio"> ★★★★☆<br>
+    <input type="radio" name="rate" value="3" class="radio"> ★★★☆☆<br>
+    <input type="radio" name="rate" value="2" class="radio"> ★★☆☆☆<br>
+    <input type="radio" name="rate" value="1" class="radio"> ★☆☆☆☆<br>
     <br>
+
     <input type="submit" value="작성">
     </form>
   </div>
 </body>
+
+
 </html>

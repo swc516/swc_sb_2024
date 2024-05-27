@@ -33,11 +33,11 @@ public class TheaterTime {
 	private String extra__cinemaBranch;
 	
 	
-	public String getForPrintType1StartTime() {
+	public String getForPrintStartTime() {
 		return startTime.substring(11, 16);
 	}
 	
-	public String getForPrintType1EndTime() {
+	public String getForPrintEndTime() {
 		return endTime.substring(11, 16);
 	}
 }
